@@ -9,19 +9,17 @@ if GL and GR work
 
 if GL is broken and GR works
     GL off
-    (GR is initially in 'power right side' mode)
+    GR power right
     if AL works
-        AL power left side
+        AL power left 
     else if AR works
-        AR power left side
+        AR power left 
     else
         GR power whole plane
 
-
-
 if GL works and GR is broken
     GR off
-    (GL initially in 'power left side' mode)
+    GL power left
     if AR works
         AR power right side
     if AL works
@@ -37,16 +35,16 @@ if GL and GR are broken
         AL power whole plane
     %else all generators are broken, pwwwned.
 
-% STATES
+% STATES (represent contactors on/off as boolean array [B1 B2 B3 B4 B5 B6])
+% for now, an 'x' in the contactor array means 'dont care' or 'defer the other states to set this'
 GL off:
-    B1 off
+    [0 x x x x x] %B1 off
 
 GL power left:
-    B1, B7 on
-    B5 off
+    [1 x x x 0 x] %B1 on, B5 off
 
 GL whole plane:
-    B1, B5, B6, B7 on
+    [1 x x x 1 1] %B1, B5, B6 on
 
 
 GR off:
