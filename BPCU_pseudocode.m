@@ -4,26 +4,25 @@
 
 % CASES
 if GL and GR work
-    GL power left
-    GR power right
+    [1 x x 1 0 0] %GL power left, GR power right
 
 if GL is broken and GR works
     GL off
     GR power right
     if AL works
-        AL power left 
+        [0 1 x 1 1 0] %GL off, GR power right, AL power left 
     else if AR works
-        AR power left 
+        [0 x 1 1 1 0] %GL off, GR power right, AR power left  
     else
-        GR power whole plane
+        [0 x x 1 1 1] %GR power whole plane
 
 if GL works and GR is broken
     GR off
     GL power left
     if AR works
-        AR power right side
+        AR power right
     if AL works
-        AL power right side
+        AL power right
     else
         GL power whole plane
 
