@@ -48,28 +48,39 @@ GL whole plane:
 
 
 GR off:
+    %B4 off
 
 GR right:
+    %B4 on, B6 off
 
 GR whole plane:
+    %B4, B6, B6 on
 
 
 AL off:
+    %B2 off
 
 AL left:
+    %B2 on, B5 on, B6 off
 
 AL right:
+    %B2 on, B5 off, B6 on
 
 AL whole plane:
+    %B2, B5, B6 on
 
 
 AR off:
+    %B3 off
 
 AR right:
+    %B3 on, B5 off, B6 on
 
 AR left:
+    %B3 on, B5 on, B6 off
 
-AR whole plane:    
+AR whole plane:
+    %B3 on, B6 on, B6 on
 
 
 
