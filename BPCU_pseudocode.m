@@ -1,6 +1,7 @@
 
 
-%for now, ignoring the "first turn stuff off; then turn stuff on" idea. will come back to this later.
+% for now, ignoring the "first turn stuff off; then turn stuff on" idea. will come back to this later.
+% Later, we'll revise this to have one set of cases for *each contactor*, which decides the contactor's position based on the generator statuses. (basically turn the current code inside out)
 
 % CASES
 if GL and GR work
@@ -20,18 +21,18 @@ if GL works and GR is broken
     GR off
     GL power left
     if AR works
-        AR power right
+        [1 x 1 0 0 1] %GR off, GL power left, AR power right
     if AL works
-        AL power right
+        [1 1 x 0 0 1] %GR off, GL power left, AL power right
     else
-        GL power whole plane
+        [1 x x 0 1 1] %GL power whole plane
 
 if GL and GR are broken
     %it's arbitrary whether to use AL or AR in this case
     if AR works
-        AR power whole plane
+        [0 1 0 x 1 1] %GL off, GR off, AR power whole plane
     else if AL works
-        AL power whole plane
+        [0 1 x 0 1 1] %GL off, GR off, AL power whole plane
     %else all generators are broken, pwwwned.
 
 % STATES (represent contactors on/off as boolean array [B1 B2 B3 B4 B5 B6])
