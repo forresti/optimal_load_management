@@ -1,7 +1,25 @@
 
 
 % for now, ignoring the "first turn stuff off; then turn stuff on" idea. will come back to this later.
-% Later, we'll revise this to have one set of cases for *each contactor*, which decides the contactor's position based on the generator statuses. (basically turn the current code inside out)
+% one set of cases for *each contactor*, which decides the contactor's position based on the generator statuses.
+
+%B1 is on if...
+    GL works
+
+%B2 is on if...
+
+%B3 is on if...
+
+%B4 is on if...
+    GR works
+
+%B5 is on if...
+
+%B6 is on if...
+
+
+
+
 
 % CASES
 if GL and GR work
