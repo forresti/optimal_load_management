@@ -5,6 +5,8 @@
 
 %List of cases where each contactor is on. (else off)
 
+[GL AL AR GR] = input %input a length-4 vector of signals
+
 %B1 (power for GL) is on if...
     GL works
 
