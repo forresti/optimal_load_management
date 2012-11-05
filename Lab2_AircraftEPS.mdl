@@ -6,7 +6,7 @@ Model {
     NumRootInports	    0
     NumRootOutports	    0
     ParameterArgumentNames  ""
-    ComputedModelVersion    "1.339"
+    ComputedModelVersion    "1.345"
     NumModelReferences	    0
     NumTestPointedSignals   0
   }
@@ -56,11 +56,11 @@ Model {
 	$ObjectID		5
 	$ClassName		"Simulink.EditorInfo"
 	IsActive		[1]
-	ViewObjType		"SimulinkSubsys"
-	LoadSaveID		"1778"
+	ViewObjType		"SimulinkTopLevel"
+	LoadSaveID		"0"
 	Extents			[2459.0, 1269.0]
 	ZoomFactor		[1.0]
-	Offset			[-347.0, -64.5]
+	Offset			[-112.0, -135.0]
       }
     }
   }
@@ -73,9 +73,9 @@ Model {
   ModifiedByFormat	  "%<Auto>"
   LastModifiedBy	  "forrest"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Mon Nov 05 14:51:34 2012"
+  LastModifiedDate	  "Mon Nov 05 14:56:23 2012"
   RTWModifiedTimeStamp	  274026866
-  ModelVersionFormat	  "1.%<AutoIncrement:339>"
+  ModelVersionFormat	  "1.%<AutoIncrement:345>"
   ConfigurationManager	  "None"
   SampleTimeColors	  off
   SampleTimeAnnotations	  off
@@ -100,7 +100,7 @@ Model {
   StatusBar		  on
   BrowserShowLibraryLinks off
   BrowserLookUnderMasks	  off
-  SimulationMode	  "accelerator"
+  SimulationMode	  "normal"
   LinearizationMsg	  "none"
   Profile		  off
   ParamWorkspaceSource	  "MATLABWorkspace"
@@ -1011,7 +1011,7 @@ Model {
   System {
     Name		    "Lab2_AircraftEPS"
     Location		    [66, 52, 2561, 1468]
-    Open		    off
+    Open		    on
     ModelBrowserVisibility  off
     ModelBrowserWidth	    200
     ScreenColor		    "white"
@@ -6511,10 +6511,10 @@ Model {
     Block {
       BlockType		      SubSystem
       Name		      "B2"
-      SID		      "5039"
+      SID		      "5001"
       Ports		      [1, 0, 0, 0, 0, 3, 3]
-      Position		      [1236, 385, 1314, 430]
-      ZOrder		      -9
+      Position		      [716, 365, 794, 410]
+      ZOrder		      -10
       BlockRotation	      270
       BlockMirror	      on
       BackgroundColor	      "lightBlue"
@@ -6546,386 +6546,6 @@ Model {
       }
       System {
 	Name			"B2"
-	Location		[501, 117, 1202, 563]
-	Open			off
-	ModelBrowserVisibility	off
-	ModelBrowserWidth	200
-	ScreenColor		"white"
-	PaperOrientation	"landscape"
-	PaperPositionMode	"auto"
-	PaperType		"usletter"
-	PaperUnits		"inches"
-	TiledPaperMargins	[0.500000, 0.500000, 0.500000, 0.500000]
-	TiledPageScale		1
-	ShowPageBoundaries	off
-	ZoomFactor		"100"
-	Block {
-	  BlockType		  Inport
-	  Name			  "com"
-	  SID			  "5040"
-	  Position		  [383, 45, 397, 75]
-	  ZOrder		  -1
-	  BlockRotation		  270
-	  BlockMirror		  on
-	  NamePlacement		  "alternate"
-	  IconDisplay		  "Port number"
-	}
-	Block {
-	  BlockType		  SubSystem
-	  Name			  "Contactor"
-	  SID			  "5041"
-	  Ports			  [1, 0, 0, 0, 0, 3, 3]
-	  Position		  [455, 88, 545, 237]
-	  ZOrder		  -2
-	  MinAlgLoopOccurrences	  off
-	  PropExecContextOutsideSubsystem off
-	  RTWSystemCode		  "Auto"
-	  FunctionWithSeparateData off
-	  Opaque		  off
-	  RequestExecContextInheritance	off
-	  MaskHideContents	  off
-	  System {
-	    Name		    "Contactor"
-	    Location		    [122, 52, 466, 468]
-	    Open		    off
-	    ModelBrowserVisibility  off
-	    ModelBrowserWidth	    200
-	    ScreenColor		    "white"
-	    PaperOrientation	    "landscape"
-	    PaperPositionMode	    "auto"
-	    PaperType		    "usletter"
-	    PaperUnits		    "inches"
-	    TiledPaperMargins	    [0.500000, 0.500000, 0.500000, 0.500000]
-	    TiledPageScale	    1
-	    ShowPageBoundaries	    off
-	    ZoomFactor		    "100"
-	    Block {
-	      BlockType		      Inport
-	      Name		      "com"
-	      SID		      "5042"
-	      Position		      [15, 28, 45, 42]
-	      ZOrder		      -1
-	      IconDisplay	      "Port number"
-	    }
-	    Block {
-	      BlockType		      Reference
-	      Name		      "Ideal Switch"
-	      SID		      "5043"
-	      Ports		      [1, 0, 0, 0, 0, 1, 1]
-	      Position		      [120, 25, 175, 65]
-	      ZOrder		      -2
-	      LibraryVersion	      "1.2162"
-	      SourceBlock	      "powerlib/Power\nElectronics/Ideal Switch"
-	      SourceType	      "Ideal Switch"
-	      Ron		      "0.001"
-	      Lon		      "0"
-	      IC		      "0"
-	      Rs		      "1e3"
-	      Cs		      "inf"
-	      Measurements	      off
-	    }
-	    Block {
-	      BlockType		      Reference
-	      Name		      "Ideal Switch1"
-	      SID		      "5044"
-	      Ports		      [1, 0, 0, 0, 0, 1, 1]
-	      Position		      [120, 90, 175, 130]
-	      ZOrder		      -3
-	      LibraryVersion	      "1.2162"
-	      SourceBlock	      "powerlib/Power\nElectronics/Ideal Switch"
-	      SourceType	      "Ideal Switch"
-	      Ron		      "0.001"
-	      Lon		      "0"
-	      IC		      "0"
-	      Rs		      "1e3"
-	      Cs		      "inf"
-	      Measurements	      off
-	    }
-	    Block {
-	      BlockType		      Reference
-	      Name		      "Ideal Switch2"
-	      SID		      "5045"
-	      Ports		      [1, 0, 0, 0, 0, 1, 1]
-	      Position		      [120, 165, 175, 205]
-	      ZOrder		      -4
-	      LibraryVersion	      "1.2162"
-	      SourceBlock	      "powerlib/Power\nElectronics/Ideal Switch"
-	      SourceType	      "Ideal Switch"
-	      Ron		      "0.001"
-	      Lon		      "0"
-	      IC		      "0"
-	      Rs		      "1e3"
-	      Cs		      "inf"
-	      Measurements	      off
-	    }
-	    Block {
-	      BlockType		      PMIOPort
-	      Name		      "A"
-	      SID		      "5046"
-	      Position		      [65, 48, 95, 62]
-	      ZOrder		      -5
-	      Port		      "1"
-	      Side		      "Left"
-	    }
-	    Block {
-	      BlockType		      PMIOPort
-	      Name		      "a"
-	      SID		      "5047"
-	      Position		      [210, 38, 240, 52]
-	      ZOrder		      -6
-	      BlockMirror	      on
-	      Port		      "2"
-	      Side		      "Right"
-	    }
-	    Block {
-	      BlockType		      PMIOPort
-	      Name		      "B"
-	      SID		      "5048"
-	      Position		      [65, 113, 95, 127]
-	      ZOrder		      -7
-	      Port		      "3"
-	      Side		      "Left"
-	    }
-	    Block {
-	      BlockType		      PMIOPort
-	      Name		      "b"
-	      SID		      "5049"
-	      Position		      [205, 103, 235, 117]
-	      ZOrder		      -8
-	      BlockMirror	      on
-	      Port		      "4"
-	      Side		      "Right"
-	    }
-	    Block {
-	      BlockType		      PMIOPort
-	      Name		      "C"
-	      SID		      "5050"
-	      Position		      [65, 188, 95, 202]
-	      ZOrder		      -9
-	      Port		      "5"
-	      Side		      "Left"
-	    }
-	    Block {
-	      BlockType		      PMIOPort
-	      Name		      "c"
-	      SID		      "5051"
-	      Position		      [210, 178, 240, 192]
-	      ZOrder		      -10
-	      BlockMirror	      on
-	      Port		      "6"
-	      Side		      "Right"
-	    }
-	    Line {
-	      SrcBlock		      "com"
-	      SrcPort		      1
-	      Points		      [0, 0; 5, 0]
-	      Branch {
-		DstBlock		"Ideal Switch"
-		DstPort			1
-	      }
-	      Branch {
-		Points			[0, 65]
-		Branch {
-		  Points		  [0, 75]
-		  DstBlock		  "Ideal Switch2"
-		  DstPort		  1
-		}
-		Branch {
-		  DstBlock		  "Ideal Switch1"
-		  DstPort		  1
-		}
-	      }
-	    }
-	    Line {
-	      LineType		      "Connection"
-	      SrcBlock		      "A"
-	      SrcPort		      RConn1
-	      DstBlock		      "Ideal Switch"
-	      DstPort		      LConn1
-	    }
-	    Line {
-	      LineType		      "Connection"
-	      SrcBlock		      "a"
-	      SrcPort		      RConn1
-	      DstBlock		      "Ideal Switch"
-	      DstPort		      RConn1
-	    }
-	    Line {
-	      LineType		      "Connection"
-	      SrcBlock		      "B"
-	      SrcPort		      RConn1
-	      DstBlock		      "Ideal Switch1"
-	      DstPort		      LConn1
-	    }
-	    Line {
-	      LineType		      "Connection"
-	      SrcBlock		      "b"
-	      SrcPort		      RConn1
-	      DstBlock		      "Ideal Switch1"
-	      DstPort		      RConn1
-	    }
-	    Line {
-	      LineType		      "Connection"
-	      SrcBlock		      "C"
-	      SrcPort		      RConn1
-	      DstBlock		      "Ideal Switch2"
-	      DstPort		      LConn1
-	    }
-	    Line {
-	      LineType		      "Connection"
-	      SrcBlock		      "c"
-	      SrcPort		      RConn1
-	      DstBlock		      "Ideal Switch2"
-	      DstPort		      RConn1
-	    }
-	  }
-	}
-	Block {
-	  BlockType		  PMIOPort
-	  Name			  "A1"
-	  SID			  "5052"
-	  Position		  [590, 108, 620, 122]
-	  ZOrder		  -3
-	  BlockMirror		  on
-	  Port			  "1"
-	  Side			  "Right"
-	}
-	Block {
-	  BlockType		  PMIOPort
-	  Name			  "B1"
-	  SID			  "5053"
-	  Position		  [590, 158, 620, 172]
-	  ZOrder		  -4
-	  BlockMirror		  on
-	  Port			  "2"
-	  Side			  "Right"
-	}
-	Block {
-	  BlockType		  PMIOPort
-	  Name			  "C1"
-	  SID			  "5054"
-	  Position		  [590, 208, 620, 222]
-	  ZOrder		  -5
-	  BlockMirror		  on
-	  Port			  "3"
-	  Side			  "Right"
-	}
-	Block {
-	  BlockType		  PMIOPort
-	  Name			  "A"
-	  SID			  "5055"
-	  Position		  [375, 138, 405, 152]
-	  ZOrder		  -6
-	  Port			  "4"
-	  Side			  "Left"
-	}
-	Block {
-	  BlockType		  PMIOPort
-	  Name			  "B"
-	  SID			  "5056"
-	  Position		  [375, 173, 405, 187]
-	  ZOrder		  -7
-	  Port			  "5"
-	  Side			  "Left"
-	}
-	Block {
-	  BlockType		  PMIOPort
-	  Name			  "C"
-	  SID			  "5057"
-	  Position		  [375, 208, 405, 222]
-	  ZOrder		  -8
-	  Port			  "6"
-	  Side			  "Left"
-	}
-	Line {
-	  LineType		  "Connection"
-	  SrcBlock		  "Contactor"
-	  SrcPort		  RConn1
-	  DstBlock		  "A1"
-	  DstPort		  RConn1
-	}
-	Line {
-	  LineType		  "Connection"
-	  SrcBlock		  "Contactor"
-	  SrcPort		  RConn2
-	  DstBlock		  "B1"
-	  DstPort		  RConn1
-	}
-	Line {
-	  LineType		  "Connection"
-	  SrcBlock		  "Contactor"
-	  SrcPort		  RConn3
-	  DstBlock		  "C1"
-	  DstPort		  RConn1
-	}
-	Line {
-	  LineType		  "Connection"
-	  SrcBlock		  "A"
-	  SrcPort		  RConn1
-	  DstBlock		  "Contactor"
-	  DstPort		  LConn1
-	}
-	Line {
-	  LineType		  "Connection"
-	  SrcBlock		  "B"
-	  SrcPort		  RConn1
-	  DstBlock		  "Contactor"
-	  DstPort		  LConn2
-	}
-	Line {
-	  LineType		  "Connection"
-	  SrcBlock		  "C"
-	  SrcPort		  RConn1
-	  DstBlock		  "Contactor"
-	  DstPort		  LConn3
-	}
-	Line {
-	  SrcBlock		  "com"
-	  SrcPort		  1
-	  Points		  [0, 30]
-	  DstBlock		  "Contactor"
-	  DstPort		  1
-	}
-      }
-    }
-    Block {
-      BlockType		      SubSystem
-      Name		      "B3"
-      SID		      "5001"
-      Ports		      [1, 0, 0, 0, 0, 3, 3]
-      Position		      [716, 365, 794, 410]
-      ZOrder		      -10
-      BlockRotation	      270
-      BlockMirror	      on
-      BackgroundColor	      "lightBlue"
-      NamePlacement	      "alternate"
-      MinAlgLoopOccurrences   off
-      PropExecContextOutsideSubsystem off
-      RTWSystemCode	      "Auto"
-      FunctionWithSeparateData off
-      Opaque		      off
-      RequestExecContextInheritance off
-      MaskHideContents	      off
-      Object {
-	$PropName		"MaskObject"
-	$ObjectID		35
-	$ClassName		"Simulink.Mask"
-	Type			"Contactor"
-	Description		"Simple three phase contactor without a fuse."
-	Display			"plot([0.236212508752942;73.9345152396709], [85.2727156598121;85.2727156598121])\npatch([0;170.545431319624"
-	";170.545431319624;0;0;0.472425017505884;0.472425017505884;170.073006302118;170.073006302118;0.472425017505884;0], [17"
-	"0.545431319624;170.545431319624;0;0;170.545431319624;170.073006302118;0.472425017505884;0.472425017505884;170.0730063"
-	"02118;170.073006302118;170.545431319624], [1;1;1])\nplot([96.6109160799533;170.309218810871], [85.2727156598121;85.27"
-	"27156598121])\npatch([73.9345152396709;79.6036154497415;79.6036154497415;73.9345152396709;73.9345152396709], [119.287"
-	"316920236;119.287316920236;51.2581143993884;51.2581143993884;119.287316920236], [0;0;0])\nplot([73.9345152396709;79.6"
-	"036154497415;79.6036154497415;73.9345152396709;73.9345152396709], [119.287316920236;119.287316920236;51.2581143993884"
-	";51.2581143993884;119.287316920236])\npatch([90.9418158698827;96.6109160799533;96.6109160799533;90.9418158698827;90.9"
-	"418158698827], [119.287316920236;119.287316920236;51.2581143993884;51.2581143993884;119.287316920236], [0;0;0])\nplot"
-	"([90.9418158698827;96.6109160799533;96.6109160799533;90.9418158698827;90.9418158698827], [119.287316920236;119.287316"
-	"920236;51.2581143993884;51.2581143993884;119.287316920236])\n;"
-      }
-      System {
-	Name			"B3"
 	Location		[501, 117, 1202, 563]
 	Open			off
 	ModelBrowserVisibility	off
@@ -7270,7 +6890,7 @@ Model {
     }
     Block {
       BlockType		      SubSystem
-      Name		      "B4"
+      Name		      "B3"
       SID		      "5020"
       Ports		      [1, 0, 0, 0, 0, 3, 3]
       Position		      [946, 370, 1024, 415]
@@ -7288,7 +6908,7 @@ Model {
       MaskHideContents	      off
       Object {
 	$PropName		"MaskObject"
-	$ObjectID		36
+	$ObjectID		35
 	$ClassName		"Simulink.Mask"
 	Type			"Contactor"
 	Description		"Simple three phase contactor without a fuse."
@@ -7305,7 +6925,7 @@ Model {
 	"920236;51.2581143993884;51.2581143993884;119.287316920236])\n;"
       }
       System {
-	Name			"B4"
+	Name			"B3"
 	Location		[501, 139, 1202, 585]
 	Open			off
 	ModelBrowserVisibility	off
@@ -7592,6 +7212,386 @@ Model {
 	  BlockType		  PMIOPort
 	  Name			  "C"
 	  SID			  "5038"
+	  Position		  [375, 208, 405, 222]
+	  ZOrder		  -8
+	  Port			  "6"
+	  Side			  "Left"
+	}
+	Line {
+	  LineType		  "Connection"
+	  SrcBlock		  "Contactor"
+	  SrcPort		  RConn1
+	  DstBlock		  "A1"
+	  DstPort		  RConn1
+	}
+	Line {
+	  LineType		  "Connection"
+	  SrcBlock		  "Contactor"
+	  SrcPort		  RConn2
+	  DstBlock		  "B1"
+	  DstPort		  RConn1
+	}
+	Line {
+	  LineType		  "Connection"
+	  SrcBlock		  "Contactor"
+	  SrcPort		  RConn3
+	  DstBlock		  "C1"
+	  DstPort		  RConn1
+	}
+	Line {
+	  LineType		  "Connection"
+	  SrcBlock		  "A"
+	  SrcPort		  RConn1
+	  DstBlock		  "Contactor"
+	  DstPort		  LConn1
+	}
+	Line {
+	  LineType		  "Connection"
+	  SrcBlock		  "B"
+	  SrcPort		  RConn1
+	  DstBlock		  "Contactor"
+	  DstPort		  LConn2
+	}
+	Line {
+	  LineType		  "Connection"
+	  SrcBlock		  "C"
+	  SrcPort		  RConn1
+	  DstBlock		  "Contactor"
+	  DstPort		  LConn3
+	}
+	Line {
+	  SrcBlock		  "com"
+	  SrcPort		  1
+	  Points		  [0, 30]
+	  DstBlock		  "Contactor"
+	  DstPort		  1
+	}
+      }
+    }
+    Block {
+      BlockType		      SubSystem
+      Name		      "B4"
+      SID		      "5039"
+      Ports		      [1, 0, 0, 0, 0, 3, 3]
+      Position		      [1236, 385, 1314, 430]
+      ZOrder		      -9
+      BlockRotation	      270
+      BlockMirror	      on
+      BackgroundColor	      "lightBlue"
+      NamePlacement	      "alternate"
+      MinAlgLoopOccurrences   off
+      PropExecContextOutsideSubsystem off
+      RTWSystemCode	      "Auto"
+      FunctionWithSeparateData off
+      Opaque		      off
+      RequestExecContextInheritance off
+      MaskHideContents	      off
+      Object {
+	$PropName		"MaskObject"
+	$ObjectID		36
+	$ClassName		"Simulink.Mask"
+	Type			"Contactor"
+	Description		"Simple three phase contactor without a fuse."
+	Display			"plot([0.236212508752942;73.9345152396709], [85.2727156598121;85.2727156598121])\npatch([0;170.545431319624"
+	";170.545431319624;0;0;0.472425017505884;0.472425017505884;170.073006302118;170.073006302118;0.472425017505884;0], [17"
+	"0.545431319624;170.545431319624;0;0;170.545431319624;170.073006302118;0.472425017505884;0.472425017505884;170.0730063"
+	"02118;170.073006302118;170.545431319624], [1;1;1])\nplot([96.6109160799533;170.309218810871], [85.2727156598121;85.27"
+	"27156598121])\npatch([73.9345152396709;79.6036154497415;79.6036154497415;73.9345152396709;73.9345152396709], [119.287"
+	"316920236;119.287316920236;51.2581143993884;51.2581143993884;119.287316920236], [0;0;0])\nplot([73.9345152396709;79.6"
+	"036154497415;79.6036154497415;73.9345152396709;73.9345152396709], [119.287316920236;119.287316920236;51.2581143993884"
+	";51.2581143993884;119.287316920236])\npatch([90.9418158698827;96.6109160799533;96.6109160799533;90.9418158698827;90.9"
+	"418158698827], [119.287316920236;119.287316920236;51.2581143993884;51.2581143993884;119.287316920236], [0;0;0])\nplot"
+	"([90.9418158698827;96.6109160799533;96.6109160799533;90.9418158698827;90.9418158698827], [119.287316920236;119.287316"
+	"920236;51.2581143993884;51.2581143993884;119.287316920236])\n;"
+      }
+      System {
+	Name			"B4"
+	Location		[501, 117, 1202, 563]
+	Open			off
+	ModelBrowserVisibility	off
+	ModelBrowserWidth	200
+	ScreenColor		"white"
+	PaperOrientation	"landscape"
+	PaperPositionMode	"auto"
+	PaperType		"usletter"
+	PaperUnits		"inches"
+	TiledPaperMargins	[0.500000, 0.500000, 0.500000, 0.500000]
+	TiledPageScale		1
+	ShowPageBoundaries	off
+	ZoomFactor		"100"
+	Block {
+	  BlockType		  Inport
+	  Name			  "com"
+	  SID			  "5040"
+	  Position		  [383, 45, 397, 75]
+	  ZOrder		  -1
+	  BlockRotation		  270
+	  BlockMirror		  on
+	  NamePlacement		  "alternate"
+	  IconDisplay		  "Port number"
+	}
+	Block {
+	  BlockType		  SubSystem
+	  Name			  "Contactor"
+	  SID			  "5041"
+	  Ports			  [1, 0, 0, 0, 0, 3, 3]
+	  Position		  [455, 88, 545, 237]
+	  ZOrder		  -2
+	  MinAlgLoopOccurrences	  off
+	  PropExecContextOutsideSubsystem off
+	  RTWSystemCode		  "Auto"
+	  FunctionWithSeparateData off
+	  Opaque		  off
+	  RequestExecContextInheritance	off
+	  MaskHideContents	  off
+	  System {
+	    Name		    "Contactor"
+	    Location		    [122, 52, 466, 468]
+	    Open		    off
+	    ModelBrowserVisibility  off
+	    ModelBrowserWidth	    200
+	    ScreenColor		    "white"
+	    PaperOrientation	    "landscape"
+	    PaperPositionMode	    "auto"
+	    PaperType		    "usletter"
+	    PaperUnits		    "inches"
+	    TiledPaperMargins	    [0.500000, 0.500000, 0.500000, 0.500000]
+	    TiledPageScale	    1
+	    ShowPageBoundaries	    off
+	    ZoomFactor		    "100"
+	    Block {
+	      BlockType		      Inport
+	      Name		      "com"
+	      SID		      "5042"
+	      Position		      [15, 28, 45, 42]
+	      ZOrder		      -1
+	      IconDisplay	      "Port number"
+	    }
+	    Block {
+	      BlockType		      Reference
+	      Name		      "Ideal Switch"
+	      SID		      "5043"
+	      Ports		      [1, 0, 0, 0, 0, 1, 1]
+	      Position		      [120, 25, 175, 65]
+	      ZOrder		      -2
+	      LibraryVersion	      "1.2162"
+	      SourceBlock	      "powerlib/Power\nElectronics/Ideal Switch"
+	      SourceType	      "Ideal Switch"
+	      Ron		      "0.001"
+	      Lon		      "0"
+	      IC		      "0"
+	      Rs		      "1e3"
+	      Cs		      "inf"
+	      Measurements	      off
+	    }
+	    Block {
+	      BlockType		      Reference
+	      Name		      "Ideal Switch1"
+	      SID		      "5044"
+	      Ports		      [1, 0, 0, 0, 0, 1, 1]
+	      Position		      [120, 90, 175, 130]
+	      ZOrder		      -3
+	      LibraryVersion	      "1.2162"
+	      SourceBlock	      "powerlib/Power\nElectronics/Ideal Switch"
+	      SourceType	      "Ideal Switch"
+	      Ron		      "0.001"
+	      Lon		      "0"
+	      IC		      "0"
+	      Rs		      "1e3"
+	      Cs		      "inf"
+	      Measurements	      off
+	    }
+	    Block {
+	      BlockType		      Reference
+	      Name		      "Ideal Switch2"
+	      SID		      "5045"
+	      Ports		      [1, 0, 0, 0, 0, 1, 1]
+	      Position		      [120, 165, 175, 205]
+	      ZOrder		      -4
+	      LibraryVersion	      "1.2162"
+	      SourceBlock	      "powerlib/Power\nElectronics/Ideal Switch"
+	      SourceType	      "Ideal Switch"
+	      Ron		      "0.001"
+	      Lon		      "0"
+	      IC		      "0"
+	      Rs		      "1e3"
+	      Cs		      "inf"
+	      Measurements	      off
+	    }
+	    Block {
+	      BlockType		      PMIOPort
+	      Name		      "A"
+	      SID		      "5046"
+	      Position		      [65, 48, 95, 62]
+	      ZOrder		      -5
+	      Port		      "1"
+	      Side		      "Left"
+	    }
+	    Block {
+	      BlockType		      PMIOPort
+	      Name		      "a"
+	      SID		      "5047"
+	      Position		      [210, 38, 240, 52]
+	      ZOrder		      -6
+	      BlockMirror	      on
+	      Port		      "2"
+	      Side		      "Right"
+	    }
+	    Block {
+	      BlockType		      PMIOPort
+	      Name		      "B"
+	      SID		      "5048"
+	      Position		      [65, 113, 95, 127]
+	      ZOrder		      -7
+	      Port		      "3"
+	      Side		      "Left"
+	    }
+	    Block {
+	      BlockType		      PMIOPort
+	      Name		      "b"
+	      SID		      "5049"
+	      Position		      [205, 103, 235, 117]
+	      ZOrder		      -8
+	      BlockMirror	      on
+	      Port		      "4"
+	      Side		      "Right"
+	    }
+	    Block {
+	      BlockType		      PMIOPort
+	      Name		      "C"
+	      SID		      "5050"
+	      Position		      [65, 188, 95, 202]
+	      ZOrder		      -9
+	      Port		      "5"
+	      Side		      "Left"
+	    }
+	    Block {
+	      BlockType		      PMIOPort
+	      Name		      "c"
+	      SID		      "5051"
+	      Position		      [210, 178, 240, 192]
+	      ZOrder		      -10
+	      BlockMirror	      on
+	      Port		      "6"
+	      Side		      "Right"
+	    }
+	    Line {
+	      SrcBlock		      "com"
+	      SrcPort		      1
+	      Points		      [0, 0; 5, 0]
+	      Branch {
+		DstBlock		"Ideal Switch"
+		DstPort			1
+	      }
+	      Branch {
+		Points			[0, 65]
+		Branch {
+		  Points		  [0, 75]
+		  DstBlock		  "Ideal Switch2"
+		  DstPort		  1
+		}
+		Branch {
+		  DstBlock		  "Ideal Switch1"
+		  DstPort		  1
+		}
+	      }
+	    }
+	    Line {
+	      LineType		      "Connection"
+	      SrcBlock		      "A"
+	      SrcPort		      RConn1
+	      DstBlock		      "Ideal Switch"
+	      DstPort		      LConn1
+	    }
+	    Line {
+	      LineType		      "Connection"
+	      SrcBlock		      "a"
+	      SrcPort		      RConn1
+	      DstBlock		      "Ideal Switch"
+	      DstPort		      RConn1
+	    }
+	    Line {
+	      LineType		      "Connection"
+	      SrcBlock		      "B"
+	      SrcPort		      RConn1
+	      DstBlock		      "Ideal Switch1"
+	      DstPort		      LConn1
+	    }
+	    Line {
+	      LineType		      "Connection"
+	      SrcBlock		      "b"
+	      SrcPort		      RConn1
+	      DstBlock		      "Ideal Switch1"
+	      DstPort		      RConn1
+	    }
+	    Line {
+	      LineType		      "Connection"
+	      SrcBlock		      "C"
+	      SrcPort		      RConn1
+	      DstBlock		      "Ideal Switch2"
+	      DstPort		      LConn1
+	    }
+	    Line {
+	      LineType		      "Connection"
+	      SrcBlock		      "c"
+	      SrcPort		      RConn1
+	      DstBlock		      "Ideal Switch2"
+	      DstPort		      RConn1
+	    }
+	  }
+	}
+	Block {
+	  BlockType		  PMIOPort
+	  Name			  "A1"
+	  SID			  "5052"
+	  Position		  [590, 108, 620, 122]
+	  ZOrder		  -3
+	  BlockMirror		  on
+	  Port			  "1"
+	  Side			  "Right"
+	}
+	Block {
+	  BlockType		  PMIOPort
+	  Name			  "B1"
+	  SID			  "5053"
+	  Position		  [590, 158, 620, 172]
+	  ZOrder		  -4
+	  BlockMirror		  on
+	  Port			  "2"
+	  Side			  "Right"
+	}
+	Block {
+	  BlockType		  PMIOPort
+	  Name			  "C1"
+	  SID			  "5054"
+	  Position		  [590, 208, 620, 222]
+	  ZOrder		  -5
+	  BlockMirror		  on
+	  Port			  "3"
+	  Side			  "Right"
+	}
+	Block {
+	  BlockType		  PMIOPort
+	  Name			  "A"
+	  SID			  "5055"
+	  Position		  [375, 138, 405, 152]
+	  ZOrder		  -6
+	  Port			  "4"
+	  Side			  "Left"
+	}
+	Block {
+	  BlockType		  PMIOPort
+	  Name			  "B"
+	  SID			  "5056"
+	  Position		  [375, 173, 405, 187]
+	  ZOrder		  -7
+	  Port			  "5"
+	  Side			  "Left"
+	}
+	Block {
+	  BlockType		  PMIOPort
+	  Name			  "C"
+	  SID			  "5057"
 	  Position		  [375, 208, 405, 222]
 	  ZOrder		  -8
 	  Port			  "6"
@@ -9369,8 +9369,8 @@ Model {
       MaskHideContents	      off
       System {
 	Name			"BPCU"
-	Location		[66, 52, 2561, 1468]
-	Open			on
+	Location		[1421, 212, 3914, 1599]
+	Open			off
 	ModelBrowserVisibility	off
 	ModelBrowserWidth	200
 	ScreenColor		"white"
@@ -16236,7 +16236,7 @@ Model {
       Name		      "status_B1"
       SID		      "5096"
       Ports		      [1]
-      Position		      [185, 362, 370, 388]
+      Position		      [275, 362, 370, 388]
       ZOrder		      -67
       BlockMirror	      on
       Decimation	      "1"
@@ -16282,21 +16282,9 @@ Model {
     Block {
       BlockType		      Display
       Name		      "status_B2"
-      SID		      "5098"
-      Ports		      [1]
-      Position		      [1170, 352, 1210, 378]
-      ZOrder		      -71
-      BlockMirror	      on
-      Decimation	      "1"
-      Lockdown		      off
-      SampleTime	      "1e-2"
-    }
-    Block {
-      BlockType		      Display
-      Name		      "status_B3"
       SID		      "5099"
       Ports		      [1]
-      Position		      [640, 354, 685, 376]
+      Position		      [630, 358, 685, 382]
       ZOrder		      -72
       BlockMirror	      on
       Decimation	      "1"
@@ -16305,7 +16293,7 @@ Model {
     }
     Block {
       BlockType		      Display
-      Name		      "status_B4"
+      Name		      "status_B3"
       SID		      "5100"
       Ports		      [1]
       Position		      [875, 357, 915, 383]
@@ -16317,10 +16305,22 @@ Model {
     }
     Block {
       BlockType		      Display
+      Name		      "status_B4"
+      SID		      "5098"
+      Ports		      [1]
+      Position		      [1170, 352, 1210, 378]
+      ZOrder		      -71
+      BlockMirror	      on
+      Decimation	      "1"
+      Lockdown		      off
+      SampleTime	      "1e-2"
+    }
+    Block {
+      BlockType		      Display
       Name		      "status_B5"
       SID		      "5101"
       Ports		      [1]
-      Position		      [485, 362, 590, 388]
+      Position		      [495, 359, 590, 391]
       ZOrder		      -74
       BlockMirror	      on
       Decimation	      "1"
@@ -16424,11 +16424,11 @@ Model {
       Points		      [10, 0]
       Branch {
 	Points			[25, 0]
-	DstBlock		"B3"
+	DstBlock		"B2"
 	DstPort			1
       }
       Branch {
-	DstBlock		"status_B3"
+	DstBlock		"status_B2"
 	DstPort			1
       }
     }
@@ -16438,11 +16438,11 @@ Model {
       Points		      [5, 0]
       Branch {
 	Points			[25, 0]
-	DstBlock		"B4"
+	DstBlock		"B3"
 	DstPort			1
       }
       Branch {
-	DstBlock		"status_B4"
+	DstBlock		"status_B3"
 	DstPort			1
       }
     }
@@ -16451,28 +16451,28 @@ Model {
       Labels		      [0, 0]
       SrcBlock		      "APU2"
       SrcPort		      RConn1
-      DstBlock		      "B4"
+      DstBlock		      "B3"
       DstPort		      LConn1
     }
     Line {
       LineType		      "Connection"
       SrcBlock		      "APU2"
       SrcPort		      RConn2
-      DstBlock		      "B4"
+      DstBlock		      "B3"
       DstPort		      LConn2
     }
     Line {
       LineType		      "Connection"
       SrcBlock		      "APU2"
       SrcPort		      RConn3
-      DstBlock		      "B4"
+      DstBlock		      "B3"
       DstPort		      LConn3
     }
     Line {
       LineType		      "Connection"
       SrcBlock		      "Right Engine HV"
       SrcPort		      RConn1
-      DstBlock		      "B2"
+      DstBlock		      "B4"
       DstPort		      LConn1
     }
     Line {
@@ -16481,11 +16481,11 @@ Model {
       Points		      [10, 0]
       Branch {
 	Points			[20, 0]
-	DstBlock		"B2"
+	DstBlock		"B4"
 	DstPort			1
       }
       Branch {
-	DstBlock		"status_B2"
+	DstBlock		"status_B4"
 	DstPort			1
       }
     }
@@ -16856,7 +16856,7 @@ Model {
       }
       Branch {
 	ConnectType		"SRC_DEST"
-	SrcBlock		"B3"
+	SrcBlock		"B2"
 	SrcPort			RConn1
 	Points			[0, 30]
       }
@@ -16868,7 +16868,7 @@ Model {
       }
       Branch {
 	ConnectType		"DEST_DEST"
-	SrcBlock		"B4"
+	SrcBlock		"B3"
 	SrcPort			RConn1
 	Points			[0, 25]
       }
@@ -16884,7 +16884,7 @@ Model {
       }
       Branch {
 	ConnectType		"SRC_DEST"
-	SrcBlock		"B3"
+	SrcBlock		"B2"
 	SrcPort			RConn2
 	Points			[0, 50]
       }
@@ -16895,7 +16895,7 @@ Model {
       }
       Branch {
 	ConnectType		"DEST_DEST"
-	SrcBlock		"B4"
+	SrcBlock		"B3"
 	SrcPort			RConn2
 	Points			[0, 45]
       }
@@ -16911,7 +16911,7 @@ Model {
       }
       Branch {
 	ConnectType		"SRC_DEST"
-	SrcBlock		"B3"
+	SrcBlock		"B2"
 	SrcPort			RConn3
 	Points			[0, 70]
       }
@@ -16923,7 +16923,7 @@ Model {
       }
       Branch {
 	ConnectType		"DEST_DEST"
-	SrcBlock		"B4"
+	SrcBlock		"B3"
 	SrcPort			RConn3
 	Points			[0, 65]
       }
@@ -16932,19 +16932,19 @@ Model {
       LineType		      "Connection"
       SrcBlock		      "APU1"
       SrcPort		      RConn1
-      DstBlock		      "B3"
+      DstBlock		      "B2"
       DstPort		      LConn1
     }
     Line {
       LineType		      "Connection"
       SrcBlock		      "APU1"
       SrcPort		      RConn2
-      DstBlock		      "B3"
+      DstBlock		      "B2"
       DstPort		      LConn2
     }
     Line {
       LineType		      "Connection"
-      SrcBlock		      "B3"
+      SrcBlock		      "B2"
       SrcPort		      LConn3
       DstBlock		      "APU1"
       DstPort		      RConn3
@@ -16961,7 +16961,7 @@ Model {
       }
       Branch {
 	ConnectType		"DEST_DEST"
-	SrcBlock		"B2"
+	SrcBlock		"B4"
 	SrcPort			RConn1
 	Points			[0, 20]
       }
@@ -16978,7 +16978,7 @@ Model {
       }
       Branch {
 	ConnectType		"DEST_DEST"
-	SrcBlock		"B2"
+	SrcBlock		"B4"
 	SrcPort			RConn2
 	Points			[0, 40]
       }
@@ -16995,7 +16995,7 @@ Model {
       }
       Branch {
 	ConnectType		"DEST_DEST"
-	SrcBlock		"B2"
+	SrcBlock		"B4"
 	SrcPort			RConn3
 	Points			[0, 60]
       }
@@ -17004,7 +17004,7 @@ Model {
       LineType		      "Connection"
       SrcBlock		      "Right Engine HV"
       SrcPort		      RConn2
-      DstBlock		      "B2"
+      DstBlock		      "B4"
       DstPort		      LConn2
     }
     Line {
@@ -17084,7 +17084,7 @@ Model {
       LineType		      "Connection"
       SrcBlock		      "Right Engine HV"
       SrcPort		      RConn3
-      DstBlock		      "B2"
+      DstBlock		      "B4"
       DstPort		      LConn3
     }
     Line {
