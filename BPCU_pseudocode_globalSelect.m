@@ -28,7 +28,7 @@ if GL works and GR is broken
 if GL and GR are broken
     %it's arbitrary whether to use AL or AR in this case
     if AR works
-        [0 1 0 0 1 1] %GL off, GR off, AR power whole plane
+        [0 0 1 0 1 1] %GL off, GR off, AR power whole plane
     else if AL works
         [0 1 0 0 1 1] %GL off, GR off, AL power whole plane
     %else all generators are broken, pwwwned.
