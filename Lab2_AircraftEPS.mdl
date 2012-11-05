@@ -6,7 +6,7 @@ Model {
     NumRootInports	    0
     NumRootOutports	    0
     ParameterArgumentNames  ""
-    ComputedModelVersion    "1.294"
+    ComputedModelVersion    "1.302"
     NumModelReferences	    0
     NumTestPointedSignals   0
   }
@@ -51,28 +51,16 @@ Model {
 	$ClassName		"Simulink.ExplorerBarInfo"
 	Visible			[1]
       }
-      Array {
-	Type			"Simulink.EditorInfo"
-	Dimension		2
-	Object {
-	  $ObjectID		  5
-	  IsActive		  [0]
-	  ViewObjType		  "SimulinkTopLevel"
-	  LoadSaveID		  "0"
-	  Extents		  [2459.0, 1268.0]
-	  ZoomFactor		  [1.0]
-	  Offset		  [61.0, 3.875]
-	}
-	Object {
-	  $ObjectID		  6
-	  IsActive		  [1]
-	  ViewObjType		  "SimulinkSubsys"
-	  LoadSaveID		  "1778"
-	  Extents		  [2459.0, 1268.0]
-	  ZoomFactor		  [1.0]
-	  Offset		  [-527.0, -64.0]
-	}
-	PropName		"EditorsInfo"
+      Object {
+	$PropName		"EditorsInfo"
+	$ObjectID		5
+	$ClassName		"Simulink.EditorInfo"
+	IsActive		[1]
+	ViewObjType		"SimulinkSubsys"
+	LoadSaveID		"1778"
+	Extents			[2459.0, 1269.0]
+	ZoomFactor		[1.0]
+	Offset			[-527.0, -64.0]
       }
     }
   }
@@ -85,9 +73,9 @@ Model {
   ModifiedByFormat	  "%<Auto>"
   LastModifiedBy	  "forrest"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Mon Nov 05 14:02:38 2012"
+  LastModifiedDate	  "Mon Nov 05 14:13:55 2012"
   RTWModifiedTimeStamp	  274024510
-  ModelVersionFormat	  "1.%<AutoIncrement:294>"
+  ModelVersionFormat	  "1.%<AutoIncrement:302>"
   ConfigurationManager	  "None"
   SampleTimeColors	  off
   SampleTimeAnnotations	  off
@@ -122,7 +110,7 @@ Model {
   TryForcingSFcnDF	  off
   Object {
     $PropName		    "DataLoggingOverride"
-    $ObjectID		    7
+    $ObjectID		    6
     $ClassName		    "Simulink.SimulationData.ModelLoggingInfo"
     model_		    "Lab2_AircraftEPS"
     Array {
@@ -180,13 +168,13 @@ Model {
     Type		    "Handle"
     Dimension		    1
     Simulink.ConfigSet {
-      $ObjectID		      8
+      $ObjectID		      7
       Version		      "1.12.1"
       Array {
 	Type			"Handle"
 	Dimension		9
 	Simulink.SolverCC {
-	  $ObjectID		  9
+	  $ObjectID		  8
 	  Version		  "1.12.1"
 	  StartTime		  "0.0"
 	  StopTime		  "10"
@@ -221,7 +209,7 @@ Model {
 	  InsertRTBMode		  "Whenever possible"
 	}
 	Simulink.DataIOCC {
-	  $ObjectID		  10
+	  $ObjectID		  9
 	  Version		  "1.12.1"
 	  Decimation		  "1"
 	  ExternalInput		  "[t, u]"
@@ -253,7 +241,7 @@ Model {
 	  Refine		  "1"
 	}
 	Simulink.OptimizationCC {
-	  $ObjectID		  11
+	  $ObjectID		  10
 	  Version		  "1.12.1"
 	  Array {
 	    Type		    "Cell"
@@ -309,7 +297,7 @@ Model {
 	  ParallelExecutionInRapidAccelerator on
 	}
 	Simulink.DebuggingCC {
-	  $ObjectID		  12
+	  $ObjectID		  11
 	  Version		  "1.12.1"
 	  RTPrefix		  "error"
 	  ConsistencyChecking	  "none"
@@ -399,7 +387,7 @@ Model {
 	  SFTransitionActionBeforeConditionDiag	"warning"
 	}
 	Simulink.HardwareCC {
-	  $ObjectID		  13
+	  $ObjectID		  12
 	  Version		  "1.12.1"
 	  ProdBitPerChar	  8
 	  ProdBitPerShort	  16
@@ -436,7 +424,7 @@ Model {
 	  ProdEqTarget		  on
 	}
 	Simulink.ModelReferenceCC {
-	  $ObjectID		  14
+	  $ObjectID		  13
 	  Version		  "1.12.1"
 	  UpdateModelReferenceTargets "IfOutOfDateOrStructuralChange"
 	  CheckModelReferenceTargetMessage "error"
@@ -451,7 +439,7 @@ Model {
 	  SupportModelReferenceSimTargetCustomCode off
 	}
 	Simulink.SFSimCC {
-	  $ObjectID		  15
+	  $ObjectID		  14
 	  Version		  "1.12.1"
 	  SFSimEnableDebug	  on
 	  SFSimOverflowDetection  on
@@ -466,7 +454,7 @@ Model {
 	}
 	Simulink.RTWCC {
 	  $BackupClass		  "Simulink.RTWCC"
-	  $ObjectID		  16
+	  $ObjectID		  15
 	  Version		  "1.12.1"
 	  Array {
 	    Type		    "Cell"
@@ -527,7 +515,7 @@ Model {
 	    Type		    "Handle"
 	    Dimension		    2
 	    Simulink.CodeAppCC {
-	      $ObjectID		      17
+	      $ObjectID		      16
 	      Version		      "1.12.1"
 	      Array {
 		Type			"Cell"
@@ -594,7 +582,7 @@ Model {
 	    }
 	    Simulink.GRTTargetCC {
 	      $BackupClass	      "Simulink.TargetCC"
-	      $ObjectID		      18
+	      $ObjectID		      17
 	      Version		      "1.12.1"
 	      Array {
 		Type			"Cell"
@@ -675,7 +663,7 @@ Model {
 	  }
 	}
 	SSC.SimscapeCC {
-	  $ObjectID		  19
+	  $ObjectID		  18
 	  Version		  "1.0"
 	  Array {
 	    Type		    "Cell"
@@ -704,11 +692,11 @@ Model {
   }
   Simulink.ConfigSet {
     $PropName		    "ActiveConfigurationSet"
-    $ObjectID		    8
+    $ObjectID		    7
   }
   Object {
     $PropName		    "DataTransfer"
-    $ObjectID		    20
+    $ObjectID		    19
     $ClassName		    "Simulink.GlobalDataTransfer"
     DefaultTransitionBetweenSyncTasks "Ensure deterministic transfer (maximum delay)"
     DefaultTransitionBetweenAsyncTasks "Ensure data integrity only"
@@ -1023,7 +1011,7 @@ Model {
   System {
     Name		    "Lab2_AircraftEPS"
     Location		    [65, 86, 2562, 1531]
-    Open		    on
+    Open		    off
     ModelBrowserVisibility  off
     ModelBrowserWidth	    200
     ScreenColor		    "white"
@@ -1057,7 +1045,7 @@ Model {
       MaskHideContents	      off
       Object {
 	$PropName		"MaskObject"
-	$ObjectID		21
+	$ObjectID		20
 	$ClassName		"Simulink.Mask"
 	Display			"image(imread('power_aircraft_distribution_ACLamp.jpg','jpg'))"
       }
@@ -1280,7 +1268,7 @@ Model {
       MaskHideContents	      off
       Object {
 	$PropName		"MaskObject"
-	$ObjectID		22
+	$ObjectID		21
 	$ClassName		"Simulink.Mask"
 	Display			"image(imread('power_aircraft_distribution_ACLamp.jpg','jpg'))"
       }
@@ -1505,7 +1493,7 @@ Model {
       MaskHideContents	      off
       Object {
 	$PropName		"MaskObject"
-	$ObjectID		23
+	$ObjectID		22
 	$ClassName		"Simulink.Mask"
 	Display			"plot(-80,-50,80,50,[0,9,18,24,29,30,29,24,18,9,0,-9,-18,-24,-29,-30,-29,-24,-18,-9,0],[30,29,24,18,9,0,-9,"
 	"-18,-24,-29,-30,-29,-24,-18,-9,0,9,18,24,29,30],[-50 -30],[0 0],[50,30],[0 0],[45 35 40 40 40],[15 15 15 20 10],[1 2 "
@@ -2182,7 +2170,7 @@ Model {
 	  MaskHideContents	  off
 	  Object {
 	    $PropName		    "MaskObject"
-	    $ObjectID		    24
+	    $ObjectID		    23
 	    $ClassName		    "Simulink.Mask"
 	    Display		    "image(imread('power_aircraft_distribution_GCU.jpg','jpg'))"
 	  }
@@ -2606,7 +2594,7 @@ Model {
 	  MaskHideContents	  on
 	  Object {
 	    $PropName		    "MaskObject"
-	    $ObjectID		    25
+	    $ObjectID		    24
 	    $ClassName		    "Simulink.Mask"
 	    Type		    "Sigbuilder block"
 	    Description		    "Sigbuilder GUI"
@@ -2703,7 +2691,7 @@ Model {
 	  MaskHideContents	  off
 	  Object {
 	    $PropName		    "MaskObject"
-	    $ObjectID		    26
+	    $ObjectID		    25
 	    $ClassName		    "Simulink.Mask"
 	    Display		    "image(imread('power_aircraft_distribution_APU_Generator.jpg','jpg'))\n"
 	  }
@@ -3519,7 +3507,7 @@ Model {
       MaskHideContents	      off
       Object {
 	$PropName		"MaskObject"
-	$ObjectID		27
+	$ObjectID		26
 	$ClassName		"Simulink.Mask"
 	Display			"plot(-80,-50,80,50,[0,9,18,24,29,30,29,24,18,9,0,-9,-18,-24,-29,-30,-29,-24,-18,-9,0],[30,29,24,18,9,0,-9,"
 	"-18,-24,-29,-30,-29,-24,-18,-9,0,9,18,24,29,30],[-50 -30],[0 0],[50,30],[0 0],[45 35 40 40 40],[15 15 15 20 10],[1 2 "
@@ -4196,7 +4184,7 @@ Model {
 	  MaskHideContents	  off
 	  Object {
 	    $PropName		    "MaskObject"
-	    $ObjectID		    28
+	    $ObjectID		    27
 	    $ClassName		    "Simulink.Mask"
 	    Display		    "image(imread('power_aircraft_distribution_GCU.jpg','jpg'))"
 	  }
@@ -4650,7 +4638,7 @@ Model {
 	  MaskHideContents	  on
 	  Object {
 	    $PropName		    "MaskObject"
-	    $ObjectID		    29
+	    $ObjectID		    28
 	    $ClassName		    "Simulink.Mask"
 	    Type		    "Sigbuilder block"
 	    Description		    "Sigbuilder GUI"
@@ -4747,7 +4735,7 @@ Model {
 	  MaskHideContents	  off
 	  Object {
 	    $PropName		    "MaskObject"
-	    $ObjectID		    30
+	    $ObjectID		    29
 	    $ClassName		    "Simulink.Mask"
 	    Display		    "image(imread('power_aircraft_distribution_APU_Generator.jpg','jpg'))\n"
 	  }
@@ -5577,7 +5565,7 @@ Model {
       MaskHideContents	      off
       Object {
 	$PropName		"MaskObject"
-	$ObjectID		31
+	$ObjectID		30
 	$ClassName		"Simulink.Mask"
 	Type			"Contactor"
 	Description		"Simple three phase contactor without a fuse."
@@ -5957,7 +5945,7 @@ Model {
       MaskHideContents	      off
       Object {
 	$PropName		"MaskObject"
-	$ObjectID		32
+	$ObjectID		31
 	$ClassName		"Simulink.Mask"
 	Type			"Contactor"
 	Description		"Simple single phase contactor without a fuse."
@@ -6151,7 +6139,7 @@ Model {
       MaskHideContents	      off
       Object {
 	$PropName		"MaskObject"
-	$ObjectID		33
+	$ObjectID		32
 	$ClassName		"Simulink.Mask"
 	Type			"Contactor"
 	Description		"Simple single phase contactor without a fuse."
@@ -6345,7 +6333,7 @@ Model {
       MaskHideContents	      off
       Object {
 	$PropName		"MaskObject"
-	$ObjectID		34
+	$ObjectID		33
 	$ClassName		"Simulink.Mask"
 	Type			"Contactor"
 	Description		"Simple single phase contactor without a fuse."
@@ -6540,7 +6528,7 @@ Model {
       MaskHideContents	      off
       Object {
 	$PropName		"MaskObject"
-	$ObjectID		35
+	$ObjectID		34
 	$ClassName		"Simulink.Mask"
 	Type			"Contactor"
 	Description		"Simple three phase contactor without a fuse."
@@ -6920,7 +6908,7 @@ Model {
       MaskHideContents	      off
       Object {
 	$PropName		"MaskObject"
-	$ObjectID		36
+	$ObjectID		35
 	$ClassName		"Simulink.Mask"
 	Type			"Contactor"
 	Description		"Simple three phase contactor without a fuse."
@@ -7300,7 +7288,7 @@ Model {
       MaskHideContents	      off
       Object {
 	$PropName		"MaskObject"
-	$ObjectID		37
+	$ObjectID		36
 	$ClassName		"Simulink.Mask"
 	Type			"Contactor"
 	Description		"Simple three phase contactor without a fuse."
@@ -7679,7 +7667,7 @@ Model {
       MaskHideContents	      off
       Object {
 	$PropName		"MaskObject"
-	$ObjectID		38
+	$ObjectID		37
 	$ClassName		"Simulink.Mask"
 	Type			"Contactor"
 	Description		"Simple three phase contactor without a fuse."
@@ -8054,7 +8042,7 @@ Model {
       MaskHideContents	      off
       Object {
 	$PropName		"MaskObject"
-	$ObjectID		39
+	$ObjectID		38
 	$ClassName		"Simulink.Mask"
 	Type			"Contactor"
 	Description		"Simple three phase contactor without a fuse."
@@ -8430,7 +8418,7 @@ Model {
       MaskHideContents	      off
       Object {
 	$PropName		"MaskObject"
-	$ObjectID		40
+	$ObjectID		39
 	$ClassName		"Simulink.Mask"
 	Type			"Contactor"
 	Description		"Simple three phase contactor without a fuse."
@@ -8810,7 +8798,7 @@ Model {
       MaskHideContents	      off
       Object {
 	$PropName		"MaskObject"
-	$ObjectID		41
+	$ObjectID		40
 	$ClassName		"Simulink.Mask"
 	Type			"Contactor"
 	Description		"Simple three phase contactor without a fuse."
@@ -9190,7 +9178,7 @@ Model {
       MaskHideContents	      off
       Object {
 	$PropName		"MaskObject"
-	$ObjectID		42
+	$ObjectID		41
 	$ClassName		"Simulink.Mask"
 	Type			"Contactor"
 	Description		"Simple single phase contactor without a fuse."
@@ -9433,11 +9421,10 @@ Model {
 	  BlockType		  BusCreator
 	  Name			  "Bus Creator"
 	  SID			  "5342"
-	  Ports			  [2, 1]
+	  Ports			  [4, 1]
 	  Position		  [595, 551, 600, 589]
 	  ZOrder		  40
 	  ShowName		  off
-	  Inputs		  "2"
 	  DisplayOption		  "bar"
 	}
 	Block {
@@ -9516,7 +9503,7 @@ Model {
 	  MaskHideContents	  off
 	  System {
 	    Name		    "Load Management"
-	    Location		    [-8, -8, 1928, 1168]
+	    Location		    [65, 86, 2562, 1531]
 	    Open		    off
 	    ModelBrowserVisibility  off
 	    ModelBrowserWidth	    200
@@ -9664,7 +9651,7 @@ Model {
 	  Name			  "MATLAB Function"
 	  SID			  "5346"
 	  Ports			  [1, 2]
-	  Position		  [710, 549, 780, 596]
+	  Position		  [685, 531, 810, 609]
 	  ZOrder		  44
 	  LibraryVersion	  "1.32"
 	  ErrorFcn		  "Stateflow.Translate.translate"
@@ -9680,13 +9667,13 @@ Model {
 	  SFBlockType		  "MATLAB Function"
 	  Object {
 	    $PropName		    "MaskObject"
-	    $ObjectID		    43
+	    $ObjectID		    42
 	    $ClassName		    "Simulink.Mask"
 	    Type		    "Stateflow"
 	    Description		    "Embedded MATLAB block"
 	    SelfModifiable	    "on"
 	    Display		    "bgColor = Simulink.Root.ColorString2Rgb(get_param(gcbh, 'BackgroundColor')); image(imread('private/"
-	    "eml_membrane_16.png','png','BackgroundColor',bgColor(1:3)),'center'); disp([10 10 'fcn']);"
+	    "eml_membrane_16.png','png','BackgroundColor',bgColor(1:3)),'center'); disp([10 10 'BPCU_core']);"
 	    IconOpaque		    "off"
 	    IconUnits		    "normalized"
 	  }
@@ -10016,8 +10003,16 @@ Model {
 	Line {
 	  SrcBlock		  "checkVoltage"
 	  SrcPort		  1
-	  DstBlock		  "Display"
-	  DstPort		  1
+	  Points		  [38, 0]
+	  Branch {
+	    Points		    [0, 445]
+	    DstBlock		    "Bus Creator"
+	    DstPort		    1
+	  }
+	  Branch {
+	    DstBlock		    "Display"
+	    DstPort		    1
+	  }
 	}
 	Line {
 	  SrcBlock		  "RAPU"
@@ -10028,8 +10023,16 @@ Model {
 	Line {
 	  SrcBlock		  "checkVoltage1"
 	  SrcPort		  1
-	  DstBlock		  "Display1"
-	  DstPort		  1
+	  Points		  [28, 0]
+	  Branch {
+	    Points		    [0, 340]
+	    DstBlock		    "Bus Creator"
+	    DstPort		    2
+	  }
+	  Branch {
+	    DstBlock		    "Display1"
+	    DstPort		    1
+	  }
 	}
 	Line {
 	  SrcBlock		  "LAPU"
@@ -10048,9 +10051,9 @@ Model {
 	  SrcPort		  1
 	  Points		  [6, 0]
 	  Branch {
-	    Points		    [0, 115]
+	    Points		    [0, 120]
 	    DstBlock		    "Bus Creator"
-	    DstPort		    2
+	    DstPort		    4
 	  }
 	  Branch {
 	    DstBlock		    "Display3"
@@ -10062,9 +10065,9 @@ Model {
 	  SrcPort		  1
 	  Points		  [21, 0]
 	  Branch {
-	    Points		    [0, 215]
+	    Points		    [0, 230]
 	    DstBlock		    "Bus Creator"
-	    DstPort		    1
+	    DstPort		    3
 	  }
 	  Branch {
 	    DstBlock		    "Display2"
@@ -10074,20 +10077,20 @@ Model {
 	Line {
 	  SrcBlock		  "Bus Creator"
 	  SrcPort		  1
-	  Points		  [90, 0]
 	  DstBlock		  "MATLAB Function"
 	  DstPort		  1
 	}
 	Line {
 	  SrcBlock		  "MATLAB Function"
 	  SrcPort		  1
+	  Points		  [55, 0; 0, 10]
 	  DstBlock		  "Display4"
 	  DstPort		  1
 	}
 	Line {
 	  SrcBlock		  "MATLAB Function"
 	  SrcPort		  2
-	  Points		  [71, 0; 0, 25]
+	  Points		  [41, 0; 0, 20]
 	  DstBlock		  "Display5"
 	  DstPort		  1
 	}
@@ -10114,7 +10117,7 @@ Model {
       MaskHideContents	      off
       Object {
 	$PropName		"MaskObject"
-	$ObjectID		44
+	$ObjectID		43
 	$ClassName		"Simulink.Mask"
 	Display			"image(imread('power_aircraft_distribution_DCLamp.jpg','jpg'))"
       }
@@ -10343,7 +10346,7 @@ Model {
       MaskHideContents	      off
       Object {
 	$PropName		"MaskObject"
-	$ObjectID		45
+	$ObjectID		44
 	$ClassName		"Simulink.Mask"
 	Display			"image(imread('power_aircraft_distribution_DCLamp.jpg','jpg'))"
       }
@@ -11320,7 +11323,7 @@ Model {
       MaskHideContents	      off
       Object {
 	$PropName		"MaskObject"
-	$ObjectID		46
+	$ObjectID		45
 	$ClassName		"Simulink.Mask"
 	Display			"plot(-80,-50,80,50,[0,9,18,24,29,30,29,24,18,9,0,-9,-18,-24,-29,-30,-29,-24,-18,-9,0],[30,29,24,18,9,0,-9,"
 	"-18,-24,-29,-30,-29,-24,-18,-9,0,9,18,24,29,30],[-50 -30],[0 0],[50,30],[0 0],[45 35 40 40 40],[15 15 15 20 10],[1 2 "
@@ -11985,7 +11988,7 @@ Model {
 	  MaskHideContents	  off
 	  Object {
 	    $PropName		    "MaskObject"
-	    $ObjectID		    47
+	    $ObjectID		    46
 	    $ClassName		    "Simulink.Mask"
 	    Display		    "image(imread('power_aircraft_distribution_GCU.jpg','jpg'))"
 	  }
@@ -12489,7 +12492,7 @@ Model {
 	  MaskHideContents	  on
 	  Object {
 	    $PropName		    "MaskObject"
-	    $ObjectID		    48
+	    $ObjectID		    47
 	    $ClassName		    "Simulink.Mask"
 	    Type		    "Sigbuilder block"
 	    Description		    "Sigbuilder GUI"
@@ -12586,7 +12589,7 @@ Model {
 	  MaskHideContents	  off
 	  Object {
 	    $PropName		    "MaskObject"
-	    $ObjectID		    49
+	    $ObjectID		    48
 	    $ClassName		    "Simulink.Mask"
 	    Display		    "image(imread('power_aircraft_distribution_APU_Generator.jpg','jpg'))\n"
 	  }
@@ -13440,7 +13443,7 @@ Model {
       MaskHideContents	      off
       Object {
 	$PropName		"MaskObject"
-	$ObjectID		50
+	$ObjectID		49
 	$ClassName		"Simulink.Mask"
 	Display			"plot(-80,-50,80,50,[0,9,18,24,29,30,29,24,18,9,0,-9,-18,-24,-29,-30,-29,-24,-18,-9,0],[30,29,24,18,9,0,-9,"
 	"-18,-24,-29,-30,-29,-24,-18,-9,0,9,18,24,29,30],[-50 -30],[0 0],[50,30],[0 0],[45 35 40 40 40],[15 15 15 20 10],[1 2 "
@@ -14117,7 +14120,7 @@ Model {
 	  MaskHideContents	  off
 	  Object {
 	    $PropName		    "MaskObject"
-	    $ObjectID		    51
+	    $ObjectID		    50
 	    $ClassName		    "Simulink.Mask"
 	    Display		    "image(imread('power_aircraft_distribution_GCU.jpg','jpg'))"
 	  }
@@ -14541,7 +14544,7 @@ Model {
 	  MaskHideContents	  on
 	  Object {
 	    $PropName		    "MaskObject"
-	    $ObjectID		    52
+	    $ObjectID		    51
 	    $ClassName		    "Simulink.Mask"
 	    Type		    "Sigbuilder block"
 	    Description		    "Sigbuilder GUI"
@@ -14638,7 +14641,7 @@ Model {
 	  MaskHideContents	  off
 	  Object {
 	    $PropName		    "MaskObject"
-	    $ObjectID		    53
+	    $ObjectID		    52
 	    $ClassName		    "Simulink.Mask"
 	    Display		    "image(imread('power_aircraft_distribution_APU_Generator.jpg','jpg'))\n"
 	  }
@@ -15486,7 +15489,7 @@ Model {
       MaskHideContents	      off
       Object {
 	$PropName		"MaskObject"
-	$ObjectID		54
+	$ObjectID		53
 	$ClassName		"Simulink.Mask"
 	Display			"image(imread('power_aircraft_distribution_TRU.jpg','jpg'))"
       }
@@ -15917,7 +15920,7 @@ Model {
       MaskHideContents	      off
       Object {
 	$PropName		"MaskObject"
-	$ObjectID		55
+	$ObjectID		54
 	$ClassName		"Simulink.Mask"
 	Display			"image(imread('power_aircraft_distribution_TRU.jpg','jpg'))"
       }
@@ -17735,7 +17738,7 @@ Stateflow {
     chartFileNumber	    2
     disableImplicitCasting  1
     eml {
-      name		      "fcn"
+      name		      "BPCU_core"
     }
   }
   state {
@@ -17752,7 +17755,8 @@ Stateflow {
     decomposition	    CLUSTER_STATE
     eml {
       isEML		      1
-      script		      "function [a_out,b_out] = fcn(in_bus)\n%#codegen\n\na_out = in_bus(1)\nb_out = in_bus(2)\n"
+      script		      "function [a_out,b_out] = BPCU_core(in_bus)\n    GL = in_bus(1);\n    AL = in_bus(2);\n    AR = in"
+      "_bus(3);\n    GR = in_bus(4);\n\na_out = in_bus(1)\nb_out = in_bus(2)\n"
       editorLayout	      "100 M4x1[10 5 700 500]"
     }
   }
