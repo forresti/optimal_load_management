@@ -16,8 +16,6 @@ if GL is broken and GR works
         [0 0 0 1 1 1] %GR power whole plane, everything else off
 
 if GL works and GR is broken
-    GR off
-    GL power left
     if AR works
         [1 0 1 0 0 1] %GR off, GL power left, AR power right
     if AL works
