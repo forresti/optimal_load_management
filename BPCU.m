@@ -9,6 +9,8 @@ function [contactors] = BPCU(generatorHealth)
 
     contactors = zeros([1 12]) %test
 
+    if 1 && ~0
+        x = 'blah'
     
 
 end
