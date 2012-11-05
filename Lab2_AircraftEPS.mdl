@@ -6,7 +6,7 @@ Model {
     NumRootInports	    0
     NumRootOutports	    0
     ParameterArgumentNames  ""
-    ComputedModelVersion    "1.288"
+    ComputedModelVersion    "1.294"
     NumModelReferences	    0
     NumTestPointedSignals   0
   }
@@ -56,7 +56,7 @@ Model {
 	Dimension		2
 	Object {
 	  $ObjectID		  5
-	  IsActive		  [1]
+	  IsActive		  [0]
 	  ViewObjType		  "SimulinkTopLevel"
 	  LoadSaveID		  "0"
 	  Extents		  [2459.0, 1268.0]
@@ -65,7 +65,7 @@ Model {
 	}
 	Object {
 	  $ObjectID		  6
-	  IsActive		  [0]
+	  IsActive		  [1]
 	  ViewObjType		  "SimulinkSubsys"
 	  LoadSaveID		  "1778"
 	  Extents		  [2459.0, 1268.0]
@@ -85,9 +85,9 @@ Model {
   ModifiedByFormat	  "%<Auto>"
   LastModifiedBy	  "forrest"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Mon Nov 05 13:56:44 2012"
+  LastModifiedDate	  "Mon Nov 05 14:02:38 2012"
   RTWModifiedTimeStamp	  274024510
-  ModelVersionFormat	  "1.%<AutoIncrement:288>"
+  ModelVersionFormat	  "1.%<AutoIncrement:294>"
   ConfigurationManager	  "None"
   SampleTimeColors	  off
   SampleTimeAnnotations	  off
@@ -937,6 +937,13 @@ Model {
       SampleTime	      "-1"
     }
     Block {
+      BlockType		      S-Function
+      FunctionName	      "system"
+      SFunctionModules	      "''"
+      PortCounts	      "[]"
+      SFunctionDeploymentMode off
+    }
+    Block {
       BlockType		      Scope
       ModelBased	      off
       TickLabels	      "OneTimeTick"
@@ -1029,7 +1036,7 @@ Model {
     ShowPageBoundaries	    off
     ZoomFactor		    "100"
     ReportName		    "simulink-default.rpt"
-    SIDHighWatermark	    "5345"
+    SIDHighWatermark	    "5346"
     Block {
       BlockType		      SubSystem
       Name		      "AC Load1"
@@ -9434,28 +9441,6 @@ Model {
 	  DisplayOption		  "bar"
 	}
 	Block {
-	  BlockType		  BusSelector
-	  Name			  "Bus Selector"
-	  SID			  "5343"
-	  Ports			  [1, 2]
-	  Position		  [700, 551, 705, 589]
-	  ZOrder		  41
-	  ShowName		  off
-	  OutputSignals		  "isWorking (signal 1),isWorking (signal 2)"
-	  Port {
-	    PortNumber		    1
-	    Name		    "<isWorking (signal 1)>"
-	    RTWStorageClass	    "Auto"
-	    DataLoggingNameMode	    "SignalName"
-	  }
-	  Port {
-	    PortNumber		    2
-	    Name		    "<isWorking (signal 2)>"
-	    RTWStorageClass	    "Auto"
-	    DataLoggingNameMode	    "SignalName"
-	  }
-	}
-	Block {
 	  BlockType		  Display
 	  Name			  "Display"
 	  SID			  "5302"
@@ -9500,7 +9485,7 @@ Model {
 	  Name			  "Display4"
 	  SID			  "5344"
 	  Ports			  [1]
-	  Position		  [770, 545, 860, 575]
+	  Position		  [930, 545, 1020, 575]
 	  ZOrder		  42
 	  Decimation		  "1"
 	  Lockdown		  off
@@ -9510,7 +9495,7 @@ Model {
 	  Name			  "Display5"
 	  SID			  "5345"
 	  Ports			  [1]
-	  Position		  [770, 595, 860, 625]
+	  Position		  [930, 595, 1020, 625]
 	  ZOrder		  43
 	  Decimation		  "1"
 	  Lockdown		  off
@@ -9671,6 +9656,154 @@ Model {
 		DstBlock		"B12"
 		DstPort			1
 	      }
+	    }
+	  }
+	}
+	Block {
+	  BlockType		  SubSystem
+	  Name			  "MATLAB Function"
+	  SID			  "5346"
+	  Ports			  [1, 2]
+	  Position		  [710, 549, 780, 596]
+	  ZOrder		  44
+	  LibraryVersion	  "1.32"
+	  ErrorFcn		  "Stateflow.Translate.translate"
+	  PermitHierarchicalResolution "ExplicitOnly"
+	  TreatAsAtomicUnit	  on
+	  MinAlgLoopOccurrences	  off
+	  PropExecContextOutsideSubsystem off
+	  RTWSystemCode		  "Auto"
+	  FunctionWithSeparateData off
+	  Opaque		  off
+	  RequestExecContextInheritance	off
+	  MaskHideContents	  off
+	  SFBlockType		  "MATLAB Function"
+	  Object {
+	    $PropName		    "MaskObject"
+	    $ObjectID		    43
+	    $ClassName		    "Simulink.Mask"
+	    Type		    "Stateflow"
+	    Description		    "Embedded MATLAB block"
+	    SelfModifiable	    "on"
+	    Display		    "bgColor = Simulink.Root.ColorString2Rgb(get_param(gcbh, 'BackgroundColor')); image(imread('private/"
+	    "eml_membrane_16.png','png','BackgroundColor',bgColor(1:3)),'center'); disp([10 10 'fcn']);"
+	    IconOpaque		    "off"
+	    IconUnits		    "normalized"
+	  }
+	  System {
+	    Name		    "MATLAB Function"
+	    Location		    [223, 338, 826, 833]
+	    Open		    off
+	    ModelBrowserVisibility  off
+	    ModelBrowserWidth	    200
+	    ScreenColor		    "white"
+	    PaperOrientation	    "landscape"
+	    PaperPositionMode	    "auto"
+	    PaperType		    "usletter"
+	    PaperUnits		    "inches"
+	    TiledPaperMargins	    [0.500000, 0.500000, 0.500000, 0.500000]
+	    TiledPageScale	    1
+	    ShowPageBoundaries	    off
+	    ZoomFactor		    "100"
+	    SIDHighWatermark	    "24"
+	    Block {
+	      BlockType		      Inport
+	      Name		      "in_bus"
+	      SID		      "5346::1"
+	      Position		      [20, 101, 40, 119]
+	      ZOrder		      -1
+	      IconDisplay	      "Port number"
+	    }
+	    Block {
+	      BlockType		      Demux
+	      Name		      " Demux "
+	      SID		      "5346::20"
+	      Ports		      [1, 1]
+	      Position		      [270, 180, 320, 220]
+	      ZOrder		      6
+	      Outputs		      "1"
+	    }
+	    Block {
+	      BlockType		      S-Function
+	      Name		      " SFunction "
+	      SID		      "5346::19"
+	      Tag		      "Stateflow S-Function Lab2_AircraftEPS 2"
+	      Ports		      [1, 3]
+	      Position		      [180, 100, 230, 180]
+	      ZOrder		      5
+	      FunctionName	      "sf_sfun"
+	      PortCounts	      "[1 3]"
+	      EnableBusSupport	      on
+	      Port {
+		PortNumber		2
+		Name			"a_out"
+		RTWStorageClass		"Auto"
+		DataLoggingNameMode	"SignalName"
+	      }
+	      Port {
+		PortNumber		3
+		Name			"b_out"
+		RTWStorageClass		"Auto"
+		DataLoggingNameMode	"SignalName"
+	      }
+	    }
+	    Block {
+	      BlockType		      Terminator
+	      Name		      " Terminator "
+	      SID		      "5346::22"
+	      Position		      [460, 191, 480, 209]
+	      ZOrder		      8
+	    }
+	    Block {
+	      BlockType		      Outport
+	      Name		      "a_out"
+	      SID		      "5346::5"
+	      Position		      [460, 101, 480, 119]
+	      ZOrder		      -5
+	      IconDisplay	      "Port number"
+	    }
+	    Block {
+	      BlockType		      Outport
+	      Name		      "b_out"
+	      SID		      "5346::24"
+	      Position		      [460, 136, 480, 154]
+	      ZOrder		      10
+	      Port		      "2"
+	      IconDisplay	      "Port number"
+	    }
+	    Line {
+	      SrcBlock		      "in_bus"
+	      SrcPort		      1
+	      DstBlock		      " SFunction "
+	      DstPort		      1
+	    }
+	    Line {
+	      Name		      "a_out"
+	      Labels		      [0, 0]
+	      SrcBlock		      " SFunction "
+	      SrcPort		      2
+	      DstBlock		      "a_out"
+	      DstPort		      1
+	    }
+	    Line {
+	      Name		      "b_out"
+	      Labels		      [0, 0]
+	      SrcBlock		      " SFunction "
+	      SrcPort		      3
+	      DstBlock		      "b_out"
+	      DstPort		      1
+	    }
+	    Line {
+	      SrcBlock		      " Demux "
+	      SrcPort		      1
+	      DstBlock		      " Terminator "
+	      DstPort		      1
+	    }
+	    Line {
+	      SrcBlock		      " SFunction "
+	      SrcPort		      1
+	      DstBlock		      " Demux "
+	      DstPort		      1
 	    }
 	  }
 	}
@@ -9941,23 +10074,20 @@ Model {
 	Line {
 	  SrcBlock		  "Bus Creator"
 	  SrcPort		  1
-	  DstBlock		  "Bus Selector"
+	  Points		  [90, 0]
+	  DstBlock		  "MATLAB Function"
 	  DstPort		  1
 	}
 	Line {
-	  Name			  "<isWorking (signal 1)>"
-	  Labels		  [0, 0]
-	  SrcBlock		  "Bus Selector"
+	  SrcBlock		  "MATLAB Function"
 	  SrcPort		  1
 	  DstBlock		  "Display4"
 	  DstPort		  1
 	}
 	Line {
-	  Name			  "<isWorking (signal 2)>"
-	  Labels		  [0, 0]
-	  SrcBlock		  "Bus Selector"
+	  SrcBlock		  "MATLAB Function"
 	  SrcPort		  2
-	  Points		  [27, 0; 0, 30]
+	  Points		  [71, 0; 0, 25]
 	  DstBlock		  "Display5"
 	  DstPort		  1
 	}
@@ -9984,7 +10114,7 @@ Model {
       MaskHideContents	      off
       Object {
 	$PropName		"MaskObject"
-	$ObjectID		43
+	$ObjectID		44
 	$ClassName		"Simulink.Mask"
 	Display			"image(imread('power_aircraft_distribution_DCLamp.jpg','jpg'))"
       }
@@ -10213,7 +10343,7 @@ Model {
       MaskHideContents	      off
       Object {
 	$PropName		"MaskObject"
-	$ObjectID		44
+	$ObjectID		45
 	$ClassName		"Simulink.Mask"
 	Display			"image(imread('power_aircraft_distribution_DCLamp.jpg','jpg'))"
       }
@@ -11190,7 +11320,7 @@ Model {
       MaskHideContents	      off
       Object {
 	$PropName		"MaskObject"
-	$ObjectID		45
+	$ObjectID		46
 	$ClassName		"Simulink.Mask"
 	Display			"plot(-80,-50,80,50,[0,9,18,24,29,30,29,24,18,9,0,-9,-18,-24,-29,-30,-29,-24,-18,-9,0],[30,29,24,18,9,0,-9,"
 	"-18,-24,-29,-30,-29,-24,-18,-9,0,9,18,24,29,30],[-50 -30],[0 0],[50,30],[0 0],[45 35 40 40 40],[15 15 15 20 10],[1 2 "
@@ -11855,7 +11985,7 @@ Model {
 	  MaskHideContents	  off
 	  Object {
 	    $PropName		    "MaskObject"
-	    $ObjectID		    46
+	    $ObjectID		    47
 	    $ClassName		    "Simulink.Mask"
 	    Display		    "image(imread('power_aircraft_distribution_GCU.jpg','jpg'))"
 	  }
@@ -12359,7 +12489,7 @@ Model {
 	  MaskHideContents	  on
 	  Object {
 	    $PropName		    "MaskObject"
-	    $ObjectID		    47
+	    $ObjectID		    48
 	    $ClassName		    "Simulink.Mask"
 	    Type		    "Sigbuilder block"
 	    Description		    "Sigbuilder GUI"
@@ -12456,7 +12586,7 @@ Model {
 	  MaskHideContents	  off
 	  Object {
 	    $PropName		    "MaskObject"
-	    $ObjectID		    48
+	    $ObjectID		    49
 	    $ClassName		    "Simulink.Mask"
 	    Display		    "image(imread('power_aircraft_distribution_APU_Generator.jpg','jpg'))\n"
 	  }
@@ -13310,7 +13440,7 @@ Model {
       MaskHideContents	      off
       Object {
 	$PropName		"MaskObject"
-	$ObjectID		49
+	$ObjectID		50
 	$ClassName		"Simulink.Mask"
 	Display			"plot(-80,-50,80,50,[0,9,18,24,29,30,29,24,18,9,0,-9,-18,-24,-29,-30,-29,-24,-18,-9,0],[30,29,24,18,9,0,-9,"
 	"-18,-24,-29,-30,-29,-24,-18,-9,0,9,18,24,29,30],[-50 -30],[0 0],[50,30],[0 0],[45 35 40 40 40],[15 15 15 20 10],[1 2 "
@@ -13987,7 +14117,7 @@ Model {
 	  MaskHideContents	  off
 	  Object {
 	    $PropName		    "MaskObject"
-	    $ObjectID		    50
+	    $ObjectID		    51
 	    $ClassName		    "Simulink.Mask"
 	    Display		    "image(imread('power_aircraft_distribution_GCU.jpg','jpg'))"
 	  }
@@ -14411,7 +14541,7 @@ Model {
 	  MaskHideContents	  on
 	  Object {
 	    $PropName		    "MaskObject"
-	    $ObjectID		    51
+	    $ObjectID		    52
 	    $ClassName		    "Simulink.Mask"
 	    Type		    "Sigbuilder block"
 	    Description		    "Sigbuilder GUI"
@@ -14508,7 +14638,7 @@ Model {
 	  MaskHideContents	  off
 	  Object {
 	    $PropName		    "MaskObject"
-	    $ObjectID		    52
+	    $ObjectID		    53
 	    $ClassName		    "Simulink.Mask"
 	    Display		    "image(imread('power_aircraft_distribution_APU_Generator.jpg','jpg'))\n"
 	  }
@@ -15356,7 +15486,7 @@ Model {
       MaskHideContents	      off
       Object {
 	$PropName		"MaskObject"
-	$ObjectID		53
+	$ObjectID		54
 	$ClassName		"Simulink.Mask"
 	Display			"image(imread('power_aircraft_distribution_TRU.jpg','jpg'))"
       }
@@ -15787,7 +15917,7 @@ Model {
       MaskHideContents	      off
       Object {
 	$PropName		"MaskObject"
-	$ObjectID		54
+	$ObjectID		55
 	$ClassName		"Simulink.Mask"
 	Display			"image(imread('power_aircraft_distribution_TRU.jpg','jpg'))"
       }
@@ -17581,11 +17711,153 @@ Stateflow {
     name		    "Lab2_AircraftEPS"
     created		    "09-Feb-2012 11:24:55"
     isLibrary		    0
-    firstTarget		    2
+    firstTarget		    10
     sfVersion		    76014001.001
   }
-  target {
+  chart {
     id			    2
+    name		    "BPCU/MATLAB Function"
+    windowPosition	    [357.12 483.496 167 391]
+    viewLimits		    [0 156.75 0 153.75]
+    screen		    [1 1 1280 1024 1.041666666666667]
+    treeNode		    [0 3 0 0]
+    firstTransition	    8
+    firstJunction	    7
+    viewObj		    2
+    visible		    1
+    machine		    1
+    subviewS {
+    }
+    ssIdHighWaterMark	    7
+    decomposition	    CLUSTER_CHART
+    type		    EML_CHART
+    firstData		    4
+    chartFileNumber	    2
+    disableImplicitCasting  1
+    eml {
+      name		      "fcn"
+    }
+  }
+  state {
+    id			    3
+    labelString		    "eML_blk_kernel()"
+    position		    [18 64.5 118 66]
+    fontSize		    12
+    chart		    2
+    treeNode		    [2 0 0 0]
+    superState		    SUBCHART
+    subviewer		    2
+    ssIdNumber		    1
+    type		    FUNC_STATE
+    decomposition	    CLUSTER_STATE
+    eml {
+      isEML		      1
+      script		      "function [a_out,b_out] = fcn(in_bus)\n%#codegen\n\na_out = in_bus(1)\nb_out = in_bus(2)\n"
+      editorLayout	      "100 M4x1[10 5 700 500]"
+    }
+  }
+  data {
+    id			    4
+    ssIdNumber		    4
+    name		    "in_bus"
+    linkNode		    [2 0 5]
+    scope		    INPUT_DATA
+    machine		    1
+    props {
+      array {
+	size			"-1"
+      }
+      type {
+	method			SF_INHERITED_TYPE
+	primitive		SF_DOUBLE_TYPE
+      }
+      complexity	      SF_COMPLEX_INHERITED
+    }
+    dataType		    "Inherit: Same as Simulink"
+  }
+  data {
+    id			    5
+    ssIdNumber		    5
+    name		    "a_out"
+    linkNode		    [2 4 6]
+    scope		    OUTPUT_DATA
+    machine		    1
+    props {
+      array {
+	size			"-1"
+      }
+      type {
+	method			SF_INHERITED_TYPE
+	primitive		SF_DOUBLE_TYPE
+      }
+      complexity	      SF_COMPLEX_INHERITED
+      frame		      SF_FRAME_NO
+    }
+    dataType		    "Inherit: Same as Simulink"
+  }
+  data {
+    id			    6
+    ssIdNumber		    7
+    name		    "b_out"
+    linkNode		    [2 5 0]
+    scope		    OUTPUT_DATA
+    machine		    1
+    props {
+      array {
+	size			"-1"
+      }
+      type {
+	method			SF_INHERITED_TYPE
+	primitive		SF_DOUBLE_TYPE
+	isSigned		1
+	wordLength		"16"
+      }
+      complexity	      SF_COMPLEX_INHERITED
+      frame		      SF_FRAME_NO
+    }
+    dataType		    "Inherit: Same as Simulink"
+  }
+  junction {
+    id			    7
+    position		    [23.5747 49.5747 7]
+    chart		    2
+    linkNode		    [2 0 0]
+    subviewer		    2
+    ssIdNumber		    3
+    type		    CONNECTIVE_JUNCTION
+  }
+  transition {
+    id			    8
+    labelString		    "{eML_blk_kernel();}"
+    labelPosition	    [32.125 19.875 102.544 14.964]
+    fontSize		    12
+    src {
+      intersection	      [0 0 1 0 23.5747 14.625 0 0]
+    }
+    dst {
+      id		      7
+      intersection	      [1 0 -1 0 23.5747 42.5747 0 0]
+    }
+    midPoint		    [23.5747 24.9468]
+    chart		    2
+    linkNode		    [2 0 0]
+    dataLimits		    [21.175 25.975 14.625 42.575]
+    subviewer		    2
+    drawStyle		    SMART
+    slide {
+      sticky		      BOTH_STICK
+    }
+    executionOrder	    1
+    ssIdNumber		    2
+  }
+  instance {
+    id			    9
+    name		    "BPCU/MATLAB Function"
+    machine		    1
+    chart		    2
+  }
+  target {
+    id			    10
     name		    "sfun"
     description		    "Default Simulink S-Function Target."
     machine		    1
