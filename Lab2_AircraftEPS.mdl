@@ -6,7 +6,7 @@ Model {
     NumRootInports	    0
     NumRootOutports	    0
     ParameterArgumentNames  ""
-    ComputedModelVersion    "1.324"
+    ComputedModelVersion    "1.326"
     NumModelReferences	    0
     NumTestPointedSignals   0
   }
@@ -73,9 +73,9 @@ Model {
   ModifiedByFormat	  "%<Auto>"
   LastModifiedBy	  "forrest"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Mon Nov 05 14:35:01 2012"
+  LastModifiedDate	  "Mon Nov 05 14:38:53 2012"
   RTWModifiedTimeStamp	  274026866
-  ModelVersionFormat	  "1.%<AutoIncrement:324>"
+  ModelVersionFormat	  "1.%<AutoIncrement:326>"
   ConfigurationManager	  "None"
   SampleTimeColors	  off
   SampleTimeAnnotations	  off
@@ -1010,7 +1010,7 @@ Model {
   }
   System {
     Name		    "Lab2_AircraftEPS"
-    Location		    [65, 86, 2562, 1531]
+    Location		    [66, 52, 2561, 1468]
     Open		    off
     ModelBrowserVisibility  off
     ModelBrowserWidth	    200
@@ -9422,20 +9422,30 @@ Model {
 	  Name			  "Bus Creator"
 	  SID			  "5342"
 	  Ports			  [4, 1]
-	  Position		  [595, 551, 600, 589]
+	  Position		  [595, 616, 600, 654]
 	  ZOrder		  40
 	  ShowName		  off
 	  DisplayOption		  "bar"
 	}
 	Block {
+	  BlockType		  Display
+	  Name			  "Contactors:\nB1 - B12 output"
+	  SID			  "5350"
+	  Ports			  [1]
+	  Position		  [865, 817, 1010, 1053]
+	  ZOrder		  48
+	  Decimation		  "1"
+	  Lockdown		  off
+	}
+	Block {
 	  BlockType		  Demux
 	  Name			  "Demux"
 	  SID			  "5349"
-	  Ports			  [1, 2]
-	  Position		  [880, 551, 885, 589]
+	  Ports			  [1, 12]
+	  Position		  [880, 477, 960, 788]
 	  ZOrder		  47
 	  ShowName		  off
-	  Outputs		  "2"
+	  Outputs		  "12"
 	  DisplayOption		  "bar"
 	  Port {
 	    PortNumber		    1
@@ -9495,18 +9505,8 @@ Model {
 	  Name			  "Display4"
 	  SID			  "5344"
 	  Ports			  [1]
-	  Position		  [980, 525, 1095, 595]
+	  Position		  [1235, 412, 1385, 628]
 	  ZOrder		  42
-	  Decimation		  "1"
-	  Lockdown		  off
-	}
-	Block {
-	  BlockType		  Display
-	  Name			  "Display5"
-	  SID			  "5350"
-	  Ports			  [1]
-	  Position		  [810, 775, 925, 845]
-	  ZOrder		  48
 	  Decimation		  "1"
 	  Lockdown		  off
 	}
@@ -9674,7 +9674,7 @@ Model {
 	  Name			  "MATLAB Function"
 	  SID			  "5346"
 	  Ports			  [1, 1]
-	  Position		  [685, 531, 810, 609]
+	  Position		  [685, 596, 810, 674]
 	  ZOrder		  44
 	  LibraryVersion	  "1.32"
 	  ErrorFcn		  "Stateflow.Translate.translate"
@@ -10005,7 +10005,7 @@ Model {
 	  SrcPort		  1
 	  Points		  [38, 0]
 	  Branch {
-	    Points		    [0, 445]
+	    Points		    [0, 510]
 	    DstBlock		    "Bus Creator"
 	    DstPort		    1
 	  }
@@ -10025,7 +10025,7 @@ Model {
 	  SrcPort		  1
 	  Points		  [28, 0]
 	  Branch {
-	    Points		    [0, 340]
+	    Points		    [0, 405]
 	    DstBlock		    "Bus Creator"
 	    DstPort		    2
 	  }
@@ -10051,7 +10051,7 @@ Model {
 	  SrcPort		  1
 	  Points		  [6, 0]
 	  Branch {
-	    Points		    [0, 120]
+	    Points		    [0, 185]
 	    DstBlock		    "Bus Creator"
 	    DstPort		    4
 	  }
@@ -10065,7 +10065,7 @@ Model {
 	  SrcPort		  1
 	  Points		  [21, 0]
 	  Branch {
-	    Points		    [0, 230]
+	    Points		    [0, 295]
 	    DstBlock		    "Bus Creator"
 	    DstPort		    3
 	  }
@@ -10085,8 +10085,8 @@ Model {
 	  SrcPort		  1
 	  Points		  [30, 0]
 	  Branch {
-	    Points		    [0, 75; -50, 0]
-	    DstBlock		    "Display5"
+	    Points		    [0, 300]
+	    DstBlock		    "Contactors:\nB1 - B12 output"
 	    DstPort		    1
 	  }
 	  Branch {
@@ -10099,6 +10099,7 @@ Model {
 	  Labels		  [0, 0]
 	  SrcBlock		  "Demux"
 	  SrcPort		  1
+	  Points		  [132, 0; 0, 25]
 	  DstBlock		  "Display4"
 	  DstPort		  1
 	}
@@ -16339,7 +16340,7 @@ Model {
       Ports		      []
       Position		      [75, 35, 172, 87]
       ZOrder		      -66
-      LibraryVersion	      "1.2162"
+      LibraryVersion	      "*1.2162"
       UserDataPersistent      on
       UserData		      "DataTag8"
       FontSize		      14
