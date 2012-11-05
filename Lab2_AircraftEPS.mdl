@@ -6,11 +6,11 @@ Model {
     NumRootInports	    0
     NumRootOutports	    0
     ParameterArgumentNames  ""
-    ComputedModelVersion    "1.285"
+    ComputedModelVersion    "1.288"
     NumModelReferences	    0
     NumTestPointedSignals   0
   }
-  SavedCharacterEncoding  "windows-1252"
+  SavedCharacterEncoding  "UTF-8"
   PreLoadFcn		  "warning off\nTs=10e-6;"
   SaveDefaultBlockParams  on
   ScopeRefreshTime	  0.035000
@@ -34,7 +34,7 @@ Model {
       $ObjectID		      2
       $ClassName	      "Simulink.WindowInfo"
       IsActive		      [1]
-      Location		      [52.0, 114.0, 1612.0, 876.0]
+      Location		      [65.0, 86.0, 2497.0, 1445.0]
       Object {
 	$PropName		"ModelBrowserInfo"
 	$ObjectID		3
@@ -59,18 +59,18 @@ Model {
 	  IsActive		  [1]
 	  ViewObjType		  "SimulinkTopLevel"
 	  LoadSaveID		  "0"
-	  Extents		  [1560.0, 697.0]
+	  Extents		  [2459.0, 1268.0]
 	  ZoomFactor		  [1.0]
-	  Offset		  [61.0, 5.0]
+	  Offset		  [61.0, 3.875]
 	}
 	Object {
 	  $ObjectID		  6
 	  IsActive		  [0]
 	  ViewObjType		  "SimulinkSubsys"
 	  LoadSaveID		  "1778"
-	  Extents		  [1560.0, 697.0]
+	  Extents		  [2459.0, 1268.0]
 	  ZoomFactor		  [1.0]
-	  Offset		  [46.125000596046448, -63.974987745285034]
+	  Offset		  [-527.0, -64.0]
 	}
 	PropName		"EditorsInfo"
       }
@@ -83,11 +83,11 @@ Model {
   Creator		  "pidm"
   UpdateHistory		  "UpdateHistoryNever"
   ModifiedByFormat	  "%<Auto>"
-  LastModifiedBy	  "huytbvo"
+  LastModifiedBy	  "forrest"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Sat Nov 03 18:01:01 2012"
-  RTWModifiedTimeStamp	  273866454
-  ModelVersionFormat	  "1.%<AutoIncrement:285>"
+  LastModifiedDate	  "Mon Nov 05 13:56:44 2012"
+  RTWModifiedTimeStamp	  274024510
+  ModelVersionFormat	  "1.%<AutoIncrement:288>"
   ConfigurationManager	  "None"
   SampleTimeColors	  off
   SampleTimeAnnotations	  off
@@ -769,6 +769,13 @@ Model {
   }
   BlockParameterDefaults {
     Block {
+      BlockType		      BusCreator
+      Inputs		      "4"
+      DisplayOption	      "none"
+      OutDataTypeStr	      "Inherit: auto"
+      NonVirtualBus	      off
+    }
+    Block {
       BlockType		      BusSelector
       OutputSignals	      "signal1,signal2,signal3"
       OutputAsBus	      off
@@ -1008,7 +1015,7 @@ Model {
   }
   System {
     Name		    "Lab2_AircraftEPS"
-    Location		    [52, 114, 1664, 990]
+    Location		    [65, 86, 2562, 1531]
     Open		    on
     ModelBrowserVisibility  off
     ModelBrowserWidth	    200
@@ -1022,7 +1029,7 @@ Model {
     ShowPageBoundaries	    off
     ZoomFactor		    "100"
     ReportName		    "simulink-default.rpt"
-    SIDHighWatermark	    "5341"
+    SIDHighWatermark	    "5345"
     Block {
       BlockType		      SubSystem
       Name		      "AC Load1"
@@ -9367,7 +9374,7 @@ Model {
       MaskHideContents	      off
       System {
 	Name			"BPCU"
-	Location		[332, 188, 1944, 1064]
+	Location		[65, 86, 2562, 1531]
 	Open			on
 	ModelBrowserVisibility	off
 	ModelBrowserWidth	200
@@ -9416,6 +9423,39 @@ Model {
 	  IconDisplay		  "Port number"
 	}
 	Block {
+	  BlockType		  BusCreator
+	  Name			  "Bus Creator"
+	  SID			  "5342"
+	  Ports			  [2, 1]
+	  Position		  [595, 551, 600, 589]
+	  ZOrder		  40
+	  ShowName		  off
+	  Inputs		  "2"
+	  DisplayOption		  "bar"
+	}
+	Block {
+	  BlockType		  BusSelector
+	  Name			  "Bus Selector"
+	  SID			  "5343"
+	  Ports			  [1, 2]
+	  Position		  [700, 551, 705, 589]
+	  ZOrder		  41
+	  ShowName		  off
+	  OutputSignals		  "isWorking (signal 1),isWorking (signal 2)"
+	  Port {
+	    PortNumber		    1
+	    Name		    "<isWorking (signal 1)>"
+	    RTWStorageClass	    "Auto"
+	    DataLoggingNameMode	    "SignalName"
+	  }
+	  Port {
+	    PortNumber		    2
+	    Name		    "<isWorking (signal 2)>"
+	    RTWStorageClass	    "Auto"
+	    DataLoggingNameMode	    "SignalName"
+	  }
+	}
+	Block {
 	  BlockType		  Display
 	  Name			  "Display"
 	  SID			  "5302"
@@ -9452,6 +9492,26 @@ Model {
 	  Ports			  [1]
 	  Position		  [420, 450, 510, 480]
 	  ZOrder		  23
+	  Decimation		  "1"
+	  Lockdown		  off
+	}
+	Block {
+	  BlockType		  Display
+	  Name			  "Display4"
+	  SID			  "5344"
+	  Ports			  [1]
+	  Position		  [770, 545, 860, 575]
+	  ZOrder		  42
+	  Decimation		  "1"
+	  Lockdown		  off
+	}
+	Block {
+	  BlockType		  Display
+	  Name			  "Display5"
+	  SID			  "5345"
+	  Ports			  [1]
+	  Position		  [770, 595, 860, 625]
+	  ZOrder		  43
 	  Decimation		  "1"
 	  Lockdown		  off
 	}
@@ -9621,7 +9681,7 @@ Model {
 	  Ports			  [1, 1]
 	  Position		  [260, 89, 360, 131]
 	  ZOrder		  36
-	  LibraryVersion	  "1.6"
+	  LibraryVersion	  "1.11"
 	  SourceBlock		  "checkVoltage/checkVoltage"
 	  SourceType		  "SubSystem"
 	}
@@ -9632,7 +9692,7 @@ Model {
 	  Ports			  [1, 1]
 	  Position		  [260, 204, 360, 246]
 	  ZOrder		  37
-	  LibraryVersion	  "1.6"
+	  LibraryVersion	  "1.11"
 	  SourceBlock		  "checkVoltage/checkVoltage"
 	  SourceType		  "SubSystem"
 	}
@@ -9643,7 +9703,7 @@ Model {
 	  Ports			  [1, 1]
 	  Position		  [260, 324, 360, 366]
 	  ZOrder		  38
-	  LibraryVersion	  "1.6"
+	  LibraryVersion	  "1.11"
 	  SourceBlock		  "checkVoltage/checkVoltage"
 	  SourceType		  "SubSystem"
 	}
@@ -9654,7 +9714,7 @@ Model {
 	  Ports			  [1, 1]
 	  Position		  [260, 444, 360, 486]
 	  ZOrder		  39
-	  LibraryVersion	  "1.6"
+	  LibraryVersion	  "1.11"
 	  SourceBlock		  "checkVoltage/checkVoltage"
 	  SourceType		  "SubSystem"
 	}
@@ -9845,12 +9905,6 @@ Model {
 	  DstPort		  1
 	}
 	Line {
-	  SrcBlock		  "checkVoltage2"
-	  SrcPort		  1
-	  DstBlock		  "Display2"
-	  DstPort		  1
-	}
-	Line {
 	  SrcBlock		  "RHV"
 	  SrcPort		  1
 	  DstBlock		  "checkVoltage3"
@@ -9859,7 +9913,52 @@ Model {
 	Line {
 	  SrcBlock		  "checkVoltage3"
 	  SrcPort		  1
-	  DstBlock		  "Display3"
+	  Points		  [6, 0]
+	  Branch {
+	    Points		    [0, 115]
+	    DstBlock		    "Bus Creator"
+	    DstPort		    2
+	  }
+	  Branch {
+	    DstBlock		    "Display3"
+	    DstPort		    1
+	  }
+	}
+	Line {
+	  SrcBlock		  "checkVoltage2"
+	  SrcPort		  1
+	  Points		  [21, 0]
+	  Branch {
+	    Points		    [0, 215]
+	    DstBlock		    "Bus Creator"
+	    DstPort		    1
+	  }
+	  Branch {
+	    DstBlock		    "Display2"
+	    DstPort		    1
+	  }
+	}
+	Line {
+	  SrcBlock		  "Bus Creator"
+	  SrcPort		  1
+	  DstBlock		  "Bus Selector"
+	  DstPort		  1
+	}
+	Line {
+	  Name			  "<isWorking (signal 1)>"
+	  Labels		  [0, 0]
+	  SrcBlock		  "Bus Selector"
+	  SrcPort		  1
+	  DstBlock		  "Display4"
+	  DstPort		  1
+	}
+	Line {
+	  Name			  "<isWorking (signal 2)>"
+	  Labels		  [0, 0]
+	  SrcBlock		  "Bus Selector"
+	  SrcPort		  2
+	  Points		  [27, 0; 0, 30]
+	  DstBlock		  "Display5"
 	  DstPort		  1
 	}
       }
@@ -16099,7 +16198,7 @@ Model {
       Ports		      []
       Position		      [75, 35, 172, 87]
       ZOrder		      -66
-      LibraryVersion	      "1.2162"
+      LibraryVersion	      "*1.2162"
       UserDataPersistent      on
       UserData		      "DataTag8"
       FontSize		      14
@@ -17203,8 +17302,8 @@ MatData {
     "&          4    (               !          D         #@   #@    &    \"     8         !0    @    !     0    $     "
     "    \"0    @           #P/PX    P    !@    @    &          4    (               !          D         #@   #     & "
     "   \"     8         !0    @               $         \"0         .    .     8    (    !@         %    \"     $    !"
-    "     0         )    \"         #  @A #@   #@    &    \"     8         !0    @    !     0    $         \"0    @    "
-    "     $4!C0 X    P    !@    @    &          4    (               !          D         "
+    "     0         )    \"            @A #@   #@    &    \"     8         !0    @    !     0    $         \"0    @    "
+    "     \"^!B0 X    P    !@    @    &          4    (               !          D         "
   }
   DataRecord {
     Tag			    DataTag2
@@ -17286,8 +17385,8 @@ MatData {
     "&          4    (               !          D         #@   #@    &    \"     8         !0    @    !     0    $     "
     "    \"0    @           #P/PX    P    !@    @    &          4    (               !          D         #@   #     & "
     "   \"     8         !0    @               $         \"0         .    .     8    (    !@         %    \"     $    !"
-    "     0         )    \"         #  @A #@   #@    &    \"     8         !0    @    !     0    $         \"0    @    "
-    "     ![!V0 X    P    !@    @    &          4    (               !          D         "
+    "     0         )    \"            @A #@   #@    &    \"     8         !0    @    !     0    $         \"0    @    "
+    "     !(!V0 X    P    !@    @    &          4    (               !          D         "
   }
   DataRecord {
     Tag			    DataTag4
@@ -17369,8 +17468,8 @@ MatData {
     "&          4    (               !          D         #@   #@    &    \"     8         !0    @    !     0    $     "
     "    \"0    @           #P/PX    P    !@    @    &          4    (               !          D         #@   #     & "
     "   \"     8         !0    @               $         \"0         .    .     8    (    !@         %    \"     $    !"
-    "     0         )    \"         #  @A #@   #@    &    \"     8         !0    @    !     0    $         \"0    @    "
-    "   \"  -ZQ0 X    P    !@    @    &          4    (               !          D         "
+    "     0         )    \"            @A #@   #@    &    \"     8         !0    @    !     0    $         \"0    @    "
+    "   !   210 X    P    !@    @    &          4    (               !          D         "
   }
   DataRecord {
     Tag			    DataTag6
@@ -17452,8 +17551,8 @@ MatData {
     "&          4    (               !          D         #@   #@    &    \"     8         !0    @    !     0    $     "
     "    \"0    @           #P/PX    P    !@    @    &          4    (               !          D         #@   #     & "
     "   \"     8         !0    @               $         \"0         .    .     8    (    !@         %    \"     $    !"
-    "     0         )    \"         #  @A #@   #@    &    \"     8         !0    @    !     0    $         \"0    @    "
-    "   !P +6R0 X    P    !@    @    &          4    (               !          D         "
+    "     0         )    \"            @A #@   #@    &    \"     8         !0    @    !     0    $         \"0    @    "
+    "   \"@ &\"40 X    P    !@    @    &          4    (               !          D         "
   }
   DataRecord {
     Tag			    DataTag8
@@ -17472,7 +17571,7 @@ MatData {
 }
 # Finite State Machines
 #
-#    Stateflow Version 7.6 (R2012b) dated Jul 26 2012, 22:31:44
+#    Stateflow Version 7.6 (R2012b) dated Jul 26 2012, 17:33:50
 #
 #
 
