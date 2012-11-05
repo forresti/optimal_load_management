@@ -6,7 +6,7 @@ Model {
     NumRootInports	    0
     NumRootOutports	    0
     ParameterArgumentNames  ""
-    ComputedModelVersion    "1.284"
+    ComputedModelVersion    "1.285"
     NumModelReferences	    0
     NumTestPointedSignals   0
   }
@@ -34,7 +34,7 @@ Model {
       $ObjectID		      2
       $ClassName	      "Simulink.WindowInfo"
       IsActive		      [1]
-      Location		      [332.0, 188.0, 1612.0, 876.0]
+      Location		      [52.0, 114.0, 1612.0, 876.0]
       Object {
 	$PropName		"ModelBrowserInfo"
 	$ObjectID		3
@@ -56,7 +56,7 @@ Model {
 	Dimension		2
 	Object {
 	  $ObjectID		  5
-	  IsActive		  [0]
+	  IsActive		  [1]
 	  ViewObjType		  "SimulinkTopLevel"
 	  LoadSaveID		  "0"
 	  Extents		  [1560.0, 697.0]
@@ -65,12 +65,12 @@ Model {
 	}
 	Object {
 	  $ObjectID		  6
-	  IsActive		  [1]
+	  IsActive		  [0]
 	  ViewObjType		  "SimulinkSubsys"
 	  LoadSaveID		  "1778"
 	  Extents		  [1560.0, 697.0]
 	  ZoomFactor		  [1.0]
-	  Offset		  [46.125000596046448, -61.474990129470825]
+	  Offset		  [46.125000596046448, -63.974987745285034]
 	}
 	PropName		"EditorsInfo"
       }
@@ -85,9 +85,9 @@ Model {
   ModifiedByFormat	  "%<Auto>"
   LastModifiedBy	  "huytbvo"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Wed Oct 31 16:59:53 2012"
-  RTWModifiedTimeStamp	  273602686
-  ModelVersionFormat	  "1.%<AutoIncrement:284>"
+  LastModifiedDate	  "Sat Nov 03 18:01:01 2012"
+  RTWModifiedTimeStamp	  273866454
+  ModelVersionFormat	  "1.%<AutoIncrement:285>"
   ConfigurationManager	  "None"
   SampleTimeColors	  off
   SampleTimeAnnotations	  off
@@ -948,6 +948,15 @@ Model {
       SampleTime	      "-1"
     }
     Block {
+      BlockType		      Step
+      Time		      "1"
+      Before		      "0"
+      After		      "1"
+      SampleTime	      "-1"
+      VectorParams1D	      on
+      ZeroCross		      on
+    }
+    Block {
       BlockType		      SubSystem
       ShowPortLabels	      "FromPortIcon"
       Permissions	      "ReadWrite"
@@ -999,7 +1008,7 @@ Model {
   }
   System {
     Name		    "Lab2_AircraftEPS"
-    Location		    [0, 0, 1612, 876]
+    Location		    [52, 114, 1664, 990]
     Open		    on
     ModelBrowserVisibility  off
     ModelBrowserWidth	    200
@@ -1013,7 +1022,7 @@ Model {
     ShowPageBoundaries	    off
     ZoomFactor		    "100"
     ReportName		    "simulink-default.rpt"
-    SIDHighWatermark	    "5337"
+    SIDHighWatermark	    "5341"
     Block {
       BlockType		      SubSystem
       Name		      "AC Load1"
@@ -9612,7 +9621,7 @@ Model {
 	  Ports			  [1, 1]
 	  Position		  [260, 89, 360, 131]
 	  ZOrder		  36
-	  LibraryVersion	  "1.5"
+	  LibraryVersion	  "1.6"
 	  SourceBlock		  "checkVoltage/checkVoltage"
 	  SourceType		  "SubSystem"
 	}
@@ -9623,7 +9632,7 @@ Model {
 	  Ports			  [1, 1]
 	  Position		  [260, 204, 360, 246]
 	  ZOrder		  37
-	  LibraryVersion	  "1.5"
+	  LibraryVersion	  "1.6"
 	  SourceBlock		  "checkVoltage/checkVoltage"
 	  SourceType		  "SubSystem"
 	}
@@ -9634,7 +9643,7 @@ Model {
 	  Ports			  [1, 1]
 	  Position		  [260, 324, 360, 366]
 	  ZOrder		  38
-	  LibraryVersion	  "1.5"
+	  LibraryVersion	  "1.6"
 	  SourceBlock		  "checkVoltage/checkVoltage"
 	  SourceType		  "SubSystem"
 	}
@@ -9645,7 +9654,7 @@ Model {
 	  Ports			  [1, 1]
 	  Position		  [260, 444, 360, 486]
 	  ZOrder		  39
-	  LibraryVersion	  "1.5"
+	  LibraryVersion	  "1.6"
 	  SourceBlock		  "checkVoltage/checkVoltage"
 	  SourceType		  "SubSystem"
 	}
@@ -9854,41 +9863,6 @@ Model {
 	  DstPort		  1
 	}
       }
-    }
-    Block {
-      BlockType		      Constant
-      Name		      "Constant1"
-      SID		      "4801"
-      Position		      [820, 170, 850, 200]
-      ZOrder		      -4
-      BlockMirror	      on
-      NamePlacement	      "alternate"
-    }
-    Block {
-      BlockType		      Constant
-      Name		      "Constant2"
-      SID		      "4868"
-      Position		      [310, 155, 340, 185]
-      ZOrder		      -4
-    }
-    Block {
-      BlockType		      Constant
-      Name		      "Constant3"
-      SID		      "4803"
-      Position		      [1070, 170, 1100, 200]
-      ZOrder		      -4
-      BlockMirror	      on
-      NamePlacement	      "alternate"
-      Value		      "0"
-    }
-    Block {
-      BlockType		      Constant
-      Name		      "Constant4"
-      SID		      "4804"
-      Position		      [1310, 170, 1340, 200]
-      ZOrder		      -4
-      BlockMirror	      on
-      NamePlacement	      "alternate"
     }
     Block {
       BlockType		      SubSystem
@@ -15232,6 +15206,38 @@ Model {
       }
     }
     Block {
+      BlockType		      Step
+      Name		      "Step"
+      SID		      "5338"
+      Position		      [265, 135, 295, 165]
+      ZOrder		      1
+      SampleTime	      "0"
+    }
+    Block {
+      BlockType		      Step
+      Name		      "Step1"
+      SID		      "5339"
+      Position		      [640, 135, 670, 165]
+      ZOrder		      2
+      SampleTime	      "0"
+    }
+    Block {
+      BlockType		      Step
+      Name		      "Step2"
+      SID		      "5340"
+      Position		      [880, 135, 910, 165]
+      ZOrder		      3
+      SampleTime	      "0"
+    }
+    Block {
+      BlockType		      Step
+      Name		      "Step3"
+      SID		      "5341"
+      Position		      [1170, 135, 1200, 165]
+      ZOrder		      4
+      SampleTime	      "0"
+    }
+    Block {
       BlockType		      SubSystem
       Name		      "TRU\n28Vdc\n4kW"
       SID		      "469"
@@ -16599,34 +16605,6 @@ Model {
       DstPort		      4
     }
     Line {
-      SrcBlock		      "Constant1"
-      SrcPort		      1
-      Points		      [-60, 0]
-      DstBlock		      "APU1"
-      DstPort		      1
-    }
-    Line {
-      SrcBlock		      "Constant2"
-      SrcPort		      1
-      Points		      [95, 0]
-      DstBlock		      "Left Engine HV"
-      DstPort		      1
-    }
-    Line {
-      SrcBlock		      "Constant3"
-      SrcPort		      1
-      Points		      [-80, 0]
-      DstBlock		      "APU2"
-      DstPort		      1
-    }
-    Line {
-      SrcBlock		      "Constant4"
-      SrcPort		      1
-      Points		      [-30, 0]
-      DstBlock		      "Right Engine HV"
-      DstPort		      1
-    }
-    Line {
       SrcBlock		      "BPCU"
       SrcPort		      11
       DstBlock		      "Goto16"
@@ -17089,6 +17067,34 @@ Model {
       DstBlock		      "B12"
       DstPort		      RConn1
     }
+    Line {
+      SrcBlock		      "Step"
+      SrcPort		      1
+      Points		      [140, 0]
+      DstBlock		      "Left Engine HV"
+      DstPort		      1
+    }
+    Line {
+      SrcBlock		      "Step1"
+      SrcPort		      1
+      Points		      [80, 0]
+      DstBlock		      "APU1"
+      DstPort		      1
+    }
+    Line {
+      SrcBlock		      "Step2"
+      SrcPort		      1
+      Points		      [70, 0]
+      DstBlock		      "APU2"
+      DstPort		      1
+    }
+    Line {
+      SrcBlock		      "Step3"
+      SrcPort		      1
+      Points		      [70, 0]
+      DstBlock		      "Right Engine HV"
+      DstPort		      1
+    }
     Annotation {
       SID		      "5193"
       Name		      "The 'Ts' parameter used in this model\nis set to 10e-4  by the Model Properties Callbacks "
@@ -17197,8 +17203,8 @@ MatData {
     "&          4    (               !          D         #@   #@    &    \"     8         !0    @    !     0    $     "
     "    \"0    @           #P/PX    P    !@    @    &          4    (               !          D         #@   #     & "
     "   \"     8         !0    @               $         \"0         .    .     8    (    !@         %    \"     $    !"
-    "     0         )    \"            @A #@   #@    &    \"     8         !0    @    !     0    $         \"0    @    "
-    "     \"^!B0 X    P    !@    @    &          4    (               !          D         "
+    "     0         )    \"         #  @A #@   #@    &    \"     8         !0    @    !     0    $         \"0    @    "
+    "     $4!C0 X    P    !@    @    &          4    (               !          D         "
   }
   DataRecord {
     Tag			    DataTag2
@@ -17280,8 +17286,8 @@ MatData {
     "&          4    (               !          D         #@   #@    &    \"     8         !0    @    !     0    $     "
     "    \"0    @           #P/PX    P    !@    @    &          4    (               !          D         #@   #     & "
     "   \"     8         !0    @               $         \"0         .    .     8    (    !@         %    \"     $    !"
-    "     0         )    \"            @A #@   #@    &    \"     8         !0    @    !     0    $         \"0    @    "
-    "     !(!V0 X    P    !@    @    &          4    (               !          D         "
+    "     0         )    \"         #  @A #@   #@    &    \"     8         !0    @    !     0    $         \"0    @    "
+    "     ![!V0 X    P    !@    @    &          4    (               !          D         "
   }
   DataRecord {
     Tag			    DataTag4
@@ -17363,8 +17369,8 @@ MatData {
     "&          4    (               !          D         #@   #@    &    \"     8         !0    @    !     0    $     "
     "    \"0    @           #P/PX    P    !@    @    &          4    (               !          D         #@   #     & "
     "   \"     8         !0    @               $         \"0         .    .     8    (    !@         %    \"     $    !"
-    "     0         )    \"            @A #@   #@    &    \"     8         !0    @    !     0    $         \"0    @    "
-    "    @ !210 X    P    !@    @    &          4    (               !          D         "
+    "     0         )    \"         #  @A #@   #@    &    \"     8         !0    @    !     0    $         \"0    @    "
+    "   \"  -ZQ0 X    P    !@    @    &          4    (               !          D         "
   }
   DataRecord {
     Tag			    DataTag6
@@ -17446,8 +17452,8 @@ MatData {
     "&          4    (               !          D         #@   #@    &    \"     8         !0    @    !     0    $     "
     "    \"0    @           #P/PX    P    !@    @    &          4    (               !          D         #@   #     & "
     "   \"     8         !0    @               $         \"0         .    .     8    (    !@         %    \"     $    !"
-    "     0         )    \"            @A #@   #@    &    \"     8         !0    @    !     0    $         \"0    @    "
-    "   \"  '\"40 X    P    !@    @    &          4    (               !          D         "
+    "     0         )    \"         #  @A #@   #@    &    \"     8         !0    @    !     0    $         \"0    @    "
+    "   !P +6R0 X    P    !@    @    &          4    (               !          D         "
   }
   DataRecord {
     Tag			    DataTag8
