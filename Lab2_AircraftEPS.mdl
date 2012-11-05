@@ -6,7 +6,7 @@ Model {
     NumRootInports	    0
     NumRootOutports	    0
     ParameterArgumentNames  ""
-    ComputedModelVersion    "1.314"
+    ComputedModelVersion    "1.316"
     NumModelReferences	    0
     NumTestPointedSignals   0
   }
@@ -73,9 +73,9 @@ Model {
   ModifiedByFormat	  "%<Auto>"
   LastModifiedBy	  "forrest"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Mon Nov 05 14:21:04 2012"
+  LastModifiedDate	  "Mon Nov 05 14:23:13 2012"
   RTWModifiedTimeStamp	  274024510
-  ModelVersionFormat	  "1.%<AutoIncrement:314>"
+  ModelVersionFormat	  "1.%<AutoIncrement:316>"
   ConfigurationManager	  "None"
   SampleTimeColors	  off
   SampleTimeAnnotations	  off
@@ -1024,7 +1024,7 @@ Model {
     ShowPageBoundaries	    off
     ZoomFactor		    "100"
     ReportName		    "simulink-default.rpt"
-    SIDHighWatermark	    "5349"
+    SIDHighWatermark	    "5350"
     Block {
       BlockType		      SubSystem
       Name		      "AC Load1"
@@ -9503,10 +9503,10 @@ Model {
 	Block {
 	  BlockType		  Display
 	  Name			  "Display5"
-	  SID			  "5348"
+	  SID			  "5350"
 	  Ports			  [1]
-	  Position		  [990, 640, 1080, 670]
-	  ZOrder		  46
+	  Position		  [810, 775, 925, 845]
+	  ZOrder		  48
 	  Decimation		  "1"
 	  Lockdown		  off
 	}
@@ -10083,8 +10083,16 @@ Model {
 	Line {
 	  SrcBlock		  "MATLAB Function"
 	  SrcPort		  1
-	  DstBlock		  "Demux"
-	  DstPort		  1
+	  Points		  [30, 0]
+	  Branch {
+	    Points		    [0, 75; -50, 0]
+	    DstBlock		    "Display5"
+	    DstPort		    1
+	  }
+	  Branch {
+	    DstBlock		    "Demux"
+	    DstPort		    1
+	  }
 	}
 	Line {
 	  Name			  "<signal1>"
@@ -10092,15 +10100,6 @@ Model {
 	  SrcBlock		  "Demux"
 	  SrcPort		  1
 	  DstBlock		  "Display4"
-	  DstPort		  1
-	}
-	Line {
-	  Name			  "<signal2>"
-	  Labels		  [0, 0]
-	  SrcBlock		  "Demux"
-	  SrcPort		  2
-	  Points		  [42, 0; 0, 75]
-	  DstBlock		  "Display5"
 	  DstPort		  1
 	}
       }
