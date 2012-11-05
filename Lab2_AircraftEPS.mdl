@@ -6,7 +6,7 @@ Model {
     NumRootInports	    0
     NumRootOutports	    0
     ParameterArgumentNames  ""
-    ComputedModelVersion    "1.313"
+    ComputedModelVersion    "1.314"
     NumModelReferences	    0
     NumTestPointedSignals   0
   }
@@ -60,7 +60,7 @@ Model {
 	LoadSaveID		"1778"
 	Extents			[2459.0, 1269.0]
 	ZoomFactor		[1.0]
-	Offset			[-527.0, -64.0]
+	Offset			[-347.0, -64.5]
       }
     }
   }
@@ -73,9 +73,9 @@ Model {
   ModifiedByFormat	  "%<Auto>"
   LastModifiedBy	  "forrest"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Mon Nov 05 14:17:21 2012"
+  LastModifiedDate	  "Mon Nov 05 14:21:04 2012"
   RTWModifiedTimeStamp	  274024510
-  ModelVersionFormat	  "1.%<AutoIncrement:313>"
+  ModelVersionFormat	  "1.%<AutoIncrement:314>"
   ConfigurationManager	  "None"
   SampleTimeColors	  off
   SampleTimeAnnotations	  off
@@ -1024,7 +1024,7 @@ Model {
     ShowPageBoundaries	    off
     ZoomFactor		    "100"
     ReportName		    "simulink-default.rpt"
-    SIDHighWatermark	    "5346"
+    SIDHighWatermark	    "5349"
     Block {
       BlockType		      SubSystem
       Name		      "AC Load1"
@@ -9428,6 +9428,29 @@ Model {
 	  DisplayOption		  "bar"
 	}
 	Block {
+	  BlockType		  Demux
+	  Name			  "Demux"
+	  SID			  "5349"
+	  Ports			  [1, 2]
+	  Position		  [880, 551, 885, 589]
+	  ZOrder		  47
+	  ShowName		  off
+	  Outputs		  "2"
+	  DisplayOption		  "bar"
+	  Port {
+	    PortNumber		    1
+	    Name		    "<signal1>"
+	    RTWStorageClass	    "Auto"
+	    DataLoggingNameMode	    "SignalName"
+	  }
+	  Port {
+	    PortNumber		    2
+	    Name		    "<signal2>"
+	    RTWStorageClass	    "Auto"
+	    DataLoggingNameMode	    "SignalName"
+	  }
+	}
+	Block {
 	  BlockType		  Display
 	  Name			  "Display"
 	  SID			  "5302"
@@ -9472,8 +9495,18 @@ Model {
 	  Name			  "Display4"
 	  SID			  "5344"
 	  Ports			  [1]
-	  Position		  [935, 535, 1050, 605]
+	  Position		  [980, 525, 1095, 595]
 	  ZOrder		  42
+	  Decimation		  "1"
+	  Lockdown		  off
+	}
+	Block {
+	  BlockType		  Display
+	  Name			  "Display5"
+	  SID			  "5348"
+	  Ports			  [1]
+	  Position		  [990, 640, 1080, 670]
+	  ZOrder		  46
 	  Decimation		  "1"
 	  Lockdown		  off
 	}
@@ -10050,7 +10083,24 @@ Model {
 	Line {
 	  SrcBlock		  "MATLAB Function"
 	  SrcPort		  1
+	  DstBlock		  "Demux"
+	  DstPort		  1
+	}
+	Line {
+	  Name			  "<signal1>"
+	  Labels		  [0, 0]
+	  SrcBlock		  "Demux"
+	  SrcPort		  1
 	  DstBlock		  "Display4"
+	  DstPort		  1
+	}
+	Line {
+	  Name			  "<signal2>"
+	  Labels		  [0, 0]
+	  SrcBlock		  "Demux"
+	  SrcPort		  2
+	  Points		  [42, 0; 0, 75]
+	  DstBlock		  "Display5"
 	  DstPort		  1
 	}
       }
