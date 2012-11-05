@@ -6,7 +6,7 @@ Model {
     NumRootInports	    0
     NumRootOutports	    0
     ParameterArgumentNames  ""
-    ComputedModelVersion    "1.302"
+    ComputedModelVersion    "1.313"
     NumModelReferences	    0
     NumTestPointedSignals   0
   }
@@ -73,9 +73,9 @@ Model {
   ModifiedByFormat	  "%<Auto>"
   LastModifiedBy	  "forrest"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Mon Nov 05 14:13:55 2012"
+  LastModifiedDate	  "Mon Nov 05 14:17:21 2012"
   RTWModifiedTimeStamp	  274024510
-  ModelVersionFormat	  "1.%<AutoIncrement:302>"
+  ModelVersionFormat	  "1.%<AutoIncrement:313>"
   ConfigurationManager	  "None"
   SampleTimeColors	  off
   SampleTimeAnnotations	  off
@@ -9472,18 +9472,8 @@ Model {
 	  Name			  "Display4"
 	  SID			  "5344"
 	  Ports			  [1]
-	  Position		  [930, 545, 1020, 575]
+	  Position		  [935, 535, 1050, 605]
 	  ZOrder		  42
-	  Decimation		  "1"
-	  Lockdown		  off
-	}
-	Block {
-	  BlockType		  Display
-	  Name			  "Display5"
-	  SID			  "5345"
-	  Ports			  [1]
-	  Position		  [930, 595, 1020, 625]
-	  ZOrder		  43
 	  Decimation		  "1"
 	  Lockdown		  off
 	}
@@ -9650,7 +9640,7 @@ Model {
 	  BlockType		  SubSystem
 	  Name			  "MATLAB Function"
 	  SID			  "5346"
-	  Ports			  [1, 2]
+	  Ports			  [1, 1]
 	  Position		  [685, 531, 810, 609]
 	  ZOrder		  44
 	  LibraryVersion	  "1.32"
@@ -9715,21 +9705,15 @@ Model {
 	      Name		      " SFunction "
 	      SID		      "5346::19"
 	      Tag		      "Stateflow S-Function Lab2_AircraftEPS 2"
-	      Ports		      [1, 3]
+	      Ports		      [1, 2]
 	      Position		      [180, 100, 230, 180]
 	      ZOrder		      5
 	      FunctionName	      "sf_sfun"
-	      PortCounts	      "[1 3]"
+	      PortCounts	      "[1 2]"
 	      EnableBusSupport	      on
 	      Port {
 		PortNumber		2
 		Name			"a_out"
-		RTWStorageClass		"Auto"
-		DataLoggingNameMode	"SignalName"
-	      }
-	      Port {
-		PortNumber		3
-		Name			"b_out"
 		RTWStorageClass		"Auto"
 		DataLoggingNameMode	"SignalName"
 	      }
@@ -9749,15 +9733,6 @@ Model {
 	      ZOrder		      -5
 	      IconDisplay	      "Port number"
 	    }
-	    Block {
-	      BlockType		      Outport
-	      Name		      "b_out"
-	      SID		      "5346::24"
-	      Position		      [460, 136, 480, 154]
-	      ZOrder		      10
-	      Port		      "2"
-	      IconDisplay	      "Port number"
-	    }
 	    Line {
 	      SrcBlock		      "in_bus"
 	      SrcPort		      1
@@ -9770,14 +9745,6 @@ Model {
 	      SrcBlock		      " SFunction "
 	      SrcPort		      2
 	      DstBlock		      "a_out"
-	      DstPort		      1
-	    }
-	    Line {
-	      Name		      "b_out"
-	      Labels		      [0, 0]
-	      SrcBlock		      " SFunction "
-	      SrcPort		      3
-	      DstBlock		      "b_out"
 	      DstPort		      1
 	    }
 	    Line {
@@ -10083,15 +10050,7 @@ Model {
 	Line {
 	  SrcBlock		  "MATLAB Function"
 	  SrcPort		  1
-	  Points		  [55, 0; 0, 10]
 	  DstBlock		  "Display4"
-	  DstPort		  1
-	}
-	Line {
-	  SrcBlock		  "MATLAB Function"
-	  SrcPort		  2
-	  Points		  [41, 0; 0, 20]
-	  DstBlock		  "Display5"
 	  DstPort		  1
 	}
       }
@@ -17714,7 +17673,7 @@ Stateflow {
     name		    "Lab2_AircraftEPS"
     created		    "09-Feb-2012 11:24:55"
     isLibrary		    0
-    firstTarget		    10
+    firstTarget		    9
     sfVersion		    76014001.001
   }
   chart {
@@ -17724,8 +17683,8 @@ Stateflow {
     viewLimits		    [0 156.75 0 153.75]
     screen		    [1 1 1280 1024 1.041666666666667]
     treeNode		    [0 3 0 0]
-    firstTransition	    8
-    firstJunction	    7
+    firstTransition	    7
+    firstJunction	    6
     viewObj		    2
     visible		    1
     machine		    1
@@ -17755,8 +17714,8 @@ Stateflow {
     decomposition	    CLUSTER_STATE
     eml {
       isEML		      1
-      script		      "function [a_out,b_out] = BPCU_core(in_bus)\n    GL = in_bus(1);\n    AL = in_bus(2);\n    AR = in"
-      "_bus(3);\n    GR = in_bus(4);\n\na_out = in_bus(1)\nb_out = in_bus(2)\n"
+      script		      "function a_out  = BPCU_core(in_bus)\n    GL = in_bus(1);\n    AL = in_bus(2);\n    AR = in_bus(3)"
+      ";\n    GR = in_bus(4);\n    \n    a_out = [GL AR]\n\n    %a_out = in_bus(1)\n    %b_out = in_bus(2)\n"
       editorLayout	      "100 M4x1[10 5 700 500]"
     }
   }
@@ -17783,7 +17742,7 @@ Stateflow {
     id			    5
     ssIdNumber		    5
     name		    "a_out"
-    linkNode		    [2 4 6]
+    linkNode		    [2 4 0]
     scope		    OUTPUT_DATA
     machine		    1
     props {
@@ -17793,28 +17752,6 @@ Stateflow {
       type {
 	method			SF_INHERITED_TYPE
 	primitive		SF_DOUBLE_TYPE
-      }
-      complexity	      SF_COMPLEX_INHERITED
-      frame		      SF_FRAME_NO
-    }
-    dataType		    "Inherit: Same as Simulink"
-  }
-  data {
-    id			    6
-    ssIdNumber		    7
-    name		    "b_out"
-    linkNode		    [2 5 0]
-    scope		    OUTPUT_DATA
-    machine		    1
-    props {
-      array {
-	size			"-1"
-      }
-      type {
-	method			SF_INHERITED_TYPE
-	primitive		SF_DOUBLE_TYPE
-	isSigned		1
-	wordLength		"16"
       }
       complexity	      SF_COMPLEX_INHERITED
       frame		      SF_FRAME_NO
@@ -17822,7 +17759,7 @@ Stateflow {
     dataType		    "Inherit: Same as Simulink"
   }
   junction {
-    id			    7
+    id			    6
     position		    [23.5747 49.5747 7]
     chart		    2
     linkNode		    [2 0 0]
@@ -17831,7 +17768,7 @@ Stateflow {
     type		    CONNECTIVE_JUNCTION
   }
   transition {
-    id			    8
+    id			    7
     labelString		    "{eML_blk_kernel();}"
     labelPosition	    [32.125 19.875 102.544 14.964]
     fontSize		    12
@@ -17839,7 +17776,7 @@ Stateflow {
       intersection	      [0 0 1 0 23.5747 14.625 0 0]
     }
     dst {
-      id		      7
+      id		      6
       intersection	      [1 0 -1 0 23.5747 42.5747 0 0]
     }
     midPoint		    [23.5747 24.9468]
@@ -17855,13 +17792,13 @@ Stateflow {
     ssIdNumber		    2
   }
   instance {
-    id			    9
+    id			    8
     name		    "BPCU/MATLAB Function"
     machine		    1
     chart		    2
   }
   target {
-    id			    10
+    id			    9
     name		    "sfun"
     description		    "Default Simulink S-Function Target."
     machine		    1
