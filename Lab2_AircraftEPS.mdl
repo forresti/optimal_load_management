@@ -6,7 +6,7 @@ Model {
     NumRootInports	    0
     NumRootOutports	    0
     ParameterArgumentNames  ""
-    ComputedModelVersion    "1.326"
+    ComputedModelVersion    "1.336"
     NumModelReferences	    0
     NumTestPointedSignals   0
   }
@@ -56,11 +56,11 @@ Model {
 	$ObjectID		5
 	$ClassName		"Simulink.EditorInfo"
 	IsActive		[1]
-	ViewObjType		"SimulinkSubsys"
-	LoadSaveID		"1778"
+	ViewObjType		"SimulinkTopLevel"
+	LoadSaveID		"0"
 	Extents			[2459.0, 1269.0]
 	ZoomFactor		[1.0]
-	Offset			[-347.0, -64.5]
+	Offset			[0.0, 0.0]
       }
     }
   }
@@ -73,9 +73,9 @@ Model {
   ModifiedByFormat	  "%<Auto>"
   LastModifiedBy	  "forrest"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Mon Nov 05 14:38:53 2012"
+  LastModifiedDate	  "Mon Nov 05 14:45:14 2012"
   RTWModifiedTimeStamp	  274026866
-  ModelVersionFormat	  "1.%<AutoIncrement:326>"
+  ModelVersionFormat	  "1.%<AutoIncrement:336>"
   ConfigurationManager	  "None"
   SampleTimeColors	  off
   SampleTimeAnnotations	  off
@@ -1011,7 +1011,7 @@ Model {
   System {
     Name		    "Lab2_AircraftEPS"
     Location		    [66, 52, 2561, 1468]
-    Open		    off
+    Open		    on
     ModelBrowserVisibility  off
     ModelBrowserWidth	    200
     ScreenColor		    "white"
@@ -1024,7 +1024,7 @@ Model {
     ShowPageBoundaries	    off
     ZoomFactor		    "100"
     ReportName		    "simulink-default.rpt"
-    SIDHighWatermark	    "5350"
+    SIDHighWatermark	    "5351"
     Block {
       BlockType		      SubSystem
       Name		      "AC Load1"
@@ -9370,7 +9370,7 @@ Model {
       System {
 	Name			"BPCU"
 	Location		[66, 52, 2561, 1468]
-	Open			on
+	Open			off
 	ModelBrowserVisibility	off
 	ModelBrowserWidth	200
 	ScreenColor		"white"
@@ -9386,7 +9386,7 @@ Model {
 	  BlockType		  Inport
 	  Name			  "LHV"
 	  SID			  "4028"
-	  Position		  [155, 103, 185, 117]
+	  Position		  [265, 103, 295, 117]
 	  ZOrder		  -1
 	  IconDisplay		  "Port number"
 	}
@@ -9394,7 +9394,7 @@ Model {
 	  BlockType		  Inport
 	  Name			  "LAPU"
 	  SID			  "4029"
-	  Position		  [155, 338, 185, 352]
+	  Position		  [265, 338, 295, 352]
 	  ZOrder		  -2
 	  Port			  "2"
 	  IconDisplay		  "Port number"
@@ -9403,7 +9403,7 @@ Model {
 	  BlockType		  Inport
 	  Name			  "RAPU"
 	  SID			  "4030"
-	  Position		  [155, 218, 185, 232]
+	  Position		  [265, 218, 295, 232]
 	  ZOrder		  -3
 	  Port			  "3"
 	  IconDisplay		  "Port number"
@@ -9412,7 +9412,7 @@ Model {
 	  BlockType		  Inport
 	  Name			  "RHV"
 	  SID			  "4031"
-	  Position		  [155, 458, 185, 472]
+	  Position		  [265, 458, 295, 472]
 	  ZOrder		  -4
 	  Port			  "4"
 	  IconDisplay		  "Port number"
@@ -9422,7 +9422,7 @@ Model {
 	  Name			  "Bus Creator"
 	  SID			  "5342"
 	  Ports			  [4, 1]
-	  Position		  [595, 616, 600, 654]
+	  Position		  [705, 616, 710, 654]
 	  ZOrder		  40
 	  ShowName		  off
 	  DisplayOption		  "bar"
@@ -9432,7 +9432,7 @@ Model {
 	  Name			  "Contactors:\nB1 - B12 output"
 	  SID			  "5350"
 	  Ports			  [1]
-	  Position		  [865, 817, 1010, 1053]
+	  Position		  [975, 817, 1120, 1053]
 	  ZOrder		  48
 	  Decimation		  "1"
 	  Lockdown		  off
@@ -9442,7 +9442,7 @@ Model {
 	  Name			  "Demux"
 	  SID			  "5349"
 	  Ports			  [1, 12]
-	  Position		  [880, 477, 960, 788]
+	  Position		  [990, 124, 1050, 791]
 	  ZOrder		  47
 	  ShowName		  off
 	  Outputs		  "12"
@@ -9465,7 +9465,7 @@ Model {
 	  Name			  "Display"
 	  SID			  "5302"
 	  Ports			  [1]
-	  Position		  [420, 95, 510, 125]
+	  Position		  [530, 95, 620, 125]
 	  ZOrder		  4
 	  Decimation		  "1"
 	  Lockdown		  off
@@ -9475,7 +9475,7 @@ Model {
 	  Name			  "Display1"
 	  SID			  "5319"
 	  Ports			  [1]
-	  Position		  [420, 210, 510, 240]
+	  Position		  [530, 210, 620, 240]
 	  ZOrder		  21
 	  Decimation		  "1"
 	  Lockdown		  off
@@ -9485,7 +9485,7 @@ Model {
 	  Name			  "Display2"
 	  SID			  "5320"
 	  Ports			  [1]
-	  Position		  [420, 330, 510, 360]
+	  Position		  [530, 330, 620, 360]
 	  ZOrder		  22
 	  Decimation		  "1"
 	  Lockdown		  off
@@ -9495,186 +9495,17 @@ Model {
 	  Name			  "Display3"
 	  SID			  "5321"
 	  Ports			  [1]
-	  Position		  [420, 450, 510, 480]
+	  Position		  [530, 450, 620, 480]
 	  ZOrder		  23
 	  Decimation		  "1"
 	  Lockdown		  off
-	}
-	Block {
-	  BlockType		  Display
-	  Name			  "Display4"
-	  SID			  "5344"
-	  Ports			  [1]
-	  Position		  [1235, 412, 1385, 628]
-	  ZOrder		  42
-	  Decimation		  "1"
-	  Lockdown		  off
-	}
-	Block {
-	  BlockType		  SubSystem
-	  Name			  "Load Management"
-	  SID			  "4543"
-	  Ports			  [0, 7]
-	  Position		  [760, 167, 875, 443]
-	  ZOrder		  -5
-	  MinAlgLoopOccurrences	  off
-	  PropExecContextOutsideSubsystem off
-	  RTWSystemCode		  "Auto"
-	  FunctionWithSeparateData off
-	  Opaque		  off
-	  RequestExecContextInheritance	off
-	  MaskHideContents	  off
-	  System {
-	    Name		    "Load Management"
-	    Location		    [65, 86, 2562, 1531]
-	    Open		    off
-	    ModelBrowserVisibility  off
-	    ModelBrowserWidth	    200
-	    ScreenColor		    "white"
-	    PaperOrientation	    "landscape"
-	    PaperPositionMode	    "auto"
-	    PaperType		    "usletter"
-	    PaperUnits		    "inches"
-	    TiledPaperMargins	    [0.500000, 0.500000, 0.500000, 0.500000]
-	    TiledPageScale	    1
-	    ShowPageBoundaries	    off
-	    ZoomFactor		    "300"
-	    Block {
-	      BlockType		      Constant
-	      Name		      "Constant"
-	      SID		      "4441"
-	      Position		      [25, 25, 55, 55]
-	      ZOrder		      -1
-	      ShowName		      off
-	    }
-	    Block {
-	      BlockType		      Constant
-	      Name		      "Constant1"
-	      SID		      "4819"
-	      Position		      [25, 200, 55, 230]
-	      ZOrder		      -2
-	      ShowName		      off
-	      Value		      "0"
-	    }
-	    Block {
-	      BlockType		      Outport
-	      Name		      "B7"
-	      SID		      "4544"
-	      Position		      [90, 33, 120, 47]
-	      ZOrder		      -3
-	      IconDisplay	      "Port number"
-	    }
-	    Block {
-	      BlockType		      Outport
-	      Name		      "B8"
-	      SID		      "4545"
-	      Position		      [90, 68, 120, 82]
-	      ZOrder		      -4
-	      Port		      "2"
-	      IconDisplay	      "Port number"
-	    }
-	    Block {
-	      BlockType		      Outport
-	      Name		      "B9"
-	      SID		      "4546"
-	      Position		      [90, 108, 120, 122]
-	      ZOrder		      -5
-	      Port		      "3"
-	      IconDisplay	      "Port number"
-	    }
-	    Block {
-	      BlockType		      Outport
-	      Name		      "B10"
-	      SID		      "4547"
-	      Position		      [90, 148, 120, 162]
-	      ZOrder		      -6
-	      Port		      "4"
-	      IconDisplay	      "Port number"
-	    }
-	    Block {
-	      BlockType		      Outport
-	      Name		      "B1"
-	      SID		      "5298"
-	      Position		      [90, 178, 120, 192]
-	      ZOrder		      1
-	      Port		      "5"
-	      IconDisplay	      "Port number"
-	    }
-	    Block {
-	      BlockType		      Outport
-	      Name		      "B11"
-	      SID		      "4548"
-	      Position		      [90, 208, 120, 222]
-	      ZOrder		      -7
-	      Port		      "6"
-	      IconDisplay	      "Port number"
-	    }
-	    Block {
-	      BlockType		      Outport
-	      Name		      "B12"
-	      SID		      "4889"
-	      Position		      [90, 248, 120, 262]
-	      ZOrder		      -8
-	      Port		      "7"
-	      IconDisplay	      "Port number"
-	    }
-	    Line {
-	      SrcBlock		      "Constant"
-	      SrcPort		      1
-	      Points		      [10, 0]
-	      Branch {
-		Points			[0, 35]
-		Branch {
-		  Points		  [0, 40]
-		  Branch {
-		    Points		    [0, 40]
-		    Branch {
-		    Points		    [0, 30]
-		    DstBlock		    "B1"
-		    DstPort		    1
-		    }
-		    Branch {
-		    DstBlock		    "B10"
-		    DstPort		    1
-		    }
-		  }
-		  Branch {
-		    DstBlock		    "B9"
-		    DstPort		    1
-		  }
-		}
-		Branch {
-		  DstBlock		  "B8"
-		  DstPort		  1
-		}
-	      }
-	      Branch {
-		DstBlock		"B7"
-		DstPort			1
-	      }
-	    }
-	    Line {
-	      SrcBlock		      "Constant1"
-	      SrcPort		      1
-	      Points		      [5, 0]
-	      Branch {
-		DstBlock		"B11"
-		DstPort			1
-	      }
-	      Branch {
-		Points			[0, 40]
-		DstBlock		"B12"
-		DstPort			1
-	      }
-	    }
-	  }
 	}
 	Block {
 	  BlockType		  SubSystem
 	  Name			  "MATLAB Function"
 	  SID			  "5346"
 	  Ports			  [1, 1]
-	  Position		  [685, 596, 810, 674]
+	  Position		  [795, 596, 920, 674]
 	  ZOrder		  44
 	  LibraryVersion	  "1.32"
 	  ErrorFcn		  "Stateflow.Translate.translate"
@@ -9795,11 +9626,154 @@ Model {
 	  }
 	}
 	Block {
+	  BlockType		  SubSystem
+	  Name			  "UNUSED - \nLoad Management"
+	  SID			  "4543"
+	  Ports			  [0, 6]
+	  Position		  [20, 534, 135, 811]
+	  ZOrder		  -5
+	  MinAlgLoopOccurrences	  off
+	  PropExecContextOutsideSubsystem off
+	  RTWSystemCode		  "Auto"
+	  FunctionWithSeparateData off
+	  Opaque		  off
+	  RequestExecContextInheritance	off
+	  MaskHideContents	  off
+	  System {
+	    Name		    "UNUSED - \nLoad Management"
+	    Location		    [66, 52, 2561, 1468]
+	    Open		    off
+	    ModelBrowserVisibility  off
+	    ModelBrowserWidth	    200
+	    ScreenColor		    "white"
+	    PaperOrientation	    "landscape"
+	    PaperPositionMode	    "auto"
+	    PaperType		    "usletter"
+	    PaperUnits		    "inches"
+	    TiledPaperMargins	    [0.500000, 0.500000, 0.500000, 0.500000]
+	    TiledPageScale	    1
+	    ShowPageBoundaries	    off
+	    ZoomFactor		    "300"
+	    Block {
+	      BlockType		      Constant
+	      Name		      "Constant"
+	      SID		      "4441"
+	      Position		      [25, 25, 55, 55]
+	      ZOrder		      -1
+	      ShowName		      off
+	    }
+	    Block {
+	      BlockType		      Constant
+	      Name		      "Constant1"
+	      SID		      "4819"
+	      Position		      [25, 200, 55, 230]
+	      ZOrder		      -2
+	      ShowName		      off
+	      Value		      "0"
+	    }
+	    Block {
+	      BlockType		      Outport
+	      Name		      "B7"
+	      SID		      "4544"
+	      Position		      [90, 33, 120, 47]
+	      ZOrder		      -3
+	      IconDisplay	      "Port number"
+	    }
+	    Block {
+	      BlockType		      Outport
+	      Name		      "B8"
+	      SID		      "4545"
+	      Position		      [90, 68, 120, 82]
+	      ZOrder		      -4
+	      Port		      "2"
+	      IconDisplay	      "Port number"
+	    }
+	    Block {
+	      BlockType		      Outport
+	      Name		      "B9"
+	      SID		      "4546"
+	      Position		      [90, 108, 120, 122]
+	      ZOrder		      -5
+	      Port		      "3"
+	      IconDisplay	      "Port number"
+	    }
+	    Block {
+	      BlockType		      Outport
+	      Name		      "B10"
+	      SID		      "4547"
+	      Position		      [90, 148, 120, 162]
+	      ZOrder		      -6
+	      Port		      "4"
+	      IconDisplay	      "Port number"
+	    }
+	    Block {
+	      BlockType		      Outport
+	      Name		      "B11"
+	      SID		      "4548"
+	      Position		      [90, 208, 120, 222]
+	      ZOrder		      -7
+	      Port		      "5"
+	      IconDisplay	      "Port number"
+	    }
+	    Block {
+	      BlockType		      Outport
+	      Name		      "B12"
+	      SID		      "4889"
+	      Position		      [90, 248, 120, 262]
+	      ZOrder		      -8
+	      Port		      "6"
+	      IconDisplay	      "Port number"
+	    }
+	    Line {
+	      SrcBlock		      "Constant"
+	      SrcPort		      1
+	      Points		      [10, 0]
+	      Branch {
+		Points			[0, 35]
+		Branch {
+		  Points		  [0, 40]
+		  Branch {
+		    Points		    [0, 40]
+		    DstBlock		    "B10"
+		    DstPort		    1
+		  }
+		  Branch {
+		    DstBlock		    "B9"
+		    DstPort		    1
+		  }
+		}
+		Branch {
+		  DstBlock		  "B8"
+		  DstPort		  1
+		}
+	      }
+	      Branch {
+		DstBlock		"B7"
+		DstPort			1
+	      }
+	    }
+	    Line {
+	      SrcBlock		      "Constant1"
+	      SrcPort		      1
+	      Points		      [5, 0]
+	      Branch {
+		DstBlock		"B11"
+		DstPort			1
+	      }
+	      Branch {
+		Points			[0, 40]
+		DstBlock		"B12"
+		DstPort			1
+	      }
+	    }
+	  }
+	}
+	Block {
 	  BlockType		  Reference
 	  Name			  "checkVoltage"
 	  SID			  "5334"
 	  Ports			  [1, 1]
-	  Position		  [260, 89, 360, 131]
+	  Position		  [370, 89, 470, 131]
 	  ZOrder		  36
 	  LibraryVersion	  "1.11"
 	  SourceBlock		  "checkVoltage/checkVoltage"
@@ -9810,7 +9784,7 @@ Model {
 	  Name			  "checkVoltage1"
 	  SID			  "5335"
 	  Ports			  [1, 1]
-	  Position		  [260, 204, 360, 246]
+	  Position		  [370, 204, 470, 246]
 	  ZOrder		  37
 	  LibraryVersion	  "1.11"
 	  SourceBlock		  "checkVoltage/checkVoltage"
@@ -9821,7 +9795,7 @@ Model {
 	  Name			  "checkVoltage2"
 	  SID			  "5336"
 	  Ports			  [1, 1]
-	  Position		  [260, 324, 360, 366]
+	  Position		  [370, 324, 470, 366]
 	  ZOrder		  38
 	  LibraryVersion	  "1.11"
 	  SourceBlock		  "checkVoltage/checkVoltage"
@@ -9832,7 +9806,7 @@ Model {
 	  Name			  "checkVoltage3"
 	  SID			  "5337"
 	  Ports			  [1, 1]
-	  Position		  [260, 444, 360, 486]
+	  Position		  [370, 444, 470, 486]
 	  ZOrder		  39
 	  LibraryVersion	  "1.11"
 	  SourceBlock		  "checkVoltage/checkVoltage"
@@ -9842,7 +9816,7 @@ Model {
 	  BlockType		  Outport
 	  Name			  "B1"
 	  SID			  "4638"
-	  Position		  [1020, 358, 1050, 372]
+	  Position		  [1100, 148, 1130, 162]
 	  ZOrder		  -6
 	  IconDisplay		  "Port number"
 	}
@@ -9850,7 +9824,7 @@ Model {
 	  BlockType		  Outport
 	  Name			  "B2"
 	  SID			  "4639"
-	  Position		  [685, 138, 715, 152]
+	  Position		  [1100, 203, 1130, 217]
 	  ZOrder		  -7
 	  Port			  "2"
 	  IconDisplay		  "Port number"
@@ -9859,7 +9833,7 @@ Model {
 	  BlockType		  Outport
 	  Name			  "B3"
 	  SID			  "4640"
-	  Position		  [685, 193, 715, 207]
+	  Position		  [1100, 258, 1130, 272]
 	  ZOrder		  -8
 	  Port			  "3"
 	  IconDisplay		  "Port number"
@@ -9868,7 +9842,7 @@ Model {
 	  BlockType		  Outport
 	  Name			  "B4"
 	  SID			  "4641"
-	  Position		  [685, 263, 715, 277]
+	  Position		  [1100, 313, 1130, 327]
 	  ZOrder		  -9
 	  Port			  "4"
 	  IconDisplay		  "Port number"
@@ -9877,7 +9851,7 @@ Model {
 	  BlockType		  Outport
 	  Name			  "B5"
 	  SID			  "4642"
-	  Position		  [685, 333, 715, 347]
+	  Position		  [1100, 368, 1130, 382]
 	  ZOrder		  -10
 	  Port			  "5"
 	  IconDisplay		  "Port number"
@@ -9886,7 +9860,7 @@ Model {
 	  BlockType		  Outport
 	  Name			  "B6"
 	  SID			  "4643"
-	  Position		  [685, 403, 715, 417]
+	  Position		  [1100, 423, 1130, 437]
 	  ZOrder		  -11
 	  Port			  "6"
 	  IconDisplay		  "Port number"
@@ -9895,7 +9869,7 @@ Model {
 	  BlockType		  Outport
 	  Name			  "B7"
 	  SID			  "4040"
-	  Position		  [1020, 183, 1050, 197]
+	  Position		  [1100, 478, 1130, 492]
 	  ZOrder		  -12
 	  Port			  "7"
 	  IconDisplay		  "Port number"
@@ -9904,7 +9878,7 @@ Model {
 	  BlockType		  Outport
 	  Name			  "B8"
 	  SID			  "4041"
-	  Position		  [1020, 228, 1050, 242]
+	  Position		  [1100, 533, 1130, 547]
 	  ZOrder		  -13
 	  Port			  "8"
 	  IconDisplay		  "Port number"
@@ -9913,7 +9887,7 @@ Model {
 	  BlockType		  Outport
 	  Name			  "B9"
 	  SID			  "4042"
-	  Position		  [1020, 273, 1050, 287]
+	  Position		  [1100, 588, 1130, 602]
 	  ZOrder		  -14
 	  Port			  "9"
 	  IconDisplay		  "Port number"
@@ -9922,7 +9896,7 @@ Model {
 	  BlockType		  Outport
 	  Name			  "B10"
 	  SID			  "4043"
-	  Position		  [1020, 318, 1050, 332]
+	  Position		  [1100, 643, 1130, 657]
 	  ZOrder		  -15
 	  Port			  "10"
 	  IconDisplay		  "Port number"
@@ -9931,7 +9905,7 @@ Model {
 	  BlockType		  Outport
 	  Name			  "B11"
 	  SID			  "4044"
-	  Position		  [1020, 408, 1050, 422]
+	  Position		  [1100, 698, 1130, 712]
 	  ZOrder		  -16
 	  Port			  "11"
 	  IconDisplay		  "Port number"
@@ -9940,59 +9914,10 @@ Model {
 	  BlockType		  Outport
 	  Name			  "B12"
 	  SID			  "4890"
-	  Position		  [1020, 453, 1050, 467]
+	  Position		  [1100, 753, 1130, 767]
 	  ZOrder		  -17
 	  Port			  "12"
 	  IconDisplay		  "Port number"
-	}
-	Line {
-	  SrcBlock		  "Load Management"
-	  SrcPort		  1
-	  Points		  [0, 5]
-	  DstBlock		  "B7"
-	  DstPort		  1
-	}
-	Line {
-	  SrcBlock		  "Load Management"
-	  SrcPort		  2
-	  Points		  [0, 10]
-	  DstBlock		  "B8"
-	  DstPort		  1
-	}
-	Line {
-	  SrcBlock		  "Load Management"
-	  SrcPort		  3
-	  Points		  [0, 15]
-	  DstBlock		  "B9"
-	  DstPort		  1
-	}
-	Line {
-	  SrcBlock		  "Load Management"
-	  SrcPort		  4
-	  Points		  [0, 20]
-	  DstBlock		  "B10"
-	  DstPort		  1
-	}
-	Line {
-	  SrcBlock		  "Load Management"
-	  SrcPort		  6
-	  Points		  [67, 0; 0, 30]
-	  DstBlock		  "B11"
-	  DstPort		  1
-	}
-	Line {
-	  SrcBlock		  "Load Management"
-	  SrcPort		  7
-	  Points		  [67, 0; 0, 35]
-	  DstBlock		  "B12"
-	  DstPort		  1
-	}
-	Line {
-	  SrcBlock		  "Load Management"
-	  SrcPort		  5
-	  Points		  [67, 0; 0, 20]
-	  DstBlock		  "B1"
-	  DstPort		  1
 	}
 	Line {
 	  SrcBlock		  "LHV"
@@ -10090,17 +10015,84 @@ Model {
 	    DstPort		    1
 	  }
 	  Branch {
+	    Points		    [0, -175]
 	    DstBlock		    "Demux"
 	    DstPort		    1
 	  }
 	}
 	Line {
 	  Name			  "<signal1>"
-	  Labels		  [0, 0]
 	  SrcBlock		  "Demux"
 	  SrcPort		  1
-	  Points		  [132, 0; 0, 25]
-	  DstBlock		  "Display4"
+	  DstBlock		  "B1"
+	  DstPort		  1
+	}
+	Line {
+	  Name			  "<signal2>"
+	  SrcBlock		  "Demux"
+	  SrcPort		  2
+	  DstBlock		  "B2"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Demux"
+	  SrcPort		  3
+	  DstBlock		  "B3"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Demux"
+	  SrcPort		  4
+	  DstBlock		  "B4"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Demux"
+	  SrcPort		  5
+	  DstBlock		  "B5"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Demux"
+	  SrcPort		  6
+	  DstBlock		  "B6"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Demux"
+	  SrcPort		  7
+	  DstBlock		  "B7"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Demux"
+	  SrcPort		  8
+	  DstBlock		  "B8"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Demux"
+	  SrcPort		  9
+	  DstBlock		  "B9"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Demux"
+	  SrcPort		  10
+	  DstBlock		  "B10"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Demux"
+	  SrcPort		  11
+	  DstBlock		  "B11"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Demux"
+	  SrcPort		  12
+	  Points		  [30, 0]
+	  DstBlock		  "B12"
 	  DstPort		  1
 	}
       }
@@ -16848,6 +16840,7 @@ Model {
     Line {
       SrcBlock		      "BPCU"
       SrcPort		      11
+      Points		      [0, 0]
       DstBlock		      "Goto16"
       DstPort		      1
     }
@@ -16901,12 +16894,6 @@ Model {
     }
     Line {
       SrcBlock		      "BPCU"
-      SrcPort		      1
-      DstBlock		      "Goto"
-      DstPort		      1
-    }
-    Line {
-      SrcBlock		      "BPCU"
       SrcPort		      2
       DstBlock		      "Goto1"
       DstPort		      1
@@ -16935,6 +16922,7 @@ Model {
     Line {
       SrcBlock		      "BPCU"
       SrcPort		      12
+      Points		      [0, 0]
       DstBlock		      "Goto2"
       DstPort		      1
     }
@@ -17334,6 +17322,12 @@ Model {
       SrcPort		      1
       Points		      [70, 0]
       DstBlock		      "Right Engine HV"
+      DstPort		      1
+    }
+    Line {
+      SrcBlock		      "BPCU"
+      SrcPort		      1
+      DstBlock		      "Goto"
       DstPort		      1
     }
     Annotation {
