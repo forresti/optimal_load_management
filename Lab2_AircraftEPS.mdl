@@ -6,7 +6,7 @@ Model {
     NumRootInports	    0
     NumRootOutports	    0
     ParameterArgumentNames  ""
-    ComputedModelVersion    "1.396"
+    ComputedModelVersion    "1.404"
     NumModelReferences	    0
     NumTestPointedSignals   0
   }
@@ -108,9 +108,9 @@ Model {
   ModifiedByFormat	  "%<Auto>"
   LastModifiedBy	  "huytbvo"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Thu Nov 08 12:47:23 2012"
+  LastModifiedDate	  "Thu Nov 08 13:11:25 2012"
   RTWModifiedTimeStamp	  274274476
-  ModelVersionFormat	  "1.%<AutoIncrement:396>"
+  ModelVersionFormat	  "1.%<AutoIncrement:404>"
   ConfigurationManager	  "None"
   SampleTimeColors	  off
   SampleTimeAnnotations	  off
@@ -15747,11 +15747,21 @@ Model {
     }
     Block {
       BlockType		      Step
+      Name		      "Step"
+      SID		      "5359"
+      Position		      [285, 135, 315, 165]
+      ZOrder		      7
+      Before		      "1"
+      After		      "0"
+      SampleTime	      "0"
+    }
+    Block {
+      BlockType		      Step
       Name		      "Step1"
       SID		      "5339"
       Position		      [640, 135, 670, 165]
       ZOrder		      2
-      Time		      "100"
+      Time		      "2"
       Before		      "1"
       After		      "0"
       SampleTime	      "0"
@@ -15762,7 +15772,7 @@ Model {
       SID		      "5340"
       Position		      [880, 135, 910, 165]
       ZOrder		      3
-      Time		      "100"
+      Time		      "3"
       Before		      "1"
       After		      "0"
       SampleTime	      "0"
@@ -15773,17 +15783,7 @@ Model {
       SID		      "5341"
       Position		      [1170, 135, 1200, 165]
       ZOrder		      4
-      Time		      "100"
-      Before		      "1"
-      After		      "0"
-      SampleTime	      "0"
-    }
-    Block {
-      BlockType		      Step
-      Name		      "Step4"
-      SID		      "5359"
-      Position		      [235, 100, 265, 130]
-      ZOrder		      7
+      Time		      "4"
       Before		      "1"
       After		      "0"
       SampleTime	      "0"
@@ -17640,9 +17640,9 @@ Model {
       DstPort		      1
     }
     Line {
-      SrcBlock		      "Step4"
+      SrcBlock		      "Step"
       SrcPort		      1
-      Points		      [170, 0]
+      Points		      [120, 0]
       DstBlock		      "Left Engine HV"
       DstPort		      1
     }
@@ -18860,8 +18860,8 @@ Stateflow {
   }
   transition {
     id			    50
-    labelString		    "[GL == 0 && in(S.On)]"
-    labelPosition	    [640.143 381.262 118.25 17]
+    labelString		    "[(GL == 0 || (GR == 0 && AL == 0 && AR ==0)) && in(S.On)]"
+    labelPosition	    [572.143 369.262 317.75 17]
     fontSize		    12
     src {
       id		      16
@@ -18910,8 +18910,8 @@ Stateflow {
   }
   transition {
     id			    52
-    labelString		    "[GR == 0 && in(S.On)]"
-    labelPosition	    [998.286 386.976 120.75 17]
+    labelString		    "[(GR == 0 || (GL == 0 && AL == 0 && AR ==0)) && in(S.On)]"
+    labelPosition	    [930.286 372.976 317.75 17]
     fontSize		    12
     src {
       id		      20
@@ -19105,8 +19105,8 @@ Stateflow {
   }
   transition {
     id			    60
-    labelString		    "[hasChanged(GL) || hasChanged(GR) || hasChanged(AL) || hasChanged(GR)]"
-    labelPosition	    [92.534 289.704 419.75 17]
+    labelString		    "[hasChanged(GL) || hasChanged(GR) || hasChanged(AL) || hasChanged(AR)]"
+    labelPosition	    [92.534 289.704 418.5 17]
     fontSize		    12
     src {
       id		      34
@@ -19131,6 +19131,30 @@ Stateflow {
   transition {
     id			    61
     labelString		    ""
+    labelPosition	    [192.207 319.523 0 0]
+    fontSize		    12
+    src {
+      intersection	      [0 -0.1044 0.9945 0 195.6733 310.0785 0 0]
+    }
+    dst {
+      id		      35
+      intersection	      [1 0 -1 0.8694 191.6733 348.1927 0 0]
+    }
+    midPoint		    [193.6733 321.3383]
+    chart		    2
+    linkNode		    [33 60 62]
+    dataLimits		    [189.273 195.673 310.078 348.193]
+    subviewer		    2
+    drawStyle		    SMART
+    slide {
+      sticky		      BOTH_STICK
+    }
+    executionOrder	    1
+    ssIdNumber		    98
+  }
+  transition {
+    id			    62
+    labelString		    ""
     labelPosition	    [172.316 455.892 0 0]
     fontSize		    12
     src {
@@ -19143,7 +19167,7 @@ Stateflow {
     }
     midPoint		    [156.1733 437.0856]
     chart		    2
-    linkNode		    [33 60 62]
+    linkNode		    [33 61 0]
     dataLimits		    [153.773 158.573 408.193 473.978]
     subviewer		    2
     drawStyle		    SMART
@@ -19152,30 +19176,6 @@ Stateflow {
     }
     executionOrder	    1
     ssIdNumber		    97
-  }
-  transition {
-    id			    62
-    labelString		    ""
-    labelPosition	    [240.521 449.843 0 0]
-    fontSize		    12
-    src {
-      intersection	      [0 -0.4087 0.9127 0 229.5304 427.3642 0 0]
-    }
-    dst {
-      id		      36
-      intersection	      [2 1 0 0.1945 203.4304 485.6499 0 0]
-    }
-    midPoint		    [228.1093 456.507]
-    chart		    2
-    linkNode		    [33 61 0]
-    dataLimits		    [203.43 229.53 427.364 488.05]
-    subviewer		    2
-    drawStyle		    SMART
-    slide {
-      sticky		      BOTH_STICK
-    }
-    executionOrder	    1
-    ssIdNumber		    98
   }
   data {
     id			    63
