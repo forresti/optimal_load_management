@@ -6,11 +6,11 @@ Model {
     NumRootInports	    0
     NumRootOutports	    0
     ParameterArgumentNames  ""
-    ComputedModelVersion    "1.345"
+    ComputedModelVersion    "1.396"
     NumModelReferences	    0
     NumTestPointedSignals   0
   }
-  SavedCharacterEncoding  "UTF-8"
+  SavedCharacterEncoding  "windows-1252"
   PreLoadFcn		  "warning off\nTs=10e-6;"
   SaveDefaultBlockParams  on
   ScopeRefreshTime	  0.035000
@@ -29,39 +29,74 @@ Model {
     $PropName		    "BdWindowsInfo"
     $ObjectID		    1
     $ClassName		    "Simulink.BDWindowsInfo"
-    Object {
-      $PropName		      "WindowsInfo"
-      $ObjectID		      2
-      $ClassName	      "Simulink.WindowInfo"
-      IsActive		      [1]
-      Location		      [66.0, 52.0, 2495.0, 1416.0]
+    Array {
+      Type		      "Simulink.WindowInfo"
+      Dimension		      2
       Object {
-	$PropName		"ModelBrowserInfo"
-	$ObjectID		3
-	$ClassName		"Simulink.ModelBrowserInfo"
-	Visible			[0]
-	DockPosition		"Left"
-	Width			[50]
-	Height			[50]
-	Filter			[15]
+	$ObjectID		2
+	IsActive		[0]
+	Location		[-1608.0, 168.0, 1616.0, 916.0]
+	Object {
+	  $PropName		  "ModelBrowserInfo"
+	  $ObjectID		  3
+	  $ClassName		  "Simulink.ModelBrowserInfo"
+	  Visible		  [0]
+	  DockPosition		  "Left"
+	  Width			  [50]
+	  Height		  [50]
+	  Filter		  [15]
+	}
+	Object {
+	  $PropName		  "ExplorerBarInfo"
+	  $ObjectID		  4
+	  $ClassName		  "Simulink.ExplorerBarInfo"
+	  Visible		  [1]
+	}
+	Object {
+	  $PropName		  "EditorsInfo"
+	  $ObjectID		  5
+	  $ClassName		  "Simulink.EditorInfo"
+	  IsActive		  [1]
+	  ViewObjType		  "SimulinkTopLevel"
+	  LoadSaveID		  "0"
+	  Extents		  [1564.0, 740.0]
+	  ZoomFactor		  [1.0]
+	  Offset		  [-34.100000000000705, 5.18121100591037]
+	}
       }
       Object {
-	$PropName		"ExplorerBarInfo"
-	$ObjectID		4
-	$ClassName		"Simulink.ExplorerBarInfo"
-	Visible			[1]
-      }
-      Object {
-	$PropName		"EditorsInfo"
-	$ObjectID		5
-	$ClassName		"Simulink.EditorInfo"
+	$ObjectID		6
 	IsActive		[1]
-	ViewObjType		"SimulinkTopLevel"
-	LoadSaveID		"0"
-	Extents			[2459.0, 1269.0]
-	ZoomFactor		[1.0]
-	Offset			[-112.0, -135.0]
+	Location		[-8.0, -8.0, 1936.0, 1176.0]
+	Object {
+	  $PropName		  "ModelBrowserInfo"
+	  $ObjectID		  7
+	  $ClassName		  "Simulink.ModelBrowserInfo"
+	  Visible		  [0]
+	  DockPosition		  "Left"
+	  Width			  [50]
+	  Height		  [50]
+	  Filter		  [15]
+	}
+	Object {
+	  $PropName		  "ExplorerBarInfo"
+	  $ObjectID		  8
+	  $ClassName		  "Simulink.ExplorerBarInfo"
+	  Visible		  [1]
+	}
+	Object {
+	  $PropName		  "EditorsInfo"
+	  $ObjectID		  9
+	  $ClassName		  "Simulink.EditorInfo"
+	  IsActive		  [1]
+	  ViewObjType		  "StateflowChart"
+	  LoadSaveID		  "5356"
+	  Extents		  [1884.0, 1000.0]
+	  ZoomFactor		  [1.0]
+	  Offset		  [10.673278950694112, 30.078455488508979]
+	}
       }
+      PropName		      "WindowsInfo"
     }
   }
   PhysicalModelingChecksum "1546685730"
@@ -71,11 +106,11 @@ Model {
   Creator		  "pidm"
   UpdateHistory		  "UpdateHistoryNever"
   ModifiedByFormat	  "%<Auto>"
-  LastModifiedBy	  "forrest"
+  LastModifiedBy	  "huytbvo"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Mon Nov 05 14:56:23 2012"
-  RTWModifiedTimeStamp	  274026866
-  ModelVersionFormat	  "1.%<AutoIncrement:345>"
+  LastModifiedDate	  "Thu Nov 08 12:47:23 2012"
+  RTWModifiedTimeStamp	  274274476
+  ModelVersionFormat	  "1.%<AutoIncrement:396>"
   ConfigurationManager	  "None"
   SampleTimeColors	  off
   SampleTimeAnnotations	  off
@@ -100,7 +135,7 @@ Model {
   StatusBar		  on
   BrowserShowLibraryLinks off
   BrowserLookUnderMasks	  off
-  SimulationMode	  "normal"
+  SimulationMode	  "accelerator"
   LinearizationMsg	  "none"
   Profile		  off
   ParamWorkspaceSource	  "MATLABWorkspace"
@@ -110,7 +145,7 @@ Model {
   TryForcingSFcnDF	  off
   Object {
     $PropName		    "DataLoggingOverride"
-    $ObjectID		    6
+    $ObjectID		    10
     $ClassName		    "Simulink.SimulationData.ModelLoggingInfo"
     model_		    "Lab2_AircraftEPS"
     Array {
@@ -168,13 +203,13 @@ Model {
     Type		    "Handle"
     Dimension		    1
     Simulink.ConfigSet {
-      $ObjectID		      7
+      $ObjectID		      11
       Version		      "1.12.1"
       Array {
 	Type			"Handle"
 	Dimension		9
 	Simulink.SolverCC {
-	  $ObjectID		  8
+	  $ObjectID		  12
 	  Version		  "1.12.1"
 	  StartTime		  "0.0"
 	  StopTime		  "10"
@@ -209,7 +244,7 @@ Model {
 	  InsertRTBMode		  "Whenever possible"
 	}
 	Simulink.DataIOCC {
-	  $ObjectID		  9
+	  $ObjectID		  13
 	  Version		  "1.12.1"
 	  Decimation		  "1"
 	  ExternalInput		  "[t, u]"
@@ -241,7 +276,7 @@ Model {
 	  Refine		  "1"
 	}
 	Simulink.OptimizationCC {
-	  $ObjectID		  10
+	  $ObjectID		  14
 	  Version		  "1.12.1"
 	  Array {
 	    Type		    "Cell"
@@ -297,7 +332,7 @@ Model {
 	  ParallelExecutionInRapidAccelerator on
 	}
 	Simulink.DebuggingCC {
-	  $ObjectID		  11
+	  $ObjectID		  15
 	  Version		  "1.12.1"
 	  RTPrefix		  "error"
 	  ConsistencyChecking	  "none"
@@ -387,7 +422,7 @@ Model {
 	  SFTransitionActionBeforeConditionDiag	"warning"
 	}
 	Simulink.HardwareCC {
-	  $ObjectID		  12
+	  $ObjectID		  16
 	  Version		  "1.12.1"
 	  ProdBitPerChar	  8
 	  ProdBitPerShort	  16
@@ -424,7 +459,7 @@ Model {
 	  ProdEqTarget		  on
 	}
 	Simulink.ModelReferenceCC {
-	  $ObjectID		  13
+	  $ObjectID		  17
 	  Version		  "1.12.1"
 	  UpdateModelReferenceTargets "IfOutOfDateOrStructuralChange"
 	  CheckModelReferenceTargetMessage "error"
@@ -439,7 +474,7 @@ Model {
 	  SupportModelReferenceSimTargetCustomCode off
 	}
 	Simulink.SFSimCC {
-	  $ObjectID		  14
+	  $ObjectID		  18
 	  Version		  "1.12.1"
 	  SFSimEnableDebug	  on
 	  SFSimOverflowDetection  on
@@ -454,7 +489,7 @@ Model {
 	}
 	Simulink.RTWCC {
 	  $BackupClass		  "Simulink.RTWCC"
-	  $ObjectID		  15
+	  $ObjectID		  19
 	  Version		  "1.12.1"
 	  Array {
 	    Type		    "Cell"
@@ -515,7 +550,7 @@ Model {
 	    Type		    "Handle"
 	    Dimension		    2
 	    Simulink.CodeAppCC {
-	      $ObjectID		      16
+	      $ObjectID		      20
 	      Version		      "1.12.1"
 	      Array {
 		Type			"Cell"
@@ -582,7 +617,7 @@ Model {
 	    }
 	    Simulink.GRTTargetCC {
 	      $BackupClass	      "Simulink.TargetCC"
-	      $ObjectID		      17
+	      $ObjectID		      21
 	      Version		      "1.12.1"
 	      Array {
 		Type			"Cell"
@@ -663,7 +698,7 @@ Model {
 	  }
 	}
 	SSC.SimscapeCC {
-	  $ObjectID		  18
+	  $ObjectID		  22
 	  Version		  "1.0"
 	  Array {
 	    Type		    "Cell"
@@ -692,11 +727,11 @@ Model {
   }
   Simulink.ConfigSet {
     $PropName		    "ActiveConfigurationSet"
-    $ObjectID		    7
+    $ObjectID		    11
   }
   Object {
     $PropName		    "DataTransfer"
-    $ObjectID		    19
+    $ObjectID		    23
     $ClassName		    "Simulink.GlobalDataTransfer"
     DefaultTransitionBetweenSyncTasks "Ensure deterministic transfer (maximum delay)"
     DefaultTransitionBetweenAsyncTasks "Ensure data integrity only"
@@ -797,6 +832,17 @@ Model {
       Outputs		      "4"
       DisplayOption	      "none"
       BusSelectionMode	      off
+    }
+    Block {
+      BlockType		      DiscretePulseGenerator
+      PulseType		      "Sample based"
+      TimeSource	      "Use simulation time"
+      Amplitude		      "1"
+      Period		      "2"
+      PulseWidth	      "1"
+      PhaseDelay	      "0"
+      SampleTime	      "1"
+      VectorParams1D	      on
     }
     Block {
       BlockType		      Display
@@ -1000,6 +1046,23 @@ Model {
       BlockType		      Terminator
     }
     Block {
+      BlockType		      TriggerPort
+      TriggerType	      "rising"
+      StatesWhenEnabling      "inherit"
+      PropagateVarSize	      "During execution"
+      ShowOutputPort	      off
+      OutputDataType	      "auto"
+      SampleTimeType	      "triggered"
+      SampleTime	      "1"
+      ZeroCross		      on
+      PortDimensions	      "-1"
+      TriggerSignalSampleTime "-1"
+      OutMin		      "[]"
+      OutMax		      "[]"
+      OutDataTypeStr	      "Inherit: auto"
+      Interpolate	      on
+    }
+    Block {
       BlockType		      Trigonometry
       Operator		      "sin"
       ApproximationMethod     "None"
@@ -1010,7 +1073,7 @@ Model {
   }
   System {
     Name		    "Lab2_AircraftEPS"
-    Location		    [66, 52, 2561, 1468]
+    Location		    [-1608, 168, 8, 1084]
     Open		    on
     ModelBrowserVisibility  off
     ModelBrowserWidth	    200
@@ -1024,7 +1087,7 @@ Model {
     ShowPageBoundaries	    off
     ZoomFactor		    "100"
     ReportName		    "simulink-default.rpt"
-    SIDHighWatermark	    "5351"
+    SIDHighWatermark	    "5361"
     Block {
       BlockType		      SubSystem
       Name		      "AC Load1"
@@ -1045,7 +1108,7 @@ Model {
       MaskHideContents	      off
       Object {
 	$PropName		"MaskObject"
-	$ObjectID		20
+	$ObjectID		24
 	$ClassName		"Simulink.Mask"
 	Display			"image(imread('power_aircraft_distribution_ACLamp.jpg','jpg'))"
       }
@@ -1268,7 +1331,7 @@ Model {
       MaskHideContents	      off
       Object {
 	$PropName		"MaskObject"
-	$ObjectID		21
+	$ObjectID		25
 	$ClassName		"Simulink.Mask"
 	Display			"image(imread('power_aircraft_distribution_ACLamp.jpg','jpg'))"
       }
@@ -1493,7 +1556,7 @@ Model {
       MaskHideContents	      off
       Object {
 	$PropName		"MaskObject"
-	$ObjectID		22
+	$ObjectID		26
 	$ClassName		"Simulink.Mask"
 	Display			"plot(-80,-50,80,50,[0,9,18,24,29,30,29,24,18,9,0,-9,-18,-24,-29,-30,-29,-24,-18,-9,0],[30,29,24,18,9,0,-9,"
 	"-18,-24,-29,-30,-29,-24,-18,-9,0,9,18,24,29,30],[-50 -30],[0 0],[50,30],[0 0],[45 35 40 40 40],[15 15 15 20 10],[1 2 "
@@ -2170,7 +2233,7 @@ Model {
 	  MaskHideContents	  off
 	  Object {
 	    $PropName		    "MaskObject"
-	    $ObjectID		    23
+	    $ObjectID		    27
 	    $ClassName		    "Simulink.Mask"
 	    Display		    "image(imread('power_aircraft_distribution_GCU.jpg','jpg'))"
 	  }
@@ -2594,7 +2657,7 @@ Model {
 	  MaskHideContents	  on
 	  Object {
 	    $PropName		    "MaskObject"
-	    $ObjectID		    24
+	    $ObjectID		    28
 	    $ClassName		    "Simulink.Mask"
 	    Type		    "Sigbuilder block"
 	    Description		    "Sigbuilder GUI"
@@ -2691,7 +2754,7 @@ Model {
 	  MaskHideContents	  off
 	  Object {
 	    $PropName		    "MaskObject"
-	    $ObjectID		    25
+	    $ObjectID		    29
 	    $ClassName		    "Simulink.Mask"
 	    Display		    "image(imread('power_aircraft_distribution_APU_Generator.jpg','jpg'))\n"
 	  }
@@ -3507,7 +3570,7 @@ Model {
       MaskHideContents	      off
       Object {
 	$PropName		"MaskObject"
-	$ObjectID		26
+	$ObjectID		30
 	$ClassName		"Simulink.Mask"
 	Display			"plot(-80,-50,80,50,[0,9,18,24,29,30,29,24,18,9,0,-9,-18,-24,-29,-30,-29,-24,-18,-9,0],[30,29,24,18,9,0,-9,"
 	"-18,-24,-29,-30,-29,-24,-18,-9,0,9,18,24,29,30],[-50 -30],[0 0],[50,30],[0 0],[45 35 40 40 40],[15 15 15 20 10],[1 2 "
@@ -4184,7 +4247,7 @@ Model {
 	  MaskHideContents	  off
 	  Object {
 	    $PropName		    "MaskObject"
-	    $ObjectID		    27
+	    $ObjectID		    31
 	    $ClassName		    "Simulink.Mask"
 	    Display		    "image(imread('power_aircraft_distribution_GCU.jpg','jpg'))"
 	  }
@@ -4638,7 +4701,7 @@ Model {
 	  MaskHideContents	  on
 	  Object {
 	    $PropName		    "MaskObject"
-	    $ObjectID		    28
+	    $ObjectID		    32
 	    $ClassName		    "Simulink.Mask"
 	    Type		    "Sigbuilder block"
 	    Description		    "Sigbuilder GUI"
@@ -4735,7 +4798,7 @@ Model {
 	  MaskHideContents	  off
 	  Object {
 	    $PropName		    "MaskObject"
-	    $ObjectID		    29
+	    $ObjectID		    33
 	    $ClassName		    "Simulink.Mask"
 	    Display		    "image(imread('power_aircraft_distribution_APU_Generator.jpg','jpg'))\n"
 	  }
@@ -5565,7 +5628,7 @@ Model {
       MaskHideContents	      off
       Object {
 	$PropName		"MaskObject"
-	$ObjectID		30
+	$ObjectID		34
 	$ClassName		"Simulink.Mask"
 	Type			"Contactor"
 	Description		"Simple three phase contactor without a fuse."
@@ -5945,7 +6008,7 @@ Model {
       MaskHideContents	      off
       Object {
 	$PropName		"MaskObject"
-	$ObjectID		31
+	$ObjectID		35
 	$ClassName		"Simulink.Mask"
 	Type			"Contactor"
 	Description		"Simple single phase contactor without a fuse."
@@ -6139,7 +6202,7 @@ Model {
       MaskHideContents	      off
       Object {
 	$PropName		"MaskObject"
-	$ObjectID		32
+	$ObjectID		36
 	$ClassName		"Simulink.Mask"
 	Type			"Contactor"
 	Description		"Simple single phase contactor without a fuse."
@@ -6333,7 +6396,7 @@ Model {
       MaskHideContents	      off
       Object {
 	$PropName		"MaskObject"
-	$ObjectID		33
+	$ObjectID		37
 	$ClassName		"Simulink.Mask"
 	Type			"Contactor"
 	Description		"Simple single phase contactor without a fuse."
@@ -6528,7 +6591,7 @@ Model {
       MaskHideContents	      off
       Object {
 	$PropName		"MaskObject"
-	$ObjectID		34
+	$ObjectID		38
 	$ClassName		"Simulink.Mask"
 	Type			"Contactor"
 	Description		"Simple three phase contactor without a fuse."
@@ -6908,7 +6971,7 @@ Model {
       MaskHideContents	      off
       Object {
 	$PropName		"MaskObject"
-	$ObjectID		35
+	$ObjectID		39
 	$ClassName		"Simulink.Mask"
 	Type			"Contactor"
 	Description		"Simple three phase contactor without a fuse."
@@ -7288,7 +7351,7 @@ Model {
       MaskHideContents	      off
       Object {
 	$PropName		"MaskObject"
-	$ObjectID		36
+	$ObjectID		40
 	$ClassName		"Simulink.Mask"
 	Type			"Contactor"
 	Description		"Simple three phase contactor without a fuse."
@@ -7667,7 +7730,7 @@ Model {
       MaskHideContents	      off
       Object {
 	$PropName		"MaskObject"
-	$ObjectID		37
+	$ObjectID		41
 	$ClassName		"Simulink.Mask"
 	Type			"Contactor"
 	Description		"Simple three phase contactor without a fuse."
@@ -8042,7 +8105,7 @@ Model {
       MaskHideContents	      off
       Object {
 	$PropName		"MaskObject"
-	$ObjectID		38
+	$ObjectID		42
 	$ClassName		"Simulink.Mask"
 	Type			"Contactor"
 	Description		"Simple three phase contactor without a fuse."
@@ -8418,7 +8481,7 @@ Model {
       MaskHideContents	      off
       Object {
 	$PropName		"MaskObject"
-	$ObjectID		39
+	$ObjectID		43
 	$ClassName		"Simulink.Mask"
 	Type			"Contactor"
 	Description		"Simple three phase contactor without a fuse."
@@ -8798,7 +8861,7 @@ Model {
       MaskHideContents	      off
       Object {
 	$PropName		"MaskObject"
-	$ObjectID		40
+	$ObjectID		44
 	$ClassName		"Simulink.Mask"
 	Type			"Contactor"
 	Description		"Simple three phase contactor without a fuse."
@@ -9178,7 +9241,7 @@ Model {
       MaskHideContents	      off
       Object {
 	$PropName		"MaskObject"
-	$ObjectID		41
+	$ObjectID		45
 	$ClassName		"Simulink.Mask"
 	Type			"Contactor"
 	Description		"Simple single phase contactor without a fuse."
@@ -9369,7 +9432,7 @@ Model {
       MaskHideContents	      off
       System {
 	Name			"BPCU"
-	Location		[1421, 212, 3914, 1599]
+	Location		[-8, -8, 1928, 1168]
 	Open			off
 	ModelBrowserVisibility	off
 	ModelBrowserWidth	200
@@ -9386,7 +9449,7 @@ Model {
 	  BlockType		  Inport
 	  Name			  "LHV"
 	  SID			  "4028"
-	  Position		  [155, 103, 185, 117]
+	  Position		  [20, 153, 50, 167]
 	  ZOrder		  -1
 	  IconDisplay		  "Port number"
 	}
@@ -9394,7 +9457,7 @@ Model {
 	  BlockType		  Inport
 	  Name			  "LAPU"
 	  SID			  "4029"
-	  Position		  [155, 338, 185, 352]
+	  Position		  [20, 388, 50, 402]
 	  ZOrder		  -2
 	  Port			  "2"
 	  IconDisplay		  "Port number"
@@ -9403,7 +9466,7 @@ Model {
 	  BlockType		  Inport
 	  Name			  "RAPU"
 	  SID			  "4030"
-	  Position		  [155, 218, 185, 232]
+	  Position		  [20, 268, 50, 282]
 	  ZOrder		  -3
 	  Port			  "3"
 	  IconDisplay		  "Port number"
@@ -9412,102 +9475,30 @@ Model {
 	  BlockType		  Inport
 	  Name			  "RHV"
 	  SID			  "4031"
-	  Position		  [155, 458, 185, 472]
+	  Position		  [20, 508, 50, 522]
 	  ZOrder		  -4
 	  Port			  "4"
 	  IconDisplay		  "Port number"
 	}
 	Block {
 	  BlockType		  BusCreator
-	  Name			  "Bus Creator"
-	  SID			  "5342"
-	  Ports			  [4, 1]
-	  Position		  [595, 616, 600, 654]
-	  ZOrder		  40
+	  Name			  "Bus Creator1"
+	  SID			  "5360"
+	  Ports			  [12, 1]
+	  Position		  [1020, 689, 1025, 1291]
+	  ZOrder		  54
 	  ShowName		  off
+	  Inputs		  "12"
 	  DisplayOption		  "bar"
-	}
-	Block {
-	  BlockType		  Display
-	  Name			  "Contactors:\nB1 - B12 output"
-	  SID			  "5350"
-	  Ports			  [1]
-	  Position		  [865, 817, 1010, 1053]
-	  ZOrder		  48
-	  Decimation		  "1"
-	  Lockdown		  off
-	}
-	Block {
-	  BlockType		  Demux
-	  Name			  "Demux"
-	  SID			  "5349"
-	  Ports			  [1, 12]
-	  Position		  [880, 124, 940, 791]
-	  ZOrder		  47
-	  ShowName		  off
-	  Outputs		  "12"
-	  DisplayOption		  "bar"
-	  Port {
-	    PortNumber		    1
-	    Name		    "<signal1>"
-	    RTWStorageClass	    "Auto"
-	    DataLoggingNameMode	    "SignalName"
-	  }
-	  Port {
-	    PortNumber		    2
-	    Name		    "<signal2>"
-	    RTWStorageClass	    "Auto"
-	    DataLoggingNameMode	    "SignalName"
-	  }
-	}
-	Block {
-	  BlockType		  Display
-	  Name			  "Display"
-	  SID			  "5302"
-	  Ports			  [1]
-	  Position		  [420, 95, 510, 125]
-	  ZOrder		  4
-	  Decimation		  "1"
-	  Lockdown		  off
-	}
-	Block {
-	  BlockType		  Display
-	  Name			  "Display1"
-	  SID			  "5319"
-	  Ports			  [1]
-	  Position		  [420, 210, 510, 240]
-	  ZOrder		  21
-	  Decimation		  "1"
-	  Lockdown		  off
-	}
-	Block {
-	  BlockType		  Display
-	  Name			  "Display2"
-	  SID			  "5320"
-	  Ports			  [1]
-	  Position		  [420, 330, 510, 360]
-	  ZOrder		  22
-	  Decimation		  "1"
-	  Lockdown		  off
-	}
-	Block {
-	  BlockType		  Display
-	  Name			  "Display3"
-	  SID			  "5321"
-	  Ports			  [1]
-	  Position		  [420, 450, 510, 480]
-	  ZOrder		  23
-	  Decimation		  "1"
-	  Lockdown		  off
 	}
 	Block {
 	  BlockType		  SubSystem
-	  Name			  "MATLAB Function"
-	  SID			  "5346"
-	  Ports			  [1, 1]
-	  Position		  [685, 596, 810, 674]
-	  ZOrder		  44
-	  LibraryVersion	  "1.32"
+	  Name			  "Chart"
+	  SID			  "5356"
+	  Ports			  [4, 12, 0, 1]
+	  Position		  [615, 51, 895, 659]
+	  ZOrder		  51
+	  LibraryVersion	  "1.262"
 	  ErrorFcn		  "Stateflow.Translate.translate"
 	  PermitHierarchicalResolution "ExplicitOnly"
 	  TreatAsAtomicUnit	  on
@@ -9518,23 +9509,24 @@ Model {
 	  Opaque		  off
 	  RequestExecContextInheritance	off
 	  MaskHideContents	  off
-	  SFBlockType		  "MATLAB Function"
+	  SFBlockType		  "Chart"
 	  Object {
 	    $PropName		    "MaskObject"
-	    $ObjectID		    42
+	    $ObjectID		    46
 	    $ClassName		    "Simulink.Mask"
 	    Type		    "Stateflow"
-	    Description		    "Embedded MATLAB block"
+	    Description		    "Stateflow diagram"
 	    SelfModifiable	    "on"
-	    Display		    "bgColor = Simulink.Root.ColorString2Rgb(get_param(gcbh, 'BackgroundColor')); image(imread('private/"
-	    "eml_membrane_16.png','png','BackgroundColor',bgColor(1:3)),'center'); disp([10 10 'BPCU_core']);"
+	    Display		    "plot(sf('Private','sfblk','xIcon'),sf('Private','sfblk','yIcon'));text(0.5,0,sf('Private', 'sfblk',"
+	    " 'tIcon'),'HorizontalAl','Center','VerticalAl','Bottom');"
+	    IconFrame		    "off"
 	    IconOpaque		    "off"
 	    IconUnits		    "normalized"
 	  }
 	  System {
-	    Name		    "MATLAB Function"
-	    Location		    [223, 338, 826, 833]
-	    Open		    off
+	    Name		    "Chart"
+	    Location		    [-8, -8, 1928, 1168]
+	    Open		    on
 	    ModelBrowserVisibility  off
 	    ModelBrowserWidth	    200
 	    ScreenColor		    "white"
@@ -9546,38 +9538,141 @@ Model {
 	    TiledPageScale	    1
 	    ShowPageBoundaries	    off
 	    ZoomFactor		    "100"
-	    SIDHighWatermark	    "24"
+	    SIDHighWatermark	    "59"
 	    Block {
 	      BlockType		      Inport
-	      Name		      "in_bus"
-	      SID		      "5346::1"
+	      Name		      "GL"
+	      SID		      "5356::43"
 	      Position		      [20, 101, 40, 119]
-	      ZOrder		      -1
+	      ZOrder		      23
 	      IconDisplay	      "Port number"
+	    }
+	    Block {
+	      BlockType		      Inport
+	      Name		      "GR"
+	      SID		      "5356::56"
+	      Position		      [20, 136, 40, 154]
+	      ZOrder		      36
+	      Port		      "2"
+	      IconDisplay	      "Port number"
+	    }
+	    Block {
+	      BlockType		      Inport
+	      Name		      "AL"
+	      SID		      "5356::57"
+	      Position		      [20, 171, 40, 189]
+	      ZOrder		      37
+	      Port		      "3"
+	      IconDisplay	      "Port number"
+	    }
+	    Block {
+	      BlockType		      Inport
+	      Name		      "AR"
+	      SID		      "5356::59"
+	      Position		      [20, 206, 40, 224]
+	      ZOrder		      39
+	      Port		      "4"
+	      IconDisplay	      "Port number"
+	    }
+	    Block {
+	      BlockType		      TriggerPort
+	      Name		      "tick"
+	      SID		      "5356::41"
+	      Ports		      [0, 1]
+	      Position		      [20, 246, 40, 264]
+	      ZOrder		      21
+	      StatesWhenEnabling      "held"
+	      ShowOutputPort	      on
 	    }
 	    Block {
 	      BlockType		      Demux
 	      Name		      " Demux "
-	      SID		      "5346::20"
+	      SID		      "5356::38"
 	      Ports		      [1, 1]
-	      Position		      [270, 180, 320, 220]
-	      ZOrder		      6
+	      Position		      [270, 530, 320, 570]
+	      ZOrder		      18
 	      Outputs		      "1"
 	    }
 	    Block {
 	      BlockType		      S-Function
 	      Name		      " SFunction "
-	      SID		      "5346::19"
-	      Tag		      "Stateflow S-Function Lab2_AircraftEPS 2"
-	      Ports		      [1, 2]
-	      Position		      [180, 100, 230, 180]
-	      ZOrder		      5
+	      SID		      "5356::37"
+	      Tag		      "Stateflow S-Function Lab2_AircraftEPS 1"
+	      Ports		      [5, 13]
+	      Position		      [180, 120, 230, 420]
+	      ZOrder		      17
 	      FunctionName	      "sf_sfun"
-	      PortCounts	      "[1 2]"
+	      PortCounts	      "[5 13]"
 	      EnableBusSupport	      on
 	      Port {
 		PortNumber		2
-		Name			"contactors"
+		Name			"B1"
+		RTWStorageClass		"Auto"
+		DataLoggingNameMode	"SignalName"
+	      }
+	      Port {
+		PortNumber		3
+		Name			"B2"
+		RTWStorageClass		"Auto"
+		DataLoggingNameMode	"SignalName"
+	      }
+	      Port {
+		PortNumber		4
+		Name			"B3"
+		RTWStorageClass		"Auto"
+		DataLoggingNameMode	"SignalName"
+	      }
+	      Port {
+		PortNumber		5
+		Name			"B4"
+		RTWStorageClass		"Auto"
+		DataLoggingNameMode	"SignalName"
+	      }
+	      Port {
+		PortNumber		6
+		Name			"B5"
+		RTWStorageClass		"Auto"
+		DataLoggingNameMode	"SignalName"
+	      }
+	      Port {
+		PortNumber		7
+		Name			"B6"
+		RTWStorageClass		"Auto"
+		DataLoggingNameMode	"SignalName"
+	      }
+	      Port {
+		PortNumber		8
+		Name			"B7"
+		RTWStorageClass		"Auto"
+		DataLoggingNameMode	"SignalName"
+	      }
+	      Port {
+		PortNumber		9
+		Name			"B8"
+		RTWStorageClass		"Auto"
+		DataLoggingNameMode	"SignalName"
+	      }
+	      Port {
+		PortNumber		10
+		Name			"B9"
+		RTWStorageClass		"Auto"
+		DataLoggingNameMode	"SignalName"
+	      }
+	      Port {
+		PortNumber		11
+		Name			"B10"
+		RTWStorageClass		"Auto"
+		DataLoggingNameMode	"SignalName"
+	      }
+	      Port {
+		PortNumber		12
+		Name			"B11"
+		RTWStorageClass		"Auto"
+		DataLoggingNameMode	"SignalName"
+	      }
+	      Port {
+		PortNumber		13
+		Name			"B12"
 		RTWStorageClass		"Auto"
 		DataLoggingNameMode	"SignalName"
 	      }
@@ -9585,31 +9680,242 @@ Model {
 	    Block {
 	      BlockType		      Terminator
 	      Name		      " Terminator "
-	      SID		      "5346::22"
-	      Position		      [460, 191, 480, 209]
-	      ZOrder		      8
+	      SID		      "5356::40"
+	      Position		      [460, 541, 480, 559]
+	      ZOrder		      20
 	    }
 	    Block {
 	      BlockType		      Outport
-	      Name		      "contactors"
-	      SID		      "5346::5"
+	      Name		      "B1"
+	      SID		      "5356::42"
 	      Position		      [460, 101, 480, 119]
-	      ZOrder		      -5
+	      ZOrder		      22
+	      IconDisplay	      "Port number"
+	    }
+	    Block {
+	      BlockType		      Outport
+	      Name		      "B2"
+	      SID		      "5356::45"
+	      Position		      [460, 136, 480, 154]
+	      ZOrder		      25
+	      Port		      "2"
+	      IconDisplay	      "Port number"
+	    }
+	    Block {
+	      BlockType		      Outport
+	      Name		      "B3"
+	      SID		      "5356::46"
+	      Position		      [460, 171, 480, 189]
+	      ZOrder		      26
+	      Port		      "3"
+	      IconDisplay	      "Port number"
+	    }
+	    Block {
+	      BlockType		      Outport
+	      Name		      "B4"
+	      SID		      "5356::47"
+	      Position		      [460, 206, 480, 224]
+	      ZOrder		      27
+	      Port		      "4"
+	      IconDisplay	      "Port number"
+	    }
+	    Block {
+	      BlockType		      Outport
+	      Name		      "B5"
+	      SID		      "5356::48"
+	      Position		      [460, 246, 480, 264]
+	      ZOrder		      28
+	      Port		      "5"
+	      IconDisplay	      "Port number"
+	    }
+	    Block {
+	      BlockType		      Outport
+	      Name		      "B6"
+	      SID		      "5356::49"
+	      Position		      [460, 281, 480, 299]
+	      ZOrder		      29
+	      Port		      "6"
+	      IconDisplay	      "Port number"
+	    }
+	    Block {
+	      BlockType		      Outport
+	      Name		      "B7"
+	      SID		      "5356::50"
+	      Position		      [460, 316, 480, 334]
+	      ZOrder		      30
+	      Port		      "7"
+	      IconDisplay	      "Port number"
+	    }
+	    Block {
+	      BlockType		      Outport
+	      Name		      "B8"
+	      SID		      "5356::51"
+	      Position		      [460, 351, 480, 369]
+	      ZOrder		      31
+	      Port		      "8"
+	      IconDisplay	      "Port number"
+	    }
+	    Block {
+	      BlockType		      Outport
+	      Name		      "B9"
+	      SID		      "5356::52"
+	      Position		      [460, 386, 480, 404]
+	      ZOrder		      32
+	      Port		      "9"
+	      IconDisplay	      "Port number"
+	    }
+	    Block {
+	      BlockType		      Outport
+	      Name		      "B10"
+	      SID		      "5356::53"
+	      Position		      [460, 426, 480, 444]
+	      ZOrder		      33
+	      Port		      "10"
+	      IconDisplay	      "Port number"
+	    }
+	    Block {
+	      BlockType		      Outport
+	      Name		      "B11"
+	      SID		      "5356::54"
+	      Position		      [460, 461, 480, 479]
+	      ZOrder		      34
+	      Port		      "11"
+	      IconDisplay	      "Port number"
+	    }
+	    Block {
+	      BlockType		      Outport
+	      Name		      "B12"
+	      SID		      "5356::55"
+	      Position		      [460, 496, 480, 514]
+	      ZOrder		      35
+	      Port		      "12"
 	      IconDisplay	      "Port number"
 	    }
 	    Line {
-	      SrcBlock		      "in_bus"
+	      SrcBlock		      "GL"
 	      SrcPort		      1
 	      DstBlock		      " SFunction "
 	      DstPort		      1
 	    }
 	    Line {
-	      Name		      "contactors"
+	      SrcBlock		      "GR"
+	      SrcPort		      1
+	      DstBlock		      " SFunction "
+	      DstPort		      2
+	    }
+	    Line {
+	      SrcBlock		      "AL"
+	      SrcPort		      1
+	      DstBlock		      " SFunction "
+	      DstPort		      3
+	    }
+	    Line {
+	      SrcBlock		      "AR"
+	      SrcPort		      1
+	      DstBlock		      " SFunction "
+	      DstPort		      4
+	    }
+	    Line {
+	      Name		      "B1"
 	      Labels		      [0, 0]
 	      SrcBlock		      " SFunction "
 	      SrcPort		      2
-	      DstBlock		      "contactors"
+	      DstBlock		      "B1"
 	      DstPort		      1
+	    }
+	    Line {
+	      Name		      "B2"
+	      Labels		      [0, 0]
+	      SrcBlock		      " SFunction "
+	      SrcPort		      3
+	      DstBlock		      "B2"
+	      DstPort		      1
+	    }
+	    Line {
+	      Name		      "B3"
+	      Labels		      [0, 0]
+	      SrcBlock		      " SFunction "
+	      SrcPort		      4
+	      DstBlock		      "B3"
+	      DstPort		      1
+	    }
+	    Line {
+	      Name		      "B4"
+	      Labels		      [0, 0]
+	      SrcBlock		      " SFunction "
+	      SrcPort		      5
+	      DstBlock		      "B4"
+	      DstPort		      1
+	    }
+	    Line {
+	      Name		      "B5"
+	      Labels		      [0, 0]
+	      SrcBlock		      " SFunction "
+	      SrcPort		      6
+	      DstBlock		      "B5"
+	      DstPort		      1
+	    }
+	    Line {
+	      Name		      "B6"
+	      Labels		      [0, 0]
+	      SrcBlock		      " SFunction "
+	      SrcPort		      7
+	      DstBlock		      "B6"
+	      DstPort		      1
+	    }
+	    Line {
+	      Name		      "B7"
+	      Labels		      [0, 0]
+	      SrcBlock		      " SFunction "
+	      SrcPort		      8
+	      DstBlock		      "B7"
+	      DstPort		      1
+	    }
+	    Line {
+	      Name		      "B8"
+	      Labels		      [0, 0]
+	      SrcBlock		      " SFunction "
+	      SrcPort		      9
+	      DstBlock		      "B8"
+	      DstPort		      1
+	    }
+	    Line {
+	      Name		      "B9"
+	      Labels		      [0, 0]
+	      SrcBlock		      " SFunction "
+	      SrcPort		      10
+	      DstBlock		      "B9"
+	      DstPort		      1
+	    }
+	    Line {
+	      Name		      "B10"
+	      Labels		      [0, 0]
+	      SrcBlock		      " SFunction "
+	      SrcPort		      11
+	      DstBlock		      "B10"
+	      DstPort		      1
+	    }
+	    Line {
+	      Name		      "B11"
+	      Labels		      [0, 0]
+	      SrcBlock		      " SFunction "
+	      SrcPort		      12
+	      DstBlock		      "B11"
+	      DstPort		      1
+	    }
+	    Line {
+	      Name		      "B12"
+	      Labels		      [0, 0]
+	      SrcBlock		      " SFunction "
+	      SrcPort		      13
+	      DstBlock		      "B12"
+	      DstPort		      1
+	    }
+	    Line {
+	      SrcBlock		      "tick"
+	      SrcPort		      1
+	      DstBlock		      " SFunction "
+	      DstPort		      5
 	    }
 	    Line {
 	      SrcBlock		      " Demux "
@@ -9626,11 +9932,72 @@ Model {
 	  }
 	}
 	Block {
+	  BlockType		  Display
+	  Name			  "Display"
+	  SID			  "5302"
+	  Ports			  [1]
+	  Position		  [285, 145, 375, 175]
+	  ZOrder		  4
+	  Decimation		  "1"
+	  Lockdown		  off
+	}
+	Block {
+	  BlockType		  Display
+	  Name			  "Display1"
+	  SID			  "5319"
+	  Ports			  [1]
+	  Position		  [285, 260, 375, 290]
+	  ZOrder		  21
+	  Decimation		  "1"
+	  Lockdown		  off
+	}
+	Block {
+	  BlockType		  Display
+	  Name			  "Display2"
+	  SID			  "5320"
+	  Ports			  [1]
+	  Position		  [285, 380, 375, 410]
+	  ZOrder		  22
+	  Decimation		  "1"
+	  Lockdown		  off
+	}
+	Block {
+	  BlockType		  Display
+	  Name			  "Display3"
+	  SID			  "5321"
+	  Ports			  [1]
+	  Position		  [285, 500, 375, 530]
+	  ZOrder		  23
+	  Decimation		  "1"
+	  Lockdown		  off
+	}
+	Block {
+	  BlockType		  Display
+	  Name			  "Display4"
+	  SID			  "5361"
+	  Ports			  [1]
+	  Position		  [1355, 174, 1505, 496]
+	  ZOrder		  55
+	  Decimation		  "1"
+	  Lockdown		  off
+	}
+	Block {
+	  BlockType		  DiscretePulseGenerator
+	  Name			  "Pulse Generator"
+	  SID			  "5357"
+	  Ports			  [0, 1]
+	  Position		  [530, 19, 560, 51]
+	  ZOrder		  52
+	  PulseType		  "Time based"
+	  Period		  "0.025"
+	  PulseWidth		  "5"
+	}
+	Block {
 	  BlockType		  Reference
 	  Name			  "checkVoltage"
 	  SID			  "5334"
 	  Ports			  [1, 1]
-	  Position		  [260, 89, 360, 131]
+	  Position		  [125, 139, 225, 181]
 	  ZOrder		  36
 	  LibraryVersion	  "1.11"
 	  SourceBlock		  "checkVoltage/checkVoltage"
@@ -9641,7 +10008,7 @@ Model {
 	  Name			  "checkVoltage1"
 	  SID			  "5335"
 	  Ports			  [1, 1]
-	  Position		  [260, 204, 360, 246]
+	  Position		  [125, 254, 225, 296]
 	  ZOrder		  37
 	  LibraryVersion	  "1.11"
 	  SourceBlock		  "checkVoltage/checkVoltage"
@@ -9652,7 +10019,7 @@ Model {
 	  Name			  "checkVoltage2"
 	  SID			  "5336"
 	  Ports			  [1, 1]
-	  Position		  [260, 324, 360, 366]
+	  Position		  [125, 374, 225, 416]
 	  ZOrder		  38
 	  LibraryVersion	  "1.11"
 	  SourceBlock		  "checkVoltage/checkVoltage"
@@ -9663,7 +10030,7 @@ Model {
 	  Name			  "checkVoltage3"
 	  SID			  "5337"
 	  Ports			  [1, 1]
-	  Position		  [260, 444, 360, 486]
+	  Position		  [125, 494, 225, 536]
 	  ZOrder		  39
 	  LibraryVersion	  "1.11"
 	  SourceBlock		  "checkVoltage/checkVoltage"
@@ -9673,7 +10040,7 @@ Model {
 	  BlockType		  Outport
 	  Name			  "B1"
 	  SID			  "4638"
-	  Position		  [990, 148, 1020, 162]
+	  Position		  [1005, 73, 1035, 87]
 	  ZOrder		  -6
 	  IconDisplay		  "Port number"
 	}
@@ -9681,7 +10048,7 @@ Model {
 	  BlockType		  Outport
 	  Name			  "B2"
 	  SID			  "4639"
-	  Position		  [990, 203, 1020, 217]
+	  Position		  [1005, 123, 1035, 137]
 	  ZOrder		  -7
 	  Port			  "2"
 	  IconDisplay		  "Port number"
@@ -9690,7 +10057,7 @@ Model {
 	  BlockType		  Outport
 	  Name			  "B3"
 	  SID			  "4640"
-	  Position		  [990, 258, 1020, 272]
+	  Position		  [1005, 173, 1035, 187]
 	  ZOrder		  -8
 	  Port			  "3"
 	  IconDisplay		  "Port number"
@@ -9699,7 +10066,7 @@ Model {
 	  BlockType		  Outport
 	  Name			  "B4"
 	  SID			  "4641"
-	  Position		  [990, 313, 1020, 327]
+	  Position		  [1005, 223, 1035, 237]
 	  ZOrder		  -9
 	  Port			  "4"
 	  IconDisplay		  "Port number"
@@ -9708,7 +10075,7 @@ Model {
 	  BlockType		  Outport
 	  Name			  "B5"
 	  SID			  "4642"
-	  Position		  [990, 368, 1020, 382]
+	  Position		  [1005, 273, 1035, 287]
 	  ZOrder		  -10
 	  Port			  "5"
 	  IconDisplay		  "Port number"
@@ -9717,7 +10084,7 @@ Model {
 	  BlockType		  Outport
 	  Name			  "B6"
 	  SID			  "4643"
-	  Position		  [990, 423, 1020, 437]
+	  Position		  [1005, 323, 1035, 337]
 	  ZOrder		  -11
 	  Port			  "6"
 	  IconDisplay		  "Port number"
@@ -9726,7 +10093,7 @@ Model {
 	  BlockType		  Outport
 	  Name			  "B7"
 	  SID			  "4040"
-	  Position		  [990, 478, 1020, 492]
+	  Position		  [1005, 373, 1035, 387]
 	  ZOrder		  -12
 	  Port			  "7"
 	  IconDisplay		  "Port number"
@@ -9735,7 +10102,7 @@ Model {
 	  BlockType		  Outport
 	  Name			  "B8"
 	  SID			  "4041"
-	  Position		  [990, 533, 1020, 547]
+	  Position		  [1005, 423, 1035, 437]
 	  ZOrder		  -13
 	  Port			  "8"
 	  IconDisplay		  "Port number"
@@ -9744,7 +10111,7 @@ Model {
 	  BlockType		  Outport
 	  Name			  "B9"
 	  SID			  "4042"
-	  Position		  [990, 588, 1020, 602]
+	  Position		  [1005, 473, 1035, 487]
 	  ZOrder		  -14
 	  Port			  "9"
 	  IconDisplay		  "Port number"
@@ -9753,7 +10120,7 @@ Model {
 	  BlockType		  Outport
 	  Name			  "B10"
 	  SID			  "4043"
-	  Position		  [990, 643, 1020, 657]
+	  Position		  [1005, 523, 1035, 537]
 	  ZOrder		  -15
 	  Port			  "10"
 	  IconDisplay		  "Port number"
@@ -9762,7 +10129,7 @@ Model {
 	  BlockType		  Outport
 	  Name			  "B11"
 	  SID			  "4044"
-	  Position		  [990, 698, 1020, 712]
+	  Position		  [1005, 573, 1035, 587]
 	  ZOrder		  -16
 	  Port			  "11"
 	  IconDisplay		  "Port number"
@@ -9771,7 +10138,7 @@ Model {
 	  BlockType		  Outport
 	  Name			  "B12"
 	  SID			  "4890"
-	  Position		  [990, 753, 1020, 767]
+	  Position		  [1005, 623, 1035, 637]
 	  ZOrder		  -17
 	  Port			  "12"
 	  IconDisplay		  "Port number"
@@ -9785,10 +10152,10 @@ Model {
 	Line {
 	  SrcBlock		  "checkVoltage"
 	  SrcPort		  1
-	  Points		  [38, 0]
+	  Points		  [18, 0]
 	  Branch {
-	    Points		    [0, 510]
-	    DstBlock		    "Bus Creator"
+	    Points		    [0, -30]
+	    DstBlock		    "Chart"
 	    DstPort		    1
 	  }
 	  Branch {
@@ -9805,11 +10172,11 @@ Model {
 	Line {
 	  SrcBlock		  "checkVoltage1"
 	  SrcPort		  1
-	  Points		  [28, 0]
+	  Points		  [31, 0]
 	  Branch {
-	    Points		    [0, 405]
-	    DstBlock		    "Bus Creator"
-	    DstPort		    2
+	    Points		    [0, 305]
+	    DstBlock		    "Chart"
+	    DstPort		    4
 	  }
 	  Branch {
 	    DstBlock		    "Display1"
@@ -9831,11 +10198,11 @@ Model {
 	Line {
 	  SrcBlock		  "checkVoltage3"
 	  SrcPort		  1
-	  Points		  [6, 0]
+	  Points		  [14, 0]
 	  Branch {
-	    Points		    [0, 185]
-	    DstBlock		    "Bus Creator"
-	    DstPort		    4
+	    Points		    [0, -54; 155, 0; 0, -181]
+	    DstBlock		    "Chart"
+	    DstPort		    2
 	  }
 	  Branch {
 	    DstBlock		    "Display3"
@@ -9845,10 +10212,10 @@ Model {
 	Line {
 	  SrcBlock		  "checkVoltage2"
 	  SrcPort		  1
-	  Points		  [21, 0]
+	  Points		  [18, 0]
 	  Branch {
-	    Points		    [0, 295]
-	    DstBlock		    "Bus Creator"
+	    Points		    [0, 35]
+	    DstBlock		    "Chart"
 	    DstPort		    3
 	  }
 	  Branch {
@@ -9857,100 +10224,186 @@ Model {
 	  }
 	}
 	Line {
-	  SrcBlock		  "Bus Creator"
+	  SrcBlock		  "Pulse Generator"
 	  SrcPort		  1
-	  DstBlock		  "MATLAB Function"
+	  Points		  [190, 0]
+	  DstBlock		  "Chart"
+	  DstPort		  trigger
+	}
+	Line {
+	  SrcBlock		  "Bus Creator1"
+	  SrcPort		  1
+	  Points		  [165, 0; 0, -655]
+	  DstBlock		  "Display4"
 	  DstPort		  1
 	}
 	Line {
-	  SrcBlock		  "MATLAB Function"
+	  SrcBlock		  "Chart"
 	  SrcPort		  1
-	  Points		  [30, 0]
+	  Points		  [4, 0]
 	  Branch {
-	    Points		    [0, 300]
-	    DstBlock		    "Contactors:\nB1 - B12 output"
+	    Points		    [0, 635]
+	    DstBlock		    "Bus Creator1"
 	    DstPort		    1
 	  }
 	  Branch {
-	    Points		    [0, -175]
-	    DstBlock		    "Demux"
+	    DstBlock		    "B1"
 	    DstPort		    1
 	  }
 	}
 	Line {
-	  Name			  "<signal1>"
-	  SrcBlock		  "Demux"
-	  SrcPort		  1
-	  DstBlock		  "B1"
-	  DstPort		  1
-	}
-	Line {
-	  Name			  "<signal2>"
-	  SrcBlock		  "Demux"
+	  SrcBlock		  "Chart"
 	  SrcPort		  2
-	  DstBlock		  "B2"
-	  DstPort		  1
+	  Points		  [10, 0]
+	  Branch {
+	    DstBlock		    "B2"
+	    DstPort		    1
+	  }
+	  Branch {
+	    Points		    [0, 635]
+	    DstBlock		    "Bus Creator1"
+	    DstPort		    2
+	  }
 	}
 	Line {
-	  SrcBlock		  "Demux"
+	  SrcBlock		  "Chart"
 	  SrcPort		  3
-	  DstBlock		  "B3"
-	  DstPort		  1
+	  Points		  [18, 0]
+	  Branch {
+	    DstBlock		    "B3"
+	    DstPort		    1
+	  }
+	  Branch {
+	    Points		    [0, 635]
+	    DstBlock		    "Bus Creator1"
+	    DstPort		    3
+	  }
 	}
 	Line {
-	  SrcBlock		  "Demux"
+	  SrcBlock		  "Chart"
 	  SrcPort		  4
-	  DstBlock		  "B4"
-	  DstPort		  1
+	  Points		  [26, 0]
+	  Branch {
+	    DstBlock		    "B4"
+	    DstPort		    1
+	  }
+	  Branch {
+	    Points		    [0, 635]
+	    DstBlock		    "Bus Creator1"
+	    DstPort		    4
+	  }
 	}
 	Line {
-	  SrcBlock		  "Demux"
+	  SrcBlock		  "Chart"
 	  SrcPort		  5
-	  DstBlock		  "B5"
-	  DstPort		  1
+	  Points		  [34, 0]
+	  Branch {
+	    DstBlock		    "B5"
+	    DstPort		    1
+	  }
+	  Branch {
+	    Points		    [0, 635]
+	    DstBlock		    "Bus Creator1"
+	    DstPort		    5
+	  }
 	}
 	Line {
-	  SrcBlock		  "Demux"
+	  SrcBlock		  "Chart"
 	  SrcPort		  6
-	  DstBlock		  "B6"
-	  DstPort		  1
+	  Points		  [44, 0]
+	  Branch {
+	    DstBlock		    "B6"
+	    DstPort		    1
+	  }
+	  Branch {
+	    Points		    [0, 635]
+	    DstBlock		    "Bus Creator1"
+	    DstPort		    6
+	  }
 	}
 	Line {
-	  SrcBlock		  "Demux"
+	  SrcBlock		  "Chart"
 	  SrcPort		  7
-	  DstBlock		  "B7"
-	  DstPort		  1
+	  Points		  [52, 0]
+	  Branch {
+	    DstBlock		    "B7"
+	    DstPort		    1
+	  }
+	  Branch {
+	    Points		    [0, 635]
+	    DstBlock		    "Bus Creator1"
+	    DstPort		    7
+	  }
 	}
 	Line {
-	  SrcBlock		  "Demux"
+	  SrcBlock		  "Chart"
 	  SrcPort		  8
-	  DstBlock		  "B8"
-	  DstPort		  1
+	  Points		  [61, 0]
+	  Branch {
+	    DstBlock		    "B8"
+	    DstPort		    1
+	  }
+	  Branch {
+	    Points		    [0, 635]
+	    DstBlock		    "Bus Creator1"
+	    DstPort		    8
+	  }
 	}
 	Line {
-	  SrcBlock		  "Demux"
+	  SrcBlock		  "Chart"
 	  SrcPort		  9
-	  DstBlock		  "B9"
-	  DstPort		  1
+	  Points		  [68, 0]
+	  Branch {
+	    DstBlock		    "B9"
+	    DstPort		    1
+	  }
+	  Branch {
+	    Points		    [0, 635]
+	    DstBlock		    "Bus Creator1"
+	    DstPort		    9
+	  }
 	}
 	Line {
-	  SrcBlock		  "Demux"
+	  SrcBlock		  "Chart"
 	  SrcPort		  10
-	  DstBlock		  "B10"
-	  DstPort		  1
+	  Points		  [74, 0]
+	  Branch {
+	    DstBlock		    "B10"
+	    DstPort		    1
+	  }
+	  Branch {
+	    Points		    [0, 635]
+	    DstBlock		    "Bus Creator1"
+	    DstPort		    10
+	  }
 	}
 	Line {
-	  SrcBlock		  "Demux"
+	  SrcBlock		  "Chart"
 	  SrcPort		  11
-	  DstBlock		  "B11"
-	  DstPort		  1
+	  Points		  [84, 0]
+	  Branch {
+	    Points		    [0, 635]
+	    DstBlock		    "Bus Creator1"
+	    DstPort		    11
+	  }
+	  Branch {
+	    DstBlock		    "B11"
+	    DstPort		    1
+	  }
 	}
 	Line {
-	  SrcBlock		  "Demux"
+	  SrcBlock		  "Chart"
 	  SrcPort		  12
-	  Points		  [30, 0]
-	  DstBlock		  "B12"
-	  DstPort		  1
+	  Points		  [90, 0]
+	  Branch {
+	    Points		    [0, 635]
+	    DstBlock		    "Bus Creator1"
+	    DstPort		    12
+	  }
+	  Branch {
+	    DstBlock		    "B12"
+	    DstPort		    1
+	  }
 	}
       }
     }
@@ -9975,7 +10428,7 @@ Model {
       MaskHideContents	      off
       Object {
 	$PropName		"MaskObject"
-	$ObjectID		43
+	$ObjectID		47
 	$ClassName		"Simulink.Mask"
 	Display			"image(imread('power_aircraft_distribution_DCLamp.jpg','jpg'))"
       }
@@ -10204,7 +10657,7 @@ Model {
       MaskHideContents	      off
       Object {
 	$PropName		"MaskObject"
-	$ObjectID		44
+	$ObjectID		48
 	$ClassName		"Simulink.Mask"
 	Display			"image(imread('power_aircraft_distribution_DCLamp.jpg','jpg'))"
       }
@@ -11178,7 +11631,7 @@ Model {
       MaskHideContents	      off
       Object {
 	$PropName		"MaskObject"
-	$ObjectID		45
+	$ObjectID		49
 	$ClassName		"Simulink.Mask"
 	Display			"plot(-80,-50,80,50,[0,9,18,24,29,30,29,24,18,9,0,-9,-18,-24,-29,-30,-29,-24,-18,-9,0],[30,29,24,18,9,0,-9,"
 	"-18,-24,-29,-30,-29,-24,-18,-9,0,9,18,24,29,30],[-50 -30],[0 0],[50,30],[0 0],[45 35 40 40 40],[15 15 15 20 10],[1 2 "
@@ -11843,7 +12296,7 @@ Model {
 	  MaskHideContents	  off
 	  Object {
 	    $PropName		    "MaskObject"
-	    $ObjectID		    46
+	    $ObjectID		    50
 	    $ClassName		    "Simulink.Mask"
 	    Display		    "image(imread('power_aircraft_distribution_GCU.jpg','jpg'))"
 	  }
@@ -12347,7 +12800,7 @@ Model {
 	  MaskHideContents	  on
 	  Object {
 	    $PropName		    "MaskObject"
-	    $ObjectID		    47
+	    $ObjectID		    51
 	    $ClassName		    "Simulink.Mask"
 	    Type		    "Sigbuilder block"
 	    Description		    "Sigbuilder GUI"
@@ -12444,7 +12897,7 @@ Model {
 	  MaskHideContents	  off
 	  Object {
 	    $PropName		    "MaskObject"
-	    $ObjectID		    48
+	    $ObjectID		    52
 	    $ClassName		    "Simulink.Mask"
 	    Display		    "image(imread('power_aircraft_distribution_APU_Generator.jpg','jpg'))\n"
 	  }
@@ -13298,7 +13751,7 @@ Model {
       MaskHideContents	      off
       Object {
 	$PropName		"MaskObject"
-	$ObjectID		49
+	$ObjectID		53
 	$ClassName		"Simulink.Mask"
 	Display			"plot(-80,-50,80,50,[0,9,18,24,29,30,29,24,18,9,0,-9,-18,-24,-29,-30,-29,-24,-18,-9,0],[30,29,24,18,9,0,-9,"
 	"-18,-24,-29,-30,-29,-24,-18,-9,0,9,18,24,29,30],[-50 -30],[0 0],[50,30],[0 0],[45 35 40 40 40],[15 15 15 20 10],[1 2 "
@@ -13975,7 +14428,7 @@ Model {
 	  MaskHideContents	  off
 	  Object {
 	    $PropName		    "MaskObject"
-	    $ObjectID		    50
+	    $ObjectID		    54
 	    $ClassName		    "Simulink.Mask"
 	    Display		    "image(imread('power_aircraft_distribution_GCU.jpg','jpg'))"
 	  }
@@ -14399,7 +14852,7 @@ Model {
 	  MaskHideContents	  on
 	  Object {
 	    $PropName		    "MaskObject"
-	    $ObjectID		    51
+	    $ObjectID		    55
 	    $ClassName		    "Simulink.Mask"
 	    Type		    "Sigbuilder block"
 	    Description		    "Sigbuilder GUI"
@@ -14496,7 +14949,7 @@ Model {
 	  MaskHideContents	  off
 	  Object {
 	    $PropName		    "MaskObject"
-	    $ObjectID		    52
+	    $ObjectID		    56
 	    $ClassName		    "Simulink.Mask"
 	    Display		    "image(imread('power_aircraft_distribution_APU_Generator.jpg','jpg'))\n"
 	  }
@@ -15294,18 +15747,13 @@ Model {
     }
     Block {
       BlockType		      Step
-      Name		      "Step"
-      SID		      "5338"
-      Position		      [265, 135, 295, 165]
-      ZOrder		      1
-      SampleTime	      "0"
-    }
-    Block {
-      BlockType		      Step
       Name		      "Step1"
       SID		      "5339"
       Position		      [640, 135, 670, 165]
       ZOrder		      2
+      Time		      "100"
+      Before		      "1"
+      After		      "0"
       SampleTime	      "0"
     }
     Block {
@@ -15314,6 +15762,9 @@ Model {
       SID		      "5340"
       Position		      [880, 135, 910, 165]
       ZOrder		      3
+      Time		      "100"
+      Before		      "1"
+      After		      "0"
       SampleTime	      "0"
     }
     Block {
@@ -15322,6 +15773,19 @@ Model {
       SID		      "5341"
       Position		      [1170, 135, 1200, 165]
       ZOrder		      4
+      Time		      "100"
+      Before		      "1"
+      After		      "0"
+      SampleTime	      "0"
+    }
+    Block {
+      BlockType		      Step
+      Name		      "Step4"
+      SID		      "5359"
+      Position		      [235, 100, 265, 130]
+      ZOrder		      7
+      Before		      "1"
+      After		      "0"
       SampleTime	      "0"
     }
     Block {
@@ -15344,7 +15808,7 @@ Model {
       MaskHideContents	      off
       Object {
 	$PropName		"MaskObject"
-	$ObjectID		53
+	$ObjectID		57
 	$ClassName		"Simulink.Mask"
 	Display			"image(imread('power_aircraft_distribution_TRU.jpg','jpg'))"
       }
@@ -15775,7 +16239,7 @@ Model {
       MaskHideContents	      off
       Object {
 	$PropName		"MaskObject"
-	$ObjectID		54
+	$ObjectID		58
 	$ClassName		"Simulink.Mask"
 	Display			"image(imread('power_aircraft_distribution_TRU.jpg','jpg'))"
       }
@@ -16694,7 +17158,6 @@ Model {
     Line {
       SrcBlock		      "BPCU"
       SrcPort		      11
-      Points		      [0, 0]
       DstBlock		      "Goto16"
       DstPort		      1
     }
@@ -16776,7 +17239,6 @@ Model {
     Line {
       SrcBlock		      "BPCU"
       SrcPort		      12
-      Points		      [0, 0]
       DstBlock		      "Goto2"
       DstPort		      1
     }
@@ -17151,13 +17613,6 @@ Model {
       DstPort		      RConn1
     }
     Line {
-      SrcBlock		      "Step"
-      SrcPort		      1
-      Points		      [140, 0]
-      DstBlock		      "Left Engine HV"
-      DstPort		      1
-    }
-    Line {
       SrcBlock		      "Step1"
       SrcPort		      1
       Points		      [80, 0]
@@ -17182,6 +17637,13 @@ Model {
       SrcBlock		      "BPCU"
       SrcPort		      1
       DstBlock		      "Goto"
+      DstPort		      1
+    }
+    Line {
+      SrcBlock		      "Step4"
+      SrcPort		      1
+      Points		      [170, 0]
+      DstBlock		      "Left Engine HV"
       DstPort		      1
     }
     Annotation {
@@ -17292,8 +17754,8 @@ MatData {
     "&          4    (               !          D         #@   #@    &    \"     8         !0    @    !     0    $     "
     "    \"0    @           #P/PX    P    !@    @    &          4    (               !          D         #@   #     & "
     "   \"     8         !0    @               $         \"0         .    .     8    (    !@         %    \"     $    !"
-    "     0         )    \"            @A #@   #@    &    \"     8         !0    @    !     0    $         \"0    @    "
-    "     \"^!B0 X    P    !@    @    &          4    (               !          D         "
+    "     0         )    \"          *1E] #@   #@    &    \"     8         !0    @    !     0    $         \"0    @    "
+    "   \" !R!Q0 X    P    !@    @    &          4    (               !          D         "
   }
   DataRecord {
     Tag			    DataTag2
@@ -17375,8 +17837,8 @@ MatData {
     "&          4    (               !          D         #@   #@    &    \"     8         !0    @    !     0    $     "
     "    \"0    @           #P/PX    P    !@    @    &          4    (               !          D         #@   #     & "
     "   \"     8         !0    @               $         \"0         .    .     8    (    !@         %    \"     $    !"
-    "     0         )    \"            @A #@   #@    &    \"     8         !0    @    !     0    $         \"0    @    "
-    "     !(!V0 X    P    !@    @    &          4    (               !          D         "
+    "     0         )    \"          *1E] #@   #@    &    \"     8         !0    @    !     0    $         \"0    @    "
+    "     !3!^0 X    P    !@    @    &          4    (               !          D         "
   }
   DataRecord {
     Tag			    DataTag4
@@ -17458,8 +17920,8 @@ MatData {
     "&          4    (               !          D         #@   #@    &    \"     8         !0    @    !     0    $     "
     "    \"0    @           #P/PX    P    !@    @    &          4    (               !          D         #@   #     & "
     "   \"     8         !0    @               $         \"0         .    .     8    (    !@         %    \"     $    !"
-    "     0         )    \"            @A #@   #@    &    \"     8         !0    @    !     0    $         \"0    @    "
-    "    @ '\"10 X    P    !@    @    &          4    (               !          D         "
+    "     0         )    \"          *1E] #@   #@    &    \"     8         !0    @    !     0    $         \"0    @    "
+    "    P )ZO0 X    P    !@    @    &          4    (               !          D         "
   }
   DataRecord {
     Tag			    DataTag6
@@ -17541,8 +18003,8 @@ MatData {
     "&          4    (               !          D         #@   #@    &    \"     8         !0    @    !     0    $     "
     "    \"0    @           #P/PX    P    !@    @    &          4    (               !          D         #@   #     & "
     "   \"     8         !0    @               $         \"0         .    .     8    (    !@         %    \"     $    !"
-    "     0         )    \"            @A #@   #@    &    \"     8         !0    @    !     0    $         \"0    @    "
-    "   \"  ,R40 X    P    !@    @    &          4    (               !          D         "
+    "     0         )    \"          *1E] #@   #@    &    \"     8         !0    @    !     0    $         \"0    @    "
+    "   !@ $2Q0 X    P    !@    @    &          4    (               !          D         "
   }
   DataRecord {
     Tag			    DataTag8
@@ -17561,7 +18023,7 @@ MatData {
 }
 # Finite State Machines
 #
-#    Stateflow Version 7.6 (R2012b) dated Jul 26 2012, 17:33:50
+#    Stateflow Version 7.6 (R2012b) dated Jul 26 2012, 22:31:44
 #
 #
 
@@ -17571,69 +18033,1172 @@ Stateflow {
     name		    "Lab2_AircraftEPS"
     created		    "09-Feb-2012 11:24:55"
     isLibrary		    0
-    firstTarget		    9
+    firstTarget		    81
     sfVersion		    76014001.001
   }
   chart {
     id			    2
-    name		    "BPCU/MATLAB Function"
-    windowPosition	    [357.12 483.496 167 391]
-    viewLimits		    [0 156.75 0 153.75]
-    screen		    [1 1 1280 1024 1.041666666666667]
+    name		    "BPCU/Chart"
+    windowPosition	    [169.5 246.75 417 348.75]
+    viewLimits		    [-392.327 1491.673 30.078 1030.078]
+    zoomFactor		    1.333
+    stateColor		    [0.3803921568627451 0.2745098039215687 0.1803921568627451]
+    stateLabelColor	    [0.4588235294117647 0.2980392156862745 0.1411764705882353]
+    transitionColor	    [0.3215686274509804 0.5450980392156862 0.7725490196078432]
+    transitionLabelColor    [0.3215686274509804 0.5450980392156862 0.7725490196078432]
+    junctionColor	    [0.7764705882352941 0.4980392156862745 0]
+    chartColor		    [1 0.9882352941176471 0.9254901960784314]
+    screen		    [1 1 1920 1200 1.333333333333333]
     treeNode		    [0 3 0 0]
-    firstTransition	    7
-    firstJunction	    6
     viewObj		    2
     visible		    1
     machine		    1
     subviewS {
     }
-    ssIdHighWaterMark	    7
-    decomposition	    CLUSTER_CHART
-    type		    EML_CHART
-    firstData		    4
-    chartFileNumber	    2
+    ssIdHighWaterMark	    99
+    decomposition	    SET_CHART
+    firstEvent		    79
+    firstData		    63
+    chartFileNumber	    1
+    saturateOnIntegerOverflow 1
+    userSpecifiedStateTransitionExecutionOrder 1
     disableImplicitCasting  1
-    eml {
-      name		      "BPCU_core"
-    }
   }
   state {
     id			    3
-    labelString		    "eML_blk_kernel()"
-    position		    [18 64.5 118 66]
+    labelString		    "C1"
+    position		    [512 86 270 164]
     fontSize		    12
     chart		    2
-    treeNode		    [2 0 0 0]
-    superState		    SUBCHART
+    treeNode		    [2 4 0 6]
+    firstTransition	    37
+    visible		    0
     subviewer		    2
     ssIdNumber		    1
-    type		    FUNC_STATE
+    type		    AND_STATE
     decomposition	    CLUSTER_STATE
-    eml {
-      isEML		      1
-      script		      "% for a more verbose explanation of the logic, see:\n% ee249_lab2/BPCU_pseudocode/BPCU_pseudocode"
-      "_withX.m\n\nfunction contactors  = BPCU_core(in_bus)\n    GL = in_bus(1);\n    AL = in_bus(2);\n    AR = in_bus("
-      "3);\n    GR = in_bus(4);\n    \n    c = zeros([1 6]); %simulink wants me to preallocate\n    if GL && GR\n      "
-      "  c = [1 0 0 1 0 0]; %GL power left, GR power right\n    elseif ~GL && GR\n        if AL\n            c = [0 1 0"
-      " 1 1 0]; %GL off, GR power right, AL power left \n        elseif AR\n            c = [0 0 1 1 1 0]; %GL off, GR "
-      "power right, AR power left\n        else\n            c = [0 0 0 1 1 1]; %GR power whole plane, everything else "
-      "off\n        end\n    elseif GL && ~GR\n        if AR\n            c = [1 0 1 0 0 1]; %GR off, GL power left, AR"
-      " power right\n        elseif AL\n            c = [1 1 0 0 0 1]; %GR off, GL power left, AL power right\n        "
-      "else\n            c = [1 0 0 0 1 1]; %GL power whole plane, everything else off\n        end\n    elseif ~GL && "
-      "~GR\n        %it's arbitrary whether to use AL or AR in this case\n        if AR\n            c = [0 0 1 0 1 1];"
-      " %GL off, GR off, AR power whole plane\n        elseif AL\n            c = [0 1 0 0 1 1]; %GL off, GR off, AL po"
-      "wer whole plane\n        else\n            c = [0 0 0 0 0 0]; %all generators are broken ... good luck with that"
-      ".\n        end\n    end\n\n    %append on/off status for the B7-B12. B7,B8,B9,B10 are always on, and B11,B12 are"
-      " always off\n    contactors = [c 1 1 1 1 0 0];\n"
-      editorLayout	      "100 M4x1[10 5 700 500]"
+    executionOrder	    1
+  }
+  state {
+    id			    4
+    labelString		    "On\nentry: B1 = 1"
+    position		    [530 114 90 60]
+    fontSize		    12
+    chart		    2
+    treeNode		    [3 0 0 5]
+    visible		    0
+    subviewer		    2
+    ssIdNumber		    2
+    type		    OR_STATE
+    decomposition	    CLUSTER_STATE
+  }
+  state {
+    id			    5
+    labelString		    "Off\nentry: B1 = 0;"
+    position		    [674 168 90 60]
+    fontSize		    12
+    chart		    2
+    treeNode		    [3 0 4 0]
+    visible		    0
+    subviewer		    2
+    ssIdNumber		    3
+    type		    OR_STATE
+    decomposition	    CLUSTER_STATE
+  }
+  state {
+    id			    6
+    labelString		    "C2"
+    position		    [877 86 270 164]
+    fontSize		    12
+    chart		    2
+    treeNode		    [2 8 3 9]
+    firstTransition	    40
+    visible		    0
+    subviewer		    2
+    ssIdNumber		    10
+    type		    AND_STATE
+    decomposition	    CLUSTER_STATE
+    executionOrder	    2
+  }
+  state {
+    id			    7
+    labelString		    "Off\nentry: B2 = 0;"
+    position		    [1039 168 90 60]
+    fontSize		    12
+    chart		    2
+    treeNode		    [6 0 8 0]
+    visible		    0
+    subviewer		    2
+    ssIdNumber		    13
+    type		    OR_STATE
+    decomposition	    CLUSTER_STATE
+  }
+  state {
+    id			    8
+    labelString		    "On\nentry: B2 = 1"
+    position		    [895 114 90 60]
+    fontSize		    12
+    chart		    2
+    treeNode		    [6 0 0 7]
+    visible		    0
+    subviewer		    2
+    ssIdNumber		    14
+    type		    OR_STATE
+    decomposition	    CLUSTER_STATE
+  }
+  state {
+    id			    9
+    labelString		    "C3"
+    position		    [1229 99 270 164]
+    fontSize		    12
+    chart		    2
+    treeNode		    [2 13 6 11]
+    firstTransition	    43
+    visible		    0
+    subviewer		    2
+    ssIdNumber		    16
+    type		    AND_STATE
+    decomposition	    CLUSTER_STATE
+    executionOrder	    3
+  }
+  state {
+    id			    10
+    labelString		    "Off\nentry: B3 = 0;"
+    position		    [1391 181 90 60]
+    fontSize		    12
+    chart		    2
+    treeNode		    [9 0 13 0]
+    visible		    0
+    subviewer		    2
+    ssIdNumber		    18
+    type		    OR_STATE
+    decomposition	    CLUSTER_STATE
+  }
+  state {
+    id			    11
+    labelString		    "C4"
+    position		    [1594 99 270 164]
+    fontSize		    12
+    chart		    2
+    treeNode		    [2 12 9 33]
+    firstTransition	    46
+    visible		    0
+    subviewer		    2
+    ssIdNumber		    19
+    type		    AND_STATE
+    decomposition	    CLUSTER_STATE
+    executionOrder	    4
+  }
+  state {
+    id			    12
+    labelString		    "On\nentry: B4 = 1"
+    position		    [1612 127 90 60]
+    fontSize		    12
+    chart		    2
+    treeNode		    [11 0 0 14]
+    visible		    0
+    subviewer		    2
+    ssIdNumber		    22
+    type		    OR_STATE
+    decomposition	    CLUSTER_STATE
+  }
+  state {
+    id			    13
+    labelString		    "On\nentry: B3 = 1"
+    position		    [1247 127 90 60]
+    fontSize		    12
+    chart		    2
+    treeNode		    [9 0 0 10]
+    visible		    0
+    subviewer		    2
+    ssIdNumber		    23
+    type		    OR_STATE
+    decomposition	    CLUSTER_STATE
+  }
+  state {
+    id			    14
+    labelString		    "Off\nentry: B4 = 0;"
+    position		    [1756 181 90 60]
+    fontSize		    12
+    chart		    2
+    treeNode		    [11 0 12 0]
+    visible		    0
+    subviewer		    2
+    ssIdNumber		    25
+    type		    OR_STATE
+    decomposition	    CLUSTER_STATE
+  }
+  state {
+    id			    15
+    labelString		    "C5"
+    position		    [512 359.8333 270 164]
+    fontSize		    12
+    chart		    2
+    treeNode		    [2 19 33 17]
+    firstTransition	    49
+    visible		    0
+    subviewer		    2
+    ssIdNumber		    28
+    type		    AND_STATE
+    decomposition	    CLUSTER_STATE
+    executionOrder	    5
+  }
+  state {
+    id			    16
+    labelString		    "Off\nentry: B5 = 0;"
+    position		    [674 441.8333 90 60]
+    fontSize		    12
+    chart		    2
+    treeNode		    [15 0 19 0]
+    visible		    0
+    subviewer		    2
+    ssIdNumber		    30
+    type		    OR_STATE
+    decomposition	    CLUSTER_STATE
+  }
+  state {
+    id			    17
+    labelString		    "C6"
+    position		    [877 359.8333 270 164]
+    fontSize		    12
+    chart		    2
+    treeNode		    [2 18 15 21]
+    firstTransition	    51
+    visible		    0
+    subviewer		    2
+    ssIdNumber		    32
+    type		    AND_STATE
+    decomposition	    CLUSTER_STATE
+    executionOrder	    6
+  }
+  state {
+    id			    18
+    labelString		    "On\nentry: B6= 1"
+    position		    [895 387.8333 90 60]
+    fontSize		    12
+    chart		    2
+    treeNode		    [17 0 0 20]
+    visible		    0
+    subviewer		    2
+    ssIdNumber		    35
+    type		    OR_STATE
+    decomposition	    CLUSTER_STATE
+  }
+  state {
+    id			    19
+    labelString		    "On\nentry: B5 = 1"
+    position		    [530 387.8333 90 60]
+    fontSize		    12
+    chart		    2
+    treeNode		    [15 0 0 16]
+    visible		    0
+    subviewer		    2
+    ssIdNumber		    36
+    type		    OR_STATE
+    decomposition	    CLUSTER_STATE
+  }
+  state {
+    id			    20
+    labelString		    "Off\nentry: B6 = 0;"
+    position		    [1039 441.8333 90 60]
+    fontSize		    12
+    chart		    2
+    treeNode		    [17 0 18 0]
+    visible		    0
+    subviewer		    2
+    ssIdNumber		    38
+    type		    OR_STATE
+    decomposition	    CLUSTER_STATE
+  }
+  state {
+    id			    21
+    labelString		    "C7"
+    position		    [1239 362.8333 270 164]
+    fontSize		    12
+    chart		    2
+    treeNode		    [2 22 17 24]
+    firstTransition	    53
+    visible		    0
+    subviewer		    2
+    ssIdNumber		    40
+    type		    AND_STATE
+    decomposition	    CLUSTER_STATE
+    executionOrder	    7
+  }
+  state {
+    id			    22
+    labelString		    "On\nentry: B7 = 1"
+    position		    [1257 390.8333 90 60]
+    fontSize		    12
+    chart		    2
+    treeNode		    [21 0 0 0]
+    visible		    0
+    subviewer		    2
+    ssIdNumber		    41
+    type		    OR_STATE
+    decomposition	    CLUSTER_STATE
+  }
+  state {
+    id			    23
+    labelString		    "Off\nentry: B12 = 0;"
+    position		    [1756 691.5 90 60]
+    fontSize		    12
+    chart		    2
+    treeNode		    [28 0 0 0]
+    visible		    0
+    subviewer		    2
+    ssIdNumber		    74
+    type		    OR_STATE
+    decomposition	    CLUSTER_STATE
+  }
+  state {
+    id			    24
+    labelString		    "C8"
+    position		    [1594 372.8333 270 164]
+    fontSize		    12
+    chart		    2
+    treeNode		    [2 25 21 27]
+    firstTransition	    54
+    visible		    0
+    subviewer		    2
+    ssIdNumber		    46
+    type		    AND_STATE
+    decomposition	    CLUSTER_STATE
+    executionOrder	    8
+  }
+  state {
+    id			    25
+    labelString		    "On\nentry: B8 = 1"
+    position		    [1612 400.8333 90 60]
+    fontSize		    12
+    chart		    2
+    treeNode		    [24 0 0 0]
+    visible		    0
+    subviewer		    2
+    ssIdNumber		    48
+    type		    OR_STATE
+    decomposition	    CLUSTER_STATE
+  }
+  state {
+    id			    26
+    labelString		    "C11"
+    position		    [1229 609.5 270 164]
+    fontSize		    12
+    chart		    2
+    treeNode		    [2 32 31 28]
+    firstTransition	    55
+    visible		    0
+    subviewer		    2
+    ssIdNumber		    67
+    type		    AND_STATE
+    decomposition	    CLUSTER_STATE
+    executionOrder	    11
+  }
+  state {
+    id			    27
+    labelString		    "C9"
+    position		    [512 596.5 270 164]
+    fontSize		    12
+    chart		    2
+    treeNode		    [2 29 24 31]
+    firstTransition	    56
+    visible		    0
+    subviewer		    2
+    ssIdNumber		    53
+    type		    AND_STATE
+    decomposition	    CLUSTER_STATE
+    executionOrder	    9
+  }
+  state {
+    id			    28
+    labelString		    "C12"
+    position		    [1594 609.5 270 164]
+    fontSize		    12
+    chart		    2
+    treeNode		    [2 23 26 0]
+    firstTransition	    57
+    visible		    0
+    subviewer		    2
+    ssIdNumber		    71
+    type		    AND_STATE
+    decomposition	    CLUSTER_STATE
+    executionOrder	    12
+  }
+  state {
+    id			    29
+    labelString		    "On\nentry: B9 = 1"
+    position		    [530 624.5 90 60]
+    fontSize		    12
+    chart		    2
+    treeNode		    [27 0 0 0]
+    visible		    0
+    subviewer		    2
+    ssIdNumber		    57
+    type		    OR_STATE
+    decomposition	    CLUSTER_STATE
+  }
+  state {
+    id			    30
+    labelString		    "On\nentry: B10 = 1"
+    position		    [895 624.5 90 60]
+    fontSize		    12
+    chart		    2
+    treeNode		    [31 0 0 0]
+    visible		    0
+    subviewer		    2
+    ssIdNumber		    59
+    type		    OR_STATE
+    decomposition	    CLUSTER_STATE
+  }
+  state {
+    id			    31
+    labelString		    "C10"
+    position		    [877 596.5 270 164]
+    fontSize		    12
+    chart		    2
+    treeNode		    [2 30 27 26]
+    firstTransition	    58
+    visible		    0
+    subviewer		    2
+    ssIdNumber		    60
+    type		    AND_STATE
+    decomposition	    CLUSTER_STATE
+    executionOrder	    10
+  }
+  state {
+    id			    32
+    labelString		    "Off\nentry: B11 = 0;"
+    position		    [1391 691.5 90 60]
+    fontSize		    12
+    chart		    2
+    treeNode		    [26 0 0 0]
+    visible		    0
+    subviewer		    2
+    ssIdNumber		    68
+    type		    OR_STATE
+    decomposition	    CLUSTER_STATE
+  }
+  state {
+    id			    33
+    labelString		    " S"
+    position		    [40.9304 106.3356 372.5 652.5]
+    fontSize		    12
+    chart		    2
+    treeNode		    [2 34 11 15]
+    firstTransition	    59
+    visible		    0
+    subviewer		    2
+    ssIdNumber		    92
+    type		    AND_STATE
+    decomposition	    CLUSTER_STATE
+    executionOrder	    13
+  }
+  state {
+    id			    34
+    labelString		    "Listen"
+    position		    [113.4304 190 90 60]
+    fontSize		    12
+    chart		    2
+    treeNode		    [33 0 0 35]
+    visible		    0
+    subviewer		    2
+    ssIdNumber		    93
+    type		    OR_STATE
+    decomposition	    CLUSTER_STATE
+  }
+  state {
+    id			    35
+    labelString		    "Off"
+    position		    [113.4304 348.1927 90 60]
+    fontSize		    12
+    chart		    2
+    treeNode		    [33 0 34 36]
+    visible		    0
+    subviewer		    2
+    ssIdNumber		    94
+    type		    OR_STATE
+    decomposition	    CLUSTER_STATE
+  }
+  state {
+    id			    36
+    labelString		    "On"
+    position		    [113.4304 473.9785 90 60]
+    fontSize		    12
+    chart		    2
+    treeNode		    [33 0 35 0]
+    visible		    0
+    subviewer		    2
+    ssIdNumber		    95
+    type		    OR_STATE
+    decomposition	    CLUSTER_STATE
+  }
+  transition {
+    id			    37
+    labelString		    ""
+    labelPosition	    [751 153 0 0]
+    fontSize		    12
+    src {
+      intersection	      [0 -0 1 0 751 138 0 0]
     }
+    dst {
+      id		      5
+      intersection	      [1 0 -1 0.8556 751 168 0 0]
+    }
+    midPoint		    [751 153]
+    chart		    2
+    linkNode		    [3 0 38]
+    dataLimits		    [748.6 753.4 138 168]
+    subviewer		    2
+    drawStyle		    SMART
+    slide {
+      sticky		      BOTH_STICK
+    }
+    executionOrder	    1
+    ssIdNumber		    6
+  }
+  transition {
+    id			    38
+    labelString		    "[GL == 1 && in(S.On)]"
+    labelPosition	    [640.143 116.571 118.25 17]
+    fontSize		    12
+    src {
+      id		      5
+      intersection	      [1 0 -1 0.5444 723 168 0 0]
+    }
+    dst {
+      id		      4
+      intersection	      [2 1 0 0.4667 620 142 0 0]
+    }
+    midPoint		    [687.8117 142.6883]
+    chart		    2
+    linkNode		    [3 37 39]
+    dataLimits		    [620 723 139.6 168]
+    subviewer		    2
+    drawStyle		    SMART
+    slide {
+      sticky		      BOTH_STICK
+    }
+    executionOrder	    1
+    ssIdNumber		    4
+  }
+  transition {
+    id			    39
+    labelString		    "[GL==0 && in(S.Off)]"
+    labelPosition	    [540.429 227.143 111.75 17]
+    fontSize		    12
+    src {
+      id		      4
+      intersection	      [3 0 1 0.5667 569 174 0 0]
+    }
+    dst {
+      id		      5
+      intersection	      [4 -1 0 0.2 674 216 0 0]
+    }
+    midPoint		    [604.2872 208.2128]
+    chart		    2
+    linkNode		    [3 38 0]
+    dataLimits		    [569 674 174 218.4]
+    subviewer		    2
+    drawStyle		    SMART
+    slide {
+      sticky		      BOTH_STICK
+    }
+    executionOrder	    1
+    ssIdNumber		    5
+  }
+  transition {
+    id			    40
+    labelString		    "[GL == 0 && AL == 1 && !in(C3.On) && in(S.On)]"
+    labelPosition	    [969.627 118.306 259.5 17]
+    fontSize		    12
+    src {
+      id		      7
+      intersection	      [1 0 -1 0.2852 1064.6667 168 0 0]
+    }
+    dst {
+      id		      8
+      intersection	      [2 1 0 0.4806 985 142.8333 0 0]
+    }
+    midPoint		    [1038.328 145.922]
+    chart		    2
+    linkNode		    [6 0 41]
+    visible		    0
+    dataLimits		    [985 1064.667 140.433 168]
+    subviewer		    2
+    drawStyle		    SMART
+    slide {
+      sticky		      BOTH_STICK
+    }
+    executionOrder	    1
+    ssIdNumber		    11
+  }
+  transition {
+    id			    41
+    labelString		    ""
+    labelPosition	    [1118.333 133.333 0 0]
+    fontSize		    12
+    src {
+      intersection	      [0 -0 1 0 1103.3333 150.8333 0 0]
+    }
+    dst {
+      id		      7
+      intersection	      [1 0 -1 0.7148 1103.3333 168 0 0]
+    }
+    midPoint		    [1103.3333 155.4167]
+    chart		    2
+    linkNode		    [6 40 42]
+    visible		    0
+    dataLimits		    [1100.933 1105.733 150.833 168]
+    subviewer		    2
+    slide {
+      sticky		      BOTH_STICK
+    }
+    executionOrder	    1
+    ssIdNumber		    12
+  }
+  transition {
+    id			    42
+    labelString		    "[AL==0 && in(S.Off)]"
+    labelPosition	    [917.511 232.455 110.5 17]
+    fontSize		    12
+    src {
+      id		      8
+      intersection	      [3 0 1 0.5667 934 174 0 0]
+    }
+    dst {
+      id		      7
+      intersection	      [4 -1 0 0.2 1039 216 0 0]
+    }
+    midPoint		    [940 206.8333]
+    chart		    2
+    linkNode		    [6 41 0]
+    visible		    0
+    dataLimits		    [934 1039 174 222.637]
+    subviewer		    2
+    drawStyle		    SMART
+    slide {
+      sticky		      BOTH_STICK
+    }
+    executionOrder	    1
+    ssIdNumber		    15
+  }
+  transition {
+    id			    43
+    labelString		    ""
+    labelPosition	    [1468 166 0 0]
+    fontSize		    12
+    src {
+      intersection	      [0 -0 1 0 1468 151 0 0]
+    }
+    dst {
+      id		      10
+      intersection	      [1 0 -1 0.8556 1468 181 0 0]
+    }
+    midPoint		    [1468 166]
+    chart		    2
+    linkNode		    [9 0 44]
+    visible		    0
+    dataLimits		    [1465.6 1470.4 151 181]
+    subviewer		    2
+    slide {
+      sticky		      BOTH_STICK
+    }
+    executionOrder	    1
+    ssIdNumber		    24
+  }
+  transition {
+    id			    44
+    labelString		    "[GL == 0 && AR == 1 && !in(C2.On) && in(S.On)]"
+    labelPosition	    [1353.714 128.429 262 17]
+    fontSize		    12
+    src {
+      id		      10
+      intersection	      [1 0 -1 0.5444 1440 181 0 0]
+    }
+    dst {
+      id		      13
+      intersection	      [2 1 0 0.4667 1337 155 0 0]
+    }
+    midPoint		    [1404.8117 155.6883]
+    chart		    2
+    linkNode		    [9 43 45]
+    visible		    0
+    dataLimits		    [1337 1440 152.6 181]
+    subviewer		    2
+    drawStyle		    SMART
+    slide {
+      sticky		      BOTH_STICK
+    }
+    executionOrder	    1
+    ssIdNumber		    21
+  }
+  transition {
+    id			    45
+    labelString		    "[AR==0 && in(S.Off)]"
+    labelPosition	    [1265.429 240.143 112.5 17]
+    fontSize		    12
+    src {
+      id		      13
+      intersection	      [3 0 1 0.5667 1286 187 0 0]
+    }
+    dst {
+      id		      10
+      intersection	      [4 -1 0 0.2 1391 229 0 0]
+    }
+    midPoint		    [1321.2872 221.2128]
+    chart		    2
+    linkNode		    [9 44 0]
+    visible		    0
+    dataLimits		    [1286 1391 187 231.4]
+    subviewer		    2
+    drawStyle		    SMART
+    slide {
+      sticky		      BOTH_STICK
+    }
+    executionOrder	    1
+    ssIdNumber		    17
+  }
+  transition {
+    id			    46
+    labelString		    ""
+    labelPosition	    [1833 166 0 0]
+    fontSize		    12
+    src {
+      intersection	      [0 -0 1 0 1833 151 0 0]
+    }
+    dst {
+      id		      14
+      intersection	      [1 0 -1 0.8556 1833 181 0 0]
+    }
+    midPoint		    [1833 166]
+    chart		    2
+    linkNode		    [11 0 47]
+    visible		    0
+    dataLimits		    [1830.6 1835.4 151 181]
+    subviewer		    2
+    slide {
+      sticky		      BOTH_STICK
+    }
+    executionOrder	    1
+    ssIdNumber		    27
+  }
+  transition {
+    id			    47
+    labelString		    "[GR == 1 && in(S.On)]"
+    labelPosition	    [1717.571 128.429 120.75 17]
+    fontSize		    12
+    src {
+      id		      14
+      intersection	      [1 0 -1 0.5444 1805 181 0 0]
+    }
+    dst {
+      id		      12
+      intersection	      [2 1 0 0.4667 1702 155 0 0]
+    }
+    midPoint		    [1769.8117 155.6883]
+    chart		    2
+    linkNode		    [11 46 48]
+    visible		    0
+    dataLimits		    [1702 1805 152.6 181]
+    subviewer		    2
+    drawStyle		    SMART
+    slide {
+      sticky		      BOTH_STICK
+    }
+    executionOrder	    1
+    ssIdNumber		    26
+  }
+  transition {
+    id			    48
+    labelString		    "[GR==0 && in(S.Off)]"
+    labelPosition	    [1617.857 234.429 113.75 17]
+    fontSize		    12
+    src {
+      id		      12
+      intersection	      [3 0 1 0.5667 1651 187 0 0]
+    }
+    dst {
+      id		      14
+      intersection	      [4 -1 0 0.2 1756 229 0 0]
+    }
+    midPoint		    [1686.2872 221.2128]
+    chart		    2
+    linkNode		    [11 47 0]
+    visible		    0
+    dataLimits		    [1651 1756 187 231.4]
+    subviewer		    2
+    drawStyle		    SMART
+    slide {
+      sticky		      BOTH_STICK
+    }
+    executionOrder	    1
+    ssIdNumber		    20
+  }
+  transition {
+    id			    49
+    labelString		    ""
+    labelPosition	    [751 426.833 0 0]
+    fontSize		    12
+    src {
+      intersection	      [0 -0 1 0 751 411.8333 0 0]
+    }
+    dst {
+      id		      16
+      intersection	      [1 0 -1 0.8556 751 441.8333 0 0]
+    }
+    midPoint		    [751 426.8333]
+    chart		    2
+    linkNode		    [15 0 50]
+    visible		    0
+    dataLimits		    [748.6 753.4 411.833 441.833]
+    subviewer		    2
+    slide {
+      sticky		      BOTH_STICK
+    }
+    executionOrder	    1
+    ssIdNumber		    33
+  }
+  transition {
+    id			    50
+    labelString		    "[GL == 0 && in(S.On)]"
+    labelPosition	    [640.143 381.262 118.25 17]
+    fontSize		    12
+    src {
+      id		      16
+      intersection	      [1 0 -1 0.5444 723 441.8333 0 0]
+    }
+    dst {
+      id		      19
+      intersection	      [2 1 0 0.4667 620 415.8333 0 0]
+    }
+    midPoint		    [687.8117 416.5216]
+    chart		    2
+    linkNode		    [15 49 0]
+    visible		    0
+    dataLimits		    [620 723 413.433 441.833]
+    subviewer		    2
+    drawStyle		    SMART
+    slide {
+      sticky		      BOTH_STICK
+    }
+    executionOrder	    1
+    ssIdNumber		    31
+  }
+  transition {
+    id			    51
+    labelString		    ""
+    labelPosition	    [1116 426.833 0 0]
+    fontSize		    12
+    src {
+      intersection	      [0 -0 1 0 1116 411.8333 0 0]
+    }
+    dst {
+      id		      20
+      intersection	      [1 0 -1 0.8556 1116 441.8333 0 0]
+    }
+    midPoint		    [1116 426.8333]
+    chart		    2
+    linkNode		    [17 0 52]
+    visible		    0
+    dataLimits		    [1113.6 1118.4 411.833 441.833]
+    subviewer		    2
+    slide {
+      sticky		      BOTH_STICK
+    }
+    executionOrder	    1
+    ssIdNumber		    39
+  }
+  transition {
+    id			    52
+    labelString		    "[GR == 0 && in(S.On)]"
+    labelPosition	    [998.286 386.976 120.75 17]
+    fontSize		    12
+    src {
+      id		      20
+      intersection	      [1 0 -1 0.5444 1088 441.8333 0 0]
+    }
+    dst {
+      id		      18
+      intersection	      [2 1 0 0.4667 985 415.8333 0 0]
+    }
+    midPoint		    [1052.8117 416.5216]
+    chart		    2
+    linkNode		    [17 51 0]
+    visible		    0
+    dataLimits		    [985 1088 413.433 441.833]
+    subviewer		    2
+    drawStyle		    SMART
+    slide {
+      sticky		      BOTH_STICK
+    }
+    executionOrder	    1
+    ssIdNumber		    37
+  }
+  transition {
+    id			    53
+    labelString		    ""
+    labelPosition	    [1298.665 370.011 0 0]
+    fontSize		    12
+    src {
+      intersection	      [0 0.0863 0.9963 0 1303.7776 372.3572 0 0]
+    }
+    dst {
+      id		      22
+      intersection	      [1 0 -1 0.5375 1305.3776 390.8333 0 0]
+    }
+    midPoint		    [1304.5776 376.2705]
+    chart		    2
+    linkNode		    [21 0 0]
+    visible		    0
+    dataLimits		    [1302.978 1307.778 372.357 390.833]
+    subviewer		    2
+    slide {
+      sticky		      BOTH_STICK
+    }
+    executionOrder	    1
+    ssIdNumber		    45
+  }
+  transition {
+    id			    54
+    labelString		    ""
+    labelPosition	    [1646.485 373.835 0 0]
+    fontSize		    12
+    src {
+      intersection	      [0 0.0406 0.9992 0 1648.3453 381.1572 0 0]
+    }
+    dst {
+      id		      25
+      intersection	      [1 0 -1 0.4127 1649.1453 400.8333 0 0]
+    }
+    midPoint		    [1648.7453 385.5323]
+    chart		    2
+    linkNode		    [24 0 0]
+    visible		    0
+    dataLimits		    [1646.745 1651.545 381.157 400.833]
+    subviewer		    2
+    slide {
+      sticky		      BOTH_STICK
+    }
+    executionOrder	    1
+    ssIdNumber		    51
+  }
+  transition {
+    id			    55
+    labelString		    ""
+    labelPosition	    [1468 676.5 0 0]
+    fontSize		    12
+    src {
+      intersection	      [0 -0 1 0 1468 661.5 0 0]
+    }
+    dst {
+      id		      32
+      intersection	      [1 0 -1 0.8556 1468 691.5 0 0]
+    }
+    midPoint		    [1468 676.5]
+    chart		    2
+    linkNode		    [26 0 0]
+    visible		    0
+    dataLimits		    [1465.6 1470.4 661.5 691.5]
+    subviewer		    2
+    slide {
+      sticky		      BOTH_STICK
+    }
+    executionOrder	    1
+    ssIdNumber		    69
+  }
+  transition {
+    id			    56
+    labelString		    ""
+    labelPosition	    [564.984 609.329 0 0]
+    fontSize		    12
+    src {
+      intersection	      [0 -0 1 0 569.5519 607.4618 0 0]
+    }
+    dst {
+      id		      29
+      intersection	      [1 0 -1 0.4395 569.5519 624.5 0 0]
+    }
+    midPoint		    [569.5519 610.8511]
+    chart		    2
+    linkNode		    [27 0 0]
+    visible		    0
+    dataLimits		    [567.152 571.952 607.462 624.5]
+    subviewer		    2
+    slide {
+      sticky		      BOTH_STICK
+    }
+    executionOrder	    1
+    ssIdNumber		    56
+  }
+  transition {
+    id			    57
+    labelString		    ""
+    labelPosition	    [1833 676.5 0 0]
+    fontSize		    12
+    src {
+      intersection	      [0 -0 1 0 1833 661.5 0 0]
+    }
+    dst {
+      id		      23
+      intersection	      [1 0 -1 0.8556 1833 691.5 0 0]
+    }
+    midPoint		    [1833 676.5]
+    chart		    2
+    linkNode		    [28 0 0]
+    visible		    0
+    dataLimits		    [1830.6 1835.4 661.5 691.5]
+    subviewer		    2
+    slide {
+      sticky		      BOTH_STICK
+    }
+    executionOrder	    1
+    ssIdNumber		    76
+  }
+  transition {
+    id			    58
+    labelString		    ""
+    labelPosition	    [942.933 623.605 0 0]
+    fontSize		    12
+    src {
+      intersection	      [0 -0 1 0 950.3519 606.6618 0 0]
+    }
+    dst {
+      id		      30
+      intersection	      [1 0 -1 0.615 950.3519 624.5 0 0]
+    }
+    midPoint		    [950.3519 610.3511]
+    chart		    2
+    linkNode		    [31 0 0]
+    visible		    0
+    dataLimits		    [947.952 952.752 606.662 624.5]
+    subviewer		    2
+    slide {
+      sticky		      BOTH_STICK
+    }
+    executionOrder	    1
+    ssIdNumber		    64
+  }
+  transition {
+    id			    59
+    labelString		    ""
+    labelPosition	    [114.078 502.534 0 0]
+    fontSize		    12
+    src {
+      id		      36
+      intersection	      [3 0 1 0.4846 159.8161 533.9785 0 0]
+    }
+    dst {
+      id		      34
+      intersection	      [4 -1 0 0.4154 113.4304 225.0785 0 0]
+    }
+    midPoint		    [150.6733 553.0785]
+    chart		    2
+    linkNode		    [33 0 60]
+    dataLimits		    [69.802 159.816 222.678 558.394]
+    subviewer		    2
+    drawStyle		    SMART
+    slide {
+      sticky		      BOTH_STICK
+    }
+    executionOrder	    1
+    ssIdNumber		    99
+  }
+  transition {
+    id			    60
+    labelString		    "[hasChanged(GL) || hasChanged(GR) || hasChanged(AL) || hasChanged(GR)]"
+    labelPosition	    [92.534 289.704 419.75 17]
+    fontSize		    12
+    src {
+      id		      34
+      intersection	      [3 0 1 0.4441 163.459 250 0 0]
+    }
+    dst {
+      id		      35
+      intersection	      [1 -0 -1 0.5559 163.459 348.1927 0 0]
+    }
+    midPoint		    [163.459 295.0964]
+    chart		    2
+    linkNode		    [33 59 61]
+    dataLimits		    [161.059 165.859 250 348.193]
+    subviewer		    2
+    drawStyle		    SMART
+    slide {
+      sticky		      BOTH_STICK
+    }
+    executionOrder	    1
+    ssIdNumber		    96
+  }
+  transition {
+    id			    61
+    labelString		    ""
+    labelPosition	    [172.316 455.892 0 0]
+    fontSize		    12
+    src {
+      id		      35
+      intersection	      [3 0 1 0.5251 156.1733 408.1927 0 0]
+    }
+    dst {
+      id		      36
+      intersection	      [1 -0 -1 0.4749 156.1733 473.9785 0 0]
+    }
+    midPoint		    [156.1733 437.0856]
+    chart		    2
+    linkNode		    [33 60 62]
+    dataLimits		    [153.773 158.573 408.193 473.978]
+    subviewer		    2
+    drawStyle		    SMART
+    slide {
+      sticky		      BOTH_STICK
+    }
+    executionOrder	    1
+    ssIdNumber		    97
+  }
+  transition {
+    id			    62
+    labelString		    ""
+    labelPosition	    [240.521 449.843 0 0]
+    fontSize		    12
+    src {
+      intersection	      [0 -0.4087 0.9127 0 229.5304 427.3642 0 0]
+    }
+    dst {
+      id		      36
+      intersection	      [2 1 0 0.1945 203.4304 485.6499 0 0]
+    }
+    midPoint		    [228.1093 456.507]
+    chart		    2
+    linkNode		    [33 61 0]
+    dataLimits		    [203.43 229.53 427.364 488.05]
+    subviewer		    2
+    drawStyle		    SMART
+    slide {
+      sticky		      BOTH_STICK
+    }
+    executionOrder	    1
+    ssIdNumber		    98
   }
   data {
-    id			    4
-    ssIdNumber		    4
-    name		    "in_bus"
-    linkNode		    [2 0 5]
+    id			    63
+    ssIdNumber		    8
+    name		    "B1"
+    linkNode		    [2 0 64]
+    scope		    OUTPUT_DATA
+    machine		    1
+    props {
+      type {
+	primitive		SF_DOUBLE_TYPE
+	isSigned		1
+	wordLength		"16"
+      }
+      frame		      SF_FRAME_NO
+    }
+    dataType		    "double"
+  }
+  data {
+    id			    64
+    ssIdNumber		    9
+    name		    "GL"
+    linkNode		    [2 63 65]
     scope		    INPUT_DATA
     machine		    1
     props {
@@ -17643,72 +19208,266 @@ Stateflow {
       type {
 	method			SF_INHERITED_TYPE
 	primitive		SF_DOUBLE_TYPE
+	isSigned		1
+	wordLength		"16"
       }
-      complexity	      SF_COMPLEX_INHERITED
+      frame		      SF_FRAME_INHERITED
     }
     dataType		    "Inherit: Same as Simulink"
   }
   data {
-    id			    5
-    ssIdNumber		    5
-    name		    "contactors"
-    linkNode		    [2 4 0]
+    id			    65
+    ssIdNumber		    78
+    name		    "B2"
+    linkNode		    [2 64 66]
     scope		    OUTPUT_DATA
     machine		    1
     props {
-      array {
-	size			"-1"
-      }
       type {
-	method			SF_INHERITED_TYPE
 	primitive		SF_DOUBLE_TYPE
+	isSigned		1
+	wordLength		"16"
       }
-      complexity	      SF_COMPLEX_INHERITED
       frame		      SF_FRAME_NO
     }
-    dataType		    "Inherit: Same as Simulink"
+    dataType		    "double"
   }
-  junction {
-    id			    6
-    position		    [23.5747 49.5747 7]
-    chart		    2
-    linkNode		    [2 0 0]
-    subviewer		    2
-    ssIdNumber		    3
-    type		    CONNECTIVE_JUNCTION
+  data {
+    id			    66
+    ssIdNumber		    79
+    name		    "B3"
+    linkNode		    [2 65 67]
+    scope		    OUTPUT_DATA
+    machine		    1
+    props {
+      type {
+	primitive		SF_DOUBLE_TYPE
+	isSigned		1
+	wordLength		"16"
+      }
+      frame		      SF_FRAME_NO
+    }
+    dataType		    "double"
   }
-  transition {
-    id			    7
-    labelString		    "{eML_blk_kernel();}"
-    labelPosition	    [32.125 19.875 102.544 14.964]
-    fontSize		    12
-    src {
-      intersection	      [0 0 1 0 23.5747 14.625 0 0]
+  data {
+    id			    67
+    ssIdNumber		    80
+    name		    "B4"
+    linkNode		    [2 66 68]
+    scope		    OUTPUT_DATA
+    machine		    1
+    props {
+      type {
+	primitive		SF_DOUBLE_TYPE
+	isSigned		1
+	wordLength		"16"
+      }
+      frame		      SF_FRAME_NO
     }
-    dst {
-      id		      6
-      intersection	      [1 0 -1 0 23.5747 42.5747 0 0]
+    dataType		    "double"
+  }
+  data {
+    id			    68
+    ssIdNumber		    81
+    name		    "B5"
+    linkNode		    [2 67 69]
+    scope		    OUTPUT_DATA
+    machine		    1
+    props {
+      type {
+	primitive		SF_DOUBLE_TYPE
+	isSigned		1
+	wordLength		"16"
+      }
+      frame		      SF_FRAME_NO
     }
-    midPoint		    [23.5747 24.9468]
-    chart		    2
+    dataType		    "double"
+  }
+  data {
+    id			    69
+    ssIdNumber		    82
+    name		    "B6"
+    linkNode		    [2 68 70]
+    scope		    OUTPUT_DATA
+    machine		    1
+    props {
+      type {
+	primitive		SF_DOUBLE_TYPE
+	isSigned		1
+	wordLength		"16"
+      }
+      frame		      SF_FRAME_NO
+    }
+    dataType		    "double"
+  }
+  data {
+    id			    70
+    ssIdNumber		    83
+    name		    "B7"
+    linkNode		    [2 69 71]
+    scope		    OUTPUT_DATA
+    machine		    1
+    props {
+      type {
+	primitive		SF_DOUBLE_TYPE
+	isSigned		1
+	wordLength		"16"
+      }
+      frame		      SF_FRAME_NO
+    }
+    dataType		    "double"
+  }
+  data {
+    id			    71
+    ssIdNumber		    84
+    name		    "B8"
+    linkNode		    [2 70 72]
+    scope		    OUTPUT_DATA
+    machine		    1
+    props {
+      type {
+	primitive		SF_DOUBLE_TYPE
+	isSigned		1
+	wordLength		"16"
+      }
+      frame		      SF_FRAME_NO
+    }
+    dataType		    "double"
+  }
+  data {
+    id			    72
+    ssIdNumber		    85
+    name		    "B9"
+    linkNode		    [2 71 73]
+    scope		    OUTPUT_DATA
+    machine		    1
+    props {
+      type {
+	primitive		SF_DOUBLE_TYPE
+	isSigned		1
+	wordLength		"16"
+      }
+      frame		      SF_FRAME_NO
+    }
+    dataType		    "double"
+  }
+  data {
+    id			    73
+    ssIdNumber		    86
+    name		    "B10"
+    linkNode		    [2 72 74]
+    scope		    OUTPUT_DATA
+    machine		    1
+    props {
+      type {
+	primitive		SF_DOUBLE_TYPE
+	isSigned		1
+	wordLength		"16"
+      }
+      frame		      SF_FRAME_NO
+    }
+    dataType		    "double"
+  }
+  data {
+    id			    74
+    ssIdNumber		    87
+    name		    "B11"
+    linkNode		    [2 73 75]
+    scope		    OUTPUT_DATA
+    machine		    1
+    props {
+      type {
+	primitive		SF_DOUBLE_TYPE
+	isSigned		1
+	wordLength		"16"
+      }
+      frame		      SF_FRAME_NO
+    }
+    dataType		    "double"
+  }
+  data {
+    id			    75
+    ssIdNumber		    88
+    name		    "B12"
+    linkNode		    [2 74 76]
+    scope		    OUTPUT_DATA
+    machine		    1
+    props {
+      type {
+	primitive		SF_DOUBLE_TYPE
+	isSigned		1
+	wordLength		"16"
+      }
+      frame		      SF_FRAME_NO
+    }
+    dataType		    "double"
+  }
+  data {
+    id			    76
+    ssIdNumber		    89
+    name		    "GR"
+    linkNode		    [2 75 77]
+    scope		    INPUT_DATA
+    machine		    1
+    props {
+      type {
+	primitive		SF_DOUBLE_TYPE
+	isSigned		1
+	wordLength		"16"
+      }
+    }
+    dataType		    "double"
+  }
+  data {
+    id			    77
+    ssIdNumber		    90
+    name		    "AL"
+    linkNode		    [2 76 78]
+    scope		    INPUT_DATA
+    machine		    1
+    props {
+      type {
+	primitive		SF_DOUBLE_TYPE
+	isSigned		1
+	wordLength		"16"
+      }
+    }
+    dataType		    "double"
+  }
+  data {
+    id			    78
+    ssIdNumber		    91
+    name		    "AR"
+    linkNode		    [2 77 0]
+    scope		    INPUT_DATA
+    machine		    1
+    props {
+      type {
+	primitive		SF_DOUBLE_TYPE
+	isSigned		1
+	wordLength		"16"
+      }
+      frame		      SF_FRAME_NO
+    }
+    dataType		    "double"
+  }
+  event {
+    id			    79
+    ssIdNumber		    7
+    name		    "tick"
     linkNode		    [2 0 0]
-    dataLimits		    [21.175 25.975 14.625 42.575]
-    subviewer		    2
-    drawStyle		    SMART
-    slide {
-      sticky		      BOTH_STICK
-    }
-    executionOrder	    1
-    ssIdNumber		    2
+    scope		    INPUT_EVENT
+    trigger		    RISING_EDGE_EVENT
+    machine		    1
   }
   instance {
-    id			    8
-    name		    "BPCU/MATLAB Function"
+    id			    80
+    name		    "BPCU/Chart"
     machine		    1
     chart		    2
   }
   target {
-    id			    9
+    id			    81
     name		    "sfun"
     description		    "Default Simulink S-Function Target."
     machine		    1
