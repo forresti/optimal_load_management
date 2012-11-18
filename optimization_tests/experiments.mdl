@@ -6,7 +6,7 @@ Model {
     NumRootInports	    0
     NumRootOutports	    0
     ParameterArgumentNames  ""
-    ComputedModelVersion    "1.4"
+    ComputedModelVersion    "1.7"
     NumModelReferences	    0
     NumTestPointedSignals   0
   }
@@ -30,7 +30,7 @@ Model {
       $ObjectID		      2
       $ClassName	      "Simulink.WindowInfo"
       IsActive		      [1]
-      Location		      [36.0, 57.0, 1053.0, 702.0]
+      Location		      [367.0, 113.0, 1053.0, 702.0]
       Object {
 	$PropName		"ModelBrowserInfo"
 	$ObjectID		3
@@ -66,9 +66,9 @@ Model {
   ModifiedByFormat	  "%<Auto>"
   LastModifiedBy	  "forrest"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Sun Nov 18 12:29:42 2012"
+  LastModifiedDate	  "Sun Nov 18 12:31:58 2012"
   RTWModifiedTimeStamp	  275142544
-  ModelVersionFormat	  "1.%<AutoIncrement:4>"
+  ModelVersionFormat	  "1.%<AutoIncrement:7>"
   ConfigurationManager	  "None"
   SampleTimeColors	  off
   SampleTimeAnnotations	  off
@@ -835,7 +835,7 @@ Model {
   }
   System {
     Name		    "experiments"
-    Location		    [36, 57, 1089, 759]
+    Location		    [367, 113, 1420, 815]
     Open		    on
     ModelBrowserVisibility  on
     ModelBrowserWidth	    200
@@ -1063,7 +1063,7 @@ Stateflow {
     eml {
       isEML		      1
       script		      "\n\n\nfunction isWorking = checkRmsVoltage(rmsVoltage)\n\nisWorking = 0;\nif(rmsVoltage >= 110 &&"
-      " rmsVoltage <=120)\n    isWorking = 1;\nend\n\nisWorking = 5000"
+      " rmsVoltage <=120)\n    isWorking = 1;\nend\n\ncoder.extrinsic('rms');\nx = rms([100 20]) %test\n\nisWorking = x"
       editorLayout	      "100 M4x1[10 5 700 500]"
     }
   }
