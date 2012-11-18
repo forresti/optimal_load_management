@@ -6,7 +6,7 @@ Model {
     NumRootInports	    0
     NumRootOutports	    0
     ParameterArgumentNames  ""
-    ComputedModelVersion    "1.2"
+    ComputedModelVersion    "1.4"
     NumModelReferences	    0
     NumTestPointedSignals   0
   }
@@ -30,7 +30,7 @@ Model {
       $ObjectID		      2
       $ClassName	      "Simulink.WindowInfo"
       IsActive		      [1]
-      Location		      [2626.0, 738.0, 1064.0, 962.0]
+      Location		      [36.0, 57.0, 1053.0, 702.0]
       Object {
 	$PropName		"ModelBrowserInfo"
 	$ObjectID		3
@@ -39,7 +39,7 @@ Model {
 	DockPosition		"Left"
 	Width			[50]
 	Height			[50]
-	Filter			[14]
+	Filter			[15]
       }
       Object {
 	$PropName		"ExplorerBarInfo"
@@ -54,7 +54,7 @@ Model {
 	IsActive		[1]
 	ViewObjType		"SimulinkTopLevel"
 	LoadSaveID		"0"
-	Extents			[831.0, 786.0]
+	Extents			[822.0, 540.0]
 	ZoomFactor		[1.0]
 	Offset			[0.0, 0.0]
       }
@@ -66,9 +66,9 @@ Model {
   ModifiedByFormat	  "%<Auto>"
   LastModifiedBy	  "forrest"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Sun Nov 18 11:00:13 2012"
-  RTWModifiedTimeStamp	  275136954
-  ModelVersionFormat	  "1.%<AutoIncrement:2>"
+  LastModifiedDate	  "Sun Nov 18 12:29:42 2012"
+  RTWModifiedTimeStamp	  275142544
+  ModelVersionFormat	  "1.%<AutoIncrement:4>"
   ConfigurationManager	  "None"
   SampleTimeColors	  off
   SampleTimeAnnotations	  off
@@ -106,7 +106,7 @@ Model {
     $ObjectID		    6
     $ClassName		    "Simulink.SimulationData.ModelLoggingInfo"
     model_		    "experiments"
-    overrideMode_	    [0U]
+    overrideMode_	    [0.0]
     Array {
       Type		      "Cell"
       Dimension		      1
@@ -835,7 +835,7 @@ Model {
   }
   System {
     Name		    "experiments"
-    Location		    [2626, 738, 3690, 1700]
+    Location		    [36, 57, 1089, 759]
     Open		    on
     ModelBrowserVisibility  on
     ModelBrowserWidth	    200
@@ -944,7 +944,7 @@ Model {
 	  ZOrder		  9
 	  FunctionName		  "sf_sfun"
 	  PortCounts		  "[1 2]"
-	  EnableBusSupport	  off
+	  EnableBusSupport	  on
 	  Port {
 	    PortNumber		    2
 	    Name		    "isWorking"
@@ -963,131 +963,6 @@ Model {
 	  BlockType		  Outport
 	  Name			  "isWorking"
 	  SID			  "2::5"
-	  Position		  [460, 101, 480, 119]
-	  ZOrder		  -5
-	  IconDisplay		  "Port number"
-	}
-	Line {
-	  SrcBlock		  "rmsVoltage"
-	  SrcPort		  1
-	  DstBlock		  " SFunction "
-	  DstPort		  1
-	}
-	Line {
-	  Name			  "isWorking"
-	  Labels		  [0, 0]
-	  SrcBlock		  " SFunction "
-	  SrcPort		  2
-	  DstBlock		  "isWorking"
-	  DstPort		  1
-	}
-	Line {
-	  SrcBlock		  " Demux "
-	  SrcPort		  1
-	  DstBlock		  " Terminator "
-	  DstPort		  1
-	}
-	Line {
-	  SrcBlock		  " SFunction "
-	  SrcPort		  1
-	  DstBlock		  " Demux "
-	  DstPort		  1
-	}
-      }
-    }
-    Block {
-      BlockType		      SubSystem
-      Name		      "MATLAB Function1"
-      SID		      "8"
-      Ports		      [1, 1]
-      Position		      [380, 217, 450, 263]
-      ZOrder		      25
-      LibraryVersion	      "1.32"
-      ErrorFcn		      "Stateflow.Translate.translate"
-      PermitHierarchicalResolution "ExplicitOnly"
-      TreatAsAtomicUnit	      on
-      MinAlgLoopOccurrences   off
-      PropExecContextOutsideSubsystem off
-      RTWSystemCode	      "Auto"
-      FunctionWithSeparateData off
-      Opaque		      off
-      RequestExecContextInheritance off
-      MaskHideContents	      off
-      SFBlockType	      "MATLAB Function"
-      Object {
-	$PropName		"MaskObject"
-	$ObjectID		20
-	$ClassName		"Simulink.Mask"
-	Type			"Stateflow"
-	Description		"Embedded MATLAB block"
-	SelfModifiable		"on"
-	Display			"bgColor = Simulink.Root.ColorString2Rgb(get_param(gcbh, 'BackgroundColor')); image(imread('private/eml_mem"
-	"brane_16.png','png','BackgroundColor',bgColor(1:3)),'center'); disp([10 10 'checkRmsVoltage']);"
-	IconOpaque		"off"
-	IconUnits		"normalized"
-      }
-      System {
-	Name			"MATLAB Function1"
-	Location		[223, 338, 826, 833]
-	Open			off
-	ModelBrowserVisibility	on
-	ModelBrowserWidth	200
-	ScreenColor		"white"
-	PaperOrientation	"landscape"
-	PaperPositionMode	"auto"
-	PaperType		"usletter"
-	PaperUnits		"inches"
-	TiledPaperMargins	[0.500000, 0.500000, 0.500000, 0.500000]
-	TiledPageScale		1
-	ShowPageBoundaries	off
-	ZoomFactor		"100"
-	SIDHighWatermark	"22"
-	Block {
-	  BlockType		  Inport
-	  Name			  "rmsVoltage"
-	  SID			  "8::1"
-	  Position		  [20, 101, 40, 119]
-	  ZOrder		  -1
-	  IconDisplay		  "Port number"
-	}
-	Block {
-	  BlockType		  Demux
-	  Name			  " Demux "
-	  SID			  "8::20"
-	  Ports			  [1, 1]
-	  Position		  [270, 160, 320, 200]
-	  ZOrder		  6
-	  Outputs		  "1"
-	}
-	Block {
-	  BlockType		  S-Function
-	  Name			  " SFunction "
-	  SID			  "8::19"
-	  Tag			  "Stateflow S-Function experiments 1"
-	  Ports			  [1, 2]
-	  Position		  [180, 100, 230, 160]
-	  ZOrder		  5
-	  FunctionName		  "sf_sfun"
-	  PortCounts		  "[1 2]"
-	  EnableBusSupport	  off
-	  Port {
-	    PortNumber		    2
-	    Name		    "isWorking"
-	    RTWStorageClass	    "Auto"
-	    DataLoggingNameMode	    "SignalName"
-	  }
-	}
-	Block {
-	  BlockType		  Terminator
-	  Name			  " Terminator "
-	  SID			  "8::22"
-	  Position		  [460, 171, 480, 189]
-	  ZOrder		  8
-	}
-	Block {
-	  BlockType		  Outport
-	  Name			  "isWorking"
-	  SID			  "8::5"
 	  Position		  [460, 101, 480, 119]
 	  ZOrder		  -5
 	  IconDisplay		  "Port number"
@@ -1146,12 +1021,12 @@ Stateflow {
     name		    "experiments"
     created		    "18-Nov-2012 10:49:33"
     isLibrary		    0
-    firstTarget		    16
+    firstTarget		    9
     sfVersion		    76014001.001
   }
   chart {
     id			    2
-    name		    "MATLAB Function1"
+    name		    "MATLAB Function"
     windowPosition	    [357.12 483.496 167 391]
     viewLimits		    [0 156.75 0 153.75]
     screen		    [1 1 1280 1024 1.041666666666667]
@@ -1167,7 +1042,7 @@ Stateflow {
     decomposition	    CLUSTER_CHART
     type		    EML_CHART
     firstData		    4
-    chartFileNumber	    1
+    chartFileNumber	    2
     disableImplicitCasting  1
     eml {
       name		      "checkRmsVoltage"
@@ -1187,8 +1062,8 @@ Stateflow {
     decomposition	    CLUSTER_STATE
     eml {
       isEML		      1
-      script		      "\nfunction isWorking = checkRmsVoltage(rmsVoltage)\n\nisWorking = 0;\nif(rmsVoltage >= 110 && rms"
-      "Voltage <=120)\n    isWorking = 1;\n\nend"
+      script		      "\n\n\nfunction isWorking = checkRmsVoltage(rmsVoltage)\n\nisWorking = 0;\nif(rmsVoltage >= 110 &&"
+      " rmsVoltage <=120)\n    isWorking = 1;\nend\n\nisWorking = 5000"
       editorLayout	      "100 M4x1[10 5 700 500]"
     }
   }
@@ -1266,133 +1141,12 @@ Stateflow {
   }
   instance {
     id			    8
-    name		    "MATLAB Function1"
+    name		    "MATLAB Function"
     machine		    1
     chart		    2
   }
-  chart {
-    id			    9
-    name		    "MATLAB Function"
-    windowPosition	    [357.12 483.496 167 391]
-    viewLimits		    [0 156.75 0 153.75]
-    screen		    [1 1 1280 1024 1.041666666666667]
-    treeNode		    [0 10 0 0]
-    firstTransition	    14
-    firstJunction	    13
-    viewObj		    9
-    visible		    1
-    machine		    1
-    subviewS {
-    }
-    ssIdHighWaterMark	    5
-    decomposition	    CLUSTER_CHART
-    type		    EML_CHART
-    firstData		    11
-    chartFileNumber	    2
-    disableImplicitCasting  1
-    eml {
-      name		      "checkRmsVoltage"
-    }
-  }
-  state {
-    id			    10
-    labelString		    "eML_blk_kernel()"
-    position		    [18 64.5 118 66]
-    fontSize		    12
-    chart		    9
-    treeNode		    [9 0 0 0]
-    superState		    SUBCHART
-    subviewer		    9
-    ssIdNumber		    1
-    type		    FUNC_STATE
-    decomposition	    CLUSTER_STATE
-    eml {
-      isEML		      1
-      script		      "\n\n\nfunction isWorking = checkRmsVoltage(rmsVoltage)\n\nisWorking = 0;\nif(rmsVoltage >= 110 &&"
-      " rmsVoltage <=120)\n    isWorking = 1;\n\nend"
-      editorLayout	      "100 M4x1[10 5 700 500]"
-    }
-  }
-  data {
-    id			    11
-    ssIdNumber		    4
-    name		    "rmsVoltage"
-    linkNode		    [9 0 12]
-    scope		    INPUT_DATA
-    machine		    1
-    props {
-      array {
-	size			"-1"
-      }
-      type {
-	method			SF_INHERITED_TYPE
-	primitive		SF_DOUBLE_TYPE
-      }
-      complexity	      SF_COMPLEX_INHERITED
-    }
-    dataType		    "Inherit: Same as Simulink"
-  }
-  data {
-    id			    12
-    ssIdNumber		    5
-    name		    "isWorking"
-    linkNode		    [9 11 0]
-    scope		    OUTPUT_DATA
-    machine		    1
-    props {
-      array {
-	size			"-1"
-      }
-      type {
-	method			SF_INHERITED_TYPE
-	primitive		SF_DOUBLE_TYPE
-      }
-      complexity	      SF_COMPLEX_INHERITED
-      frame		      SF_FRAME_NO
-    }
-    dataType		    "Inherit: Same as Simulink"
-  }
-  junction {
-    id			    13
-    position		    [23.5747 49.5747 7]
-    chart		    9
-    linkNode		    [9 0 0]
-    subviewer		    9
-    ssIdNumber		    3
-    type		    CONNECTIVE_JUNCTION
-  }
-  transition {
-    id			    14
-    labelString		    "{eML_blk_kernel();}"
-    labelPosition	    [32.125 19.875 102.544 14.964]
-    fontSize		    12
-    src {
-      intersection	      [0 0 1 0 23.5747 14.625 0 0]
-    }
-    dst {
-      id		      13
-      intersection	      [1 0 -1 0 23.5747 42.5747 0 0]
-    }
-    midPoint		    [23.5747 24.9468]
-    chart		    9
-    linkNode		    [9 0 0]
-    dataLimits		    [21.175 25.975 14.625 42.575]
-    subviewer		    9
-    drawStyle		    SMART
-    slide {
-      sticky		      BOTH_STICK
-    }
-    executionOrder	    1
-    ssIdNumber		    2
-  }
-  instance {
-    id			    15
-    name		    "MATLAB Function"
-    machine		    1
-    chart		    9
-  }
   target {
-    id			    16
+    id			    9
     name		    "sfun"
     description		    "Default Simulink S-Function Target."
     machine		    1
