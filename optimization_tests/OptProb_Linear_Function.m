@@ -1,5 +1,6 @@
 
-function [] = OptProb_Linear_Function()
+%return all decision variables
+function [C1 C2 Del1 Del2 Beta1 Beta2 Y1 Y2 alpha Pito1 Pito2 ] = OptProb_Linear_Function()
     % Choose between different load files, load1, load2, load3,...
 
     clear all
