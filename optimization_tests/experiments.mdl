@@ -6,7 +6,7 @@ Model {
     NumRootInports	    0
     NumRootOutports	    0
     ParameterArgumentNames  ""
-    ComputedModelVersion    "1.18"
+    ComputedModelVersion    "1.20"
     NumModelReferences	    0
     NumTestPointedSignals   0
   }
@@ -30,7 +30,7 @@ Model {
       $ObjectID		      2
       $ClassName	      "Simulink.WindowInfo"
       IsActive		      [1]
-      Location		      [74.0, 0.0, 1053.0, 724.0]
+      Location		      [43.0, 84.0, 1053.0, 746.0]
       Object {
 	$PropName		"ModelBrowserInfo"
 	$ObjectID		3
@@ -54,7 +54,7 @@ Model {
 	IsActive		[1]
 	ViewObjType		"SimulinkTopLevel"
 	LoadSaveID		"0"
-	Extents			[822.0, 562.0]
+	Extents			[822.0, 584.0]
 	ZoomFactor		[1.0]
 	Offset			[0.0, 0.0]
       }
@@ -66,9 +66,9 @@ Model {
   ModifiedByFormat	  "%<Auto>"
   LastModifiedBy	  "forrest"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Sun Nov 18 14:18:45 2012"
-  RTWModifiedTimeStamp	  275146250
-  ModelVersionFormat	  "1.%<AutoIncrement:18>"
+  LastModifiedDate	  "Sun Nov 18 14:39:16 2012"
+  RTWModifiedTimeStamp	  275150235
+  ModelVersionFormat	  "1.%<AutoIncrement:20>"
   ConfigurationManager	  "None"
   SampleTimeColors	  off
   SampleTimeAnnotations	  off
@@ -835,7 +835,7 @@ Model {
   }
   System {
     Name		    "experiments"
-    Location		    [74, 0, 1127, 724]
+    Location		    [43, 84, 1096, 830]
     Open		    on
     ModelBrowserVisibility  on
     ModelBrowserWidth	    200
@@ -1062,10 +1062,10 @@ Stateflow {
     decomposition	    CLUSTER_STATE
     eml {
       isEML		      1
-      script		      "\n\n\nfunction isWorking = testOptimization(rmsVoltage)\n\nisWorking = 0;\nif(rmsVoltage >= 110 &"
-      "& rmsVoltage <=120)\n    isWorking = 1;\nend\n\ncoder.extrinsic('rms');\nx = rms([100 20]) %test\n\ncoder.extrin"
-      "sic('sdpsettings');\noptions=sdpsettings('solver','Cplex')\n\ncoder.extrinsic('OptProb_Linear_Function');\nOptPr"
-      "ob_Linear_Function()\n\n\nisWorking = x"
+      script		      "\n\n\nfunction isWorking = testOptimization(rmsVoltage)\n\ncoder.extrinsic('pause');\npause(2)\n\n"
+      "isWorking = 0;\nif(rmsVoltage >= 110 && rmsVoltage <=120)\n    isWorking = 1;\nend\n\ncoder.extrinsic('rms');\nx"
+      " = rms([100 20]) %test\n\ncoder.extrinsic('sdpsettings');\noptions=sdpsettings('solver','Cplex')\n\ncoder.extrin"
+      "sic('OptProb_Linear_Function');\nOptProb_Linear_Function()\n\n\nisWorking = x"
       editorLayout	      "100 M4x1[10 5 700 500]"
     }
   }
