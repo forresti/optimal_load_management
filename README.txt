@@ -2,7 +2,9 @@ To run our project,
 
 1) Open up Matlab
 
-2) Set the search path to this folder
+2) Set the search path to this folder.
+   Important, otherwise Matlab won't include
+   our libraries.
 
 3) Open Lab2_AircraftEPS
    -- This is necessary because we're using the
