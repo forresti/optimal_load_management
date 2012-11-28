@@ -46,10 +46,7 @@ function [Shedding1 Shedding2] = selectShedding(sensors, constants, BusGen)
     Bus1_pwrReq = sum(sensors.workload.Ls1) + sum(sensors.workload.Lns1)
     Bus2_pwrReq = sum(sensors.workload.Ls2) + sum(sensors.workload.Lns2)
 
-    pwrReqGen1 = 0;
-    pwrReqGen2 = 0;
-    pwrReqApu = 0;
-
+    pwrReqGen1 = 0; pwrReqGen2 = 0; pwrReqApu = 0;
     if (BusGen(1) == 1)
         pwrReqGen1 = Bus1_pwrReq;
     elseif (BusGen(1) == 2)
