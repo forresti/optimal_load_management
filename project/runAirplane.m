@@ -16,14 +16,15 @@ function [] = runAirplane()
     [Ls1,Lns1,Ls2,Lns2]=load3(N); % load the "loads" -- choose between load1, load2 and load3.
     historicalWorkloads = struct('Ls1', Ls1, 'Lns1', Lns1, 'Ls2', Ls2, 'Lns2', Lns2);
     priorityTables = getPriorityTables();
-    constants = struct('historicalWorkloads', historicalWorkloads, 'priorityTables', priorityTables, 'generatorOutput', generatorOutput, 'Nt', Nt, 'Nl', Nl, 'Ns', Ns, 'Nb', Nb); %hard-coded params to pass around  
+    constants = struct('historicalWorkloads', historicalWorkloads, 'priorityTables', priorityTables, 'generatorOutput', generatorOutput, 'Nt', Nt, 'Nl', Nl, 'Ns', Ns, 'Nb', Nb, 'N', N); %hard-coded params to pass around  
  
     for time=1:N
         workload = genWorkload(historicalWorkloads, time);
         genStatus = getGeneratorStatus(time);
         sensors = struct('workload', workload, 'genStatus', genStatus, 'time', time);
 
-        config = LLLMS(sensors, constants)
+        %config = LLLMS(sensors, constants)
+        config = HLLMS(sensors, constants) %purely a TEST
 
         configLog = [configLog config]; %this concatenation is slow ... but that's fine. 
         sensorLog = [sensorLog sensors];

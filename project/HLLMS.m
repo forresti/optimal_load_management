@@ -1,8 +1,6 @@
 function [config] = HLLMS(sensors, constants) %only using 'sensors' for generator status
     % Choose between different load files, load1, load2, load3,...
 
-    close all hidden %get rid of old figures
-    clear all
     %% constants
     %Nt=10+1;   % length of prediction horizon (I think)   % can select: 10+1, 20+1, 50+1 and 100+1.
     %Nl=10;   % number of loads connected to each bus
@@ -10,11 +8,14 @@ function [config] = HLLMS(sensors, constants) %only using 'sensors' for generato
     %Nb=2;    % number of HVAC buses
     %N=100;   % number of timesteps
 
-    Nt = constants.Nt; % length of prediction horizon (I think)
+    %Nt = constants.Nt; % length of prediction horizon (I think)
+    Nt = 1; %test
     Nl = constants.Nl; % number of loads connected to each bus
     Ns = constants.Ns; % number of power sources
     Nb = constants.Nb; % number of HVAC buses
-    N = constants.N; % number of timesteps
+    %N = constants.N; % number of timesteps
+    N = 1; %test
+    startTime = sensors.time;
 
     %% load the "loads"
     %[Ls1,Lns1,Ls2,Lns2]=load3(N);   % choose between load1, load2 and load3.
@@ -83,5 +84,20 @@ function [config] = HLLMS(sensors, constants) %only using 'sensors' for generato
     %test2 = kron(double(C1(1,:)),ones(1,100/(Nt-1))) %this is how to get an actual matrix from C1(1,:)
 
     %TODO: pack the results into a 'config' data structure.
+
+    Shedding1 = kron(double(C1(:,startTime)),ones(1,100/(Nt-1)));
+    Shedding2 = kron(double(C2(:,startTime)),ones(1,100/(Nt-1)));
+    Battery1 = kron(double(Beta1(:,startTime)),ones(1,100/(Nt-1)));
+    Battery2 = kron(double(Beta2(:,startTime)),ones(1,100/(Nt-1)));
+        
+
+    BusGen = [0 0];
+    [myMax BusGen(1)] = max(Del1(:,startTime))  %BusGen(1) is argmax here
+    [myMax BusGen(2)] = max(Del2(:,startTime))
+
+    %TODO: work out whether to make this for "one timestep" or "whole horizon"
+    %config = struct('Shedding1', C1, 'Shedding2', C2, 'BusGen', BusGen, 'Battery1', Beta1, 'Battery2', Beta2, 'GeneratorOnOff', alpha)
+    config = []
+
 end
 
