@@ -63,18 +63,18 @@ function [Shedding1 Shedding2] = selectShedding(sensors, constants, BusGen)
         pwrReqApu = pwrReqApu + Bus2_pwrReq;
     end
 
-    Shedding1 = zeros(1, 10); %if Shedding(1)==0, then DON'T shed. if shedding(1)==1, then DO shed.
-    Shedding2 = zeros(1, 10);
+    Shedding1 = ones(1, 10); %if Shedding(1)==1, then DON'T shed. if shedding(1)==0, then DO shed.
+    Shedding2 = ones(1, 10);
     sheddingPri1 = constants.priorityTables.sheddingPri1;
     sheddingPri2 = constants.priorityTables.sheddingPri2;
     priority = 10;
     while (pwrReqGen1 > constants.generatorOutput(1) && priority>0)
         if (BusGen(2) == 1) % remove sheddable load from right side first
             pwrReqGen1 = pwrReqGen1 - sensors.workload.Ls2(sheddingPri2(1,priority));
-            Shedding2(priority) = 1;
+            Shedding2(priority) = 0; %TODO: Shedding2(sheddingPri2(1,priority))
         elseif (BusGen(1) == 1 && pwrReqGen1 > constants.generatorOutput(1)) % now do it for the left side if still over
             pwrReqGen1 = pwrReqGen1 - sensors.workload.Ls1(sheddingPri1(1,priority));
-            Shedding1(priority) = 1;
+            Shedding1(priority) = 0;
         end
         priority = priority - 1;
     end
@@ -83,10 +83,10 @@ function [Shedding1 Shedding2] = selectShedding(sensors, constants, BusGen)
     while (pwrReqGen2 > constants.generatorOutput(2) && priority>0)
         if (BusGen(1) == 2) % remove sheddable load from left side first
             pwrReqGen2 = pwrReqGen2 - sensors.workload.Ls1(sheddingPri1(1,priority));
-            Shedding1(priority) = 1;
+            Shedding1(priority) = 0;
         elseif (BusGen(2) == 2 && pwrReqGen2 > constants.generatorOutput(2)) % now do it for the right side if still over
             pwrReqGen2= pwrReqGen2 - sensors.workload.Ls2(sheddingPri2(1,priority));
-            Shedding2(priority) = 1;
+            Shedding2(priority) = 0;
         end
         priority = priority - 1;
     end
@@ -95,10 +95,10 @@ function [Shedding1 Shedding2] = selectShedding(sensors, constants, BusGen)
     while (pwrReqApu > constants.generatorOutput(3) && priority>0)
         if (BusGen(1) == 3) % remove sheddable load from left side first
             pwrReqApu = pwrReqApu - sensors.workload.Ls1(sheddingPri1(1,priority));
-            Shedding1(priority) = 1;
+            Shedding1(priority) = 0;
         elseif (BusGen(2) == 3 && pwrReqGen2 > constants.generatorOutput(3)) % now do it for the right side if still over
             pwrReqApu = pwrReqApu - sensors.workload.Ls2(sheddingPri2(1,priority));
-            Shedding2(priority) = 1;
+            Shedding2(priority) = 0;
         end
         priority = priority - 1;
     end

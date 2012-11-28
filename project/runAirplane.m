@@ -1,6 +1,7 @@
 
 %This is the "main function" for our airplane power simulation system
 function [] = runAirplane()
+    close all hidden %get rid of old figures
 
     N = 100; %number of timesteps
     Nt = 10+1; % prediction horizon length
@@ -24,7 +25,7 @@ function [] = runAirplane()
 
         config = LL_LMS(sensors, constants)
 
-        configLog = [configLog config]; %this concatenation slow ... but that's fine. 
+        configLog = [configLog config]; %this concatenation is slow ... but that's fine. 
         sensorLog = [sensorLog sensors];
     end
     plotGraphs(configLog, sensorLog, constants, Nt, N)
