@@ -57,7 +57,7 @@ function [config] = HLLMS(sensors, constants) %only using 'sensors' for generato
     cons=[ cons, sum(Del2,1) == ones(1,Nt)];
     for i=1:Ns %hard code "generator broken" where necessary
         if (sensors.genStatus(i) == 0)
-            cons = [cons, alpha(:, i)=0]; %require that generator i is not used
+            cons=[cons, alpha(:, i)==0]; %require that generator i is not used
         end
     end
 
@@ -89,15 +89,17 @@ function [config] = HLLMS(sensors, constants) %only using 'sensors' for generato
     Shedding2 = kron(double(C2(:,startTime)),ones(1,100/(Nt-1)));
     Battery1 = kron(double(Beta1(:,startTime)),ones(1,100/(Nt-1)));
     Battery2 = kron(double(Beta2(:,startTime)),ones(1,100/(Nt-1)));
-        
+   
+    Del1_double = kron(double(Del1(:,startTime)),ones(1,100/(Nt-1)));
+    Del2_double = kron(double(Del2(:,startTime)),ones(1,100/(Nt-1)));
+    GeneratorOnOff = kron(double(alpha(:,startTime)),ones(1,100/(Nt-1)));
 
     BusGen = [0 0];
     [myMax BusGen(1)] = max(Del1(:,startTime))  %BusGen(1) is argmax here
     [myMax BusGen(2)] = max(Del2(:,startTime))
 
     %TODO: work out whether to make this for "one timestep" or "whole horizon"
-    %config = struct('Shedding1', C1, 'Shedding2', C2, 'BusGen', BusGen, 'Battery1', Beta1, 'Battery2', Beta2, 'GeneratorOnOff', alpha)
-    config = []
+    config = struct('Shedding1', Shedding1, 'Shedding2', Shedding2, 'BusGen', BusGen, 'Battery1', Battery1, 'Battery2', Battery2, 'GeneratorOnOff', GeneratorOnOff)
 
 end
 
