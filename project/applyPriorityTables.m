@@ -11,14 +11,10 @@ function config = applyPriorityTables(sensors, constants)
     config = struct('Shedding1', Shedding1, 'Shedding2', Shedding2, 'BusGen', BusGen, 'Battery1', Battery1, 'Battery2', Battery2, 'GeneratorOnOff', GeneratorOnOff); 
 end
 
-
 %note that 'constants' contains priorityTables
 function [BusGen] = selectGenerators(sensors, constants)
     %for now, just assume generators are all operational. Later, I'll come back and do it the right way.
-
     BusGen = [1 2]; %for now, just use Gen1 for Bus1, and Gen2 for Bus2
-    %BusGen1 = [1 0 0]; %for now, just use gen 1 for bus 1 at all times
-    %BusGen2 = [0 1 0];
 end
 
 %FIXME: this doesn't promise to work properly yet
@@ -52,8 +48,8 @@ function [Shedding1 Shedding2] = selectShedding(sensors, constants, BusGen)
         pwrReqApu = pwrReqApu + Bus2_pwrReq;
     end
 
-    Shedding1 = zeroes(1, 10);
-    Shedding2 = zeroes(1, 10);
+    Shedding1 = zeros(1, 10);
+    Shedding2 = zeros(1, 10);
     priority = 10;
     while (pwrReqGen1 > constants.generatorOutput(1))
         if (BusGen(2) == 1) % remove sheddable load from right side first

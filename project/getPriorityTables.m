@@ -9,14 +9,15 @@
 % Assume 3 generators 
 
 function priTables = getPriorityTables()
-    %TODO: confirm [0 1 2] vs [1 0 2]. -- it may be reversed from what we want
-
-    genPri1 = [0 1 2]; %Bus 1 gen priority
+    genPri1 = [0 1 2]; %Bus 1 gen priority (0 is most prefereed, 2 is least preferred)
     genPri2 = [1 0 2]; %Bus 2 gen priority
-    %sheddingPri1 = ones([10 1]);
-    %sheddingPri2 = ones([10 1]);
-    sheddingPri1 = 1:10; %Bus 1 load shedding priority table
-    sheddingPri2 = 1:10; %Bus 2 load shedding priority table
+
+    sheddingPri1 = [1:10; 1:10]; %Bus 1 load shedding priority table (1 is most preferred to shed, 10 is least preferred)
+    sheddingPri2 = [1:10; 1:10]; %Bus 2 load shedding priority table
+
+    %sheddingPri notation:
+    %sheddingPri1(1,:) = load numbers to shed (in ascending order)
+    %sheddingPri2(2,:) = weight assigned to each of the loads to shed
 
     priTables = struct('genPri1', genPri1, 'genPri2', genPri2, 'sheddingPri1', sheddingPri1, 'sheddingPri2', sheddingPri2);
 end
