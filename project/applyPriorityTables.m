@@ -3,7 +3,6 @@
 function config = applyPriorityTables(sensors, constants)
     [BusGen GeneratorOnOff] = selectGenerators(sensors, constants); %Del1,Del2 in Mehdi's code
     [Shedding1 Shedding2] = selectShedding(sensors, constants, BusGen) %C1, C2 in Mehdi's code
-    %Shedding1 = ones([1 10]); Shedding2 = zeros([1 10]); %placeholder
 
     Battery1 = [0]; Battery2 = [0]; %Pwr used for charging each battery. Beta1, Beta2 in Mehdi's code
 
@@ -40,9 +39,6 @@ function [BusGen GeneratorOnOff] = selectGenerators(sensors, constants)
             break
         end
     end
-
-
-    BusGen = [1 2]; %for now, just use Gen1 for Bus1, and Gen2 for Bus2
 end
 
 %FIXME: this doesn't promise to work properly yet
@@ -75,7 +71,7 @@ function [Shedding1 Shedding2] = selectShedding(sensors, constants, BusGen)
     sheddingPri1 = constants.priorityTables.sheddingPri1;
     sheddingPri2 = constants.priorityTables.sheddingPri2;
     priority = 10;
-    while (pwrReqGen1 > constants.generatorOutput(1))
+    while (pwrReqGen1 > constants.generatorOutput(1) && priority>0)
         if (BusGen(2) == 1) % remove sheddable load from right side first
             pwrReqGen1 = pwrReqGen1 - sensors.workload.Ls2(sheddingPri2(1,priority));
             Shedding2(priority) = 1;
@@ -87,7 +83,7 @@ function [Shedding1 Shedding2] = selectShedding(sensors, constants, BusGen)
     end
 
     priority = 10;
-    while (pwrReqGen2 > constants.generatorOutput(2))
+    while (pwrReqGen2 > constants.generatorOutput(2) && priority>0)
         if (BusGen(1) == 2) % remove sheddable load from left side first
             pwrReqGen2 = pwrReqGen2 - sensors.workload.Ls1(sheddingPri1(1,priority));
             Shedding1(priority) = 1;
@@ -99,7 +95,7 @@ function [Shedding1 Shedding2] = selectShedding(sensors, constants, BusGen)
     end
 
     priority = 10;
-    while (pwrReqApu > constants.generatorOutput(3))
+    while (pwrReqApu > constants.generatorOutput(3) && priority>0)
         if (BusGen(1) == 3) % remove sheddable load from left side first
             pwrReqApu = pwrReqApu - sensors.workload.Ls1(sheddingPri1(1,priority));
             Shedding1(priority) = 1;
