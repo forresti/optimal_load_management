@@ -11,7 +11,7 @@ function plotGraphs(configLog, sensorLog, constants, Nt, N)
         Shedding1 = [Shedding1; configLog(i).Shedding1];
         Shedding2 = [Shedding2; configLog(i).Shedding2];
     end
-    plotC(Shedding1, Shedding2, Nt, N, xp)
+    plotC(Shedding1', Shedding2', Nt, N, xp)
 
     %TODO convert our config.BusGen into Del1,Del2. 
     %plotDelta(Del1, Del2, Nt, N, xp)
@@ -60,13 +60,11 @@ function plotC(C1, C2, Nt, N, xp)
 
     % Plot C
     %xp=1:1:Nt*100/(Nt-1);  % 110
-    %xp=1:10
-    xp=1:10:N; %x-axis coords
+    xp=1:100;
+    %xp=1:10:N; %x-axis coords
 
-    size(C1(4,:))
     figure;
     subplot(2,2,1);
-    C1(2,:)
     plot(xp,C1(1,:),xp,C1(2,:),xp,C1(3,:),xp,C1(4,:),xp,C1(5,:), 'LineWidth',2)
 
     legend('L_1','L_2','L_3','L_4','L_5','Orientation','horizontal');

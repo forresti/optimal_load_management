@@ -9,7 +9,7 @@ function [config] = HLLMS(sensors, constants) %only using 'sensors' for generato
     %N=100;   % number of timesteps
 
     %Nt = constants.Nt; % length of prediction horizon (I think)
-    Nt = 1; %test
+    Nt = 2; %test
     Nl = constants.Nl; % number of loads connected to each bus
     Ns = constants.Ns; % number of power sources
     Nb = constants.Nb; % number of HVAC buses
@@ -19,10 +19,10 @@ function [config] = HLLMS(sensors, constants) %only using 'sensors' for generato
 
     %% load the "loads"
     %[Ls1,Lns1,Ls2,Lns2]=load3(N);   % choose between load1, load2 and load3.
-    Ls1 = constants.historicalWorkload.Ls1;
-    Lns1 = constants.historicalWorkload.Lns1;
-    Ls2 = constants.historicalWorkload.Ls2;
-    Lns2 = constants.historicalWorkload.Lns2;
+    Ls1 = constants.historicalWorkloads.Ls1;
+    Lns1 = constants.historicalWorkloads.Lns1;
+    Ls2 = constants.historicalWorkloads.Ls2;
+    Lns2 = constants.historicalWorkloads.Lns2;
   
     %% Max. Power supply by Engines and APU
     U1=1e5;     Peng1=U1*ones(1,Nt);
@@ -82,8 +82,6 @@ function [config] = HLLMS(sensors, constants) %only using 'sensors' for generato
     toc;
 
     %test2 = kron(double(C1(1,:)),ones(1,100/(Nt-1))) %this is how to get an actual matrix from C1(1,:)
-
-    %TODO: pack the results into a 'config' data structure.
 
     Shedding1 = kron(double(C1(:,startTime)),ones(1,100/(Nt-1)));
     Shedding2 = kron(double(C2(:,startTime)),ones(1,100/(Nt-1)));
