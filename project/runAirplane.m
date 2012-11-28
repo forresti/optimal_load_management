@@ -23,7 +23,7 @@ function [] = runAirplane()
         genStatus = getGeneratorStatus(time);
         sensors = struct('workload', workload, 'genStatus', genStatus, 'time', time);
 
-        config = LL_LMS(sensors, constants)
+        config = LLLMS(sensors, constants)
 
         configLog = [configLog config]; %this concatenation is slow ... but that's fine. 
         sensorLog = [sensorLog sensors];

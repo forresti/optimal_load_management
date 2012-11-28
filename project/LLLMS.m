@@ -1,3 +1,18 @@
+
+function config = LLLMS(sensors, constants)
+
+    %TODO: get optimal config from HL_LMS
+    
+    %optConfig = HL_LMS(sensors, constants)
+    %isSafe = checkSafety(optConfig);
+    %if isSafe
+    %   config = optConfig;
+    %else
+        config = applyPriorityTables(sensors, constants);
+    %end
+
+end
+
 % Select load shedding and generator assignments based purely on priority tables
 % This the crux of the LL-LMS system
 function config = applyPriorityTables(sensors, constants)
@@ -6,7 +21,7 @@ function config = applyPriorityTables(sensors, constants)
 
     Battery1 = [0]; Battery2 = [0]; %Pwr used for charging each battery. Beta1, Beta2 in Mehdi's code
 
-    config = struct('Shedding1', Shedding1, 'Shedding2', Shedding2, 'BusGen', BusGen, 'Battery1', Battery1, 'Battery2', Battery2, 'GeneratorOnOff', GeneratorOnOff); 
+    config = struct('Shedding1', Shedding1, 'Shedding2', Shedding2, 'BusGen', BusGen, 'Battery1', Battery1, 'Battery2', Battery2, 'GeneratorOnOff', GeneratorOnOff);
 end
 
 %note that 'constants' contains priorityTables
@@ -15,7 +30,7 @@ function [BusGen GeneratorOnOff] = selectGenerators(sensors, constants)
     %genPri2 = constants.priorityTables.genPri2;
 
     %HACK priority tables. Listing the generators in order of preference
-    genPri1 = [1 2 3]; 
+    genPri1 = [1 2 3];
     genPri2 = [2 1 3]; % "first choice is Gen2, second choice is Gen1, third choice is APU"
 
     GeneratorOnOff = zeros([1 3]);
@@ -41,7 +56,7 @@ function [BusGen GeneratorOnOff] = selectGenerators(sensors, constants)
     end
 end
 
-function [Shedding1 Shedding2] = selectShedding(sensors, constants, BusGen) 
+function [Shedding1 Shedding2] = selectShedding(sensors, constants, BusGen)
     Bus1_pwrReq = sum(sensors.workload.Ls1) + sum(sensors.workload.Lns1)
     Bus2_pwrReq = sum(sensors.workload.Ls2) + sum(sensors.workload.Lns2)
 
@@ -103,4 +118,6 @@ function [Shedding1 Shedding2] = selectShedding(sensors, constants, BusGen)
     end
 
 end
+
+
 
