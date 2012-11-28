@@ -1,19 +1,47 @@
 % Select load shedding and generator assignments based purely on priority tables
 % This the crux of the LL-LMS system
 function config = applyPriorityTables(sensors, constants)
-    [BusGen] = selectGenerators(sensors, constants); %Del1,Del2 in Mehdi's code
+    [BusGen GeneratorOnOff] = selectGenerators(sensors, constants); %Del1,Del2 in Mehdi's code
     [Shedding1 Shedding2] = selectShedding(sensors, constants, BusGen) %C1, C2 in Mehdi's code
     %Shedding1 = ones([1 10]); Shedding2 = zeros([1 10]); %placeholder
 
-    GeneratorOnOff = [1 1 0]; %TODO: assign this based on BusGen1 and BusGen2
     Battery1 = [0]; Battery2 = [0]; %Pwr used for charging each battery. Beta1, Beta2 in Mehdi's code
 
     config = struct('Shedding1', Shedding1, 'Shedding2', Shedding2, 'BusGen', BusGen, 'Battery1', Battery1, 'Battery2', Battery2, 'GeneratorOnOff', GeneratorOnOff); 
 end
 
 %note that 'constants' contains priorityTables
-function [BusGen] = selectGenerators(sensors, constants)
-    %for now, just assume generators are all operational. Later, I'll come back and do it the right way.
+function [BusGen GeneratorOnOff] = selectGenerators(sensors, constants)
+    %genPri1 = constants.priorityTables.genPri1; % [0 1 2] 
+    %genPri2 = constants.priorityTables.genPri2;
+
+    %HACK priority tables. Listing the generators in order of preference
+    genPri1 = [1 2 3]; 
+    genPri2 = [2 1 3]; % "first choice is Gen2, second choice is Gen1, third choice is APU"
+
+    GeneratorOnOff = zeros([1 3]);
+    BusGen = zeros([1 2]);
+
+    %Bus 1 generator selection
+    for i=1:constants.Ns %1 to number of generators
+        if( sensors.genStatus(genPri1(i)) == 1) %this generator works properly
+            BusGen(1) = genPri1(i);
+            GeneratorOnOff(genPri1(i)) = 1; %turn the selected generator on
+            break
+        end
+    end
+
+    %Bus 2 generator selection
+    for i=1:constants.Ns %1 to number of generators
+        genPri2(i)
+        if( sensors.genStatus(genPri2(i)) == 1) %this generator works properly
+            BusGen(2) = genPri2(i);
+            GeneratorOnOff(genPri2(i)) = 1; %turn the selected generator on
+            break
+        end
+    end
+
+
     BusGen = [1 2]; %for now, just use Gen1 for Bus1, and Gen2 for Bus2
 end
 

@@ -1,6 +1,6 @@
 
 % Are any power caps exceeded?
-function isSafe = safetyCheck(config, sensors, constants)
+function isSafe = checkSafety(config, sensors, constants)
     
     %TODO: figure out pwrReqGen1, pwrReqGen2, pwrReqGen3
 

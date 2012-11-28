@@ -8,7 +8,6 @@ function [] = runAirplane()
     Ns=3;    % number of power sources
     Nb=2;    % number of buses
 
-
     generatorOutput = [1e5, 1e5, 104e3]; %Pwr produced by generators. Called U1, U2, U3 in Mehdi's code
         %TODO: make generatorOutput be a parameter to Mehdi's code, so that we can tweak it easily.
     [Ls1,Lns1,Ls2,Lns2]=load3(N); % load the "loads" -- choose between load1, load2 and load3.
@@ -17,13 +16,14 @@ function [] = runAirplane()
     constants = struct('historicalWorkloads', historicalWorkloads, 'priorityTables', priorityTables, 'generatorOutput', generatorOutput, 'horizon', horizon, 'Nl', Nl, 'Ns', Ns, 'Nb', Nb); %hard-coded params to pass around  
  
 
-    %for time=1:N
-    for time=1:2 %test
-        workload = genWorkload(historicalWorkloads, time)    
-        genStatus = getGeneratorStatus(time)
-        sensors = struct('workload', workload, 'genStatus', genStatus)
+    for time=1:N
+    %for time=1:2 %test
+        workload = genWorkload(historicalWorkloads, time);
+        genStatus = getGeneratorStatus(time);
+        sensors = struct('workload', workload, 'genStatus', genStatus, 'time', time)
 
-        config = applyPriorityTables(sensors, constants)
+        %config = applyPriorityTables(sensors, constants)
+        config = LL_LMS(sensors, constants)
     end
 
 end
