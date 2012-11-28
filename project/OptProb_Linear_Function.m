@@ -6,11 +6,11 @@ function [C1 C2 Del1 Del2 Beta1 Beta2 Y1 Y2 alpha Pito1 Pito2 ] = OptProb_Linear
     close all hidden %get rid of old figures
     clear all
     %% constants
-    Nt=10+1;   % number of time steps   % can select: 10+1, 20+1, 50+1 and 100+1.
+    Nt=10+1;   % length of prediction horizon (I think)   % can select: 10+1, 20+1, 50+1 and 100+1.
     Nl=10;   % number of loads connected to each bus
     Ns=3;    % number of power sources
     Nb=2;    % number of HVAC buses
-    N=100;   % length of prediction horizon
+    N=100;   % number of timesteps
 
     %% load the "loads"
     [Ls1,Lns1,Ls2,Lns2]=load3(N);   % choose between load1, load2 and load3.
