@@ -1,15 +1,11 @@
 
-function config = LLLMS(sensors, constants)
+function config = LLLMS(sensors, constants, advice)
 
-    %TODO: get optimal config from HL_LMS
-    
-    %optConfig = HL_LMS(sensors, constants)
-    %isSafe = checkSafety(optConfig);
-    %if isSafe
-    %   config = optConfig;
-    %else
+    if (checkSafety(advice, sensors, constants))
+       config = optConfig;
+    else
         config = applyPriorityTables(sensors, constants);
-    %end
+    end
 
 end
 

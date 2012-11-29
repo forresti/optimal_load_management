@@ -26,6 +26,13 @@ function isSafe = checkSafety(config, sensors, constants)
 
     %decide whether any of the generators are being overdrawn
     isSafe=1;
+    
+    % check generator status
+    if (sensors.genStatus(config.BusGen(0)) == 0 || sensors.genStatus(config.BusGen(1)) == 0)
+        isSafe=1
+    end
+    
+    % checking for generator overload
     if(pwrReqGen1 > constants.generatorOutput(1))
         isSafe=0;
     elseif(pwrReqGen2 > constants.generatorOutput(2))
