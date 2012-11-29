@@ -4,7 +4,7 @@ function [] = runAirplane()
     close all hidden %get rid of old figures
 
     N = 100; %number of timesteps
-    Nt = 10+1; % prediction horizon length
+    Nt = 100+1; % prediction horizon length
     Nl=10;   % number of loads connected to each bus. (10 sheddable, 10 unsheddable)
     Ns=3;    % number of power sources
     Nb=2;    % number of buses
@@ -17,20 +17,20 @@ function [] = runAirplane()
     historicalWorkloads = struct('Ls1', Ls1, 'Lns1', Lns1, 'Ls2', Ls2, 'Lns2', Lns2);
     priorityTables = getPriorityTables();
     constants = struct('historicalWorkloads', historicalWorkloads, 'priorityTables', priorityTables, 'generatorOutput', generatorOutput, 'Nt', Nt, 'Nl', Nl, 'Ns', Ns, 'Nb', Nb, 'N', N); %hard-coded params to pass around  
- 
     
     advice = [];
-    ts = 0
+    HLclock = 0; %count up to each time we call the HLLMS
     for time=1:N
         workload = genWorkload(historicalWorkloads, time);
         genStatus = getGeneratorStatus(time);
         sensors = struct('workload', workload, 'genStatus', genStatus, 'time', time);
 
-        if (ts == 0)
-            advice = HLLMS(sensors, constants);
-        end
-        config = LLLMS(sensors, constants, advice(ts));
-        if (ts == 10) ts = 0; else ts = ts + 1; end
+        config = HLLMS(sensors, constants); % this is a TEST
+%        if (HLckock == 0) %time to call HLLMS again
+%            advice = HLLMS(sensors, constants);
+%        end
+%        config = LLLMS(sensors, constants, advice(HLclock));
+%        if (HLclock == 10) HLclock = 0; else HLclock = HLclock + 1; end
 
         configLog = [configLog config]; %this concatenation is slow ... but that's fine. 
         sensorLog = [sensorLog sensors];

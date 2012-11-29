@@ -8,18 +8,19 @@ function [config] = HLLMS(sensors, constants) %only using 'sensors' for generato
     %Nb=2;    % number of HVAC buses
     %N=100;   % number of timesteps
 
-    %Nt = constants.Nt; % length of prediction horizon (I think)
-    Nt = 2; %test
+    Nt = constants.Nt; % length of prediction horizon (I think)
+    %Nt = 2; %test
     Nl = constants.Nl; % number of loads connected to each bus
     Ns = constants.Ns; % number of power sources
     Nb = constants.Nb; % number of HVAC buses
-    %N = constants.N; % number of timesteps
-    N = 1; %test
+    N = constants.N; % number of timesteps
+    %N = 1; %test
     startTime = sensors.time;
+    stopTime = sensors.time + Nt;
 
     %% load the "loads"
     %[Ls1,Lns1,Ls2,Lns2]=load3(N);   % choose between load1, load2 and load3.
-    Ls1 = constants.historicalWorkloads.Ls1;
+    Ls1 = constants.historicalWorkloads.Ls1; %from startTime to horizon (may need an if/else statement in case Nt is beyond the horizon
     Lns1 = constants.historicalWorkloads.Lns1;
     Ls2 = constants.historicalWorkloads.Ls2;
     Lns2 = constants.historicalWorkloads.Lns2;
@@ -81,20 +82,18 @@ function [config] = HLLMS(sensors, constants) %only using 'sensors' for generato
     solvesdp(cons,obj,options);
     toc;
 
-    %test2 = kron(double(C1(1,:)),ones(1,100/(Nt-1))) %this is how to get an actual matrix from C1(1,:)
-
     Shedding1 = double(C1(:,startTime))
     Shedding2 = double(C2(:,startTime));
     Battery1 = double(Beta1(:,startTime));
     Battery2 = double(Beta2(:,startTime));
    
-    Del1_double = double(Del1(:,startTime)));
+    Del1_double = double(Del1(:,startTime));
     Del2_double = double(Del2(:,startTime));
     GeneratorOnOff = double(alpha(:,startTime));
 
     BusGen = [0 0];
-    [myMax BusGen(1)] = max(Del1_double(:,startTime))  %BusGen(1) is argmax here
-    [myMax BusGen(2)] = max(Del2_double(:,startTime))
+    [myMax BusGen(1)] = max(Del1_double(:))  %BusGen(1) is argmax here
+    [myMax BusGen(2)] = max(Del2_double(:))
 
     %TODO: work out whether to make this for "one timestep" or "whole horizon"
     config = struct('Shedding1', Shedding1, 'Shedding2', Shedding2, 'BusGen', BusGen, 'Battery1', Battery1, 'Battery2', Battery2, 'GeneratorOnOff', GeneratorOnOff)

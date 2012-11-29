@@ -6,7 +6,7 @@ function [C1 C2 Del1 Del2 Beta1 Beta2 Y1 Y2 alpha Pito1 Pito2 ] = OptProb_Linear
     close all hidden %get rid of old figures
     clear all
     %% constants
-    Nt=10+1;   % length of prediction horizon (I think)   % can select: 10+1, 20+1, 50+1 and 100+1.
+    Nt=100+1;   % length of prediction horizon (I think)   % can select: 10+1, 20+1, 50+1 and 100+1.
     Nl=10;   % number of loads connected to each bus
     Ns=3;    % number of power sources
     Nb=2;    % number of HVAC buses
