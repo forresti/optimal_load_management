@@ -2,7 +2,8 @@
 function config = LLLMS(sensors, constants, advice)
 
     if (checkSafety(advice, sensors, constants))
-       config = optConfig;
+        %config = optConfig;
+        config = advice;
     else
         config = applyPriorityTables(sensors, constants);
     end

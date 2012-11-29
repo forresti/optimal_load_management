@@ -28,8 +28,8 @@ function isSafe = checkSafety(config, sensors, constants)
     isSafe=1;
     
     % check generator status
-    if (sensors.genStatus(config.BusGen(0)) == 0 || sensors.genStatus(config.BusGen(1)) == 0)
-        isSafe=1
+    if (sensors.genStatus(config.BusGen(1)) == 0 || sensors.genStatus(config.BusGen(2)) == 0) %have we assigned a broken generator to a bus?
+        isSafe=0;
     end
     
     % checking for generator overload

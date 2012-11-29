@@ -27,7 +27,7 @@ function [] = runAirplane()
         sensors = struct('workload', workload, 'genStatus', genStatus, 'time', time);
 
         if (ts == 0)
-            advice = HLLLMS(sensors, constants);
+            advice = HLLMS(sensors, constants);
         end
         config = LLLMS(sensors, constants, advice(ts));
         if (ts == 10) ts = 0; else ts = ts + 1; end
