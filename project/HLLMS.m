@@ -6,8 +6,8 @@ function [config] = HLLMS(sensors, constants) %only using 'sensors' for generato
     Nl = constants.Nl; % number of loads connected to each bus
     Ns = constants.Ns; % number of power sources
     Nb = constants.Nb; % number of HVAC buses
-    startTime = min(N, sensors.time)
-    stopTime = min(N, sensors.time + Nt) %make sure we don't go out of bounds
+    %startTime = min(N, sensors.time)
+    %stopTime = min(N, sensors.time + Nt) %make sure we don't go out of bounds
 
     %% load the "loads"
     [Ls1 Lns1 Ls2 Lns2] = sliceWorkloads(sensors, constants); %get relavent slice of historicalWorkloads
@@ -69,20 +69,20 @@ function [config] = HLLMS(sensors, constants) %only using 'sensors' for generato
     solvesdp(cons,obj,options);
     toc;
 
-    Shedding1 = double(C1(:,startTime))
-    Shedding2 = double(C2(:,startTime));
-    Battery1 = double(Beta1(:,startTime));
-    Battery2 = double(Beta2(:,startTime));
+    %for now, just use the 1st index of these. later, I'll return the whole horizon.
+    Shedding1 = double(C1(:,1))
+    Shedding2 = double(C2(:,1));
+    Battery1 = double(Beta1(:,1));
+    Battery2 = double(Beta2(:,1));
    
-    Del1_double = double(Del1(:,startTime));
-    Del2_double = double(Del2(:,startTime));
-    GeneratorOnOff = double(alpha(:,startTime));
+    Del1_double = double(Del1(:,1));
+    Del2_double = double(Del2(:,1));
+    GeneratorOnOff = double(alpha(1,:)); % unlike the other variables, alpha's time index comes first
 
     BusGen = [0 0];
-    [myMax BusGen(1)] = max(Del1_double(:))  %BusGen(1) is argmax here
+    [myMax BusGen(1)] = max(Del1_double(:));  %BusGen(1) is argmax here
     [myMax BusGen(2)] = max(Del2_double(:))
 
-    %TODO: work out whether to make this for "one timestep" or "whole horizon"
     config = struct('Shedding1', Shedding1, 'Shedding2', Shedding2, 'BusGen', BusGen, 'Battery1', Battery1, 'Battery2', Battery2, 'GeneratorOnOff', GeneratorOnOff)
 
 end
