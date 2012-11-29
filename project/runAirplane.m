@@ -18,13 +18,19 @@ function [] = runAirplane()
     priorityTables = getPriorityTables();
     constants = struct('historicalWorkloads', historicalWorkloads, 'priorityTables', priorityTables, 'generatorOutput', generatorOutput, 'Nt', Nt, 'Nl', Nl, 'Ns', Ns, 'Nb', Nb, 'N', N); %hard-coded params to pass around  
  
+    
+    advice = [];
+    ts = 0
     for time=1:N
         workload = genWorkload(historicalWorkloads, time);
         genStatus = getGeneratorStatus(time);
         sensors = struct('workload', workload, 'genStatus', genStatus, 'time', time);
 
-        %config = LLLMS(sensors, constants)
-        config = HLLMS(sensors, constants) %purely a TEST
+        if (ts == 0)
+            advice = HLLLMS(sensors, constants);
+        end
+        config = LLLMS(sensors, constants, advice(ts));
+        if (ts == 10) ts = 0; else ts = ts + 1; end
 
         configLog = [configLog config]; %this concatenation is slow ... but that's fine. 
         sensorLog = [sensorLog sensors];
