@@ -1,29 +1,16 @@
 function [config] = HLLMS(sensors, constants) %only using 'sensors' for generator status
     % Choose between different load files, load1, load2, load3,...
 
-    %% constants
-    %Nt=10+1;   % length of prediction horizon (I think)   % can select: 10+1, 20+1, 50+1 and 100+1.
-    %Nl=10;   % number of loads connected to each bus
-    %Ns=3;    % number of power sources
-    %Nb=2;    % number of HVAC buses
-    %N=100;   % number of timesteps
-
-    Nt = constants.Nt; % length of prediction horizon (I think)
-    %Nt = 2; %test
+    N = constants.N; % number of timesteps (use all timesteps -- no interpolation or kron)
+    Nt = constants.Nt; % prediction horizon
     Nl = constants.Nl; % number of loads connected to each bus
     Ns = constants.Ns; % number of power sources
     Nb = constants.Nb; % number of HVAC buses
-    N = constants.N; % number of timesteps
-    %N = 1; %test
-    startTime = sensors.time;
-    stopTime = sensors.time + Nt;
+    startTime = min(N, sensors.time)
+    stopTime = min(N, sensors.time + Nt) %make sure we don't go out of bounds
 
     %% load the "loads"
-    %[Ls1,Lns1,Ls2,Lns2]=load3(N);   % choose between load1, load2 and load3.
-    Ls1 = constants.historicalWorkloads.Ls1; %from startTime to horizon (may need an if/else statement in case Nt is beyond the horizon
-    Lns1 = constants.historicalWorkloads.Lns1;
-    Ls2 = constants.historicalWorkloads.Ls2;
-    Lns2 = constants.historicalWorkloads.Lns2;
+    [Ls1 Lns1 Ls2 Lns2] = sliceWorkloads(sensors, constants); %get relavent slice of historicalWorkloads
   
     %% Max. Power supply by Engines and APU
     U1=1e5;     Peng1=U1*ones(1,Nt);
@@ -62,7 +49,7 @@ function [config] = HLLMS(sensors, constants) %only using 'sensors' for generato
         end
     end
 
-    x=1:1:100;
+    x=1:1:N;
     xi=0:N/(Nt-1):N; xi(1)=1;  % 0:10:100
 
     % the following five lead to MILP.
@@ -98,5 +85,17 @@ function [config] = HLLMS(sensors, constants) %only using 'sensors' for generato
     %TODO: work out whether to make this for "one timestep" or "whole horizon"
     config = struct('Shedding1', Shedding1, 'Shedding2', Shedding2, 'BusGen', BusGen, 'Battery1', Battery1, 'Battery2', Battery2, 'GeneratorOnOff', GeneratorOnOff)
 
+end
+
+function [Ls1 Lns1 Ls2 Lns2] = sliceWorkloads(sensors, constants)
+    nTimestepsOuterLoop = max(size(constants.historicalWorkloads.Ls1(1,:)));
+    lo = sensors.time;
+    hi = min((sensors.time + constants.N)-1, nTimestepsOuterLoop) %out-of-bounds check
+    %hi = min((sensors.time + constants.N)+1, nTimestepsOuterLoop) %out-of-bounds check
+    %hi = min((sensors.time + constants.N), nTimestepsOuterLoop) %out-of-bounds check
+    Ls1 = constants.historicalWorkloads.Ls1(:, lo:hi);
+    Lns1 = constants.historicalWorkloads.Lns1(:, lo:hi);
+    Ls2 = constants.historicalWorkloads.Ls2(:, lo:hi);
+    Lns2 = constants.historicalWorkloads.Lns2(:, lo:hi);
 end
 

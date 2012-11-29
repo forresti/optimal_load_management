@@ -6,7 +6,7 @@ function [C1 C2 Del1 Del2 Beta1 Beta2 Y1 Y2 alpha Pito1 Pito2 ] = OptProb_Linear
     close all hidden %get rid of old figures
     clear all
     %% constants
-    Nt=100+1;   % length of prediction horizon (I think)   % can select: 10+1, 20+1, 50+1 and 100+1.
+    Nt=10+1;   % length of prediction horizon (I think)   % can select: 10+1, 20+1, 50+1 and 100+1.
     Nl=10;   % number of loads connected to each bus
     Ns=3;    % number of power sources
     Nb=2;    % number of HVAC buses
@@ -14,15 +14,6 @@ function [C1 C2 Del1 Del2 Beta1 Beta2 Y1 Y2 alpha Pito1 Pito2 ] = OptProb_Linear
 
     %% load the "loads"
     [Ls1,Lns1,Ls2,Lns2]=load3(N);   % choose between load1, load2 and load3.
-
-    %Load requirements for bus 1
-    Ls1sum=sum(Ls1,1); 
-    Lns1sum=sum(Lns1,1);
-
-    % Load requirements for bus 2
-    Ls2sum=sum(Ls2,1); 
-    Lns2sum=sum(Lns2,1); 
-
     plotPowerReq(Ls1, Lns1, Ls2, Lns2, N)
 
     %% Max. Power supply by Engines and APU
@@ -57,7 +48,8 @@ function [C1 C2 Del1 Del2 Beta1 Beta2 Y1 Y2 alpha Pito1 Pito2 ] = OptProb_Linear
     cons=[ cons, sum(Del1,1) == ones(1,Nt)];  % \delta_11(t) + \delta12(t) + \delta_13(t)=1    \forall t>=0
     cons=[ cons, sum(Del2,1) == ones(1,Nt)];
 
-    x=1:1:100;
+    x = 1:1:N;
+    %x=1:1:100;
     xi=0:N/(Nt-1):N; xi(1)=1;  % 0:10:100
 
     % the following five lead to MILP.
@@ -78,7 +70,7 @@ function [C1 C2 Del1 Del2 Beta1 Beta2 Y1 Y2 alpha Pito1 Pito2 ] = OptProb_Linear
     toc;
 
     %test = C1 %this just prints "Linear matrix variable 10x11 (full, real, binary, 110 variables)"
-    test2 = kron(double(C1(1,:)),ones(1,100/(Nt-1))) %this is how to get an actual matrix from C1(1,:)
+    %test2 = kron(double(C1(1,:)),ones(1,100/(Nt-1))) %this is how to get an actual matrix from C1(1,:)
 
     %Plots
     xp=1:1:Nt*100/(Nt-1);  % 110
