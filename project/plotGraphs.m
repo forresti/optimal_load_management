@@ -3,7 +3,8 @@
 function plotGraphs(configLog, sensorLog, constants, Nt, N)
 
     xp=1:1:Nt*100/(Nt-1);  % 110
-    plotPowerReq(constants.historicalWorkloads.Ls1, constants.historicalWorkloads.Lns1, constants.historicalWorkloads.Ls2, constants.historicalWorkloads.Lns2, N)
+    plotPowerReq(constants.historicalWorkloads.Ls1(:,1:N)', constants.historicalWorkloads.Lns1(:,1:N)', constants.historicalWorkloads.Ls2(:,1:N)', constants.historicalWorkloads.Lns2(:,1:N)', N)
+    %plotPowerReq(constants.historicalWorkloads.Ls1, constants.historicalWorkloads.Lns1, constants.historicalWorkloads.Ls2, constants.historicalWorkloads.Lns2, N)
 
     %Shedding1 = configLog(:).Shedding1; doesn't work -- it just returns the first timestep instead of all timesteps
     Shedding1 = []; Shedding2 = [];
@@ -13,9 +14,7 @@ function plotGraphs(configLog, sensorLog, constants, Nt, N)
     end
     plotC(Shedding1', Shedding2', Nt, N, xp)
 
-    %TODO convert our config.BusGen into Del1,Del2. 
     %plotDelta(Del1, Del2, Nt, N, xp)
-
     %plotBeta(Beta1, Beta2, Nt, N, xp)
 end
 

@@ -80,7 +80,7 @@ function [configs] = HLLMS(sensors, constants) %only using 'sensors' for generat
     %[myMax BusGen(2)] = max(Del2_double(:)) %TODO: figure out how to do this in 2d
 
 
-    Shedding1 = double(C1(:,:))
+    Shedding1 = double(C1(:,:));
     Shedding2 = double(C2(:,:));
     Battery1 = double(Beta1(:,:));
     Battery2 = double(Beta2(:,:)); 
@@ -88,14 +88,14 @@ function [configs] = HLLMS(sensors, constants) %only using 'sensors' for generat
     Del2_double = double(Del2(:,:));
     GeneratorOnOff = double(alpha(:,:)); % unlike the other variables, alpha's time index comes first
 
-       configs = [] %array of 'config' data structures
+       configs = []; %array of 'config' data structures
     for i=1:Nt %1 to horizon
         BusGen = [0 0];
-        [myMax BusGen(1)] = max(Del1_double(:,i))  %BusGen(1) is argmax here
-        [myMax BusGen(2)] = max(Del2_double(:,i))
+        [myMax BusGen(1)] = max(Del1_double(:,i));  %BusGen(1) is argmax here
+        [myMax BusGen(2)] = max(Del2_double(:,i));
 
         config = struct('Shedding1', Shedding1(:,i), 'Shedding2', Shedding2(:,i), 'BusGen', BusGen, 'Battery1', Battery1(:,i), 'Battery2', Battery2(:,i), 'GeneratorOnOff', GeneratorOnOff(i,:))
-        configs = [configs config]
+        configs = [configs config];
     end
 end
 
