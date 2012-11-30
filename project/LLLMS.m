@@ -1,7 +1,6 @@
 
 function config = LLLMS(sensors, constants, advice)
     if (checkSafety(advice, sensors, constants))
-        %config = optConfig;
         config = advice;
     else
         config = applyPriorityTables(sensors, constants);
@@ -12,7 +11,7 @@ end
 % This the crux of the LL-LMS system
 function config = applyPriorityTables(sensors, constants)
     [BusGen GeneratorOnOff] = selectGenerators(sensors, constants); %Del1,Del2 in Mehdi's code
-    [Shedding1 Shedding2] = selectShedding(sensors, constants, BusGen) %C1, C2 in Mehdi's code
+    [Shedding1 Shedding2] = selectShedding(sensors, constants, BusGen); %C1, C2 in Mehdi's code
 
     Battery1 = [0]; Battery2 = [0]; %Pwr used for charging each battery. Beta1, Beta2 in Mehdi's code
 
@@ -52,8 +51,8 @@ function [BusGen GeneratorOnOff] = selectGenerators(sensors, constants)
 end
 
 function [Shedding1 Shedding2] = selectShedding(sensors, constants, BusGen)
-    Bus1_pwrReq = sum(sensors.workload.Ls1) + sum(sensors.workload.Lns1)
-    Bus2_pwrReq = sum(sensors.workload.Ls2) + sum(sensors.workload.Lns2)
+    Bus1_pwrReq = sum(sensors.workload.Ls1) + sum(sensors.workload.Lns1);
+    Bus2_pwrReq = sum(sensors.workload.Ls2) + sum(sensors.workload.Lns2);
 
     pwrReqGen1 = 0; pwrReqGen2 = 0; pwrReqApu = 0;
     if (BusGen(1) == 1)

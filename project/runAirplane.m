@@ -1,4 +1,3 @@
-
 %This is the "main function" for our airplane power simulation system
 function [] = runAirplane()
     close all hidden %get rid of old figures
@@ -29,11 +28,10 @@ function [] = runAirplane()
         genStatus = getGeneratorStatus(time);
         sensors = struct('workload', workload, 'genStatus', genStatus, 'time', time);
 
-%        config = HLLMS(sensors, constants); % this is a TEST
         if (HLclock == 1) %time to call HLLMS again
             advice = HLLMS(sensors, constants);
         end
-        config = LLLMS(sensors, constants, advice(HLclock))
+        config = LLLMS(sensors, constants, advice(HLclock));
         if (HLclock == 10) HLclock = 1; 
         else HLclock = HLclock + 1; 
         end

@@ -8,9 +8,6 @@ function plotGraphs(configLog, sensorLog, constants, Nt, N)
     %Shedding1 = configLog(:).Shedding1; doesn't work -- it just returns the first timestep instead of all timesteps
     Shedding1 = []; Shedding2 = [];
     for i=1:N
-        sizeConfigShedding1 = size(configLog(i).Shedding1)
-        sizeShedding1 = size(Shedding1)
-        tmpShedding = configLog(i).Shedding1
         Shedding1 = [Shedding1; configLog(i).Shedding1];
         Shedding2 = [Shedding2; configLog(i).Shedding2];
     end
@@ -58,12 +55,9 @@ end
 
 %plot load shedding
 function plotC(C1, C2, Nt, N, xp)
-    % Plot C
     %xp=1:1:Nt*100/(Nt-1);  % 110
     xp=1:N;
     %xp=1:10:N; %x-axis coords
-    sizeC1 = size(C1(2,:))
-    sizexp = size(xp)
  
     figure;
     subplot(2,2,1);
@@ -105,7 +99,6 @@ function plotC(C1, C2, Nt, N, xp)
 end
 
 function plotDelta(Del1, Del2, Nt, N, xp)
-    % Plot Delta
     figure;
     subplot(2,1,1);
     plot(xi,double(Del1(1,:)),xi,double(Del1(2,:)),xi,double(Del1(3,:)));

@@ -1,6 +1,4 @@
 function [configs] = HLLMS(sensors, constants) %only using 'sensors' for generator status
-    % Choose between different load files, load1, load2, load3,...
-
     N = constants.N; % number of timesteps (use all timesteps -- no interpolation or kron)
     Nt = constants.Nt; % prediction horizon
     Nl = constants.Nl; % number of loads connected to each bus
@@ -67,19 +65,6 @@ function [configs] = HLLMS(sensors, constants) %only using 'sensors' for generat
     solvesdp(cons,obj,options);
     toc;
 
-    %for now, just use the 1st index of these. later, I'll return the whole horizon.
-    %Shedding1 = double(C1(:,1))
-    %Shedding2 = double(C2(:,1));
-    %Battery1 = double(Beta1(:,1));
-    %Battery2 = double(Beta2(:,1)); 
-    %Del1_double = double(Del1(:,1));
-    %Del2_double = double(Del2(:,1));
-    %GeneratorOnOff = double(alpha(1,:)); % unlike the other variables, alpha's time index comes first
-    % BusGen = [0 0];
-    %[myMax BusGen(1)] = max(Del1_double(:))  %BusGen(1) is argmax here
-    %[myMax BusGen(2)] = max(Del2_double(:)) %TODO: figure out how to do this in 2d
-
-
     Shedding1 = double(C1(:,:));
     Shedding2 = double(C2(:,:));
     Battery1 = double(Beta1(:,:));
@@ -88,13 +73,13 @@ function [configs] = HLLMS(sensors, constants) %only using 'sensors' for generat
     Del2_double = double(Del2(:,:));
     GeneratorOnOff = double(alpha(:,:)); % unlike the other variables, alpha's time index comes first
 
-       configs = []; %array of 'config' data structures
+    configs = []; %array of 'config' data structures
     for i=1:Nt %1 to horizon
         BusGen = [0 0];
         [myMax BusGen(1)] = max(Del1_double(:,i));  %BusGen(1) is argmax here
         [myMax BusGen(2)] = max(Del2_double(:,i));
 
-        config = struct('Shedding1', Shedding1(:,i)', 'Shedding2', Shedding2(:,i)', 'BusGen', BusGen, 'Battery1', Battery1(:,i), 'Battery2', Battery2(:,i), 'GeneratorOnOff', GeneratorOnOff(i,:))
+        config = struct('Shedding1', Shedding1(:,i)', 'Shedding2', Shedding2(:,i)', 'BusGen', BusGen, 'Battery1', Battery1(:,i), 'Battery2', Battery2(:,i), 'GeneratorOnOff', GeneratorOnOff(i,:));
         configs = [configs config];
     end
 end
@@ -102,9 +87,7 @@ end
 function [Ls1 Lns1 Ls2 Lns2] = sliceWorkloads(sensors, constants)
     nTimestepsOuterLoop = max(size(constants.historicalWorkloads.Ls1(1,:)));
     lo = sensors.time;
-    hi = min((sensors.time + constants.N)-1, nTimestepsOuterLoop) %out-of-bounds check
-    %hi = min((sensors.time + constants.N)+1, nTimestepsOuterLoop) %out-of-bounds check
-    %hi = min((sensors.time + constants.N), nTimestepsOuterLoop) %out-of-bounds check
+    hi = min((sensors.time + constants.N)-1, nTimestepsOuterLoop); %out-of-bounds check
     Ls1 = constants.historicalWorkloads.Ls1(:, lo:hi);
     Lns1 = constants.historicalWorkloads.Lns1(:, lo:hi);
     Ls2 = constants.historicalWorkloads.Ls2(:, lo:hi);
