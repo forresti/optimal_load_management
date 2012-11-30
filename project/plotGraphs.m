@@ -4,13 +4,13 @@ function plotGraphs(configLog, sensorLog, constants, Nt, N)
 
     xp=1:1:Nt*100/(Nt-1);  % 110
     plotPowerReq(constants.historicalWorkloads.Ls1(:,1:N), constants.historicalWorkloads.Lns1(:,1:N), constants.historicalWorkloads.Ls2(:,1:N), constants.historicalWorkloads.Lns2(:,1:N), N)
-    %plotPowerReq(constants.historicalWorkloads.Ls1, constants.historicalWorkloads.Lns1, constants.historicalWorkloads.Ls2, constants.historicalWorkloads.Lns2, N)
 
     %Shedding1 = configLog(:).Shedding1; doesn't work -- it just returns the first timestep instead of all timesteps
     Shedding1 = []; Shedding2 = [];
     for i=1:N
         sizeConfigShedding1 = size(configLog(i).Shedding1)
         sizeShedding1 = size(Shedding1)
+        tmpShedding = configLog(i).Shedding1
         Shedding1 = [Shedding1; configLog(i).Shedding1];
         Shedding2 = [Shedding2; configLog(i).Shedding2];
     end
@@ -60,7 +60,7 @@ end
 function plotC(C1, C2, Nt, N, xp)
     % Plot C
     %xp=1:1:Nt*100/(Nt-1);  % 110
-    xp=1:100;
+    xp=1:N;
     %xp=1:10:N; %x-axis coords
     sizeC1 = size(C1(2,:))
     sizexp = size(xp)
