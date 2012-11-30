@@ -33,13 +33,15 @@ function [] = runAirplane()
         if (HLclock == 1) %time to call HLLMS again
             advice = HLLMS(sensors, constants);
         end
-        config = LLLMS(sensors, constants, advice(HLclock));
-        if (HLclock == 10) HLclock = 1; else HLclock = HLclock + 1; end
+        config = LLLMS(sensors, constants, advice(HLclock))
+        if (HLclock == 10) HLclock = 1; 
+        else HLclock = HLclock + 1; 
+        end
 
         configLog = [configLog config]; %this concatenation is slow ... but that's fine. 
         sensorLog = [sensorLog sensors];
     end
-    plotGraphs(configLog, sensorLog, constants, Nt, N)
+    plotGraphs(configLog, sensorLog, constants, Nt, nTimesteps)
 end
 
 
