@@ -1,4 +1,4 @@
-function [Ls1,Lns1,Ls2,Lns2]=load3(N)
+function [Ls1,Lns1,Ls2,Lns2]=load4(N)
 
 %constant workloads.
 %60,000 power units in each bus (30,000 sheddable, 30,000 unsheddable)
