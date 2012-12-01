@@ -3,7 +3,7 @@
 % Assumes 3 generators are in the system
 
 function genStatus = getGeneratorStatus(time)
-    if(time < 50) 
+    if(time < 45) 
         genStatus = [1 1 1];
     else
         genStatus = [1 0 1]; %Gen2 fails at time 50 (arbitrary)
