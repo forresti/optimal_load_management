@@ -5,7 +5,10 @@
 %note: all 'binvar' objects are cast to double.
 function isSafe = checkSafety(Shedding1, Shedding2, Ls1, Lns1, Ls2, Lns2, genAssignment1, genAssignment2, generatorOutput) 
 
-    %TODO: convert genAssignment to BusGen
+    BusGen = [0 0];
+    [myMax BusGen(1)] = max(genAssignment1);  %BusGen(1) is argmax here
+    [myMax BusGen(2)] = max(genAssignment2);
+
     genStatus = [1 1 1]; %assume no generator failures for this experiment
 
     Bus1_pwrReq = sum(Ls1) + sum(Lns1(Shedding1>0)); %'Shedding1>0' is a Matlab 'logical coordinate

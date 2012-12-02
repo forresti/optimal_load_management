@@ -1,8 +1,9 @@
 % Choose between different load files, load1, load2, load3,...
 
+close all hidden %get rid of old figures
 clear all
 %% constants
-Nt=10+1;   % number of time steps   % can select: 10+1, 20+1, 50+1 and 100+1.
+Nt=100+1;   % number of time steps   % can select: 10+1, 20+1, 50+1 and 100+1.
 Nl=10;   % number of loads connected to each bus
 Ns=3;    % number of power sources
 Nb=2;    % number of HVAC buses
@@ -110,6 +111,13 @@ obj = obj + M * sum(sum(alpha));
 options=sdpsettings('solver','cplex');
 solvesdp(cons,obj,options);
 toc;
+
+generatorOutput = [U1 U2 U3]; %how much pwr each generator can produce
+isSafe = zeros([1 N]); 
+for i=1:N
+    isSafe(i) = checkSafety(double(C1(:,i)), double(C2(:,i)), Ls1(:,i), Lns1(:,i), Ls2(:,i), Lns2(:,i), double(Del1(:,i)), double(Del2(:,i)), generatorOutput); 
+end
+display(isSafe)
 
 % Plot C
 xp=1:1:Nt*100/(Nt-1);  % 110
