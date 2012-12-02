@@ -69,6 +69,7 @@ function plotC(C1, C2, Nt, N, xp)
     set(gca,'YTick',0:1:1);
     set(gca,'YTickLabel',{'Shed (off)','Granted (on)'});
     xlabel('time [s]');
+    set(gca, 'LineWidth', 5.0) 
 
     subplot(2,2,2);
     plot(xp,C2(1,:),xp,C2(2,:),xp,C2(3,:),xp,C2(4,:),xp,C2(5,:))
