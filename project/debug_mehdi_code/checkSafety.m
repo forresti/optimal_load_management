@@ -3,7 +3,7 @@
 %function isSafe = checkSafety(config, sensors, constants)
 
 %note: all 'binvar' objects are cast to double.
-function isSafe = checkSafety(Shedding1, Shedding2, Ls1, Lns1, Ls2, Lns2, genAssignment1, genAssignment2, generatorOutput) 
+function isSafe = checkSafety(Shedding1, Shedding2, Ls1, Lns1, Ls2, Lns2, genAssignment1, genAssignment2, generatorOutput, time) 
 
     BusGen = [0 0];
     [myMax BusGen(1)] = max(genAssignment1);  %BusGen(1) is argmax here
@@ -43,9 +43,12 @@ function isSafe = checkSafety(Shedding1, Shedding2, Ls1, Lns1, Ls2, Lns2, genAss
     % checking for generator overload
     if(pwrReqGen1 > generatorOutput(1))
         isSafe=0;
+        sprintf('UNSAFE at time %d: Generator 1 produces %d power units, but the HL-LMS allocated Generator 1 to provide %d power units', time, generatorOutput(1), pwrReqGen1)
     elseif(pwrReqGen2 > generatorOutput(2))
         isSafe=0;
+        sprintf('UNSAFE at time %d: Generator 2 produces %d power units, but the HL-LMS allocated Generator 2 to provide %d power units', time, generatorOutput(2), pwrReqGen2)
     elseif(pwrReqApu > generatorOutput(3))
+        sprintf('UNSAFE at time %d: APU produces %d power units, but the HL-LMS allocated APU to provide %d power units', time, generatorOutput(3), pwrReqApu)
         isSafe=0;
     end
 end
