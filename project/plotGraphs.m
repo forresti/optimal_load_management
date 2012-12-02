@@ -61,7 +61,7 @@ function plotC(C1, C2, Nt, N, xp)
  
     figure;
     subplot(2,2,1);
-    plot(xp,C1(1,:),xp,C1(2,:),xp,C1(3,:),xp,C1(4,:),xp,C1(5,:), 'LineWidth',2)
+    plot(xp,C1(1,:),xp,C1(2,:),xp,C1(3,:),xp,C1(4,:),xp,C1(5,:), 'LineWidth',1.5)
 
     legend('L_1','L_2','L_3','L_4','L_5','Orientation','horizontal');
     title('Power shedding of AC bus 1 (loads 1 to 5)');
@@ -71,7 +71,7 @@ function plotC(C1, C2, Nt, N, xp)
     xlabel('time [s]');
 
     subplot(2,2,2);
-    plot(xp,C2(1,:),xp,C2(2,:),xp,C2(3,:),xp,C2(4,:),xp,C2(5,:))
+    plot(xp,C2(1,:),xp,C2(2,:),xp,C2(3,:),xp,C2(4,:),xp,C2(5,:), 'LineWidth',1.5)
     legend('L_1','L_2','L_3','L_4','L_5','Orientation','horizontal');
     title('Power shedding of AC bus 2 (loads 1 to 5)');
     axis([0 N+10 -0.1 1.5]);
@@ -80,7 +80,7 @@ function plotC(C1, C2, Nt, N, xp)
     xlabel('time [s]');
 
     subplot(2,2,3);
-    plot(xp,C1(6,:),xp,C1(7,:),xp,C1(8,:),xp,C1(9,:),xp,C1(10,:))
+    plot(xp,C1(6,:),xp,C1(7,:),xp,C1(8,:),xp,C1(9,:),xp,C1(10,:), 'LineWidth',1.5)
     legend('L_6','L_7','L_8','L_9','L_{10}','Orientation','horizontal');
     title('Power shedding of AC bus 1 (loads 6 to 10)');
     axis([0 N+10 -0.1 1.5]);
@@ -89,7 +89,7 @@ function plotC(C1, C2, Nt, N, xp)
     xlabel('time [s]');
 
     subplot(2,2,4);
-    plot(xp,C2(6,:),xp,C2(7,:),xp,C2(8,:),xp,C2(9,:),xp,C2(10,:))
+    plot(xp,C2(6,:),xp,C2(7,:),xp,C2(8,:),xp,C2(9,:),xp,C2(10,:), 'LineWidth',1.5)
     legend('L_6','L_7','L_8','L_9','L_{10}','Orientation','horizontal');
     title('Power shedding of AC bus 2 (loads 6 to 10)');
     axis([0 N+10 -0.1 1.5]);
