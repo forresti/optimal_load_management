@@ -10,10 +10,10 @@ end
 
 %perturb one set of workloads on a bus (e.g. Ls1, Lns1, ...)
 function bus =  perturbBus(bus)
-    randRange = 5.2; %will use random numbers in the space (-randRange/2, randRange/2)
+    randRange = 4.0; %will use random numbers in the space (-randRange/2, randRange/2)
     Nl = size(bus); %number of individual loads to perturb
     perturbation = (rand(Nl) * (randRange)) - (randRange/2); %random vector of size Nl with the specified range, centered at 0
-    bus = abs(bus + bus .* perturbation)
+    bus = abs(bus + bus .* perturbation);
 
 end
 
