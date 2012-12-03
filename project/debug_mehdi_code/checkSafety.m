@@ -11,8 +11,8 @@ function isSafe = checkSafety(Shedding1, Shedding2, Ls1, Lns1, Ls2, Lns2, genAss
 
     genStatus = [1 1 1]; %assume no generator failures for this experiment
 
-    Bus1_pwrReq = sum(Lns1) + sum(Ls1(Shedding1>0)); %'Shedding1>0' is a Matlab 'logical coordinate
-    Bus2_pwrReq = sum(Lns2) + sum(Ls2(Shedding2>0));
+    Bus1_pwrReq = sum(Lns1) + sum(Ls1(Shedding1<1)); %'Shedding1>0' is a Matlab 'logical coordinate
+    Bus2_pwrReq = sum(Lns2) + sum(Ls2(Shedding2<1));
    
     %calculate pwr required from each generator
     pwrReqGen1 = 0; pwrReqGen2 = 0; pwrReqApu = 0; 

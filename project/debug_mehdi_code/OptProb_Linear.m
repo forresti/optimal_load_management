@@ -115,7 +115,8 @@ toc;
 generatorOutput = [U1 U2 U3]; %how much pwr each generator can produce
 isSafe = zeros([1 N]); 
 for i=1:N
-    isSafe(i) = checkSafety(double(C1(:,i)), double(C2(:,i)), Ls1(:,i), Lns1(:,i), Ls2(:,i), Lns2(:,i), double(Del1(:,i)), double(Del2(:,i)), generatorOutput, i); 
+    %isSafe(i) = checkSafety(double(C1(:,i)), double(C2(:,i)), Ls1(:,i), Lns1(:,i), Ls2(:,i), Lns2(:,i), double(Del1(:,i)), double(Del2(:,i)), generatorOutput, i); 
+    isSafe(i) = checkSafety(double(C1(:,i+1)), double(C2(:,i+1)), Ls1(:,i), Lns1(:,i), Ls2(:,i), Lns2(:,i), double(Del1(:,i+1)), double(Del2(:,+1)), generatorOutput, i); 
 end
 %display(isSafe)
 
