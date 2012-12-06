@@ -8,7 +8,7 @@
 \makeatother
 \begin{document}
 
-\title{OL-LMS}
+\title{Hierarchical Control for Aircraft Electronic Power Systems}
 
 \numberofauthors{2}
 \author{
@@ -27,27 +27,28 @@ Huy Vo\\
 Best abstract ever
 \end{abstract}
 
-\keywords{embedded systems and planes and stuff} 
+\keywords{avionics, control, optimization} 
 
 \section{Introduction}
-Overview, stuff about platform based design... test test
+High-level... Increasing complexity of EPS...
 
-Intro to aircraft EPS... explain the buses and generators.
-Possibly show the diagram from the Honeywell patent.
-Possibly show our ``cartoon" diagram of an EPS system.
-
-Our key objective is to design a Load Management System (LMS) for EPS that is ``smarter" in terms of several criteria.
+We aim to design a Load Management System (LMS) for EPS that is ``smarter" in terms of several criteria.
 First, always preserve safety.
 After preserving safety, maximize the quality of service.
 Finally, conserve fuel by using as few generators as possible.
 
+The rest of the paper is organized as follows. (TODO)
+
+\section{Aircraft EPS Overview}
+Intro to aircraft EPS... explain the buses and generators.
+Possibly show the diagram from the Honeywell patent.
+Possibly show our ``cartoon" diagram of an EPS system.
+
+\subsection{Load Shedding}
 Aircraft EPS generally have two types of loads: sheddable and non-sheddable.
 Examples of non-sheddable loads include navigation systems, electronic actuators, and other mission-critical devices.
 Sheddable loads include the cabin lights, kitchen, and electrical outlets for passengers' laptop computers.
 If an EPS power bus requires more power than the generators can provide, the LMS is responsible for disabling (shedding) some of the sheddable loads.
-
-\subsection{OL-LMS Goals}
-Talk about goals of project
 
 \section{Related Work}
 \label{sec:related-work}
@@ -56,13 +57,13 @@ Specifically, [these systems typically require] unsheddable loads to remain powe
 Therefore, if a generator fails, the EPS must shed loads and/or reallocate generators to buses such that no unsheddable load becomes unpowered.
 Typically, these systems rely on hard-coded priority tables for selecting loads to shed and for allocating generators to buses.
 
-\subsection{Optimizing-LMS}
+\section{Optimizing LMS}
 \label{sec:optimizing-LMS}
 LMS systems that are based purely on priority tables are effective for preserving safety.
 However, priority table solutions tend to shed more loads than necessary, to use more generators than necessary, [and be ill-defined in their tradeoffs between generator allocation and load shedding].
 Toward resolving these issues, the control systems community recently designed a model-predictive optimizing controller for aircraft EPS [Mehdi's paper].
 The key insight in [Mehdi's paper] is to formulate the system requirements (e.g. the maximum power produced by each generator) as constraints in an optimization problem.
-Then, [Mehdi's paper] selected an objective function such that solving this optimization problem produces a power system allocation using a minimal number of generators while also minimizing the total number and duration of loads that are shed. 
+Further, [Mehdi's paper] proposes an objective function such that solving the optimization problem produces a power system allocation using a minimal number of generators while also minimizing the total number and duration of loads that are shed. 
 [This optimizing controller aims to minimize three weighted parameters: load shedding preference, generator selection preference, and number of generators used.]
 [TODO: show a simplified version of Mehdi's math]
 
@@ -90,8 +91,17 @@ Ensure that no non-sheddable load is unpowered for more  than 50ms
 Modify LL-LMS to call the Optimizing LMS periodically.
 LL-LMS does safety checks on results from Optimizing LMS...
 
-\section{OL-LMS}
-Talk about how the entire system works at a whole, how we set it up, etc.
+TODO: explain interaction and communication between Optimizing LMS and LL-LMS.
+
+\section{Experimental Design}
+
+Parameters: \\
+generator 1: 100,000 W \\
+generator 2: 100,000 W \\
+APU: 104,000 W \\
+
+[TODO: show priority tables]
+
 \section{Experimental Results}
 \begin{figure}[hb]
   \centering
@@ -122,7 +132,7 @@ Talk about how the entire system works at a whole, how we set it up, etc.
 
 For our first experiment, we simulated the case when there are no power
 generators failures in the system using the power usage profile shown in
-Figure~\ref{fig:preqnofail}. Notice that Bus 1 uses more than 100000 Watts
+Figure~\ref{fig:preqnofail}. Notice that Bus 1 requests more than 100,000 Watts
 between time 30 and 60 and again around time 90. Bus 2, on the other hand,
 has a massive power usage between time 50 and 80. We wanted to see how the
 HL-LMS and the LL-LMS responds to this scenario in isolation. Our results
