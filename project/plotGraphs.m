@@ -61,7 +61,7 @@ function plotC(C1, C2, Nt, N, xp)
  
     figure;
     subplot(2,2,1);
-    plot(xp,C1(1,:),xp,C1(2,:),xp,C1(3,:),xp,C1(4,:),xp,C1(5,:), 'LineWidth',1.5)
+    plot(xp,C1(1,:),xp,C1(2,:)+0.01,xp,C1(3,:),xp,C1(4,:),xp,C1(5,:), 'LineWidth',1.5)
 
     legend('L_1','L_2','L_3','L_4','L_5','Orientation','horizontal');
     title('Power shedding of AC bus 1 (loads 1 to 5)');
