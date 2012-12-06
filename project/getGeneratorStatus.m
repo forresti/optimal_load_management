@@ -6,7 +6,7 @@ function genStatus = getGeneratorStatus(time)
     if(time < 45) 
         genStatus = [1 1 1];
     else
-        genStatus = [1 0 1]; %Gen2 fails at time 50 (arbitrary)
+        genStatus = [1 1 1]; %Gen2 fails at time 50 (arbitrary)
     end
 end
 

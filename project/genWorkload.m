@@ -1,11 +1,20 @@
 % Get a workload at a particular time.
 % One way to do this is to just use (and perhaps slightly perturb) historical workloads
-function workload = genWorkload(historicalWorkloads, time)
-    newLs1 = perturbBus(historicalWorkloads.Ls1(:,time));
-    newLns1 = perturbBus(historicalWorkloads.Lns1(:,time));
-    newLs2 = perturbBus(historicalWorkloads.Ls2(:,time));
-    newLns2 = perturbBus(historicalWorkloads.Lns2(:,time));
-    workload = struct('Ls1', newLs1, 'Lns1', newLns1, 'Ls2', newLs2, 'Lns2', newLns2);
+function workload = genWorkload(historicalWorkloads, time, doPerturb)
+    Ls1 = historicalWorkloads.Ls1(:,time);
+    Lns1 = historicalWorkloads.Lns1(:,time);
+    Ls2 = historicalWorkloads.Ls2(:,time);
+    Lns2 = historicalWorkloads.Lns2(:,time);
+    newLs1 = perturbBus(Ls1);
+    newLns1 = perturbBus(Lns1);
+    newLs2 = perturbBus(Ls2);
+    newLns2 = perturbBus(Lns2);
+    if (doPerturb)
+      workload = struct('Ls1', newLs1, 'Lns1', newLns1, 'Ls2', newLs2, 'Lns2', newLns2);
+    else
+       workload = struct('Ls1', Ls1, 'Lns1', Lns1, 'Ls2', Ls2, 'Lns2', Lns2);
+    end
+        
 end
 
 %perturb one set of workloads on a bus (e.g. Ls1, Lns1, ...)
