@@ -1,0 +1,231 @@
+%%%%
+%%%%  $Source: /home/zaher/iandola1/Robust-Journal/RCS/artrtcl.sty,v $
+%%%%  $Id: artrtcl.sty,v 1.1 2010/05/07 03:04:34 pjayach2 Exp $
+%%%%
+%%%%  Standard Article Style modfications used by Real-Time Computing Lab
+%%%%
+%
+%The content of theorem enviroment is printed in Roman
+%
+\def\@begintheorem#1#2{\rm \trivlist \item[\hskip \labelsep{\bf #1\ #2:~}]}
+\def\@opargbegintheorem#1#2#3{\bf \trivlist
+      \item[\hskip \labelsep{\bf #1\ #2\ (#3):}]}
+\def\@endtheorem{\endtrivlist}
+%
+% redefine equation numbering in appendix
+%
+\def\appendix{\par
+  \setcounter{section}{0}
+  \setcounter{subsection}{0}
+  \def\theequation{\Alph{section}.\arabic{equation}}
+  \def\thesection{\Alph{section}}}
+%
+% EQUATION and EQNARRAY numbered with each section
+%
+\@newctr{equation}[section]
+\def\theequation{\arabic{section}.\arabic{equation}}
+%
+% Perform indentation after sections heading
+%
+\def\section{\@startsection {section}{1}{\z@}{3.5ex plus -1ex minus 
+    -.2ex}{2.3ex plus .2ex}{\Large\bf}}
+\def\subsection{\@startsection{subsection}{2}{\z@}{3.25ex plus -1ex minus 
+   -.2ex}{1.5ex plus .2ex}{\large\bf}}
+\def\subsubsection{\@startsection{subsubsection}{3}{\z@}{3.25ex plus 
+ -1ex minus -.2ex}{1.5ex plus .2ex}{\normalsize\bf}}
+% define math operator Prob.
+\def\prob{\mathop{\rm Prob}\nolimits}
+% A new list enviroment equivalent to troff's .ip
+\newenvironment{itemlist}[1]
+{\begin{list}{}{\settowidth{\labelwidth}{#1}
+\setlength{\leftmargin}{\labelwidth}
+\addtolength{\leftmargin}{\itemindent}
+\addtolength{\leftmargin}{\labelsep}
+\renewcommand{\makelabel}[1]{##1\hfill}}}{\end{list}}  
+%
+%
+%  Modified footname stuff
+%
+%
+\long\def\@ourmakefntext#1{\parindent 1em\noindent 
+ #1}
+\long\def\@ourfootnotetext#1{\insert\footins{\footnotesize
+    \interlinepenalty\interfootnotelinepenalty 
+    \splittopskip\footnotesep
+    \splitmaxdepth \dp\strutbox \floatingpenalty \@MM
+    \hsize\columnwidth \@parboxrestore
+   \edef\@currentlabel{\csname p@footnote\endcsname}\@ourmakefntext
+    {\rule{\z@}{\footnotesep}\ignorespaces
+      #1\strut}}}
+\def\ourfootnotetext{\@ifnextchar
+    [{\@xfootnotenext}{\xdef\@thefnmark{\thempfn}\@ourfootnotetext}}
+%
+%
+% Maketitle modified to prevent it from printing out the
+% the date.
+%
+\def\thanks#1{\begingroup
+\def\protect{\noexpand\protect\noexpand}\xdef\@thanks{\@thanks
+  \protect\ourfootnotetext{#1}}\endgroup}
+%
+\def\maketitle{\par
+ \begingroup
+ \if@twocolumn 
+ \twocolumn[\@maketitle] 
+ \else \newpage
+ \global\@topnum\z@ \@maketitle \fi\thispagestyle{empty}\@thanks
+ \endgroup
+ \setcounter{footnote}{0}
+ \let\maketitle\relax
+ \let\@maketitle\relax
+ \gdef\@thanks{}\gdef\@author{}\gdef\@title{}\let\thanks\relax}
+\def\@maketitle{
+ \vskip 2em \begin{center}
+ {\def\baselinestretch{1.2} \Large \bf \@title \par\def\baselinestretch{1}}
+ \vskip 1.5em {\large \lineskip .5em
+\begin{tabular}[t]{c}\@author 
+ \end{tabular}\par} 
+ \end{center}
+ \par
+ } 
+\def\abstract{\if@twocolumn
+\section*{Abstract}
+\else 
+\begin{center}
+{\bf ABSTRACT\vspace{-.5em}\vspace{0pt}}
+\end{center}
+\fi}
+\def\endabstract{}
+%
+%
+%
+
+\mark{{}{}} 
+
+\if@twoside \def\ps@headings{\let\@mkboth\markboth
+\def\@oddfoot{}\def\@evenfoot{}\def\@evenhead{\rm \thepage\hfil \sl
+\leftmark}\def\@oddhead{\hbox{}\sl \rightmark \hfil
+\rm\thepage}\def\sectionmark##1{\markboth {\uppercase{\ifnum \c@secnumdepth
+>\z@
+ \thesection\hskip 1em\relax \fi ##1}}{}}\def\subsectionmark##1{\markright
+{\ifnum \c@secnumdepth >\@ne
+ \thesubsection\hskip 1em\relax \fi ##1}}}
+\else \def\ps@headings{\let\@mkboth\markboth
+\def\@oddfoot{}\def\@evenfoot{}\def\@oddhead{\hbox {}\sl \rightmark \hfil
+\rm\thepage}\def\sectionmark##1{\markright {\uppercase{\ifnum \c@secnumdepth
+>\z@
+ \thesection\hskip 1em\relax \fi ##1}}}}
+\fi
+\def\ps@myheadings{\let\@mkboth\@gobbletwo
+\def\@oddhead{\hbox{}\sl\rightmark \hfil
+\sl\leftmark}\def\@oddfoot{}\def\@evenhead{\sl\rightmark\hfil\sl\leftmark\hbox
+{}}\def\@evenfoot{}\def\sectionmark##1{}\def\subsectionmark##1{}}
+% 
+%
+%Table of contents
+%
+\def\tableofcontents{\section*{TABLE OF CONTENTS}
+ \@starttoc{toc}}
+\def\l@part#1#2{\addpenalty{\@secpenalty}
+ \addvspace{2.25em plus 1pt} \begingroup
+ \@tempdima 3em \parindent \z@ \rightskip \@pnumwidth \parfillskip
+-\@pnumwidth 
+ {\large \bf \leavevmode #1\hfil \hbox to\@pnumwidth{\hss #2}}\par
+ \nobreak \endgroup}
+\def\l@section#1#2{\addpenalty{\@secpenalty} \addvspace{1.0em plus 1pt}
+\@tempdima 1.5em \begingroup
+ \parindent \z@ \rightskip \@pnumwidth 
+ \parfillskip -\@pnumwidth 
+ \bf \leavevmode #1\hfil \hbox to\@pnumwidth{\hss #2}\par
+ \endgroup}
+\def\l@subsection{\@dottedtocline{2}{1.5em}{2.3em}}
+\def\l@subsubsection{\@dottedtocline{3}{3.8em}{3.2em}}
+\def\l@paragraph{\@dottedtocline{4}{7.0em}{4.1em}}
+\def\l@subparagraph{\@dottedtocline{5}{10em}{5em}}
+\def\listoffigures{\section*{LIST OF FIGURES}
+ \@starttoc{lof}}
+\def\l@figure{\@dottedtocline{1}{1.5em}{2.3em}}
+\def\listoftables{\section*{LIST OF TABLES}
+ \@starttoc{lot}}
+\let\l@table\l@figure
+%
+%
+%
+%
+%
+\newcount\hrs
+\newcount\minu
+\newcount\finalhrs
+\def\rtcltime{ \hrs=\time \divide\hrs by60 \finalhrs=\hrs 
+               \multiply\hrs by-60 \minu=\time \advance\minu by\hrs
+               \number\finalhrs:\number\minu~hrs} 
+%
+%
+%
+% Fix to the myheadings problem
+%   - Puts the date on the right side headings
+%
+\def\ps@rtclhead{\let\@mkboth\@gobbletwo
+\def\@oddhead{\hbox{}\bf\rightmark \hfil \bf\leftmark}
+\def\@oddfoot{\hbox{}\hfil\rm\thepage\hfil\hbox{}}
+\def\@evenhead{\bf \righthead\hfil\bf\leftmark\hbox {}}
+\def\@evenfoot{\hbox{}\hfil\rm\thepage\hfil\hbox{}}
+\def\sectionmark##1{}\def\subsectionmark##1{}}
+%
+% Headings without page at the bottom
+%
+\def\ps@rtclchdwopg{\let\@mkboth\@gobbletwo
+\def\@oddhead{\hbox{}\bf\rightmark \hfil \bf\leftmark}
+\def\@oddfoot{}
+\def\@evenhead{\bf \righthead\hfil\bf\leftmark\hbox {}}
+\def\@evenfoot{}
+\def\sectionmark##1{}\def\subsectionmark##1{}}
+%
+% Command for linespacing
+%
+\input{lsmacro.sty}
+
+%
+% Definitions to get trademark
+%
+\newfont{\sqi}{cmssqi8}
+\newcommand{\IR}{\mbox{$I\!\!R$}}
+\newcommand{\IP}{\mbox{$I\!\!P$}}
+\newcommand{\IN}{\mbox{$I\!\!N$}}
+\newcommand{\IC}{\mbox{$C\!\!\!\!\raisebox{.75pt}{\mbox{\sqi I}}$}}
+%
+\def\tm{\hbox{$^{\scriptscriptstyle \rm TM}$}}
+% 
+% Filled Box
+%
+\newcommand{\darkbox}{\vrule height6pt width6pt depth0pt}
+%
+%  Source: clbiba.sty ( Closed Bibliography Style )
+%
+\def\thebibliography#1{\section*{References
+  }\list
+  {[\arabic{enumi}]}{\settowidth\labelwidth{[#1]}
+    \leftmargin\labelwidth
+    \advance\leftmargin\labelsep
+    \usecounter{enumi}}
+    \def\newblock{\hskip .11em plus .33em minus -.07em}
+    \sloppy
+    \sfcode`\.=1000\relax}
+%
+%
+%
+%
+% Normal Page Size Modifications
+%
+\oddsidemargin  0.1875in               %
+\evensidemargin 0.1875in               %
+\topmargin -0.3in                      %
+\textheight 8.5in                      %
+\textwidth  6.0in                      %
+\parskip 6pt plus 1pt                  %
+%
+%  New Environments
+%
+\newtheorem{thm}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{defi}{Definition}
