@@ -16,7 +16,7 @@ function [] = runAirplane()
     generatorOutput = [1e5, 1e5, 104e3]; %Pwr produced by generators. Called U1, U2, U3 in Mehdi's code
         %TODO: make generatorOutput be a parameter to Mehdi's code, so that we can tweak it easily.
     %[Ls1,Lns1,Ls2,Lns2]=load3(typecast(nTimesteps+Nt, 'int32')); % load the "loads" -- choose between load1, load2 and load3. (including extra padding, Nt, to avoid out-of-bounds in HLLMS)
-    [Ls1,Lns1,Ls2,Lns2]=load1(110);
+    [Ls1,Lns1,Ls2,Lns2]=load3(110);
     historicalWorkloads = struct('Ls1', Ls1, 'Lns1', Lns1, 'Ls2', Ls2, 'Lns2', Lns2);
     priorityTables = getPriorityTables();
     constants = struct('historicalWorkloads', historicalWorkloads, 'priorityTables', priorityTables, 'generatorOutput', generatorOutput, 'nTimesteps', nTimesteps, 'Nt', Nt, 'Nl', Nl, 'Ns', Ns, 'Nb', Nb, 'N', N); %hard-coded params to pass around  

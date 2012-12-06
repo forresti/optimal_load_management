@@ -74,12 +74,12 @@ function [configs] = HLLMS(sensors, constants) %only using 'sensors' for generat
     GeneratorOnOff = double(alpha(:,:)); % unlike the other variables, alpha's time index comes first
 
     configs = []; %array of 'config' data structures
-    for i=1:Nt %1 to horizon
+    for i=1:(Nt-1) %1 to horizon
         BusGen = [0 0];
-        [myMax BusGen(1)] = max(Del1_double(:,i));  %BusGen(1) is argmax here
-        [myMax BusGen(2)] = max(Del2_double(:,i));
+        [myMax BusGen(1)] = max(Del1_double(:,i+1));  %BusGen(1) is argmax here
+        [myMax BusGen(2)] = max(Del2_double(:,i+1));
 
-        config = struct('Shedding1', Shedding1(:,i)', 'Shedding2', Shedding2(:,i)', 'BusGen', BusGen, 'Battery1', Battery1(:,i), 'Battery2', Battery2(:,i), 'GeneratorOnOff', GeneratorOnOff(i,:));
+        config = struct('Shedding1', Shedding1(:,i+1)', 'Shedding2', Shedding2(:,i+1)', 'BusGen', BusGen, 'Battery1', Battery1(:,i), 'Battery2', Battery2(:,i), 'GeneratorOnOff', GeneratorOnOff(i,:));
         configs = [configs config];
     end
 end

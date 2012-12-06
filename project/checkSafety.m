@@ -3,8 +3,8 @@
 function isSafe = checkSafety(config, sensors, constants)
     Shedding1 = config.Shedding1;
     Shedding2 = config.Shedding2;
-    Bus1_pwrReq = sum(sensors.workload.Ls1) + sum(sensors.workload.Lns1(Shedding1>0)); %'Shedding1>0' is a Matlab 'logical coordinate'
-    Bus2_pwrReq = sum(sensors.workload.Ls2) + sum(sensors.workload.Lns2(Shedding2>0));
+    Bus1_pwrReq = sum(sensors.workload.Lns1) + sum(sensors.workload.Ls1(Shedding1>0)); %'Shedding1>0' is a Matlab 'logical coordinate'
+    Bus2_pwrReq = sum(sensors.workload.Lns2) + sum(sensors.workload.Ls2(Shedding2>0));
    
     %calculate pwr required from each generator
     pwrReqGen1 = 0; pwrReqGen2 = 0; pwrReqApu = 0; 
