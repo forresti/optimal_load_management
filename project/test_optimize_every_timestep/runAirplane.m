@@ -8,8 +8,8 @@ function [] = runAirplane()
     Nb=2;    % number of buses
 
     %N and Nt are params for for Mehdi's code
-    N = 10; % prediction horizon
-    Nt = 10+1; % (prediction horizon + 1) -- some off-by-one-fix relic.
+    N = 2; % prediction horizon
+    Nt = 2+1; % (prediction horizon + 1) -- some off-by-one-fix relic.
 
     sensorLog = [];
     configLog = [];
@@ -28,13 +28,8 @@ function [] = runAirplane()
         genStatus = getGeneratorStatus(time);
         sensors = struct('workload', workload, 'genStatus', genStatus, 'time', time);
 
-        if (HLclock == 1) %time to call HLLMS again
-            advice = HLLMS(sensors, constants);
-        end
+        advice = HLLMS(sensors, constants);
         config = LLLMS(sensors, constants, advice(HLclock));
-        if (HLclock == 10) HLclock = 1; 
-        else HLclock = HLclock + 1; 
-        end
 
         configLog = [configLog config]; %this concatenation is slow ... but that's fine. 
         sensorLog = [sensorLog sensors];
