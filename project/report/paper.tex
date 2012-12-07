@@ -59,7 +59,8 @@ Typically, these systems rely on hard-coded priority tables for selecting loads 
 
 \section{Optimizing LMS}
 \label{sec:optimizing-LMS}
-LMS systems that are based purely on priority tables are effective for preserving safety.
+LMS systems that are based purely on priority tables are very simplistic, allowing them to frequently sample the system. These LMS systems are thus more
+responsive to failures in the system.
 However, priority table solutions tend to shed more loads than necessary, to use more generators than necessary, [and be ill-defined in their tradeoffs between generator allocation and load shedding].
 Toward resolving these issues, the control systems community recently designed a model-predictive optimizing controller for aircraft EPS~\cite{mehdi}.
 The key insight in~\cite{mehdi} is to formulate the system requirements (e.g. the maximum power produced by each generator) as constraints in an optimization problem.
@@ -75,39 +76,14 @@ Thus, it is potentially unsafe to use Optimizing LMS to control the electronics 
 However, as we will see later in the paper, the Optimizing LMS can be effective if it is coupled with a fail-safe Low Level LMS.
 
 \section{Low Level LMS}
-[Talk about our LL-LMS system, its inputs/outputs, functionality, etc]
-
-This section presents a Low-Level LMS (LL-LMS) similar to the controllers discussed in Section~\ref{sec:related-work}.
-The key goal (and perhaps the only) goal of this load management system is to preserve safety if workloads change or if  generators fail.
-Therefore, using a pre-defined priority table of generator assignments and loads to shed, our LL-LMS sheds loads until the power requirement is within the generator's power budget.
-
-[TODO: 4-line pseudo-code for how we apply priority tables]
-
-Other details:
-Low-level controller samples system at every  timestep (e.g. 50ms of system time) 
-Ensure that no non-sheddable load is unpowered for more  than 50ms 
-
-\section{Hierarchical LMS}
-Modify LL-LMS to call the Optimizing LMS periodically.
-LL-LMS does safety checks on results from Optimizing LMS...
-
-TODO: explain interaction and communication between Optimizing LMS and LL-LMS.
-
-\section{Experimental Design}
-
-Parameters: \\
-generator 1: 100,000 W \\
-generator 2: 100,000 W \\
-APU: 104,000 W \\
-
-[TODO: show priority tables; numerical example]
-
 \begin{table}[t]
-\caption{Load Priority Table Example} %from Mehdi's paper
-\label{T:shed} 
+\caption{\textbf{Load Priority Table Example, NS = nonsheddable, S = sheddable} 
+Loads lower in the list have lower priority while loads higher up in the list have
+higher priority. LL-LMS will shed load starting at the lower end of the list.}
+\label{T:shed}
 \centering
 \begin{tabular}{c|cc}
- Non-sheddable loads (W) & Sheddable loads (W) & Shed priority \\ \hline
+ NS loads (W) & S loads (W) & Shed priority \\ \hline
 1000 & 1000 & 1 \\
 1000 & 5000 & 2 \\
 500 & 2000 & 3 \\
@@ -121,10 +97,90 @@ APU: 104,000 W \\
 \end{tabular}
 \end{table}
 
-\section{Experimental Results}
-\begin{figure}[hb]
+\subsection{Overview}
+As the name suggest, the LL-LMS is implemented as the last level of controller in the system. Above all else, the LL-LMS must guarantee safe operation
+conditions \footnote{For the purposes of this paper, we only consider the following safety conditions: no load remains unpowered for more than 50ms,
+loads are not connected to unpowered generators, and no generator is connected to loads whose power request exceeds the power rating of the generator}.
+Briefly, the LL-LMS uses various sensors to frequently sample the state of the system. It then uses its sensor readings along with its
+priority tables, such as the one in Table~\ref{T:shed}, to produce a safe system configuration.
+
+\subsection{Implementation}
+\label{sec:LL-LMS}
+Every cycle, the LL-LMS reads it sensors to collect data on generator status and power requests on all the nonsheddable and sheddable loads. The LL-LMS
+first filters out unhealthy generator tables and then uses its generator priority table to determine which of the remaining healthy generators it should
+use to power the system. Once it has determined what generator to use, the LL-LMS will then determine how much load it has to shed. It first sums up power
+requests of all the loads (sheddable and nonsheddable) on each bus. It then determines if the generator for each of the buses are able to power all of the
+loads. If the power request is more than a generator can provide, the LL-LMS will start shedding sheddable loads starting at the load with the lowest
+priority. This simple generator selection and load shedding scheme ensure that the LL-LMS can quickly arrive at a safe system configuration.
+
+%% This section presents a Low-Level LMS (LL-LMS) similar to the controllers discussed in Section~\ref{sec:related-work}.
+%% The key goal (and perhaps the only) goal of this load management system is to preserve safety if workloads change or if  generators fail.
+%% Therefore, using a pre-defined priority table of generator assignments and loads to shed, our LL-LMS sheds loads until the power requirement is within the generator's power budget.
+
+[TODO: 4-line pseudo-code for how we apply priority tables]
+
+Other details:
+Low-level controller samples system at every  timestep (e.g. 50ms of system time) 
+Ensure that no non-sheddable load is unpowered for more  than 50ms 
+
+\section{Hierarchical LMS}
+\subsection{Overview}
+Recall that the goal of our project is not to design an LMS that is safe OR optimal. Rather, we want to build an LMS that is both safe AND optimal. To this
+end, we propose a hierarchical LMS that achieves the best of both worlds by combining an optimizing LMS with a low level LMS. The OL-LMS periodically,
+though at a slow rate, samples the status of the system and produces a system configuration that is optimal. More specifically, the OL-LMS checks the
+status of the generators and solves the optimization problem detailed in Section~\ref{sec:optimizing-LMS}. The LL-LMS collects the advice from the O-LMS
+and determines whether or not the advice is safe. If the advice is safe, the LL-LMS will actuate the system based on the O-LMS's advice. Otherwise, the
+LL-LMS will fall back to its priority table. Because failures are rare, the LL-LMS will spend most of the time actuating the system based on the O-LMS's
+advice. This hierarchical LMS (H-LMS) is optimal because the O-LMS is optimal and is safe because the LL-LMS is safe.
+
+\subsection{O-LMS Modifications}
+Instead of having the O-LMS system read the sensors directly as it would in a system that relies solely on an O-LMS, it will instead receive its system 
+status information from the LL-LMS. This communication strategy saves on communication links between sensors and the O-LMS and reuses the communication
+link between the LL-LMS and the O-LMS. We also use the O-LMS to perform live optimizations of the system. That is, instead of solving one large offline
+optimization problem use a receding horizon that covers the entire flight, we have the O-LMS periodically solve many optimization problems using a much
+smaller receding horizon. Our implementation makes the O-LMS system more resilient to generator failures. Previously, the O-LMS would be completely
+oblivious to generators that fail mid-flight. With this modification, the O-LMS will eventually see that there is a generator failure and reoptimize.
+
+\subsection{LL-LMS Modifications}
+The LL-LMS will now receive advice from the HL-LMS in addition to its other functionalities detailed in Section~\ref{sec:LL-LMS}. The LL-LMS will then
+check to see that the HL-LMS's advice is safe. Specifically, the LL-LMS will check that the HL-LMS did not recommend the use of a failed generator and that
+the HL-LMS has shed enough loads so that no generator is overloaded. In the case that the HL-LMS recommended the use of a failed generator, the LL-LMS
+will use the next best generator according to its priority table and perform the appropriate load shedding. In the case that HL-LMS advice would cause a
+generator overload, the LL-LMS will shed additional loads so that the power request on the bus is under the corresponding generator's power rating.
+
+\subsection{H-LMS Implmentation}
+
+\begin{figure*}[htb]
   \centering
-  \includegraphics[width=0.9\columnwidth]{figures/preqnofail.png}
+  \includegraphics[width=0.75\textwidth]{figures/H-LMS.pdf}
+  \caption{\textbf{H-LMS Block Diagram} The O-LMS and the LL-LMS runs at different rates. The O-LMS no longer communicates directly with the EPS sensors
+and actuators. The LL-LMS is the last level of controller and communicates directly with the EPS sensors and actuators. The LL-LMS periodically sends
+generator status to the O-LMS which the O-LMS uses in its next iteration. The O-LMS produces advice that it sends to the LL-LMS. Whether or not the O-LMS's
+advice is ever actuated on is left to the discretion of the LL-LMS.}
+  \label{fig:H-LMS}
+\end{figure*}
+
+Figure~\ref{fig:H-LMS} shows the block diagram of our hierarchical controller. The different clocks fed into the two controllers indicate that the two
+controllers operate at different frequencies. More specifically, the LL-LMS operates at a high frequency, fast enough to ensure that the system is not
+in an unsafe configuration for more than 50 ms. On the other hand, the HL-LMS runs at a much slower rate due to the complexity of the optimization problem.
+It produces a set of advice (generator usage recommendations as well as load shedding configurations) that can the LL-LMS can use until the next O-LMS 
+cycle. Notice that there is an arrow going from the the LL-LMS to th H-LMS because the LL-LMS is responsible for providing the H-LMS with information of
+the status of the generators. The actual generator usage and load shedding that the LL-LMS will actuate on will be either the advice provided by the H-LMS
+if it is safe or the configuration determined by the LL-LMS's priority table if the O-LMS's advice is unsafe.
+
+\section{Experimental Design}
+
+Parameters: \\
+generator 1: 100,000 W \\
+generator 2: 100,000 W \\
+APU: 104,000 W \\
+
+[TODO: show priority tables; numerical example]
+
+\section{Experimental Results}
+\begin{figure}[htb]
+  \centering
+  \includegraphics[width=\columnwidth]{figures/preqnofail}
   \caption{\textbf{Power Request}
   Historical data of power request on Bus 1 and Bus 2 for time 0
   to 100. Notice the spikes in power usage on Bus 2 that pulls the
@@ -134,16 +190,16 @@ APU: 104,000 W \\
 \end{figure}
 
 \subsection{No Failures}
-\begin{figure}[ht]
+\begin{figure}[htb]
   \centering
-  \includegraphics[width=0.9\columnwidth]{figures/lshlnofail.png}
+  \includegraphics[width=\columnwidth]{figures/lshlnofail}
   \caption{\textbf{Optimizing LMS Load Shedding} Notice the long
   period of load shedding around the power usage spikes.}
   \label{fig:lshlnofail}
 \end{figure}
-\begin{figure}[ht]
+\begin{figure}[htb]
   \centering
-  \includegraphics[width=0.9\columnwidth]{figures/lsllnofail.png}
+  \includegraphics[width=0.9\columnwidth]{figures/lsllnofail}
   \caption{\textbf{LL-LMS Load Shedding} Notice that the 
   LL-LMS sheds much more load than the Optimizing LMS.}
   \label{fig:lsllnofail}
@@ -183,17 +239,17 @@ number of loads are shed. Then at time 50, the Optimizing LMS reoptimizes by tur
 Notice the difference in the number of loads shed onward from time 50 in 
 Figure~\ref{fig:lsllonefail} and Figure~\ref{fig:lsolonefail}.
 
-\begin{figure}[ht]
+\begin{figure}[htb]
   \centering
-  \includegraphics[width=0.9\columnwidth]{figures/lsllonefail.png}
+  \includegraphics[width=0.9\columnwidth]{figures/lsllonefail}
   \caption{\textbf{LL-LMS Load Shedding -- One Failure}. Notice
   the large amount of loads shedded in order to keep power usage below the power rating
   of generator 1.}
   \label{fig:lsllonefail}
 \end{figure}
-\begin{figure}[ht]
+\begin{figure}[htb]
   \centering
-  \includegraphics[width=0.9\columnwidth]{figures/lsolonefail.png}
+  \includegraphics[width=0.9\columnwidth]{figures/lsolonefail}
   \caption{\textbf{Hierarchical LMS Load Shedding -- One Failure}. Notice the
   large number of loads dropped from time 45 to 50 before the Optimizing LMS can reoptimize.}
   \label{fig:lsolonefail}
@@ -217,20 +273,20 @@ generator. Because we have a LL-LMS, we are able to keep the system in a safe co
 Figure~\ref{fig:lsolpwrspike} shows that the LL-LMS will detect that the generators would
 be overloaded and thus shed some loads during this time interval.
 
-\begin{figure}[ht]
+\begin{figure}[htb]
   \centering
-  \includegraphics[width=0.9\columnwidth]{figures/preqpwrspike.png}
+  \includegraphics[width=0.9\columnwidth]{figures/preqpwrspike}
   \caption{\textbf{Actual Power Request} Notice the difference between this power
   request and the power request expected by the historical data in 
   Figure~\ref{fig:preqnofail}. In particular, there is a large power spike from time 10
   to 40 that is not accounted for in the historical data.}
   \label{fig:preqpwrspike}
 \end{figure}
-\begin{figure}[ht]
+\begin{figure}[htb]
   \centering
-  \includegraphics[width=0.9\columnwidth]{figures/lsolonefail.png}
+  \includegraphics[width=0.9\columnwidth]{figures/lsolpwrspike}
   \caption{\textbf{Hierarchical LMS Load Shedding -- Power Spike} Whenever possible the LL-LMS will
-  use the advice from the Optimizing LMS. The only time it ignores the advice from the Optimizing LMS is
+  use the advice from the Optimizing LMS. The only time it ignores the advice from the Optimizaing LMS is
   from time 10 to 40 when there is a power spike that the Optimizing LMS is not aware of.}
   \label{fig:lsolpwrspike}
 \end{figure}
