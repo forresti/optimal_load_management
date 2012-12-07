@@ -27,7 +27,7 @@ Huy Vo\\
 \maketitle
 \begin{abstract}
 As avionics and other aircraft electronics system increase in complexity, the task of controlling aircraft electronic power systems (EPS) becomes more challenging.
-With this in mind, we present an aircraft EPS controller, or \emph{load management system (LMS} that guarantees safety while aiming to optimize quality of service metrics such as minimizing load shedding.
+With this in mind, we present an aircraft EPS controller, or \emph{load management system (LMS)}, that guarantees safety while aiming to optimize quality of service metrics such as minimizing load shedding.
 Our controller uses a hierarchical control to combine an optimization-based model predictive LMS with a priority table based low-level LMS.
 The fundamental contribution is in coupling the two controllers to work in a hierarchical fashion, where the optimization-based LMS looks forward and the low-level LMS guarantees safety in the short term.
 Through simulations and numerical examples, we find that our hierarchical controller minimizes load shedding while always preserving safety in the aircraft EPS.
@@ -98,7 +98,7 @@ Since the Optimizing LMS relies on historical data, it may produce unsafe alloca
 Thus, it is potentially unsafe to use Optimizing LMS to control the electronics in a real airplane. 
 However, as we will see later in the paper, the Optimizing LMS can be effective if it is coupled with a fail-safe Low Level LMS.
 
-\section{Low Level LMS}
+\section{Low Level LMS (LL-LMS)}
 \label{sec:LL-LMS}
 \begin{table}[t]
 \caption{\textbf{Load Priority Table Example, NS = nonsheddable, S = sheddable} 
@@ -121,20 +121,20 @@ higher priority. LL-LMS will shed load starting at the lower end of the list.}
 \end{tabular}
 \end{table}
 
-\subsection{Overview}
-As the name suggest, the LL-LMS is implemented as the last level of controller in the system. Above all else, the LL-LMS must guarantee safe operation
-conditions \footnote{For the purposes of this paper, we only consider the following safety conditions: no load remains unpowered for more than 50ms,
-loads are not connected to unpowered generators, and no generator is connected to loads whose power request exceeds the power rating of the generator}.
+\subsection{LL-LMS Overview}
+As the name suggests, the LL-LMS serves as a simple, fail-safe controller in an aircraft power system.
+Above all else, the LL-LMS must guarantee safe operation conditions.\footnote{For the purposes of this paper, we consider the following safety requirements: no load remains unpowered for more than 50ms, loads are not connected to unpowered generators, and no generator is connected to loads whose power request exceeds the power rating of the generator.}
 Briefly, the LL-LMS uses various sensors to frequently sample the state of the system. It then uses its sensor readings along with its
 priority tables, such as the one in Table~\ref{T:shed}, to produce a safe system configuration.
 
 \subsection{Implementation}
-Every cycle, the LL-LMS reads it sensors to collect data on generator status and power requests on all the nonsheddable and sheddable loads. The LL-LMS
-first filters out unhealthy generator tables and then uses its generator priority table to determine which of the remaining healthy generators it should
-use to power the system. Once it has determined what generator to use, the LL-LMS will then determine how much load it has to shed. It first sums up power
-requests of all the loads (sheddable and nonsheddable) on each bus. It then determines if the generator for each of the buses are able to power all of the
-loads. If the power request is more than a generator can provide, the LL-LMS will start shedding sheddable loads starting at the load with the lowest
-priority. This simple generator selection and load shedding scheme ensure that the LL-LMS can quickly arrive at a safe system configuration.
+Every cycle, the LL-LMS reads it sensors to collect data on generator status and power requests on all the nonsheddable and sheddable loads. 
+The LL-LMS first filters out unhealthy generator tables and then uses its generator priority table to determine which of the remaining healthy generators it should use to power the system. 
+Once it has determined what generator to use, the LL-LMS will then determine how much load it has to shed. 
+It first sums up power requests of all the loads (sheddable and nonsheddable) on each bus. 
+It then determines if the generator for each of the buses are able to power all of the loads. 
+If the power request is more than a generator can provide, the LL-LMS will start shedding sheddable loads starting at the load with the lowest priority. 
+This simple generator selection and load shedding scheme ensure that the LL-LMS can quickly arrive at a safe system configuration.
 
 %% This section presents a Low-Level LMS (LL-LMS) similar to the controllers discussed in Section~\ref{sec:related-work}.
 %% The key goal (and perhaps the only) goal of this load management system is to preserve safety if workloads change or if  generators fail.
@@ -142,9 +142,6 @@ priority. This simple generator selection and load shedding scheme ensure that t
 
 [TODO: 4-line pseudo-code for how we apply priority tables]
 
-Other details:
-Low-level controller samples system at every  timestep (e.g. 50ms of system time) 
-Ensure that no nonsheddable load is unpowered for more  than 50ms 
 
 \section{Hierarchical LMS}
 \subsection{Overview}
@@ -200,6 +197,11 @@ Parameters: \\
 generator 1: 100,000 W \\
 generator 2: 100,000 W \\
 APU: 104,000 W \\
+
+Recall from Section~\ref{sec:optimizing-LMS} that the Optimizing LMS can optimize over a horizon of 10 timesteps every 500ms. 
+Further, Section~\ref{sec:related-work} mentioned that 50ms is a typical sampling frequency for a LMS system.
+We design our simulation with these parameters in mind.
+Specifically, we set the LL-LMS to sample at a frequency of 50ms (controlled by the fast clock in Figure~\ref{fig:H-LMS}), we set the Optimizing-LMS to use a horizon of 10 timesteps, and thus the Optimizing-LMS gives a batch of advice to the LL-LMS every 500ms.
 
 [TODO: show priority tables; numerical example]
 
