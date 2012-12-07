@@ -1,8 +1,10 @@
 \begin{thebibliography}{1}
 
-\bibitem{Lamport:LaTeX}
-L.~Lamport.
-\newblock {\em LaTeX User's Guide and Document Reference Manual}.
-\newblock Addison-Wesley Publishing Company, Reading, Massachusetts, 1986.
+\bibitem{mehdi}
+M.~Maasoumy, P.~Nuzzo, M.~Kamgarpour, C.~Tomlin, A.~Sangiovanni-Vincentelli,
+  and M.~Mozumdar.
+\newblock Olms: Optimal load management system for aircraft electric power
+  distribution.
+\newblock In {\em In Review}, 2012.
 
 \end{thebibliography}

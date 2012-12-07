@@ -61,7 +61,7 @@ Typically, these systems rely on hard-coded priority tables for selecting loads 
 \label{sec:optimizing-LMS}
 LMS systems that are based purely on priority tables are effective for preserving safety.
 However, priority table solutions tend to shed more loads than necessary, to use more generators than necessary, [and be ill-defined in their tradeoffs between generator allocation and load shedding].
-Toward resolving these issues, the control systems community recently designed a model-predictive optimizing controller for aircraft EPS [Mehdi's paper].
+Toward resolving these issues, the control systems community recently designed a model-predictive optimizing controller for aircraft EPS~\cite{mehdi}.
 The key insight in [Mehdi's paper] is to formulate the system requirements (e.g. the maximum power produced by each generator) as constraints in an optimization problem.
 Further, [Mehdi's paper] proposes an objective function such that solving the optimization problem produces a power system allocation using a minimal number of generators while also minimizing the total number and duration of loads that are shed. 
 [This optimizing controller aims to minimize three weighted parameters: load shedding preference, generator selection preference, and number of generators used.]
@@ -234,9 +234,6 @@ be overloaded and thus shed some loads during this time interval.
   from time 10 to 40 when there is a power spike that the Optimizing LMS is not aware of.}
   \label{fig:lsolpwrspike}
 \end{figure}
-
-\section{Related Work}
-Related~\cite{Lamport:LaTeX}.
 
 \section{Conclusion}
 Conclusion.
