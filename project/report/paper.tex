@@ -158,7 +158,7 @@ second bus. Figure~\ref{fig:lsolonefail} shows what would happen in a combined O
 LL-LMS system. The Optimizing LMS produces advice to be used from time 40 to 50. Unfortunately,
 there is no way for the Optimizing LMS's advice to be aware of the failure at time 45. So, while the advice
 from time 40 to 44 is optimal and safe, the advice from 45 to 49 is unsafe. The LL-LMS is
-able to see this at time 45 and kicks in, ignoring the unsafe advice from the Optimizing LMS. This
+able to see this failure at time 45 and kicks in, ignoring the unsafe advice from the Optimizing LMS. This
 behavior is observed in Figure~\ref{fig:lsolonefail} where from time 45 to 49, a large
 number of loads are shed. Then at time 50, the Optimizing LMS reoptimizes by turning on the APU.
 Notice the difference in the number of loads shed onward from time 50 in 
@@ -168,7 +168,7 @@ Figure~\ref{fig:lsllonefail} and Figure~\ref{fig:lsolonefail}.
   \centering
   \includegraphics[width=0.9\columnwidth]{figures/lsllonefail.png}
   \caption{\textbf{LL-LMS Load Shedding -- One Failure}. Notice
-  the large amounts of load shedded in order to keep power usage below the power rating
+  the large amount of loads shedded in order to keep power usage below the power rating
   of generator 1.}
   \label{fig:lsllonefail}
 \end{figure}
