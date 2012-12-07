@@ -118,7 +118,7 @@ APU: 104,000 W \\
 \begin{figure}[ht]
   \centering
   \includegraphics[width=0.9\columnwidth]{figures/lshlnofail.png}
-  \caption{\textbf{HL-LMS Load Shedding} Notice the long
+  \caption{\textbf{Optimizing LMS Load Shedding} Notice the long
   period of load shedding around the power usage spikes.}
   \label{fig:lshlnofail}
 \end{figure}
@@ -126,7 +126,7 @@ APU: 104,000 W \\
   \centering
   \includegraphics[width=0.9\columnwidth]{figures/lsllnofail.png}
   \caption{\textbf{LL-LMS Load Shedding} Notice that the 
-  LL-LMS sheds much more load than the HL-LMS.}
+  LL-LMS sheds much more load than the Optimizing LMS.}
   \label{fig:lsllnofail}
 \end{figure}
 
@@ -137,30 +137,30 @@ In other words, the real power usage profile (Figure~\ref{fig:preqnofail}) is gi
 Notice that Bus 1 requests more than 100,000 Watts
 between time 30 and 60 and again around time 90. Bus 2, on the other hand,
 has a massive power usage between time 50 and 80. We wanted to see how the
-HL-LMS and the LL-LMS responds to this scenario in isolation. 
+Optimizing LMS and the LL-LMS responds to this scenario in isolation. 
 %Our results are in Figure~\ref{fig:lshlnofail} and Figure~\ref{fig:lsllnofail}.
 Comparing the results, we can see that the LL-LMS will shed a much larger
-number of loads (Figure~\ref{fig:lshlnofail}) than the the HL-LMS (Figure~\ref{fig:lsllnofail}). 
-In particular, the LL-LMS sheds exclusively from load 6-10 because it simply examines the priority table.
-However, the HL-LMS however is much smarter. It is able to minimize the number of
-loads shed by shedding loads much higher up in the priority table.
+number of loads (Figure~\ref{fig:lshlnofail}) than the the Optimizing LMS (Figure~\ref{fig:lsllnofail}). 
+In particular, the LL-LMS sheds exclusively from loads 6-10 due to the configuration of the priority table.
+However, the Optimizing LMS however is much smarter. 
+It is able to minimize the number of loads shed by shedding loads much higher up in the priority table.
 
 \subsection{Generator Failure}
 Now, we investigate how our Hierarchical LMS system responds to spontaneous generator failures. 
 To this end, we
-simulated the case when generator 2 would fail at time 45. Obviously, if the HL-LMS were
+simulated the case when generator 2 would fail at time 45. Obviously, if the Optimizing LMS were
 to run in isolation, it would leave the system unpowered from time 45 to 50. 
 Figure~\ref{fig:lsllonefail} shows what would happen if the LL-LMS were to run in 
 isolation. Starting at time 45, the LL-LMS sees that generator 2 has failed and it has 
 switched to using generator 1 to power both buses according to its priority table. In order
 to stay under generator 1's power rating, the LL-LMS sheds a large number of loads on the 
-second bus. Figure~\ref{fig:lsolonefail} shows what would happen in a combined HL-LMS
-LL-LMS system. The HL-LMS produces advice to be used from time 40 to 50. Unfortunately,
+second bus. Figure~\ref{fig:lsolonefail} shows what would happen in a combined Optimizing LMS
+LL-LMS system. The Optimizing LMS produces advice to be used from time 40 to 50. Unfortunately,
 there is no way for the Optimizing LMS's advice to be aware of the failure at time 45. So, while the advice
 from time 40 to 44 is optimal and safe, the advice from 45 to 49 is unsafe. The LL-LMS is
-able to see this at time 45 and kicks in, ignoring the unsafe advice from the HL-LMS. This
+able to see this at time 45 and kicks in, ignoring the unsafe advice from the Optimizing LMS. This
 behavior is observed in Figure~\ref{fig:lsolonefail} where from time 45 to 49, a large
-number of loads are shed. Then at time 50, the HL-LMS reoptimizes by turning on the APU.
+number of loads are shed. Then at time 50, the Optimizing LMS reoptimizes by turning on the APU.
 Notice the difference in the number of loads shed onward from time 50 in 
 Figure~\ref{fig:lsllonefail} and Figure~\ref{fig:lsolonefail}.
 
@@ -176,23 +176,23 @@ Figure~\ref{fig:lsllonefail} and Figure~\ref{fig:lsolonefail}.
   \centering
   \includegraphics[width=0.9\columnwidth]{figures/lsolonefail.png}
   \caption{\textbf{OL-LMS Load Shedding -- One Failure}. Notice the
-  large number of loads dropped from time 45 to 50 before the HL-LMS can reoptimize.}
+  large number of loads dropped from time 45 to 50 before the Optimizing LMS can reoptimize.}
   \label{fig:lsolonefail}
 \end{figure}
 
 \subsection{Unexpected Power Spikes}
-The HL-LMS performs a live optimization using historical data for load power requests from
+The Optimizing LMS performs a live optimization using historical data for load power requests from
 previous flights. Due to the nature of the optimization problem, it is impossible to
 program the optimization problem with live data. As a result, it is possible for the
-HL-LMS to provide unsafe advice if there is a power spike. More specifically, it is possible
-for the HL-LMS to generate a load shedding configuration that could have one of the power
+Optimizing LMS to provide unsafe advice if there is a power spike. More specifically, it is possible
+for the Optimizing LMS to generate a load shedding configuration that could have one of the power
 generators driving a higher power request than its rating. We want to simulate such a
 failure case and show that the LL-LMS performs the required adjustment to keep the system
 in a safe state. For this experiment, we use the same historical power request as in
 Figure~\ref{fig:preqnofail}. However, the actual power request for this simulation is shown
-in Figure~\ref{fig:preqpwrspike}. Without the LL-LMS, the HL-LMS would use the load
+in Figure~\ref{fig:preqpwrspike}. Without the LL-LMS, the Optimizing LMS would use the load
 shedding configuration seen in Figure~\ref{fig:lshlnofail}. Notice that there is a power
-spike from time 10 to 40 that the historical data does not account for and thus the HL-LMS
+spike from time 10 to 40 that the historical data does not account for and thus the Optimizing LMS
 is unaware of. As a result, its load shedding configuration would overload the power
 generator. Because we have a LL-LMS, we are able to keep the system in a safe configuration.
 Figure~\ref{fig:lsolpwrspike} shows that the LL-LMS will detect that the generators would
@@ -211,8 +211,8 @@ be overloaded and thus shed some loads during this time interval.
   \centering
   \includegraphics[width=0.9\columnwidth]{figures/lsolonefail.png}
   \caption{\textbf{OL-LMS Load Shedding -- Power Spike} Whenever possible the LL-LMS will
-  use the advice from the HL-LMS. The only time it ignores the advice from the HL-LMS is
-  from time 10 to 40 when there is a power spike that the HL-LMS is not aware of.}
+  use the advice from the Optimizing LMS. The only time it ignores the advice from the Optimizing LMS is
+  from time 10 to 40 when there is a power spike that the Optimizing LMS is not aware of.}
   \label{fig:lsolpwrspike}
 \end{figure}
 
