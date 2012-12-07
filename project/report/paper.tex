@@ -30,14 +30,19 @@ Best abstract ever
 \keywords{avionics, control, optimization} 
 
 \section{Introduction}
-High-level... Increasing complexity of EPS...
+Aircraft Electrical Power Systems (EPS) are systems that provide power to critical loads (landing gear, navigation systems, etc.)
+as well as non critical loads (cabin lights, coffee machine, etc). Above all else, an aircraft EPS controller must ensure that
+power is constantly provided to all critical parts of the system. Since EPS are involving into increasingly complex systems, EPS
+controllers must become ``smarter''. We tackle the challenge of designing such a controller in this project. More specifically,
+we contribute a Low Level Load Management System that closely monitors system status and ensures safety. We combine this
+controller with an Optimzing Load Management System~\cite{mehdi} to obtain a Hierarchical Load Management System that is
+both safe and optimal.
 
-We aim to design a Load Management System (LMS) for EPS that is ``smarter" in terms of several criteria.
-First, always preserve safety.
-After preserving safety, maximize the quality of service.
-Finally, conserve fuel by using as few generators as possible.
-
-The rest of the paper is organized as follows. (TODO)
+We will first give a brief overview of Aircraft EPS in order to provide the necesarry background information for understanding
+the purposes of our controller. This is followed by a detailed discussion of the Optimizaing Load Management System and the
+Low Level Load Management System. After presenting both controllers, we then show how to combine the two into a Hierarchical
+Load Management System. Finally, we show that our hierarchical controller acheives safety where the Optimizing Load Management
+System would have been unable to and acheives optimality where the Low Level Load Management System cannot.
 
 \section{Aircraft EPS Overview}
 Intro to aircraft EPS... explain the buses and generators.
@@ -150,7 +155,7 @@ generator overload, the LL-LMS will shed additional loads so that the power requ
 
 \subsection{H-LMS Implmentation}
 
-\begin{figure*}[htb]
+\begin{figure*}[hp]
   \centering
   \includegraphics[width=0.75\textwidth]{figures/H-LMS.pdf}
   \caption{\textbf{H-LMS Block Diagram} The O-LMS and the LL-LMS runs at different rates. The O-LMS no longer communicates directly with the EPS sensors
@@ -190,20 +195,20 @@ APU: 104,000 W \\
 \end{figure}
 
 \subsection{No Failures}
-\begin{figure}[htb]
+\begin{figure*}[hp]
   \centering
-  \includegraphics[width=\columnwidth]{figures/lshlnofail}
+  \includegraphics[width=\textwidth]{figures/lshlnofail}
   \caption{\textbf{Optimizing LMS Load Shedding} Notice the long
   period of load shedding around the power usage spikes.}
   \label{fig:lshlnofail}
-\end{figure}
-\begin{figure}[htb]
+\end{figure*}
+\begin{figure*}[hp]
   \centering
-  \includegraphics[width=0.9\columnwidth]{figures/lsllnofail}
+  \includegraphics[width=0.9\textwidth]{figures/lsllnofail}
   \caption{\textbf{LL-LMS Load Shedding} Notice that the 
   LL-LMS sheds much more load than the Optimizing LMS.}
   \label{fig:lsllnofail}
-\end{figure}
+\end{figure*}
 
 For our first experiment, we simulated the case when there are no power
 generator failures in the system using the power usage profile shown in
@@ -239,21 +244,21 @@ number of loads are shed. Then at time 50, the Optimizing LMS reoptimizes by tur
 Notice the difference in the number of loads shed onward from time 50 in 
 Figure~\ref{fig:lsllonefail} and Figure~\ref{fig:lsolonefail}.
 
-\begin{figure}[htb]
+\begin{figure*}[hp]
   \centering
-  \includegraphics[width=0.9\columnwidth]{figures/lsllonefail}
+  \includegraphics[width=0.9\textwidth]{figures/lsllonefail}
   \caption{\textbf{LL-LMS Load Shedding -- One Failure}. Notice
   the large amount of loads shedded in order to keep power usage below the power rating
   of generator 1.}
   \label{fig:lsllonefail}
-\end{figure}
-\begin{figure}[htb]
+\end{figure*}
+\begin{figure*}[hp]
   \centering
-  \includegraphics[width=0.9\columnwidth]{figures/lsolonefail}
+  \includegraphics[width=0.9\textwidth]{figures/lsolonefail}
   \caption{\textbf{Hierarchical LMS Load Shedding -- One Failure}. Notice the
   large number of loads dropped from time 45 to 50 before the Optimizing LMS can reoptimize.}
   \label{fig:lsolonefail}
-\end{figure}
+\end{figure*}
 
 \subsection{Unexpected Power Spikes}
 The Optimizing LMS performs a live optimization using historical data for load power requests from
@@ -282,14 +287,14 @@ be overloaded and thus shed some loads during this time interval.
   to 40 that is not accounted for in the historical data.}
   \label{fig:preqpwrspike}
 \end{figure}
-\begin{figure}[htb]
+\begin{figure*}[hp]
   \centering
-  \includegraphics[width=0.9\columnwidth]{figures/lsolpwrspike}
+  \includegraphics[width=0.9\textwidth]{figures/lsolpwrspike}
   \caption{\textbf{Hierarchical LMS Load Shedding -- Power Spike} Whenever possible the LL-LMS will
   use the advice from the Optimizing LMS. The only time it ignores the advice from the Optimizaing LMS is
   from time 10 to 40 when there is a power spike that the Optimizing LMS is not aware of.}
   \label{fig:lsolpwrspike}
-\end{figure}
+\end{figure*}
 
 \section{Conclusion}
 Conclusion.
