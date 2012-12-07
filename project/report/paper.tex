@@ -6,6 +6,8 @@
 \makeatletter
 \let\@copyrightspace\relax
 \makeatother
+\newcommand*{\bfrac}[2]{\genfrac{(}{)}{0pt}{}{#1}{#2}} %fraction without line
+
 \begin{document}
 
 \title{Hierarchical Control for Aircraft Electronic Power Systems}
@@ -27,51 +29,64 @@ Huy Vo\\
 Best abstract ever
 \end{abstract}
 
-\keywords{avionics, control, optimization} 
+\keywords{avionics, model-predictive control, optimization, linear programming} 
 
 \section{Introduction}
 Aircraft Electrical Power Systems (EPS) are systems that provide power to critical loads (landing gear, navigation systems, etc.)
 as well as non critical loads (cabin lights, coffee machine, etc). Above all else, an aircraft EPS controller must ensure that
-power is constantly provided to all critical parts of the system. Since EPS are involving into increasingly complex systems, EPS
-controllers must become ``smarter''. We tackle the challenge of designing such a controller in this project. More specifically,
+power is constantly provided to all critical parts of the system. Since EPS are evolving into increasingly complex systems, EPS
+controllers must become ``smarter''. We address the challenge of designing such a controller in this project. More specifically,
 we contribute a Low Level Load Management System that closely monitors system status and ensures safety. We combine this
 controller with an Optimzing Load Management System~\cite{mehdi} to obtain a Hierarchical Load Management System that is
 both safe and optimal.
 
-We will first give a brief overview of Aircraft EPS in order to provide the necesarry background information for understanding
-the purposes of our controller. This is followed by a detailed discussion of the Optimizaing Load Management System and the
-Low Level Load Management System. After presenting both controllers, we then show how to combine the two into a Hierarchical
-Load Management System. Finally, we show that our hierarchical controller acheives safety where the Optimizing Load Management
-System would have been unable to and acheives optimality where the Low Level Load Management System cannot.
+The rest of the paper is organized as follows.
+In Sections~\ref{sec:overview} and~\ref{sec:related-work}, we give an overview of Aircraft EPS. %in order to provide the necessary background information for understanding the purposes of our controller. 
+This is followed by a detailed discussion of an Optimizing Load Management System (Section~\ref{sec:optimizing-LMS}) and a Low Level Load Management System (Section~\ref{sec:LL-LMS}). 
+After presenting these two controllers, we then show how to combine the two into a Hierarchical Load Management System. 
+Finally, in Sections~\ref{sec:numerical-examples}-\ref{sec:results}, we show that our hierarchical controller achieves safety where the Optimizing Load Management System would have been unable to and achieves optimality where the Low Level Load Management System cannot.
 
 \section{Aircraft EPS Overview}
+\label{sec:overview}
 Intro to aircraft EPS... explain the buses and generators.
 Possibly show the diagram from the Honeywell patent.
 Possibly show our ``cartoon" diagram of an EPS system.
 
 \subsection{Load Shedding}
-Aircraft EPS generally have two types of loads: sheddable and non-sheddable.
-Examples of non-sheddable loads include navigation systems, electronic actuators, and other mission-critical devices.
+Aircraft EPS generally have two types of loads: sheddable and nonsheddable.
+Examples of nonsheddable loads include navigation systems, electronic actuators, and other mission-critical devices.
 Sheddable loads include the cabin lights, kitchen, and electrical outlets for passengers' laptop computers.
 If an EPS power bus requires more power than the generators can provide, the LMS is responsible for disabling (shedding) some of the sheddable loads.
 
 \section{Related Work}
 \label{sec:related-work}
 In typical aircraft EPS, the load management systems aim to ensure safety during unexpected system behavior [citation needed].
-Specifically, [these systems typically require] unsheddable loads to remain powered at all times. [or, maybe unsheddable loads can be unpowered for up to 50ms while switching generators]
-Therefore, if a generator fails, the EPS must shed loads and/or reallocate generators to buses such that no unsheddable load becomes unpowered.
+Specifically, these systems require nonsheddable loads to remain powered at all times.\footnote{More precisely, nonsheddable loads must not be more unpowered for more than one cycle of the LMS. In practice, 50ms is a typical LMS sampling frequency.} %[or, maybe nonsheddable loads can be unpowered for up to 50ms while switching generators]
+Therefore, if a generator fails, the EPS must shed loads and/or reallocate generators to buses such that no nonsheddable load becomes unpowered.
 Typically, these systems rely on hard-coded priority tables for selecting loads to shed and for allocating generators to buses.
 
 \section{Optimizing LMS}
 \label{sec:optimizing-LMS}
-LMS systems that are based purely on priority tables are very simplistic, allowing them to frequently sample the system. These LMS systems are thus more
-responsive to failures in the system.
-However, priority table solutions tend to shed more loads than necessary, to use more generators than necessary, [and be ill-defined in their tradeoffs between generator allocation and load shedding].
-Toward resolving these issues, the control systems community recently designed a model-predictive optimizing controller for aircraft EPS~\cite{mehdi}.
-The key insight in~\cite{mehdi} is to formulate the system requirements (e.g. the maximum power produced by each generator) as constraints in an optimization problem.
-Further,~\cite{mehdi} proposes an objective function such that solving the optimization problem produces a power system allocation using a minimal number of generators while also minimizing the total number and duration of loads that are shed. 
-[This optimizing controller aims to minimize three weighted parameters: load shedding preference, generator selection preference, and number of generators used.]
-[TODO: show a simplified version of Mehdi's math]
+LMS systems that are based purely on priority tables are very simplistic, allowing them to frequently sample the system. 
+These LMS systems are thus more responsive to failures in the system.
+However, pure priority table solutions tend to shed more loads than necessary, to use more generators than necessary, 
+%[and be ill-defined in their tradeoffs between generator allocation and load shedding].
+Toward resolving these issues, the control systems community recently designed a model-predictive Optimizing LMS for aircraft EPS~\cite{mehdi}.
+The key insight in~\cite{mehdi} is to formulate the system requirements (e.g. the maximum power produced by each generator) as constraints in an linear optimization problem.
+%Further,~\cite{mehdi} proposes an objective function such that solving the optimization problem produces a power system allocation using a minimal number of generators while also minimizing the total number and duration of loads that are shed. 
+The Optimizing LMS minimizes an objective function comprised of three weighted vectors: load shedding preference, generator selection preference, and number of generators used.
+The following expression gives a high-level view of the objective function in~\cite{mehdi}, where the weights can correspond with priorities in priority tables and $h$ is a time horizon:
+
+$\int_t^{t+h} min(\bfrac{\text{sheddable}}{\text{loads}} * \text{\scriptsize \emph{weights}$_1$} +  \bfrac{\text{generator}}{\text{selection}} * \text{\scriptsize \emph{weights}$_2$} +  \bfrac{\text{\scriptsize \# of generators}}{\text{\scriptsize  used}})$
+
+Notice the integral from time $t$ to time $t+horizon$. 
+If the horizon=1, then we simply optimize the objective function for one system timestep.
+However, if the horizon=10, then we do one call to the CPLEX MILP solver to compute the optimal system configurations for 10 timesteps.
+Batching several timesteps into one MILP call can reduce the overall computation time: using a 6-core Intel 3930K processor, optimizing 1 timestep takes an average of 350ms, while optimizing 10 timesteps takes an average of 500ms (so, 50ms per timestep in the batched configuration).
+
+However, our {\emph receeding horizon} approach of doing a batched optimization at every 10 timesteps is not foolproof.
+This is because, at time $t$, we can't perfectly predict the power loads or generator failures at timesteps in the range [$t+1$, $t+horizon$]. 
+Therefore, instead of using live data from the load sensors, the Optimizing LMS uses historical data, averaged from previous flights that flew the same route using the same model of aircraft.
 
 However, the Optimizing LMS~\cite{mehdi} is not without shortcomings.
 Chiefly, the Optimizing LMS is computationally expensive (0.5s for 10 timesteps of optimization in CPLEX on an Intel 3930K processor).
@@ -81,6 +96,7 @@ Thus, it is potentially unsafe to use Optimizing LMS to control the electronics 
 However, as we will see later in the paper, the Optimizing LMS can be effective if it is coupled with a fail-safe Low Level LMS.
 
 \section{Low Level LMS}
+\label{sec:LL-LMS}
 \begin{table}[t]
 \caption{\textbf{Load Priority Table Example, NS = nonsheddable, S = sheddable} 
 Loads lower in the list have lower priority while loads higher up in the list have
@@ -110,7 +126,6 @@ Briefly, the LL-LMS uses various sensors to frequently sample the state of the s
 priority tables, such as the one in Table~\ref{T:shed}, to produce a safe system configuration.
 
 \subsection{Implementation}
-\label{sec:LL-LMS}
 Every cycle, the LL-LMS reads it sensors to collect data on generator status and power requests on all the nonsheddable and sheddable loads. The LL-LMS
 first filters out unhealthy generator tables and then uses its generator priority table to determine which of the remaining healthy generators it should
 use to power the system. Once it has determined what generator to use, the LL-LMS will then determine how much load it has to shed. It first sums up power
@@ -126,7 +141,7 @@ priority. This simple generator selection and load shedding scheme ensure that t
 
 Other details:
 Low-level controller samples system at every  timestep (e.g. 50ms of system time) 
-Ensure that no non-sheddable load is unpowered for more  than 50ms 
+Ensure that no nonsheddable load is unpowered for more  than 50ms 
 
 \section{Hierarchical LMS}
 \subsection{Overview}
@@ -173,6 +188,9 @@ cycle. Notice that there is an arrow going from the the LL-LMS to th H-LMS becau
 the status of the generators. The actual generator usage and load shedding that the LL-LMS will actuate on will be either the advice provided by the H-LMS
 if it is safe or the configuration determined by the LL-LMS's priority table if the O-LMS's advice is unsafe.
 
+\section{Numerical Examples}
+\label{sec:numerical-examples}
+
 \section{Experimental Design}
 
 Parameters: \\
@@ -183,6 +201,7 @@ APU: 104,000 W \\
 [TODO: show priority tables; numerical example]
 
 \section{Experimental Results}
+\label{sec:results}
 \begin{figure}[htb]
   \centering
   \includegraphics[width=\columnwidth]{figures/preqnofail}
