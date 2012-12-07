@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2012.11.22)  7 DEC 2012 15:30
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2012.11.22)  7 DEC 2012 15:37
 entering extended mode
  %&-line parsing enabled.
 **paper.tex
@@ -266,7 +266,7 @@ LaTeX Font Info:    Try loading font information for U+lasy on input line 27.
 (/usr/share/texmf-texlive/tex/latex/base/ulasy.fd
 File: ulasy.fd 1998/08/17 v2.2e LaTeX symbol font definitions
 )
-Overfull \hbox (31.26715pt too wide) in paragraph at lines 80--81
+Overfull \hbox (31.26715pt too wide) in paragraph at lines 84--85
 []$[][] \OML/cmm/m/it/9 min\OT1/cmr/m/n/9 ([] \OMS/cmsy/m/n/9 ^^C [] \OT1/cmr/m
 /n/9 + [] \OMS/cmsy/m/n/9 ^^C [] \OT1/cmr/m/n/9 + [])$ 
  []
@@ -278,7 +278,7 @@ Overfull \hbox (31.26715pt too wide) in paragraph at lines 80--81
 <figures/H-LMS.pdf, id=22, 591.31989pt x 815.14536pt>
 File: figures/H-LMS.pdf Graphic file (type pdf)
  <use figures/H-LMS.pdf>
-Underfull \hbox (badness 10000) in paragraph at lines 196--200
+Underfull \hbox (badness 10000) in paragraph at lines 199--203
 
  []
 
@@ -319,7 +319,7 @@ opy)>] (./paper.aux) )
 Here is how much of TeX's memory you used:
  3351 strings out of 495061
  45141 string characters out of 1182620
- 116331 words of memory out of 3000000
+ 117331 words of memory out of 3000000
  6470 multiletter control sequences out of 15000+50000
  56354 words of font info for 78 fonts, out of 3000000 for 9000
  28 hyphenation exceptions out of 8191
@@ -337,7 +337,7 @@ exlive/fonts/type1/public/amsfonts/cm/cmsy9.pfb></usr/share/texmf-texlive/fonts
 c/amsfonts/cm/cmti9.pfb></usr/share/texmf-texlive/fonts/type1/urw/helvetic/uhvb
 8a.pfb></usr/share/texmf-texlive/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/shar
 e/texmf-texlive/fonts/type1/urw/times/utmb8a.pfb>
-Output written on paper.pdf (8 pages, 290884 bytes).
+Output written on paper.pdf (8 pages, 295217 bytes).
 PDF statistics:
  103 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)

@@ -26,7 +26,11 @@ Huy Vo\\
 
 \maketitle
 \begin{abstract}
-Best abstract ever
+As avionics and other aircraft electronics system increase in complexity, the task of controlling aircraft electronic power systems (EPS) becomes more challenging.
+With this in mind, we present an aircraft EPS controller, or \emph{load management system (LMS} that guarantees safety while aiming to optimize quality of service metrics such as minimizing load shedding.
+Our controller uses a hierarchical control to combine an optimization-based model predictive LMS with a priority table based low-level LMS.
+The fundamental contribution is in coupling the two controllers to work in a hierarchical fashion, where the optimization-based LMS looks forward and the low-level LMS guarantees safety in the short term.
+Through simulations and numerical examples, we find that our hierarchical controller minimizes load shedding while always preserving safety in the aircraft EPS.
 \end{abstract}
 
 \keywords{avionics, model-predictive control, optimization, linear programming} 
@@ -87,10 +91,9 @@ Batching several timesteps into one MILP call can reduce the overall computation
 However, our {\emph receeding horizon} approach of doing a batched optimization at every 10 timesteps is not foolproof.
 This is because, at time $t$, we can't perfectly predict the power loads or generator failures at timesteps in the range [$t+1$, $t+horizon$]. 
 Therefore, instead of using live data from the load sensors, the Optimizing LMS uses historical data, averaged from previous flights that flew the same route using the same model of aircraft.
-
-However, the Optimizing LMS~\cite{mehdi} is not without shortcomings.
-Chiefly, the Optimizing LMS is computationally expensive (0.5s for 10 timesteps of optimization in CPLEX on an Intel 3930K processor).
-[Discuss receding horizon and the need for historical data]
+%However, the Optimizing LMS~\cite{mehdi} is not without shortcomings.
+%Chiefly, the Optimizing LMS is computationally expensive (0.5s for 10 timesteps of optimization in CPLEX on an Intel 3930K processor).
+%[Discuss receding horizon and the need for historical data]
 Since the Optimizing LMS relies on historical data, it may produce unsafe allocations that use a broken generator or operate above the generator power caps.
 Thus, it is potentially unsafe to use Optimizing LMS to control the electronics in a real airplane. 
 However, as we will see later in the paper, the Optimizing LMS can be effective if it is coupled with a fail-safe Low Level LMS.
