@@ -131,21 +131,23 @@ APU: 104,000 W \\
 \end{figure}
 
 For our first experiment, we simulated the case when there are no power
-generators failures in the system using the power usage profile shown in
-Figure~\ref{fig:preqnofail}. Notice that Bus 1 requests more than 100,000 Watts
+generator failures in the system using the power usage profile shown in
+Figure~\ref{fig:preqnofail}. 
+In other words, the real power usage profile (Figure~\ref{fig:preqnofail}) is given to the Optimizing LMS and LL-LMS without any perturbations.
+Notice that Bus 1 requests more than 100,000 Watts
 between time 30 and 60 and again around time 90. Bus 2, on the other hand,
 has a massive power usage between time 50 and 80. We wanted to see how the
-HL-LMS and the LL-LMS responds to this scenario in isolation. Our results
-are in Figure~\ref{fig:lshlnofail} and Figure~\ref{fig:lsllnofail}.
+HL-LMS and the LL-LMS responds to this scenario in isolation. 
+%Our results are in Figure~\ref{fig:lshlnofail} and Figure~\ref{fig:lsllnofail}.
 Comparing the results, we can see that the LL-LMS will shed a much larger
-number of loads than the the HL-LMS. In particular, the LL-LMS sheds
-exclusively from load 6-10 because it simply examines the priority table.
-The HL-LMS; however, is much smarter. It is able to minimize the number of
+number of loads (Figure~\ref{fig:lshlnofail}) than the the HL-LMS (Figure~\ref{fig:lsllnofail}). 
+In particular, the LL-LMS sheds exclusively from load 6-10 because it simply examines the priority table.
+However, the HL-LMS however is much smarter. It is able to minimize the number of
 loads shed by shedding loads much higher up in the priority table.
 
 \subsection{Generator Failure}
-For this experiment, we wanted to see how a combined HL-LMS and LL-LLMS
-system would respond to spontaneous generator failures. To this end, we
+Now, we investigate how our Hierarchical LMS system responds to spontaneous generator failures. 
+To this end, we
 simulated the case when generator 2 would fail at time 45. Obviously, if the HL-LMS were
 to run in isolation, it would leave the system unpowered from time 45 to 50. 
 Figure~\ref{fig:lsllonefail} shows what would happen if the LL-LMS were to run in 
@@ -154,7 +156,7 @@ switched to using generator 1 to power both buses according to its priority tabl
 to stay under generator 1's power rating, the LL-LMS sheds a large number of loads on the 
 second bus. Figure~\ref{fig:lsolonefail} shows what would happen in a combined HL-LMS
 LL-LMS system. The HL-LMS produces advice to be used from time 40 to 50. Unfortunately,
-there is no way for this advice to be aware of the failure at time 45. So while the advice
+there is no way for the Optimizing LMS's advice to be aware of the failure at time 45. So, while the advice
 from time 40 to 44 is optimal and safe, the advice from 45 to 49 is unsafe. The LL-LMS is
 able to see this at time 45 and kicks in, ignoring the unsafe advice from the HL-LMS. This
 behavior is observed in Figure~\ref{fig:lsolonefail} where from time 45 to 49, a large
