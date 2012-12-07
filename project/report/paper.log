@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012) (format=pdflatex 2012.6.30)  6 DEC 2012 16:23
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012) (format=pdflatex 2012.6.30)  6 DEC 2012 16:26
 entering extended mode
  \write18 enabled.
  file:line:error style messages enabled.
@@ -403,25 +403,24 @@ Package pdftex.def Info: figures/lsolonefail.png used on input line 231.
 [3 <./figures/lsllonefail.png (PNG copy)> <./figures/lsolonefail.png (PNG copy)
 > <./figures/preqpwrspike.png (PNG copy)>] (./paper.aux) ) 
 Here is how much of TeX's memory you used:
- 3957 strings out of 493488
- 56520 string characters out of 3141326
+ 3953 strings out of 493488
+ 56492 string characters out of 3141326
  118485 words of memory out of 3000000
- 7181 multiletter control sequences out of 15000+200000
- 47315 words of font info for 64 fonts, out of 3000000 for 9000
+ 7180 multiletter control sequences out of 15000+200000
+ 44832 words of font info for 61 fonts, out of 3000000 for 9000
  957 hyphenation exceptions out of 8191
  44i,10n,42p,409b,326s stack positions out of 5000i,500n,10000p,200000b,50000s
 {/usr/local/texlive/2
 012/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/texlive/2012/texmf-dist/
 fonts/type1/public/amsfonts/cm/cmbx9.pfb></usr/local/texlive/2012/texmf-dist/fo
 nts/type1/public/amsfonts/cm/cmr9.pfb></usr/local/texlive/2012/texmf-dist/fonts
-/type1/public/amsfonts/cm/cmti9.pfb></usr/local/texlive/2012/texmf-dist/fonts/t
-ype1/urw/helvetic/uhvb8a.pfb></usr/local/texlive/2012/texmf-dist/fonts/type1/ur
-w/helvetic/uhvr8a.pfb></usr/local/texlive/2012/texmf-dist/fonts/type1/urw/times
-/utmb8a.pfb>
-Output written on paper.pdf (3 pages, 169233 bytes).
+/type1/urw/helvetic/uhvb8a.pfb></usr/local/texlive/2012/texmf-dist/fonts/type1/
+urw/helvetic/uhvr8a.pfb></usr/local/texlive/2012/texmf-dist/fonts/type1/urw/tim
+es/utmb8a.pfb>
+Output written on paper.pdf (3 pages, 160602 bytes).
 PDF statistics:
- 45 PDF objects out of 1000 (max. 8388607)
- 27 compressed objects within 1 object stream
+ 41 PDF objects out of 1000 (max. 8388607)
+ 24 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  31 words of extra memory for PDF output out of 10000 (max. 10000000)
 
