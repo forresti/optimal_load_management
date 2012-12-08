@@ -104,7 +104,7 @@ $\int_t^{t+h} min(\bfrac{\text{sheddable}}{\text{loads}} * \text{\scriptsize \em
 
 Notice the integral from time $t$ to time $t+horizon$. 
 If the horizon=1, then we simply optimize the objective function for one system timestep.
-However, if the horizon=10, then we do one call to the CPLEX MILP solver to compute the optimal system configurations for 10 timesteps.
+However, if the horizon=10, then we do one call to the CPLEX~\cite{CPLEX} MILP solver to compute the optimal system configurations for 10 timesteps.
 Batching several timesteps into one MILP call can reduce the overall computation time: using a 6-core Intel 3930K processor, optimizing 1 timestep takes an average of 350ms, while optimizing 10 timesteps takes an average of 500ms (so, 50ms per timestep in the batched configuration).
 
 However, our {\emph receeding horizon} approach of doing a batched optimization at every 10 timesteps is not foolproof.

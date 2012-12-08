@@ -1,5 +1,9 @@
 \begin{thebibliography}{1}
 
+\bibitem{CPLEX}
+{IBM CPLEX}.
+\newblock {\tt ibm.com/software/integration/optimization/cplex-optimizer}.
+
 \bibitem{mehdi}
 M.~Maasoumy, P.~Nuzzo, M.~Kamgarpour, C.~Tomlin, A.~Sangiovanni-Vincentelli,
   and M.~Mozumdar.
