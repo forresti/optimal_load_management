@@ -209,17 +209,12 @@ In practice, aircraft EPS typically have a mix of sheddable and nonsheddable loa
 We now present an example that illustrates how the Optimizing LMS manages to shed fewer loads than the LL-LMS. 
 In this example, there are no generator failures or power spikes (the historical data matches the live data), so the Hierarchical LMS would use the advice for the Optimizing LMS.
 
-%\begin{table}[t]
-%\caption{Optimizing LMS reduces load shedding compared to the LL-LMS load shedding policy.}
-%\label{T:example-1}
-%\centering
 \begin{tabular}{c|cc}
 Sheddable loads (W) & Shed priority \\ \hline
 60,000 & 1 (least preferred to shed) \\
 60,000 & 2 (middle priority to shed) \\ 
 40,000 & 3 (most preferred to shed) \\ \hline
 \end{tabular}
-%\end{table}
 
 When presented with this workload, the LL-LMS purely applies the priority table, without any optimization or branch-and-bound to investigate ideal combinations of tasks to shed. 
 Thus, while simply shedding Load 2 would be sufficient to get system under its power cap, the LL-LMS walks up the priority table and sheds Loads 2 and 3.
@@ -237,23 +232,29 @@ However, Timestep 2 has a power spike in Load 3 that is not anticipated in the h
 Relying on the Optimizing-LMS alone at Timestep 2 would result in an unsafe configuration, where 120,000W is draw, while the generator can only produce 100,000W.
 Fortunately, the LL-LMS in our Hierarchical controller observes the Load 3 power spike in real-time, and it sheds Load 3 to maintain safety, thus maintaining a total power draw of 80,000W, which is within the generator's 100,000W power cap.
 
-Timestep 1 (live data matches historical data):
-    Load Shedding Priority Table:
-    Load 1: 40,000W, least preferred to shed.
-    Load 2: 40,000W, second-least preferred to shed
-    Load 3: 20,000W, most preferred to shed
+Timestep 1 (live data matches historical data):\\
+\begin{tabular}{c|cc}
+Sheddable loads (W) & Shed priority \\ \hline
+40,000 & 1 (least preferred to shed) \\
+40,000 & 2 (middle priority to shed) \\ 
+{\bf 20,000} & 3 (most preferred to shed) \\ \hline
+\end{tabular}
 
-Timestep 2 (historical data):
-    Load Shedding Priority Table:
-    Load 1: 40,000W, least preferred to shed.
-    Load 2: 40,000W, second-least preferred to shed
-    Load 3: 20,000W, most preferred to shed
+Timestep 2 (historical data): \\
+\begin{tabular}{c|cc}
+Sheddable loads (W) & Shed priority \\ \hline
+40,000 & 1 (least preferred to shed) \\
+40,000 & 2 (middle priority to shed) \\ 
+{\bf 20,000} & 3 (most preferred to shed) \\ \hline
+\end{tabular}
 
-Timestep 2 (live data):
-    Load Shedding Priority Table:
-    Load 1: 20,000W, least preferred to shed.
-    Load 2: 40,000W, second-least preferred to shed
-    Load 3: 40,000W, most preferred to shed
+Timestep 2 (live data): \\
+\begin{tabular}{c|cc}
+Sheddable loads (W) & Shed priority \\ \hline
+40,000 & 1 (least preferred to shed) \\
+40,000 & 2 (middle priority to shed) \\ 
+{\bf 40,000} & 3 (most preferred to shed) \\ \hline
+\end{tabular}
 
 \subsection{Example: LL-LMS handles generator failure}
 
