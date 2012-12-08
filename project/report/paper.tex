@@ -140,6 +140,17 @@ higher priority. LL-LMS will shed load starting at the lower end of the list.}
 \end{tabular}
 \end{table}
 
+\begin{table}[t]
+\caption{Priority table for allocating generators to buses.}
+\label{T:generator-priority}
+\centering
+\begin{tabular}{c|cc}
+ Priority & Left bus & Right bus \\ \hline
+1 (most preferred) & Generator 1 & Generator 2 \\
+2 ~(mid preferred) & Generator 2 & Generator 1 \\
+3 (least preferred) & APU & APU \\ \hline
+\end{tabular}
+\end{table}
 
 \subsection{LL-LMS Overview}
 As the name suggests, the LL-LMS serves as a simple, fail-safe controller in an aircraft power system.
