@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2012.11.22)  7 DEC 2012 15:46
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2012.11.22)  7 DEC 2012 16:04
 entering extended mode
  %&-line parsing enabled.
 **paper.tex
@@ -274,17 +274,11 @@ Overfull \hbox (31.26715pt too wide) in paragraph at lines 84--85
 [1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}
 
 
-]
-Overfull \hbox (11.94804pt too wide) in paragraph at lines 125--129
-\T1/aer/m/n/9 the LL-LMS must guar-an-tee safe op-er-a-tion con-di-tions.[] Bri
-efly,
- []
-
-[2] <figures/H-LMS.pdf, id=22, 591.31989pt x 815.14536pt>
+] [2]
+<figures/H-LMS.pdf, id=22, 591.31989pt x 815.14536pt>
 File: figures/H-LMS.pdf Graphic file (type pdf)
-
-<use figures/H-LMS.pdf>
-Underfull \hbox (badness 10000) in paragraph at lines 196--200
+ <use figures/H-LMS.pdf>
+Underfull \hbox (badness 10000) in paragraph at lines 206--210
 
  []
 
@@ -329,7 +323,7 @@ Here is how much of TeX's memory you used:
  6470 multiletter control sequences out of 15000+50000
  56354 words of font info for 78 fonts, out of 3000000 for 9000
  28 hyphenation exceptions out of 8191
- 44i,10n,42p,642b,301s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 44i,10n,42p,707b,301s stack positions out of 5000i,500n,10000p,200000b,50000s
 {/usr/share/texmf-texlive/fonts/enc/dvips/base/8r.enc}</u
 sr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmbx9.pfb></usr/share/tex
 mf-texlive/fonts/type1/public/amsfonts/cmextra/cmex9.pfb></usr/share/texmf-texl
@@ -343,7 +337,7 @@ exlive/fonts/type1/public/amsfonts/cm/cmsy9.pfb></usr/share/texmf-texlive/fonts
 c/amsfonts/cm/cmti9.pfb></usr/share/texmf-texlive/fonts/type1/urw/helvetic/uhvb
 8a.pfb></usr/share/texmf-texlive/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/shar
 e/texmf-texlive/fonts/type1/urw/times/utmb8a.pfb>
-Output written on paper.pdf (8 pages, 296010 bytes).
+Output written on paper.pdf (8 pages, 296240 bytes).
 PDF statistics:
  103 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)

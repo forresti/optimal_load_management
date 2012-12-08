@@ -123,12 +123,12 @@ higher priority. LL-LMS will shed load starting at the lower end of the list.}
 
 \subsection{LL-LMS Overview}
 As the name suggests, the LL-LMS serves as a simple, fail-safe controller in an aircraft power system.
-Above all else, the LL-LMS must guarantee safe operation conditions.\footnote{For the purposes of this paper, we consider the following safety requirements: no load remains unpowered for more than 50ms, loads are not connected to unpowered generators, and no generator is connected to loads whose power request exceeds the power rating of the generator.}
+Above all else, the LL-LMS must guarantee safe aircraft EPS operation.\footnote{For the purposes of this paper, we consider the following safety requirements: no load remains unpowered for more than 50ms, loads are not connected to unpowered generators, and no generator is connected to loads whose power request exceeds the power rating of the generator.}
 Briefly, the LL-LMS uses various sensors to frequently sample the state of the system. It then uses its sensor readings along with its
 priority tables, such as the one in Table~\ref{T:shed}, to produce a safe system configuration.
 
-\subsection{Implementation}
-Every cycle, the LL-LMS reads it sensors to collect data on generator status and power requests on all the nonsheddable and sheddable loads. 
+\subsection{LL-LMS Implementation}
+Every cycle, the LL-LMS reads sensors to collect data on generator status and power requests on all the nonsheddable and sheddable loads. 
 The LL-LMS first filters out unhealthy generator tables and then uses its generator priority table to determine which of the remaining healthy generators it should use to power the system. 
 Once it has determined what generator to use, the LL-LMS will then determine how much load it has to shed. 
 It first sums up power requests of all the loads (sheddable and nonsheddable) on each bus. 
@@ -144,22 +144,32 @@ This simple generator selection and load shedding scheme ensure that the LL-LMS 
 
 
 \section{Hierarchical LMS}
-\subsection{Overview}
-Recall that the goal of our project is not to design an LMS that is safe OR optimal. Rather, we want to build an LMS that is both safe AND optimal. To this
-end, we propose a hierarchical LMS that achieves the best of both worlds by combining an optimizing LMS with a low level LMS. The OL-LMS periodically,
-though at a slow rate, samples the status of the system and produces a system configuration that is optimal. More specifically, the OL-LMS checks the
-status of the generators and solves the optimization problem detailed in Section~\ref{sec:optimizing-LMS}. The LL-LMS collects the advice from the O-LMS
-and determines whether or not the advice is safe. If the advice is safe, the LL-LMS will actuate the system based on the O-LMS's advice. Otherwise, the
-LL-LMS will fall back to its priority table. Because failures are rare, the LL-LMS will spend most of the time actuating the system based on the O-LMS's
-advice. This hierarchical LMS (H-LMS) is optimal because the O-LMS is optimal and is safe because the LL-LMS is safe.
+In this section, we begin with an overview of our Hierarchical LMS.
+Then, we explain how we modify the Optimizing LMS (Section~\ref{sec:optimizing-LMS}) and LL-LMS (Section~\ref{sec:LL-LMS}) to accommodate our hierarchical strategy.
+Finally, at the end of this section, we describe the hierarchical strategy for communication between the LL-LMS and Optimizing LMS.
 
-\subsection{O-LMS Modifications}
-Instead of having the O-LMS system read the sensors directly as it would in a system that relies solely on an O-LMS, it will instead receive its system 
-status information from the LL-LMS. This communication strategy saves on communication links between sensors and the O-LMS and reuses the communication
-link between the LL-LMS and the O-LMS. We also use the O-LMS to perform live optimizations of the system. That is, instead of solving one large offline
-optimization problem use a receding horizon that covers the entire flight, we have the O-LMS periodically solve many optimization problems using a much
-smaller receding horizon. Our implementation makes the O-LMS system more resilient to generator failures. Previously, the O-LMS would be completely
-oblivious to generators that fail mid-flight. With this modification, the O-LMS will eventually see that there is a generator failure and reoptimize.
+\subsection{Overview}
+Recall that the goal of our work is not to design an LMS that is safe OR optimal. 
+Rather, we want to build an LMS that is both safe AND optimal. 
+To this end, we propose a hierarchical LMS that achieves the best of both worlds by combining an optimizing LMS with a low level LMS. The Optimizing LMS periodically, though at a slow rate, receives the the generator status and produces a system configuration that is optimal in terms of historical workload data. 
+%More specifically, the Optimizing LMS checks the status of the generators and solves the optimization problem detailed in Section~\ref{sec:optimizing-LMS}. 
+The LL-LMS collects the advice from the Optimizing LMS and determines whether or not the advice is safe. 
+If the advice is safe, the LL-LMS will actuate the system based on the Optimizing LMS's advice. 
+Otherwise, the LL-LMS will fall back to its priority table. 
+Because failures are rare, the LL-LMS will spend most of the time actuating the system based on the Optimizing LMS's advice. 
+This Hierarchical LMS is optimal because the Optimizing LMS is optimal and is safe because the LL-LMS is safe.
+
+\subsection{Optimizing LMS Modifications}
+Instead of having the Optimizing LMS system read the sensors directly as it would in a system that relies solely on an Optimizing LMS, it will instead receive its system status information from the LL-LMS. 
+%This communication strategy saves on communication links between sensors and the Optimizing LMS and reuses the communication link between the LL-LMS and the Optimizing LMS. 
+This communication strategy allows the LL-LMS to have the final word on selecting a system configuration.
+%We also use the Optimizing LMS to perform live optimizations of the system. 
+%That is, 
+%smaller receding horizon. 
+%Most importantly, this implementation is resilient to generator failures. 
+Further, instead of solving one large offline optimization problem use a receding horizon that covers the entire flight, we have the Optimizing LMS periodically solve a batch of system configuration optimizations using small receding horizon.
+%Previously, the Optimizing LMS would be completely oblivious to generators that fail mid-flight. 
+With this modification, the Optimizing LMS will eventually see that there is a generator failure and reoptimize for the new topology.
 
 \subsection{LL-LMS Modifications}
 The LL-LMS will now receive advice from the HL-LMS in addition to its other functionalities detailed in Section~\ref{sec:LL-LMS}. The LL-LMS will then
@@ -168,14 +178,14 @@ the HL-LMS has shed enough loads so that no generator is overloaded. In the case
 will use the next best generator according to its priority table and perform the appropriate load shedding. In the case that HL-LMS advice would cause a
 generator overload, the LL-LMS will shed additional loads so that the power request on the bus is under the corresponding generator's power rating.
 
-\subsection{H-LMS Implmentation}
+\subsection{Hierarchical LMS Implmentation}
 
 \begin{figure*}[hp]
   \centering
   \includegraphics[width=0.75\textwidth]{figures/H-LMS.pdf}
-  \caption{\textbf{H-LMS Block Diagram} The O-LMS and the LL-LMS runs at different rates. The O-LMS no longer communicates directly with the EPS sensors
+  \caption{\textbf{Hierarchical LMS Block Diagram} The Optimizing LMS and the LL-LMS runs at different rates. The Optimizing LMS no longer communicates directly with the EPS sensors
 and actuators. The LL-LMS is the last level of controller and communicates directly with the EPS sensors and actuators. The LL-LMS periodically sends
-generator status to the O-LMS which the O-LMS uses in its next iteration. The O-LMS produces advice that it sends to the LL-LMS. Whether or not the O-LMS's
+generator status to the Optimizing LMS which the Optimizing LMS uses in its next iteration. The Optimizing LMS produces advice that it sends to the LL-LMS. Whether or not the Optimizing LMS's
 advice is ever actuated on is left to the discretion of the LL-LMS.}
   \label{fig:H-LMS}
 \end{figure*}
@@ -183,10 +193,10 @@ advice is ever actuated on is left to the discretion of the LL-LMS.}
 Figure~\ref{fig:H-LMS} shows the block diagram of our hierarchical controller. The different clocks fed into the two controllers indicate that the two
 controllers operate at different frequencies. More specifically, the LL-LMS operates at a high frequency, fast enough to ensure that the system is not
 in an unsafe configuration for more than 50 ms. On the other hand, the HL-LMS runs at a much slower rate due to the complexity of the optimization problem.
-It produces a set of advice (generator usage recommendations as well as load shedding configurations) that can the LL-LMS can use until the next O-LMS 
-cycle. Notice that there is an arrow going from the the LL-LMS to th H-LMS because the LL-LMS is responsible for providing the H-LMS with information of
-the status of the generators. The actual generator usage and load shedding that the LL-LMS will actuate on will be either the advice provided by the H-LMS
-if it is safe or the configuration determined by the LL-LMS's priority table if the O-LMS's advice is unsafe.
+It produces a set of advice (generator usage recommendations as well as load shedding configurations) that can the LL-LMS can use until the next Optimizing LMS 
+cycle. Notice that there is an arrow going from the the LL-LMS to the Optimizing LMS because the LL-LMS is responsible for providing the Optimizing LMS with information of
+the status of the generators. The actual generator usage and load shedding that the LL-LMS will actuate on will be either the advice provided by the Optimizing LMS
+if it is safe or the configuration determined by the LL-LMS's priority table if the Optimizing LMS's advice is unsafe.
 
 \section{Numerical Examples}
 \label{sec:numerical-examples}
