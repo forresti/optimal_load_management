@@ -430,11 +430,19 @@ Figure~\ref{fig:lsolpwrspike} shows that the LL-LMS detects that the Optimizing 
   \label{fig:lsolpwrspike}
 \end{figure*}
 
-\section{Conclusion}
-Conclusion.
+\section{Conclusions and Future Work}
+We presented a Hierarchical load management system (LMS) for aircraft EPS.
+Our Hierarchical LMS minimizes load shedding and optimizes generator assignment when the loads are predicted appropriately, and the Hierarchical LMS reverts to simple priority tables during unexpected EPS loads or failures.
+We described the interface and interaction between the two controllers in the Hierarchical LMS, and we showed the intuition and effectiveness of our controller through numerical examples and simulation experiments.
+
+The present paper motivates several avenues for future work.
+First, in real-world scenarios, the Optimizing LMS may provide more relevant advice if it has more access to the live data. 
+Strategies for fusing the live data with the historical data for use in the Optimizing LMS would be a valuable contribution.
+Further, finding ways to reduce the computational complexity of the Optimizing LMS would allow the LL-LMS to request advice from the Optimizing LMS more frequently.
+These future work directions would ideally reduce the likelihood that the Hierarchical LMS falls back on the LL-LMS and its pure priority tables, thus increasing the amount of time that the system runs in an optimal configuration.
 
 \section*{Acknowledgments}
-This work was supported by the US Department of Defense (DoD) through the National Defense Science \& Engineering Graduate Fellowship (NDSEG) Program.
+This work was supported in part by the US Department of Defense (DoD) through the National Defense Science \& Engineering Graduate Fellowship (NDSEG) Program.
 
 \bibliographystyle{abbrv}
 \bibliography{bibliography} 
