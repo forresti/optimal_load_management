@@ -49,7 +49,7 @@ The rest of the paper is organized as follows.
 In Sections~\ref{sec:overview} and~\ref{sec:related-work}, we give an overview of Aircraft EPS. %in order to provide the necessary background information for understanding the purposes of our controller. 
 This is followed by a detailed discussion of an Optimizing Load Management System (Section~\ref{sec:optimizing-LMS}) and a Low Level Load Management System (Section~\ref{sec:LL-LMS}). 
 After presenting these two controllers, we then show how to combine the two into a Hierarchical Load Management System. 
-Finally, in Sections~\ref{sec:numerical-examples}-\ref{sec:results}, we show that our hierarchical controller achieves safety where the Optimizing Load Management System would have been unable to and achieves optimality where the Low Level Load Management System cannot.
+Finally, in Sections~\ref{sec:numerical-examples} and~\ref{sec:results}, we show that our hierarchical controller achieves safety where the Optimizing Load Management System would have been unable to and achieves optimality where the Low Level Load Management System cannot.
 
 \section{Aircraft EPS Overview}
 \label{sec:overview}
@@ -84,7 +84,7 @@ If an EPS power bus requires more power than the generators can provide, the LMS
 
 \section{Related Work}
 \label{sec:related-work}
-In typical aircraft EPS, the load management systems aim to ensure safety during unexpected system behavior [citation needed].
+In typical aircraft EPS, the load management systems aim to ensure safety during unexpected system behavior.
 Specifically, these systems require nonsheddable loads to remain powered at all times.\footnote{More precisely, nonsheddable loads must not be more unpowered for more than one cycle of the LMS. In practice, 50ms is a typical LMS sampling frequency.} %[or, maybe nonsheddable loads can be unpowered for up to 50ms while switching generators]
 Therefore, if a generator fails, the EPS must shed loads and/or reallocate generators to buses such that no nonsheddable load becomes unpowered.
 Typically, these systems rely on hard-coded priority tables for selecting loads to shed and for allocating generators to buses.
@@ -268,7 +268,7 @@ Therefore, the Optimizing-LMS sheds Load 2 and doesn't shed Load 3.
 Thus, the Optimizing LMS reduces load shedding compared to the LL-LMS.
 The Optimizing-LMS produces safe results in this example, so the Hierarchical LMS shares the Optimizing-LMS's reduction in load shedding.
 
-\subsection{Example: LL-LMS Preserves Safety in \\ Power Spike}
+\subsection{Example: LL-LMS Preserves Safety \\ during Power Spike}
 \label{sec:power-spike-example}
 In this example, we show how the Hierarchical LMS preserves safety when the live workload data demands more power than the historical data predicts. 
 At Timestep 1 in the following tables, the live data matches the historical data, and the Optimizing LMS provides safe advice.
@@ -276,6 +276,7 @@ However, Timestep 2 has a power spike in Load 3 that is not anticipated in the h
 Relying on the Optimizing-LMS alone at Timestep 2 would result in an unsafe configuration, where 120,000W is draw, while the generator can only produce 100,000W.
 Fortunately, the LL-LMS in our Hierarchical controller observes the Load 3 power spike in real-time, and it sheds Load 3 to maintain safety, thus maintaining a total power draw of 80,000W, which is within the generator's 100,000W power cap.
 
+~\\ %skip a line
 Timestep 1 (live data matches historical data):\\
 \begin{tabular}{c|cc}
 Sheddable loads (W) & Shed priority \\ \hline
