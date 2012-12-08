@@ -67,6 +67,14 @@ typical EPS controller consists of Generator Control Units (GCUs) and Bus Power 
 the generators as well as isolate failed generators. The BPCU is used to control the contactors thus making it responsible for routing power from the
 generators to the load.
 
+In this paper, we discuss \emph{load management systems (LMS)} that encompass the GCU and BPCU responsibilities such as load shedding and the assignment of generators to buses. 
+The load shedding and generator assignments are actuated by the contactors, though we focus on the high-level control and assume there is an interface to convert our control instructions to contactor configurations.
+
+Also, most of the examples in this paper use a system with the following configuration.
+Each side of the aircraft has a bus, and the left-side and right-side buses each have a set of sheddable and nonsheddable tasks.
+There are three generators--Generator 1 is part of the left-side engine, Generator 2 is part of the right-side engine, and the auxiliary power unit (APU) is generally used only when one or both of the main generators has failed.
+
+
 \subsection{Load Shedding}
 Aircraft EPS generally have two types of loads: sheddable and nonsheddable.
 Examples of nonsheddable loads include navigation systems, electronic actuators, and other mission-critical devices.
@@ -151,7 +159,7 @@ This simple generator selection and load shedding scheme ensure that the LL-LMS 
 %% The key goal (and perhaps the only) goal of this load management system is to preserve safety if workloads change or if  generators fail.
 %% Therefore, using a pre-defined priority table of generator assignments and loads to shed, our LL-LMS sheds loads until the power requirement is within the generator's power budget.
 
-[TODO: 4-line pseudo-code for how we apply priority tables]
+%[TODO: 4-line pseudo-code for how we apply priority tables]
 
 
 \section{Hierarchical LMS}

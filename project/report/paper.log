@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2012.11.22)  7 DEC 2012 16:56
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2012.11.22)  7 DEC 2012 17:26
 entering extended mode
  %&-line parsing enabled.
 **paper.tex
@@ -266,112 +266,117 @@ LaTeX Font Info:    Try loading font information for U+lasy on input line 27.
 (/usr/share/texmf-texlive/tex/latex/base/ulasy.fd
 File: ulasy.fd 1998/08/17 v2.2e LaTeX symbol font definitions
 )
-Overfull \hbox (31.26715pt too wide) in paragraph at lines 84--85
+<figures/eps.png, id=1, 525.46312pt x 361.35pt>
+File: figures/eps.png Graphic file (type png)
+ <use figures/eps.png> [1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}
+
+
+]
+Overfull \hbox (31.26715pt too wide) in paragraph at lines 103--104
 []$[][] \OML/cmm/m/it/9 min\OT1/cmr/m/n/9 ([] \OMS/cmsy/m/n/9 ^^C [] \OT1/cmr/m
 /n/9 + [] \OMS/cmsy/m/n/9 ^^C [] \OT1/cmr/m/n/9 + [])$ 
  []
 
-[1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}
-
-
-] [2]
-<figures/H-LMS.pdf, id=22, 591.31989pt x 815.14536pt>
+[2 <./figures/eps.png (PNG copy)>]
+<figures/H-LMS.pdf, id=23, 591.31989pt x 815.14536pt>
 File: figures/H-LMS.pdf Graphic file (type pdf)
  <use figures/H-LMS.pdf>
-Overfull \hbox (11.20126pt too wide) in paragraph at lines 197--200
-\T1/aer/m/n/9 (con-trolled by the fast clock in Fig-ure 1[]), we set the Optimi
+Overfull \hbox (11.20126pt too wide) in paragraph at lines 216--219
+\T1/aer/m/n/9 (con-trolled by the fast clock in Fig-ure 2[]), we set the Optimi
 zing-
  []
 
 
-Overfull \hbox (8.17647pt too wide) in paragraph at lines 197--200
+Overfull \hbox (8.17647pt too wide) in paragraph at lines 216--219
 \T1/aer/m/n/9 LMS to use a hori-zon of 10 timesteps, and thus the Optimizing-
  []
 
-
-Overfull \hbox (9.58948pt too wide) in paragraph at lines 227--232
+[3] [4 <./figures/H-LMS.pdf>]
+Overfull \hbox (9.58948pt too wide) in paragraph at lines 246--251
 []\T1/aer/m/n/9 In con-trast, the Optimizing-LMS views the pri-or-i-ties as wei
 ghts
  []
 
 
-Overfull \hbox (3.15486pt too wide) in paragraph at lines 227--232
+Overfull \hbox (3.15486pt too wide) in paragraph at lines 246--251
 \T1/aer/m/n/9 in-stead of prece-dence con-straints. There-fore, the Optimizing-
 
  []
 
 
-Overfull \hbox (17.96136pt too wide) in paragraph at lines 233--233
+Overfull \hbox (17.96136pt too wide) in paragraph at lines 252--252
 []\secfnt Example: LL-LMS Pre-serves Safety in Power
  []
 
 
-Overfull \hbox (2.52911pt too wide) in paragraph at lines 264--264
+Overfull \hbox (2.52911pt too wide) in paragraph at lines 283--283
 []\secfnt Example: LL-LMS han-dles gen-er-a-tor fail-
  []
 
-[3] [4 <./figures/H-LMS.pdf>]
-Underfull \hbox (badness 10000) in paragraph at lines 287--291
+
+Underfull \vbox (badness 7907) has occurred while \output is active []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 306--310
 
  []
 
-<figures/preqnofail.png, id=38, 1201.48875pt x 590.205pt>
+<figures/preqnofail.png, id=39, 1201.48875pt x 590.205pt>
 File: figures/preqnofail.png Graphic file (type png)
 
 <use figures/preqnofail.png>
-<figures/lshlnofail.png, id=39, 1201.48875pt x 590.205pt>
+<figures/lshlnofail.png, id=40, 1201.48875pt x 590.205pt>
 File: figures/lshlnofail.png Graphic file (type png)
 
 <use figures/lshlnofail.png>
-<figures/lsllnofail.png, id=40, 1201.48875pt x 590.205pt>
+<figures/lsllnofail.png, id=41, 1201.48875pt x 590.205pt>
 File: figures/lsllnofail.png Graphic file (type png)
 
-<use figures/lsllnofail.png>
-<figures/lsllonefail.png, id=41, 1445.4pt x 725.71124pt>
+<use figures/lsllnofail.png> [5] [6 <./figures/lshlnofail.png (PNG copy)> <./fi
+gures/lsllnofail.png (PNG copy)>]
+<figures/lsllonefail.png, id=48, 1445.4pt x 725.71124pt>
 File: figures/lsllonefail.png Graphic file (type png)
 
 <use figures/lsllonefail.png>
-<figures/lsolonefail.png, id=42, 1445.4pt x 725.71124pt>
+<figures/lsolonefail.png, id=49, 1445.4pt x 725.71124pt>
 File: figures/lsolonefail.png Graphic file (type png)
 
-<use figures/lsolonefail.png> [5 <./figures/preqnofail.png (PNG copy)>]
-[6 <./figures/lshlnofail.png (PNG copy)> <./figures/lsllnofail.png (PNG copy)>]
-[7 <./figures/lsllonefail.png (PNG copy)> <./figures/lsolonefail.png (PNG copy)
->] <figures/preqpwrspike.png, id=53, 1445.4pt x 725.71124pt>
+<use figures/lsolonefail.png>
+<figures/preqpwrspike.png, id=50, 1445.4pt x 725.71124pt>
 File: figures/preqpwrspike.png Graphic file (type png)
 
 <use figures/preqpwrspike.png>
-<figures/lsolpwrspike.png, id=54, 1445.4pt x 725.71124pt>
+<figures/lsolpwrspike.png, id=51, 1445.4pt x 725.71124pt>
 File: figures/lsolpwrspike.png Graphic file (type png)
 
-<use figures/lsolpwrspike.png> (./paper.bbl) [8
-
- <./figures/preqpwrspike.png (PNG copy)>] [9 <./figures/lsolpwrspike.png (PNG c
-opy)>] (./paper.aux) ) 
+<use figures/lsolpwrspike.png> (./paper.bbl) [7 <./figures/preqnofail.png (PNG 
+copy)> <./figures/preqpwrspike.png (PNG copy)>] [8 <./figures/lsllonefail.png (
+PNG copy)> <./figures/lsolonefail.png (PNG copy)>] [9 <./figures/lsolpwrspike.p
+ng (PNG copy)>] (./paper.aux) ) 
 Here is how much of TeX's memory you used:
- 3351 strings out of 495061
- 45141 string characters out of 1182620
- 118331 words of memory out of 3000000
- 6470 multiletter control sequences out of 15000+50000
+ 3357 strings out of 495061
+ 45236 string characters out of 1182620
+ 116331 words of memory out of 3000000
+ 6475 multiletter control sequences out of 15000+50000
  56354 words of font info for 78 fonts, out of 3000000 for 9000
  28 hyphenation exceptions out of 8191
- 44i,10n,42p,720b,301s stack positions out of 5000i,500n,10000p,200000b,50000s
-{/usr/share/texmf-texlive/fonts/enc/dvips/base/8r.enc}</u
-sr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmbx9.pfb></usr/share/tex
-mf-texlive/fonts/type1/public/amsfonts/cmextra/cmex9.pfb></usr/share/texmf-texl
-ive/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/share/texmf-texlive/fonts/ty
-pe1/public/amsfonts/cm/cmmi9.pfb></usr/share/texmf-texlive/fonts/type1/public/a
-msfonts/cm/cmr5.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cm
-r6.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/
-share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/share/texmf-t
-exlive/fonts/type1/public/amsfonts/cm/cmsy9.pfb></usr/share/texmf-texlive/fonts
-/type1/public/amsfonts/cm/cmti7.pfb></usr/share/texmf-texlive/fonts/type1/publi
-c/amsfonts/cm/cmti9.pfb></usr/share/texmf-texlive/fonts/type1/urw/helvetic/uhvb
-8a.pfb></usr/share/texmf-texlive/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/shar
-e/texmf-texlive/fonts/type1/urw/times/utmb8a.pfb>
-Output written on paper.pdf (9 pages, 302587 bytes).
+ 44i,10n,42p,720b,323s stack positions out of 5000i,500n,10000p,200000b,50000s
+{/usr/share/texmf-texlive/fonts/enc/dvips/base/8
+r.enc}</usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmbx9.pfb></usr/
+share/texmf-texlive/fonts/type1/public/amsfonts/cmextra/cmex9.pfb></usr/share/t
+exmf-texlive/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/share/texmf-texlive
+/fonts/type1/public/amsfonts/cm/cmmi9.pfb></usr/share/texmf-texlive/fonts/type1
+/public/amsfonts/cm/cmr5.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfo
+nts/cm/cmr6.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr7.p
+fb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/shar
+e/texmf-texlive/fonts/type1/public/amsfonts/cm/cmsy9.pfb></usr/share/texmf-texl
+ive/fonts/type1/public/amsfonts/cm/cmti7.pfb></usr/share/texmf-texlive/fonts/ty
+pe1/public/amsfonts/cm/cmti9.pfb></usr/share/texmf-texlive/fonts/type1/urw/helv
+etic/uhvb8a.pfb></usr/share/texmf-texlive/fonts/type1/urw/helvetic/uhvr8a.pfb><
+/usr/share/texmf-texlive/fonts/type1/urw/times/utmb8a.pfb>
+Output written on paper.pdf (9 pages, 485798 bytes).
 PDF statistics:
- 106 PDF objects out of 1000 (max. 8388607)
+ 107 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 41 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 46 words of extra memory for PDF output out of 10000 (max. 10000000)
 
