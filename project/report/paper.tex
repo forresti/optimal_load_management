@@ -29,7 +29,7 @@ Huy Vo\\
 \begin{abstract}
 As avionics and other aircraft electronics system increase in complexity, the task of controlling aircraft electronic power systems (EPS) becomes more challenging.
 With this in mind, we present an aircraft EPS controller, or \emph{load management system (LMS)}, that guarantees safety while aiming to optimize quality of service metrics such as minimizing load shedding.
-Our controller uses a hierarchical control to combine an optimization-based model predictive LMS with a priority table based low-level LMS.
+Our controller is a hierarchical load management system that combines an optimization-based model predictive LMS with a priority table based low-level LMS.
 The fundamental contribution is in coupling the two controllers to work in a hierarchical fashion, where the optimization-based LMS looks forward and the low-level LMS guarantees safety in the short term.
 Through simulations and numerical examples, we find that our hierarchical controller minimizes load shedding while always preserving safety in the aircraft EPS.
 \end{abstract}
@@ -82,6 +82,7 @@ Examples of nonsheddable loads include navigation systems, electronic actuators,
 Sheddable loads include the cabin lights, kitchen, and electrical outlets for passengers' laptop computers.
 If an EPS power bus requires more power than the generators can provide, the LMS is responsible for disabling (shedding) some of the sheddable loads.
 
+~\\
 \section{Related Work}
 \label{sec:related-work}
 In typical aircraft EPS, the load management systems aim to ensure safety during unexpected system behavior.
