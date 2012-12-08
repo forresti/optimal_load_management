@@ -25,16 +25,24 @@
 \@writefile{toc}{\contentsline {subsection}{\numberline {6.4}Hierarchical LMS Implmentation}{\thepage }}
 \@writefile{toc}{\contentsline {section}{\numberline {7}Numerical Examples}{\thepage }}
 \newlabel{sec:numerical-examples}{{7}{\thepage }}
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.1}Example: No failures or power spikes}{\thepage }}
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.2}Example: LL-LMS Preserves Safety in Power Spike}{\thepage }}
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.3}Example: LL-LMS handles generator failure}{\thepage }}
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces \textbf  {Hierarchical LMS Block Diagram} The Optimizing LMS and the LL-LMS runs at different rates. The Optimizing LMS no longer communicates directly with the EPS sensors and actuators. The LL-LMS is the last level of controller and communicates directly with the EPS sensors and actuators. The LL-LMS periodically sends generator status to the Optimizing LMS which the Optimizing LMS uses in its next iteration. The Optimizing LMS produces advice that it sends to the LL-LMS. Whether or not the Optimizing LMS's advice is ever actuated on is left to the discretion of the LL-LMS.\relax }}{\thepage }}
+\newlabel{fig:H-LMS}{{1}{\thepage }}
+\bibstyle{abbrv}
+\bibdata{bibliography}
+\bibcite{mehdi}{1}
 \@writefile{toc}{\contentsline {section}{\numberline {8}Experimental Design}{\thepage }}
 \@writefile{toc}{\contentsline {section}{\numberline {9}Experimental Results}{\thepage }}
 \newlabel{sec:results}{{9}{\thepage }}
-\@writefile{toc}{\contentsline {subsection}{\numberline {9.1}No Failures}{\thepage }}
 \@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces \textbf  {Power Request} Historical data of power request on Bus 1 and Bus 2 for time 0 to 100. Notice the spikes in power usage on Bus 2 that pulls the request over 100000 Watts, well over the power rating of the generators. Load shedding is a must during those intervals.\relax }}{\thepage }}
 \newlabel{fig:preqnofail}{{2}{\thepage }}
+\@writefile{toc}{\contentsline {subsection}{\numberline {9.1}No Failures}{\thepage }}
 \@writefile{toc}{\contentsline {subsection}{\numberline {9.2}Generator Failure}{\thepage }}
 \@writefile{toc}{\contentsline {subsection}{\numberline {9.3}Unexpected Power Spikes}{\thepage }}
-\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces \textbf  {Hierarchical LMS Block Diagram} The Optimizing LMS and the LL-LMS runs at different rates. The Optimizing LMS no longer communicates directly with the EPS sensors and actuators. The LL-LMS is the last level of controller and communicates directly with the EPS sensors and actuators. The LL-LMS periodically sends generator status to the Optimizing LMS which the Optimizing LMS uses in its next iteration. The Optimizing LMS produces advice that it sends to the LL-LMS. Whether or not the Optimizing LMS's advice is ever actuated on is left to the discretion of the LL-LMS.\relax }}{\thepage }}
-\newlabel{fig:H-LMS}{{1}{\thepage }}
+\@writefile{toc}{\contentsline {section}{\numberline {10}Conclusion}{\thepage }}
+\@writefile{toc}{\contentsline {section}{\numberline {11}References}{\thepage }}
 \@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces \textbf  {Optimizing LMS Load Shedding} Notice the long period of load shedding around the power usage spikes.\relax }}{\thepage }}
 \newlabel{fig:lshlnofail}{{3}{\thepage }}
 \@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces \textbf  {LL-LMS Load Shedding} Notice that the LL-LMS sheds much more load than the Optimizing LMS.\relax }}{\thepage }}
@@ -43,12 +51,7 @@
 \newlabel{fig:lsllonefail}{{5}{\thepage }}
 \@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces \textbf  {Hierarchical LMS Load Shedding -- One Failure}. Notice the large number of loads dropped from time 45 to 50 before the Optimizing LMS can reoptimize.\relax }}{\thepage }}
 \newlabel{fig:lsolonefail}{{6}{\thepage }}
-\bibstyle{abbrv}
-\bibdata{bibliography}
-\bibcite{mehdi}{1}
 \@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces \textbf  {Actual Power Request} Notice the difference between this power request and the power request expected by the historical data in Figure\nobreakspace  {}2\hbox {}. In particular, there is a large power spike from time 10 to 40 that is not accounted for in the historical data.\relax }}{\thepage }}
 \newlabel{fig:preqpwrspike}{{7}{\thepage }}
-\@writefile{toc}{\contentsline {section}{\numberline {10}Conclusion}{\thepage }}
-\@writefile{toc}{\contentsline {section}{\numberline {11}References}{\thepage }}
 \@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces \textbf  {Hierarchical LMS Load Shedding -- Power Spike} Whenever possible the LL-LMS will use the advice from the Optimizing LMS. The only time it ignores the advice from the Optimizaing LMS is from time 10 to 40 when there is a power spike that the Optimizing LMS is not aware of.\relax }}{\thepage }}
 \newlabel{fig:lsolpwrspike}{{8}{\thepage }}

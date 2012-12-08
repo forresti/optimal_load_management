@@ -201,6 +201,67 @@ if it is safe or the configuration determined by the LL-LMS's priority table if 
 \section{Numerical Examples}
 \label{sec:numerical-examples}
 
+\subsection{Example: No failures or power spikes}
+We now present an example that illustrates how the Optimizing LMS manages to shed fewer loads than the LL-LMS. 
+In this example, there are no generator failures or power spikes (the historical data matches the live data), so the Hierarchical LMS would use the advice for the Optimizing LMS.
+
+Load Shedding Priority Table:
+Load 1: 60,000W, least preferred to shed.
+Load 2: 60,000W, second-least preferred to shed
+Load 3: 40,000W, most preferred to shed
+
+When presented with this workload, the LL-LMS purely applies the priority table, without any optimization or branch-and-bound to investigate ideal combinations of tasks to shed. 
+Thus, while simply shedding Load 2 would be sufficient to get system under its power cap, the LL-LMS walks up the priority table and sheds Loads 2 and 3.
+
+In contrast, the Optimizing-LMS views the priorities as weights instead of precedence constraints. 
+Therefore, the Optimizing-LMS sheds Load 2 and doesn't shed Load 3. 
+%This is one type of situation where the Optimizing-LMS [wins] over the LL-LMS. 
+Thus, the Optimizing LMS reduces load shedding compared to the LL-LMS.
+The Optimizing-LMS produces safe results in this example, so the Hierarchical LMS shares the Optimizing-LMS's reduction in load shedding.
+
+\subsection{Example: LL-LMS Preserves Safety in Power Spike}
+In this example, we show how the Hierarchical LMS preserves safety when the live workload data demands more power than the historical data predicts. 
+At Timestep 1 in the following tables, the live data matches the historical data, and the Optimizing LMS provides safe advice.
+However, Timestep 2 has a power spike in Load 3 that is not anticipated in the historical data. 
+Relying on the Optimizing-LMS alone at Timestep 2 would result in an unsafe configuration, where 120,000W is draw, while the generator can only produce 100,000W.
+Fortunately, the LL-LMS in our Hierarchical controller observes the Load 3 power spike in real-time, and it sheds Load 3 to maintain safety, thus maintaining a total power draw of 80,000W, which is within the generator's 100,000W power cap.
+
+Timestep 1 (live data matches historical data):
+    Load Shedding Priority Table:
+    Load 1: 40,000W, least preferred to shed.
+    Load 2: 40,000W, second-least preferred to shed
+    Load 3: 20,000W, most preferred to shed
+
+Timestep 2 (historical data):
+    Load Shedding Priority Table:
+    Load 1: 40,000W, least preferred to shed.
+    Load 2: 40,000W, second-least preferred to shed
+    Load 3: 20,000W, most preferred to shed
+
+Timestep 2 (live data):
+    Load Shedding Priority Table:
+    Load 1: 20,000W, least preferred to shed.
+    Load 2: 40,000W, second-least preferred to shed
+    Load 3: 40,000W, most preferred to shed
+
+\subsection{Example: LL-LMS handles generator failure}
+
+We use the following loads for all timesteps in this example:
+    Load Shedding Priority Table:
+    Load 1: 40,000W, least preferred to shed.
+    Load 2: 40,000W, second-least preferred to shed
+    Load 3: 20,000W, most preferred to shed
+
+Now, let Generator 1 fail at Timestep 2. 
+If we solely relied on the Optimizing-LMS, the left-side bus would continue to be powered by the (broken) Generator 1 during the time that the Optimizing-LMS reruns the optimization for the new topology.
+However, in the Hierarchical LMS, the LL-LMS steps in at the time of the generator failure and reassigns the left side bus to Generator 2 (following the priority table). 
+(Recall that Generator 2 is preferred over the APU in the priority table. This is because, in addition to handling generator failures, the generator assignment is also valuable in situations with low power demand. For example, when taxiing around the airport, the aircraft can often conserve fuel by only using one generator. A byproduct of this policy is that, in the event of a generator failure, the priority table prefers to just use one generator instead of using the APU.)
+Some loads may need to be shed to run the whole system In typical operating conditions, both side buses remain powered. 
+Then, the Optimizing-LMS is alerted of the generator failure in its next optimization run. 
+When the MILP solver finishes solving the optimization problem, the Optimizing-LMS reports a new configuration to the LL-LMS. 
+This configuration would include assigning APU to the left bus.
+
+
 \section{Experimental Design}
 
 Parameters: \\

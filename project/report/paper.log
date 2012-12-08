@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2012.11.22)  7 DEC 2012 16:04
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2012.11.22)  7 DEC 2012 16:29
 entering extended mode
  %&-line parsing enabled.
 **paper.tex
@@ -278,48 +278,74 @@ Overfull \hbox (31.26715pt too wide) in paragraph at lines 84--85
 <figures/H-LMS.pdf, id=22, 591.31989pt x 815.14536pt>
 File: figures/H-LMS.pdf Graphic file (type pdf)
  <use figures/H-LMS.pdf>
-Underfull \hbox (badness 10000) in paragraph at lines 206--210
+Overfull \hbox (9.58948pt too wide) in paragraph at lines 216--221
+[]\T1/aer/m/n/9 In con-trast, the Optimizing-LMS views the pri-or-i-ties as wei
+ghts
+ []
+
+
+Overfull \hbox (3.15486pt too wide) in paragraph at lines 216--221
+\T1/aer/m/n/9 in-stead of prece-dence con-straints. There-fore, the Optimizing-
 
  []
 
-<figures/preqnofail.png, id=24, 1201.48875pt x 590.205pt>
+
+Overfull \hbox (17.96136pt too wide) in paragraph at lines 222--222
+[]\secfnt Example: LL-LMS Pre-serves Safety in Power
+ []
+
+
+Overfull \hbox (2.52911pt too wide) in paragraph at lines 247--247
+[]\secfnt Example: LL-LMS han-dles gen-er-a-tor fail-
+ []
+
+
+Underfull \vbox (badness 5260) has occurred while \output is active []
+
+ [3]
+[4 <./figures/H-LMS.pdf>]
+Underfull \hbox (badness 10000) in paragraph at lines 267--271
+
+ []
+
+<figures/preqnofail.png, id=38, 1201.48875pt x 590.205pt>
 File: figures/preqnofail.png Graphic file (type png)
 
 <use figures/preqnofail.png>
-<figures/lshlnofail.png, id=25, 1201.48875pt x 590.205pt>
+<figures/lshlnofail.png, id=39, 1201.48875pt x 590.205pt>
 File: figures/lshlnofail.png Graphic file (type png)
 
 <use figures/lshlnofail.png>
-<figures/lsllnofail.png, id=26, 1201.48875pt x 590.205pt>
+<figures/lsllnofail.png, id=40, 1201.48875pt x 590.205pt>
 File: figures/lsllnofail.png Graphic file (type png)
 
 <use figures/lsllnofail.png>
-<figures/lsllonefail.png, id=27, 1445.4pt x 725.71124pt>
+<figures/lsllonefail.png, id=41, 1445.4pt x 725.71124pt>
 File: figures/lsllonefail.png Graphic file (type png)
 
 <use figures/lsllonefail.png>
-<figures/lsolonefail.png, id=28, 1445.4pt x 725.71124pt>
+<figures/lsolonefail.png, id=42, 1445.4pt x 725.71124pt>
 File: figures/lsolonefail.png Graphic file (type png)
 
-<use figures/lsolonefail.png> [3 <./figures/preqnofail.png (PNG copy)>]
-[4 <./figures/H-LMS.pdf>] [5 <./figures/lshlnofail.png (PNG copy)> <./figures/l
-sllnofail.png (PNG copy)>] [6 <./figures/lsllonefail.png (PNG copy)> <./figures
-/lsolonefail.png (PNG copy)>]
-<figures/preqpwrspike.png, id=49, 1445.4pt x 725.71124pt>
+<use figures/lsolonefail.png>
+<figures/preqpwrspike.png, id=43, 1445.4pt x 725.71124pt>
 File: figures/preqpwrspike.png Graphic file (type png)
 
 <use figures/preqpwrspike.png>
-<figures/lsolpwrspike.png, id=50, 1445.4pt x 725.71124pt>
+<figures/lsolpwrspike.png, id=44, 1445.4pt x 725.71124pt>
 File: figures/lsolpwrspike.png Graphic file (type png)
 
-<use figures/lsolpwrspike.png> (./paper.bbl) [7
+<use figures/lsolpwrspike.png> (./paper.bbl) [5 <./figures/preqnofail.png (PNG 
+copy)>] [6 <./figures/lshlnofail.png (PNG copy)> <./figures/lsllnofail.png (PNG
+ copy)>] [7 <./figures/lsllonefail.png (PNG copy)> <./figures/lsolonefail.png (
+PNG copy)>] [8
 
- <./figures/preqpwrspike.png (PNG copy)>] [8 <./figures/lsolpwrspike.png (PNG c
+ <./figures/preqpwrspike.png (PNG copy)>] [9 <./figures/lsolpwrspike.png (PNG c
 opy)>] (./paper.aux) ) 
 Here is how much of TeX's memory you used:
  3351 strings out of 495061
  45141 string characters out of 1182620
- 118331 words of memory out of 3000000
+ 116331 words of memory out of 3000000
  6470 multiletter control sequences out of 15000+50000
  56354 words of font info for 78 fonts, out of 3000000 for 9000
  28 hyphenation exceptions out of 8191
@@ -337,9 +363,9 @@ exlive/fonts/type1/public/amsfonts/cm/cmsy9.pfb></usr/share/texmf-texlive/fonts
 c/amsfonts/cm/cmti9.pfb></usr/share/texmf-texlive/fonts/type1/urw/helvetic/uhvb
 8a.pfb></usr/share/texmf-texlive/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/shar
 e/texmf-texlive/fonts/type1/urw/times/utmb8a.pfb>
-Output written on paper.pdf (8 pages, 296240 bytes).
+Output written on paper.pdf (9 pages, 300903 bytes).
 PDF statistics:
- 103 PDF objects out of 1000 (max. 8388607)
+ 106 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  41 words of extra memory for PDF output out of 10000 (max. 10000000)
 
