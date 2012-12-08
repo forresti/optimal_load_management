@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2012.11.22)  7 DEC 2012 16:29
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2012.11.22)  7 DEC 2012 16:42
 entering extended mode
  %&-line parsing enabled.
 **paper.tex
@@ -278,33 +278,29 @@ Overfull \hbox (31.26715pt too wide) in paragraph at lines 84--85
 <figures/H-LMS.pdf, id=22, 591.31989pt x 815.14536pt>
 File: figures/H-LMS.pdf Graphic file (type pdf)
  <use figures/H-LMS.pdf>
-Overfull \hbox (9.58948pt too wide) in paragraph at lines 216--221
+Overfull \hbox (9.58948pt too wide) in paragraph at lines 227--232
 []\T1/aer/m/n/9 In con-trast, the Optimizing-LMS views the pri-or-i-ties as wei
 ghts
  []
 
 
-Overfull \hbox (3.15486pt too wide) in paragraph at lines 216--221
+Overfull \hbox (3.15486pt too wide) in paragraph at lines 227--232
 \T1/aer/m/n/9 in-stead of prece-dence con-straints. There-fore, the Optimizing-
 
  []
 
 
-Overfull \hbox (17.96136pt too wide) in paragraph at lines 222--222
+Overfull \hbox (17.96136pt too wide) in paragraph at lines 233--233
 []\secfnt Example: LL-LMS Pre-serves Safety in Power
  []
 
 
-Overfull \hbox (2.52911pt too wide) in paragraph at lines 247--247
+Overfull \hbox (2.52911pt too wide) in paragraph at lines 258--258
 []\secfnt Example: LL-LMS han-dles gen-er-a-tor fail-
  []
 
-
-Underfull \vbox (badness 5260) has occurred while \output is active []
-
- [3]
-[4 <./figures/H-LMS.pdf>]
-Underfull \hbox (badness 10000) in paragraph at lines 267--271
+[3] [4 <./figures/H-LMS.pdf>]
+Underfull \hbox (badness 10000) in paragraph at lines 278--282
 
  []
 
@@ -335,18 +331,18 @@ File: figures/preqpwrspike.png Graphic file (type png)
 <figures/lsolpwrspike.png, id=44, 1445.4pt x 725.71124pt>
 File: figures/lsolpwrspike.png Graphic file (type png)
 
-<use figures/lsolpwrspike.png> (./paper.bbl) [5 <./figures/preqnofail.png (PNG 
-copy)>] [6 <./figures/lshlnofail.png (PNG copy)> <./figures/lsllnofail.png (PNG
- copy)>] [7 <./figures/lsllonefail.png (PNG copy)> <./figures/lsolonefail.png (
-PNG copy)>] [8
+<use figures/lsolpwrspike.png> [5 <./figures/preqnofail.png (PNG copy)>]
+[6 <./figures/lshlnofail.png (PNG copy)> <./figures/lsllnofail.png (PNG copy)>]
+[7 <./figures/lsllonefail.png (PNG copy)> <./figures/lsolonefail.png (PNG copy)
+>] (./paper.bbl) [8
 
  <./figures/preqpwrspike.png (PNG copy)>] [9 <./figures/lsolpwrspike.png (PNG c
 opy)>] (./paper.aux) ) 
 Here is how much of TeX's memory you used:
- 3351 strings out of 495061
- 45141 string characters out of 1182620
+ 3352 strings out of 495061
+ 45154 string characters out of 1182620
  116331 words of memory out of 3000000
- 6470 multiletter control sequences out of 15000+50000
+ 6471 multiletter control sequences out of 15000+50000
  56354 words of font info for 78 fonts, out of 3000000 for 9000
  28 hyphenation exceptions out of 8191
  44i,10n,42p,707b,301s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -363,7 +359,7 @@ exlive/fonts/type1/public/amsfonts/cm/cmsy9.pfb></usr/share/texmf-texlive/fonts
 c/amsfonts/cm/cmti9.pfb></usr/share/texmf-texlive/fonts/type1/urw/helvetic/uhvb
 8a.pfb></usr/share/texmf-texlive/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/shar
 e/texmf-texlive/fonts/type1/urw/times/utmb8a.pfb>
-Output written on paper.pdf (9 pages, 300903 bytes).
+Output written on paper.pdf (9 pages, 301607 bytes).
 PDF statistics:
  106 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)

@@ -200,15 +200,26 @@ if it is safe or the configuration determined by the LL-LMS's priority table if 
 
 \section{Numerical Examples}
 \label{sec:numerical-examples}
+In the following numerical examples, we show how Hierarchical LMS harnesses the Optimizing LMS and LL-LMS to handle interesting load shedding situations and failure scenarios.
+For simplicity, let each of these examples be limited to the loads in the left side bus.
+Further, to keep the examples simple, we just look at sheddable loads powered by a generator with a power cap of 100,000W.
+In practice, aircraft EPS typically have a mix of sheddable and nonsheddable loads.
 
 \subsection{Example: No failures or power spikes}
 We now present an example that illustrates how the Optimizing LMS manages to shed fewer loads than the LL-LMS. 
 In this example, there are no generator failures or power spikes (the historical data matches the live data), so the Hierarchical LMS would use the advice for the Optimizing LMS.
 
-Load Shedding Priority Table:
-Load 1: 60,000W, least preferred to shed.
-Load 2: 60,000W, second-least preferred to shed
-Load 3: 40,000W, most preferred to shed
+%\begin{table}[t]
+%\caption{Optimizing LMS reduces load shedding compared to the LL-LMS load shedding policy.}
+%\label{T:example-1}
+%\centering
+\begin{tabular}{c|cc}
+Sheddable loads (W) & Shed priority \\ \hline
+60,000 & 1 (least preferred to shed) \\
+60,000 & 2 (middle priority to shed) \\ 
+40,000 & 3 (most preferred to shed) \\ \hline
+\end{tabular}
+%\end{table}
 
 When presented with this workload, the LL-LMS purely applies the priority table, without any optimization or branch-and-bound to investigate ideal combinations of tasks to shed. 
 Thus, while simply shedding Load 2 would be sufficient to get system under its power cap, the LL-LMS walks up the priority table and sheds Loads 2 and 3.
