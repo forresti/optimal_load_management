@@ -305,23 +305,13 @@ Sheddable loads (W) & Shed priority \\ \hline
 As with our other examples in this section, we're concentrating on the left side bus, which is powered by the left generator (labeled as Generator 1).
 Now, let Generator 1 fail at Timestep 2. 
 If we solely relied on the Optimizing-LMS, the left-side bus would continue to be powered by the (broken) Generator 1 during the time that the Optimizing-LMS reruns the optimization for the new topology.
-However, in the Hierarchical LMS, the LL-LMS steps in at the time of the generator failure and reassigns the left side bus to Generator 2 (following the priority table).\footnote{Recall from Table~\ref{T:generator-priority} that Generator 2 is preferred over the APU in the left side bus's priority table. This is because, in addition to handling generator failures, the generator assignment is also valuable in situations with low power demand. For example, when taxiing around the airport, the aircraft can often conserve fuel by only using one generator. A byproduct of this policy is that, in the event of a generator failure, the priority table prefers to run the entire aircraft on a single generator instead of using the APU.}
+However, in the Hierarchical LMS, the LL-LMS steps in at the time of the generator failure and reassigns the left side bus to Generator 2 (following the priorities in Table~\ref{T:generator-priority}).\footnote{Notice in Table~\ref{T:generator-priority} that Generator 2 is preferred over the APU in the left side bus's priority table. This is because, in addition to handling generator failures, the generator assignment is also valuable in situations with low power demand. For example, when taxiing around the airport, the aircraft can often conserve fuel by only using one generator. A byproduct of this policy is that, in the event of a generator failure, the priority table prefers to run the entire aircraft on a single generator instead of using the APU.}
 Some loads may need to be shed to run the whole system off of generator 2.
 However, so long as the nonsheddable loads in both buses are within the power cap of generator 2 then, both side buses remain powered. 
 Then, the Optimizing-LMS is alerted of the generator failure in its next optimization run. 
 When the MILP solver finishes solving the optimization problem, the Optimizing-LMS reports a new configuration to the LL-LMS. 
 This configuration would include assigning the APU to power the left bus.
 
-
-\section{Experimental Design}
-
-Parameters: \\
-generator 1: 100,000 W \\
-generator 2: 100,000 W \\
-APU: 104,000 W \\
-
-
-[TODO: show priority tables; numerical example]
 
 \section{Experimental Results}
 \label{sec:results}
@@ -403,27 +393,23 @@ Figure~\ref{fig:lsllonefail} and Figure~\ref{fig:lsolonefail}.
 \end{figure*}
 
 \subsection{Unexpected Power Spikes}
-The Optimizing LMS performs a live optimization using historical data for load power requests from
-previous flights. Due to the nature of the optimization problem, it is impossible to
-program the optimization problem with live data. As a result, it is possible for the
-Optimizing LMS to provide unsafe advice if there is a power spike. More specifically, it is possible
-for the Optimizing LMS to generate a load shedding configuration that could have one of the power
-generators driving a higher power request than its rating. We want to simulate such a
-failure case and show that the LL-LMS performs the required adjustment to keep the system
-in a safe state. For this experiment, we use the same historical power request as in
-Figure~\ref{fig:preqnofail}. However, the actual power request for this simulation is shown
-in Figure~\ref{fig:preqpwrspike}. Without the LL-LMS, the Optimizing LMS would use the load
-shedding configuration seen in Figure~\ref{fig:lshlnofail}. Notice that there is a power
-spike from time 10 to 40 that the historical data does not account for and thus the Optimizing LMS
-is unaware of. As a result, its load shedding configuration would overload the power
-generator. Because we have a LL-LMS, we are able to keep the system in a safe configuration.
-Figure~\ref{fig:lsolpwrspike} shows that the LL-LMS will detect that the generators would
-be overloaded and thus shed some loads during this time interval.
+\label{sec:power-spikes-simulation}
+The Optimizing LMS performs a live optimization using historical data for load power requests from previous flights. 
+Due to the nature of the optimization problem, it is impossible to program the optimization problem with live data. 
+As a result, it is possible for the Optimizing LMS to provide unsafe advice if there is a power spike. 
+More specifically, it is possible for the Optimizing LMS to generate a load shedding configuration that could have one of the power generators driving a higher power request than its rating. We want to simulate such a failure case and show that the LL-LMS performs the required adjustment to keep the system in a safe state. 
+For this experiment, we use the same historical power request as in Figure~\ref{fig:preqnofail}. 
+However, the actual power request for this simulation is shown in Figure~\ref{fig:preqpwrspike}. 
+Without the LL-LMS, the Optimizing LMS would use the load shedding configuration seen in Figure~\ref{fig:lshlnofail}. 
+Notice that there is a power spike from time 10 to 40 that the historical data does not account for and thus the Optimizing LMS is unaware of. 
+As a result, its load shedding configuration would overload the power generator. 
+Because we have a LL-LMS, we are able to keep the system in a safe configuration.
+Figure~\ref{fig:lsolpwrspike} shows that the LL-LMS will detect that the generators would be overloaded and thus shed some loads during this time interval.
 
 \begin{figure}[htb]
   \centering
   \includegraphics[width=0.9\columnwidth]{figures/preqpwrspike}
-  \caption{\textbf{Actual Power Request} Notice the difference between this power
+  \caption{\textbf{Actual Power Request for Section~\ref{sec:power-spikes-simulation}}. Notice the difference between this power
   request and the power request expected by the historical data in 
   Figure~\ref{fig:preqnofail}. In particular, there is a large power spike from time 10
   to 40 that is not accounted for in the historical data.}
