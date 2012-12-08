@@ -262,6 +262,7 @@ Thus, the Optimizing LMS reduces load shedding compared to the LL-LMS.
 The Optimizing-LMS produces safe results in this example, so the Hierarchical LMS shares the Optimizing-LMS's reduction in load shedding.
 
 \subsection{Example: LL-LMS Preserves Safety in Power Spike}
+\label{sec:power-spike-example}
 In this example, we show how the Hierarchical LMS preserves safety when the live workload data demands more power than the historical data predicts. 
 At Timestep 1 in the following tables, the live data matches the historical data, and the Optimizing LMS provides safe advice.
 However, Timestep 2 has a power spike in Load 3 that is not anticipated in the historical data. 
@@ -342,7 +343,7 @@ This configuration would include assigning the APU to power the left bus.
   \label{fig:lsllnofail}
 \end{figure*}
 
-For our first experiment, we simulated the case when there are no power
+We begin by simulating the case when there are no power
 generator failures in the system using the power usage profile shown in
 Figure~\ref{fig:preqnofail}. 
 In other words, the real power usage profile (Figure~\ref{fig:preqnofail}) is given to the Optimizing LMS and LL-LMS without any perturbations.
@@ -394,17 +395,18 @@ Figure~\ref{fig:lsllonefail} and Figure~\ref{fig:lsolonefail}.
 
 \subsection{Unexpected Power Spikes}
 \label{sec:power-spikes-simulation}
-The Optimizing LMS performs a live optimization using historical data for load power requests from previous flights. 
-Due to the nature of the optimization problem, it is impossible to program the optimization problem with live data. 
-As a result, it is possible for the Optimizing LMS to provide unsafe advice if there is a power spike. 
-More specifically, it is possible for the Optimizing LMS to generate a load shedding configuration that could have one of the power generators driving a higher power request than its rating. We want to simulate such a failure case and show that the LL-LMS performs the required adjustment to keep the system in a safe state. 
-For this experiment, we use the same historical power request as in Figure~\ref{fig:preqnofail}. 
-However, the actual power request for this simulation is shown in Figure~\ref{fig:preqpwrspike}. 
+%The Optimizing LMS performs a live optimization using historical data for load power requests from previous flights. 
+%Due to the nature of the optimization problem, it is impossible to program the optimization problem with live data. 
+As we showed in Section~\ref{sec:power-spike-example}, it is possible for the Optimizing LMS to provide unsafe advice if there is a power spike. 
+More specifically, due to the Optimizing LMS's dependence on historical data, the Optimizing LMS can generate a load shedding configuration that draws more power than the generators can produce. 
+We want to simulate such a failure case and show that the LL-LMS performs the required adjustment to keep the system in a safe state. 
+For this experiment, the Optimizing LMS is given the historical power loads in Figure~\ref{fig:preqnofail}. 
+However, the actual power loads for this simulation is shown in Figure~\ref{fig:preqpwrspike}. 
 Without the LL-LMS, the Optimizing LMS would use the load shedding configuration seen in Figure~\ref{fig:lshlnofail}. 
 Notice that there is a power spike from time 10 to 40 that the historical data does not account for and thus the Optimizing LMS is unaware of. 
 As a result, its load shedding configuration would overload the power generator. 
 Because we have a LL-LMS, we are able to keep the system in a safe configuration.
-Figure~\ref{fig:lsolpwrspike} shows that the LL-LMS will detect that the generators would be overloaded and thus shed some loads during this time interval.
+Figure~\ref{fig:lsolpwrspike} shows that the LL-LMS detects that the Optimizing LMS's configuration overloads some generators, and the LL-LMS applies the priority tables to shed some loads during this time interval.
 
 \begin{figure}[htb]
   \centering
