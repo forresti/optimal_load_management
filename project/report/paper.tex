@@ -176,7 +176,7 @@ This simple generator selection and load shedding scheme ensure that the LL-LMS 
 
 \section{Hierarchical LMS}
 In this section, we begin with an overview of our Hierarchical LMS.
-Then, we explain how we modify the Optimizing LMS (Section~\ref{sec:optimizing-LMS}) and LL-LMS (Section~\ref{sec:LL-LMS}) to accommodate our hierarchical strategy.
+Then, we explain how we modify the Optimizing LMS (from Section~\ref{sec:optimizing-LMS}) and LL-LMS (from Section~\ref{sec:LL-LMS}) to accommodate our hierarchical strategy.
 Finally, at the end of this section, we describe the hierarchical strategy for communication between the LL-LMS and Optimizing LMS.
 
 \subsection{Overview}
@@ -242,6 +242,7 @@ Further, to keep the examples simple, we just look at sheddable loads powered by
 In practice, aircraft EPS typically have a mix of sheddable and nonsheddable loads.
 
 \subsection{Example: No failures or power spikes}
+\label{sec:load-shedding-example}
 We now present an example that illustrates how the Optimizing LMS manages to shed fewer loads than the LL-LMS. 
 In this example, there are no generator failures or power spikes (the historical data matches the live data), so the Hierarchical LMS would use the advice for the Optimizing LMS.
 
@@ -359,32 +360,31 @@ Optimizing LMS and the LL-LMS responds to this scenario in isolation.
 Comparing the results, we can see that the LL-LMS will shed a much larger
 number of loads (Figure~\ref{fig:lshlnofail}) than the the Optimizing LMS (Figure~\ref{fig:lsllnofail}). 
 In particular, the LL-LMS sheds exclusively from loads 6-10 due to the configuration of the priority table.
-However, the Optimizing LMS however is much smarter. 
-It is able to minimize the number of loads shed by shedding loads much higher up in the priority table.
+%However, the Optimizing LMS however is much smarter. 
+However, the Optimizing LMS sheds fewer loads, due to the intuition described in the numerical example in Section~\ref{sec:load-shedding-example}.
+Specifically, the Optimizing LMS reduces the number of loads shed by shedding loads by cherry-picking weighted loads throughout the priority table instead of shedding all low-priority loads before shedding high-priority loads.
+Since the system in this example experienced no generator failures or unexpected power spikes, running the system with only the Optimizing LMS or with the Hierarchical LMS produces the same result (Figure~\ref{fig:lshlnofail}).
 
 \subsection{Generator Failure}
 Now, we investigate how our Hierarchical LMS system responds to spontaneous generator failures. 
-To this end, we
-simulated the case when generator 2 would fail at time 45. Obviously, if the Optimizing LMS were
-to run in isolation, it would leave the system unpowered from time 45 to 50. 
-Figure~\ref{fig:lsllonefail} shows what would happen if the LL-LMS were to run in 
-isolation. Starting at time 45, the LL-LMS sees that generator 2 has failed and it has 
-switched to using generator 1 to power both buses according to its priority table. In order
-to stay under generator 1's power rating, the LL-LMS sheds a large number of loads on the 
-second bus. Figure~\ref{fig:lsolonefail} shows what would happen in a combined Optimizing LMS
-LL-LMS system. The Optimizing LMS produces advice to be used from time 40 to 50. Unfortunately,
-there is no way for the Optimizing LMS's advice to be aware of the failure at time 45. So, while the advice
-from time 40 to 44 is optimal and safe, the advice from 45 to 49 is unsafe. The LL-LMS is
-able to see this failure at time 45 and kicks in, ignoring the unsafe advice from the Optimizing LMS. This
-behavior is observed in Figure~\ref{fig:lsolonefail} where from time 45 to 49, a large
-number of loads are shed. Then at time 50, the Optimizing LMS reoptimizes by turning on the APU.
-Notice the difference in the number of loads shed onward from time 50 in 
-Figure~\ref{fig:lsllonefail} and Figure~\ref{fig:lsolonefail}.
+To this end, we simulated the case when generator 2 (which was powering the right bus) would fail at time 45. 
+Obviously, if the Optimizing LMS were to run in isolation, it would leave the system unpowered from time 45 to 50. 
+Figure~\ref{fig:lsllonefail} shows what would happen if the LL-LMS were to run in  isolation. 
+Starting at time 45, the LL-LMS sees that generator 2 has failed and it has switched to using generator 1 to power both buses according to its priority table. 
+In order to stay under generator 1's power rating, the LL-LMS sheds a large number of loads on the second bus. Figure~\ref{fig:lsolonefail} shows what would happen in a combined Optimizing LMS LL-LMS system. 
+The Optimizing LMS produces advice to be used from time 40 to 50. 
+Unfortunately, there is no way for the Optimizing LMS's advice to be aware of the failure at time 45. 
+So, while the advice from time 40 to 44 is optimal and safe, the advice from 45 to 49 is unsafe. 
+The LL-LMS is able to see this failure at time 45 and kicks in, ignoring the unsafe advice from the Optimizing LMS. 
+This behavior is observed in Figure~\ref{fig:lsolonefail} where from time 45 to 49, a large number of loads are shed. 
+(Given the priorities in Table~\ref{T:generator-priority}, the LL-LMS prefers to use generator 1 instead of the APU to power the right bus.)
+Then at time 50, the Optimizing LMS reoptimizes by turning on the APU.
+Notice the difference in the number of loads shed onward after time 50 in Figure~\ref{fig:lsllonefail} and Figure~\ref{fig:lsolonefail}.
 
 \begin{figure*}[hp]
   \centering
   \includegraphics[width=0.9\textwidth]{figures/lsllonefail}
-  \caption{\textbf{LL-LMS Load Shedding -- One Failure}. Notice
+  \caption{\textbf{LL-LMS Load Shedding -- One Generator Failure}. Notice
   the large amount of loads shedded in order to keep power usage below the power rating
   of generator 1.}
   \label{fig:lsllonefail}
@@ -392,7 +392,7 @@ Figure~\ref{fig:lsllonefail} and Figure~\ref{fig:lsolonefail}.
 \begin{figure*}[hp]
   \centering
   \includegraphics[width=0.9\textwidth]{figures/lsolonefail}
-  \caption{\textbf{Hierarchical LMS Load Shedding -- One Failure}. Notice the
+  \caption{\textbf{Hierarchical LMS Load Shedding -- One Generator Failure}. Notice the
   large number of loads dropped from time 45 to 50 before the Optimizing LMS can reoptimize.}
   \label{fig:lsolonefail}
 \end{figure*}
@@ -403,7 +403,7 @@ Figure~\ref{fig:lsllonefail} and Figure~\ref{fig:lsolonefail}.
 %Due to the nature of the optimization problem, it is impossible to program the optimization problem with live data. 
 As we showed in Section~\ref{sec:power-spike-example}, it is possible for the Optimizing LMS to provide unsafe advice if there is a power spike. 
 More specifically, due to the Optimizing LMS's dependence on historical data, the Optimizing LMS can generate a load shedding configuration that draws more power than the generators can produce. 
-We want to simulate such a failure case and show that the LL-LMS performs the required adjustment to keep the system in a safe state. 
+We now simulate such a failure case and show that the LL-LMS performs the required adjustment to keep the system in a safe state. 
 For this experiment, the Optimizing LMS is given the historical power loads in Figure~\ref{fig:preqnofail}. 
 However, the actual power loads for this simulation is shown in Figure~\ref{fig:preqpwrspike}. 
 Without the LL-LMS, the Optimizing LMS would use the load shedding configuration seen in Figure~\ref{fig:lshlnofail}. 
