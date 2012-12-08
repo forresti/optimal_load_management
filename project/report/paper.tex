@@ -159,7 +159,7 @@ Otherwise, the LL-LMS will fall back to its priority table.
 Because failures are rare, the LL-LMS will spend most of the time actuating the system based on the Optimizing LMS's advice. 
 This Hierarchical LMS is optimal because the Optimizing LMS is optimal and is safe because the LL-LMS is safe.
 
-\subsection{Optimizing LMS Modifications}
+\subsection{Modifications to Optimizing LMS}
 Instead of having the Optimizing LMS system read the sensors directly as it would in a system that relies solely on an Optimizing LMS, it will instead receive its system status information from the LL-LMS. 
 %This communication strategy saves on communication links between sensors and the Optimizing LMS and reuses the communication link between the LL-LMS and the Optimizing LMS. 
 This communication strategy allows the LL-LMS to have the final word on selecting a system configuration.
@@ -171,11 +171,11 @@ Further, instead of solving one large offline optimization problem use a recedin
 %Previously, the Optimizing LMS would be completely oblivious to generators that fail mid-flight. 
 With this modification, the Optimizing LMS will eventually see that there is a generator failure and reoptimize for the new topology.
 
-\subsection{LL-LMS Modifications}
-The LL-LMS will now receive advice from the HL-LMS in addition to its other functionalities detailed in Section~\ref{sec:LL-LMS}. The LL-LMS will then
-check to see that the HL-LMS's advice is safe. Specifically, the LL-LMS will check that the HL-LMS did not recommend the use of a failed generator and that
-the HL-LMS has shed enough loads so that no generator is overloaded. In the case that the HL-LMS recommended the use of a failed generator, the LL-LMS
-will use the next best generator according to its priority table and perform the appropriate load shedding. In the case that HL-LMS advice would cause a
+\subsection{Modifications to LL-LMS}
+The LL-LMS will now receive advice from the Optimizing LMS in addition to its other functionalities detailed in Section~\ref{sec:LL-LMS}. The LL-LMS will then
+check to see that the Optimizing LMS's advice is safe. Specifically, the LL-LMS will check that the Optimizing LMS did not recommend the use of a failed generator and that
+the Optimizing LMS has shed enough loads so that no generator is overloaded. In the case that the Optimizing LMS recommended the use of a failed generator, the LL-LMS
+will use the next best generator according to its priority table and perform the appropriate load shedding. In the case that Optimizing LMS advice would cause a
 generator overload, the LL-LMS will shed additional loads so that the power request on the bus is under the corresponding generator's power rating.
 
 \subsection{Hierarchical LMS Implmentation}
@@ -190,12 +190,17 @@ advice is ever actuated on is left to the discretion of the LL-LMS.}
   \label{fig:H-LMS}
 \end{figure*}
 
-Figure~\ref{fig:H-LMS} shows the block diagram of our hierarchical controller. The different clocks fed into the two controllers indicate that the two
-controllers operate at different frequencies. More specifically, the LL-LMS operates at a high frequency, fast enough to ensure that the system is not
-in an unsafe configuration for more than 50 ms. On the other hand, the HL-LMS runs at a much slower rate due to the complexity of the optimization problem.
-It produces a set of advice (generator usage recommendations as well as load shedding configurations) that can the LL-LMS can use until the next Optimizing LMS 
-cycle. Notice that there is an arrow going from the the LL-LMS to the Optimizing LMS because the LL-LMS is responsible for providing the Optimizing LMS with information of
-the status of the generators. The actual generator usage and load shedding that the LL-LMS will actuate on will be either the advice provided by the Optimizing LMS
+Figure~\ref{fig:H-LMS} shows the block diagram of our hierarchical controller. 
+The different clocks fed into the two controllers indicate that the two controllers operate at different frequencies. 
+More specifically, the LL-LMS operates at a high frequency, fast enough to ensure that the system is not in an unsafe configuration for more than 50 ms. 
+
+On the other hand, the Optimizing LMS runs at a much slower rate due to the complexity of the optimization problem.
+Recall from Section~\ref{sec:optimizing-LMS} that the Optimizing LMS can optimize over a horizon of 10 timesteps every 500ms. 
+Therefore, we set the LL-LMS to sample at a frequency of 50ms (controlled by the fast clock in Figure~\ref{fig:H-LMS}), we set the Optimizing-LMS to use a horizon of 10 timesteps, and thus the Optimizing-LMS gives a batch of advice to the LL-LMS every 500ms.
+
+At each 500ms interval, the Optimizing LMS produces a set of 10 timesteps worth of advice (generator usage recommendations as well as load shedding configurations) that can the LL-LMS can use until the next Optimizing LMS cycle. 
+Notice that there is an arrow going from the the LL-LMS to the Optimizing LMS because the LL-LMS is responsible for providing the Optimizing LMS with information of the status of the generators. 
+The generator usage and load shedding that the LL-LMS will actuate on will be either the advice provided by the Optimizing LMS
 if it is safe or the configuration determined by the LL-LMS's priority table if the Optimizing LMS's advice is unsafe.
 
 \section{Numerical Examples}
@@ -258,20 +263,23 @@ Sheddable loads (W) & Shed priority \\ \hline
 
 \subsection{Example: LL-LMS handles generator failure}
 
-We use the following loads for all timesteps in this example:
-    Load Shedding Priority Table:
-    Load 1: 40,000W, least preferred to shed.
-    Load 2: 40,000W, second-least preferred to shed
-    Load 3: 20,000W, most preferred to shed
+We use the following loads for all timesteps in this example: \\
+\begin{tabular}{c|cc}
+Sheddable loads (W) & Shed priority \\ \hline
+40,000 & 1 (least preferred to shed) \\
+40,000 & 2 (middle priority to shed) \\ 
+20,000 & 3 (most preferred to shed) \\ \hline
+\end{tabular}
 
+As with our other examples in this section, we're concentrating on the left side bus, which is powered by the left generator (labeled as Generator 1).
 Now, let Generator 1 fail at Timestep 2. 
 If we solely relied on the Optimizing-LMS, the left-side bus would continue to be powered by the (broken) Generator 1 during the time that the Optimizing-LMS reruns the optimization for the new topology.
-However, in the Hierarchical LMS, the LL-LMS steps in at the time of the generator failure and reassigns the left side bus to Generator 2 (following the priority table). 
-(Recall that Generator 2 is preferred over the APU in the priority table. This is because, in addition to handling generator failures, the generator assignment is also valuable in situations with low power demand. For example, when taxiing around the airport, the aircraft can often conserve fuel by only using one generator. A byproduct of this policy is that, in the event of a generator failure, the priority table prefers to just use one generator instead of using the APU.)
-Some loads may need to be shed to run the whole system In typical operating conditions, both side buses remain powered. 
+However, in the Hierarchical LMS, the LL-LMS steps in at the time of the generator failure and reassigns the left side bus to Generator 2 (following the priority table).\footnote{Recall that Generator 2 is preferred over the APU in the left side bus's priority table. This is because, in addition to handling generator failures, the generator assignment is also valuable in situations with low power demand. For example, when taxiing around the airport, the aircraft can often conserve fuel by only using one generator. A byproduct of this policy is that, in the event of a generator failure, the priority table prefers to run the entire aircraft on a single generator instead of using the APU.}
+Some loads may need to be shed to run the whole system off of generator 2.
+However, so long as the nonsheddable loads in both buses are within the power cap of generator 2 then, both side buses remain powered. 
 Then, the Optimizing-LMS is alerted of the generator failure in its next optimization run. 
 When the MILP solver finishes solving the optimization problem, the Optimizing-LMS reports a new configuration to the LL-LMS. 
-This configuration would include assigning APU to the left bus.
+This configuration would include assigning the APU to power the left bus.
 
 
 \section{Experimental Design}
@@ -281,10 +289,6 @@ generator 1: 100,000 W \\
 generator 2: 100,000 W \\
 APU: 104,000 W \\
 
-Recall from Section~\ref{sec:optimizing-LMS} that the Optimizing LMS can optimize over a horizon of 10 timesteps every 500ms. 
-Further, Section~\ref{sec:related-work} mentioned that 50ms is a typical sampling frequency for a LMS system.
-We design our simulation with these parameters in mind.
-Specifically, we set the LL-LMS to sample at a frequency of 50ms (controlled by the fast clock in Figure~\ref{fig:H-LMS}), we set the Optimizing-LMS to use a horizon of 10 timesteps, and thus the Optimizing-LMS gives a batch of advice to the LL-LMS every 500ms.
 
 [TODO: show priority tables; numerical example]
 
