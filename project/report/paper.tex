@@ -88,6 +88,11 @@ Specifically, these systems require nonsheddable loads to remain powered at all 
 Therefore, if a generator fails, the EPS must shed loads and/or reallocate generators to buses such that no nonsheddable load becomes unpowered.
 Typically, these systems rely on hard-coded priority tables for selecting loads to shed and for allocating generators to buses.
 
+Beyond discussions of simply applying priority tables, perhaps the most closely related work in the Aircraft EPS community focuses on optimizing \emph{the EPS topology itself}~\cite{Chandrasekaran:2003, VanDriel:2006, Pinto:2010}. 
+In contrast to these results, we focus on optimizing the control of load shedding and generator assignment of any given EPS topology, while also preserving safety.
+An other related direction is the work by Xu et al.~\cite{xu:2012}, who proposes correct-by-construction design of load management systems.
+While the work in~\cite{xu:2012} guarantees safety, it doesn't optimize for minimal load shedding or other similar metrics.
+
 \section{Optimizing LMS}
 \label{sec:optimizing-LMS}
 LMS systems that are based purely on priority tables are very simplistic, allowing them to frequently sample the system. 
