@@ -52,9 +52,20 @@ Finally, in Sections~\ref{sec:numerical-examples}-\ref{sec:results}, we show tha
 
 \section{Aircraft EPS Overview}
 \label{sec:overview}
-Intro to aircraft EPS... explain the buses and generators.
-Possibly show the diagram from the Honeywell patent.
-Possibly show our ``cartoon" diagram of an EPS system.
+\begin{figure*}[htb]
+  \centering
+  \includegraphics[width=\columnwidth]{figures/eps.png}
+  \caption{\textbf{Single Line Diagram of Aircraft Electrical Power System} Detailed model of the EPS system from the Honeywell Patent used
+  in this paper.}
+  \label{fig:sld}
+\end{figure*}
+Figure~\ref{fig:sld} shows a detailed Single Line Diagram (SLD) of an aircraft EPS. The diagram shows AC and DC generators connected to the engines
+as well as auxiliary power sources (APUs). These generators and power sources are responsible for providing power to the many critical and non-critical
+AC and DC loads as well as power conversion equipments. Buses are responsible for distributing power from the generators to the loads. Electrical switches
+called contactors route power from the generators to the buses. Current, voltage, and contactor sensors are used to monitor the status of the system. A
+typical EPS controller consists of Generator Control Units (GCUs) and Bus Power Control Unit (BPCU). The GCU is used to regulate the power output of the
+the generators as well as isolate failed generators. The BPCU is used to control the contactors thus making it responsible for routing power from the
+generators to the load.
 
 \subsection{Load Shedding}
 Aircraft EPS generally have two types of loads: sheddable and nonsheddable.
