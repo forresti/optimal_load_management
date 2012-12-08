@@ -6,6 +6,7 @@
 \makeatletter
 \let\@copyrightspace\relax
 \makeatother
+\newcommand*{\metafrac}[2]{\genfrac{}{}{0pt}{}{#1}{#2}} %fraction without line
 \newcommand*{\bfrac}[2]{\genfrac{(}{)}{0pt}{}{#1}{#2}} %fraction without line
 
 \begin{document}
@@ -105,7 +106,7 @@ The key insight in~\cite{mehdi} is to formulate the system requirements (e.g. th
 The Optimizing LMS minimizes an objective function comprised of three weighted vectors: load shedding preference, generator selection preference, and number of generators used.
 The following expression gives a high-level view of the objective function in~\cite{mehdi}, where the weights can correspond with priorities in priority tables and $h$ is a time horizon:
 
-$\int_t^{t+h} min(\bfrac{\text{sheddable}}{\text{loads}} * \text{\scriptsize \emph{weights}$_1$} +  \bfrac{\text{generator}}{\text{selection}} * \text{\scriptsize \emph{weights}$_2$} +  \bfrac{\text{\scriptsize \# of generators}}{\text{\scriptsize  used}})$
+$\int_t^{t+h} min(\bfrac{\text{sheddable}}{\text{loads}} * \text{\scriptsize \emph{weights}$_1$} +  \bfrac{\text{generator}}{\text{selection}} * \text{\scriptsize \emph{weights}$_2$} +  \bfrac{\metafrac{\text{\scriptsize \# of }}{\text{\scriptsize generators}}}{\text{\scriptsize used}})$
 
 Notice the integral from time $t$ to time $t+horizon$. 
 If the horizon=1, then we simply optimize the objective function for one system timestep.
