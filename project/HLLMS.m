@@ -61,6 +61,8 @@ function [configs] = HLLMS(sensors, constants) %only using 'sensors' for generat
     obj = obj + sum(Lambda1 * Del1) + sum(Lambda2 * Del2);
     obj = obj + M * sum(sum(alpha));
 
+    %TODO: add battery counter. How about adding the constraint 0 <= cumsum(Beta1) <= BATT_CAPACITY
+
     options=sdpsettings('solver','Cplex'); %windows needs 'Cplex' and mac is ok with 'cplex' or 'Cplex'
     solvesdp(cons,obj,options);
     toc;

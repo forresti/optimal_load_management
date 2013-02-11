@@ -13,6 +13,13 @@ function plotGraphs(configLog, sensorLog, constants, Nt, N)
     end
     plotC(Shedding1', Shedding2', Nt, N, xp)
 
+    %Battery1 = []; Battery2 = []; %Beta1, Beta2
+    %for i=1:N
+    %    Battery1 = [Battery1; sensorLog(i).Battery1];
+    %    Battery2 = [Battery2; sensorLog(i).Battery2];
+    %end
+
+    
     %plotDelta(Del1, Del2, Nt, N, xp)
     %plotBeta(Beta1, Beta2, Nt, N, xp)
 end
