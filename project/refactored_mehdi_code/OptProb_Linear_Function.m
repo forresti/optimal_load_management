@@ -84,7 +84,8 @@ function [C1 C2 Del1 Del2 Beta1 Beta2 Y1 Y2 alpha Pito1 Pito2 ] = OptProb_Linear
     xp=1:1:Nt*100/(Nt-1);  % 110
     plotC(C1, C2, Nt, N, xp)
     plotDelta(Del1, Del2, Nt, N, xp)
-    plotBeta(Beta1, Beta2, Nt, N, xp)
+    plotBetaBinary(Beta1, Beta2, Nt, N, xp)
+    plotBetaContinuous(Beta1, Beta2, Nt, N, xp)
 end
 
 function plotPowerReq(Ls1, Lns1, Ls2, Lns2, N)
@@ -189,10 +190,10 @@ function plotDelta(Del1, Del2, Nt, N, xp)
     xlabel('time [s]');
 end
 
-function plotBeta(Beta1, Beta2, Nt, N, xp)
+function plotBetaBinary(Beta1, Beta2, Nt, N, xp)
     figure;
     subplot(2,1,1);
-    %plot(xp,sign(kron(double(Beta1),ones(1,10))),'b','LineWidth',2);
+    %plot(xp,(kron(double(Beta1),ones(1,10))),'b','LineWidth',2);
     plot(xp,(kron(double(Beta1),ones(1,100/(Nt-1))))>=0.1,'b','LineWidth',2);  % sign results into error if the value is e.g. -1.2*1e-10! Therefore we use this.
     title('Battery charging status for DC bus 1');
     axis([0 N+10 -0.1 1.5]);
@@ -201,12 +202,34 @@ function plotBeta(Beta1, Beta2, Nt, N, xp)
     xlabel('time [s]');
 
     subplot(2,1,2);
-    %plot(xp,sign(kron(double(Beta2),ones(1,10))),'b','LineWidth',2);
+    %plot(xp,(kron(double(Beta2),ones(1,10))),'b','LineWidth',2);
     plot(xp,(kron(double(Beta2),ones(1,100/(Nt-1))))>=0.1,'b','LineWidth',2);  % sign results into error if the value is e.g. -1.2*1e-10! Therefore we use this.
     title('Battery charging status for DC bus 2');
     axis([0 N+10 -0.1 1.5]);
     set(gca,'YTick',0:1:1);
     set(gca,'YTickLabel',{'Not-charging','Charging'});
+    xlabel('time [s]');
+end
+
+%plot AMOUNT of [Watts? Watt-hours?] going into battery
+function plotBetaContinuous(Beta1, Beta2, Nt, N, xp)
+    figure;
+    subplot(2,1,1);
+    plot(xp,(kron(double(Beta1),ones(1,10))),'b','LineWidth',2);
+    title('Battery charging for DC bus 1');
+    axis([0 N+10 0 100000]);
+    %set(gca,'YTick',0:1:1);
+    %set(gca,'YTickLabel',{'Not-charging','Charging'});
+    ylabel('Battery Charging (Watts)')
+    xlabel('time [s]');
+
+    subplot(2,1,2);
+    plot(xp,(kron(double(Beta2),ones(1,10))),'b','LineWidth',2);
+    title('Battery charging for DC bus 2');
+    axis([0 N+10 0 100000]);
+    %set(gca,'YTick',0:1:1);
+    %set(gca,'YTickLabel',{'Not-charging','Charging'});
+    ylabel('Battery Charging (Watts)')
     xlabel('time [s]');
 end
 
