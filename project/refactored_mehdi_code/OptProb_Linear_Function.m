@@ -53,7 +53,10 @@ function [C1 C2 Del1 Del2 Beta1 Beta2 Y1 Y2 alpha Pito1 Pito2 ] = OptProb_Linear
     %cons=[cons, Beta1 >= 0; Beta2 >= 0]; %Mehdi's "charge but no discharge" strategy
     chargeRate = 0; %charge/discharge rate of 1000W per timestep. (arbitrary. will revise this once we look more carefully at specifications.)
     %cons=[cons, -chargeRate <= Beta1 <= chargeRate; -chargeRate <= Beta2 <= chargeRate];
-    cons=[cons, 0 <= Beta1; 0 <= Beta2];    
+    %cons=[cons, 0 <= Beta1 <= chargeRate*ones(size(Beta2)); 0 <= Beta2 <= chargeRate*ones(size(Beta2))];  %result: no charging, little or no generator use 
+    %cons=[cons, 0 <= Beta1; 0 <= Beta2]; %matches Medhi's results
+    %cons=[cons, 0 == Beta1; 0 == Beta2]; %this Should turn off the batteries, but instead it seems to shed everything and turn loads off.
+    cons=[cons, 0 <= Beta1 <= U3; 0 <= Beta2 <= U3]; %matches Medhi's results
 
     for i=1:Nl-1
         cons=[cons, C1(i,:) <= C1(i+1,:), C2(i,:) <= C2(i+1,:)];
