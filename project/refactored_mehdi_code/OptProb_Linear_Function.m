@@ -51,12 +51,19 @@ function [C1 C2 Del1 Del2 Beta1 Beta2 Y1 Y2 alpha Pito1 Pito2 ] = OptProb_Linear
     % Constraints
     cons=[];
     %cons=[cons, Beta1 >= 0; Beta2 >= 0]; %Mehdi's "charge but no discharge" strategy
-    chargeRate = 0; %charge/discharge rate of 1000W per timestep. (arbitrary. will revise this once we look more carefully at specifications.)
+    chargeRate = 1000; %TODO -- charge/discharge rate of 1000W per timestep. (arbitrary. will revise this once we look more carefully at specifications.)
     %cons=[cons, -chargeRate <= Beta1 <= chargeRate; -chargeRate <= Beta2 <= chargeRate];
     %cons=[cons, 0 <= Beta1 <= chargeRate*ones(size(Beta2)); 0 <= Beta2 <= chargeRate*ones(size(Beta2))];  %result: no charging, little or no generator use 
+    %cons=[cons, 0 == Beta1; 0 == Beta2]; %this Should turn off the batteries, but instead it seems to shed everything and turn loads off (I think MILP fails).
     %cons=[cons, 0 <= Beta1; 0 <= Beta2]; %matches Medhi's results
-    %cons=[cons, 0 == Beta1; 0 == Beta2]; %this Should turn off the batteries, but instead it seems to shed everything and turn loads off.
-    cons=[cons, 0 <= Beta1 <= U3; 0 <= Beta2 <= U3]; %matches Medhi's results
+    %cons=[cons, 0 <= Beta1 <= U3; 0 <= Beta2 <= U3]; %matches Medhi's results
+    cons=[cons, -U3 <= Beta1 <= U3; -U3 <= Beta2 <= U3];
+
+    %Forrest -- doing a running total of battery charge
+    timestep = 50; %temporary -- 50ms. using this to convert W to Wh for battery capacity
+    batteryCapacity = 22000; %Wh
+    %cons = [cons, 0 <= cumsum(Beta1*timestep) <= batteryCapacity]
+    cons = [cons, 0 <= cumsum(Beta1*timestep)] %infinite battery -- ignore batteryCapacity
 
     for i=1:Nl-1
         cons=[cons, C1(i,:) <= C1(i+1,:), C2(i,:) <= C2(i+1,:)];
@@ -85,7 +92,7 @@ function [C1 C2 Del1 Del2 Beta1 Beta2 Y1 Y2 alpha Pito1 Pito2 ] = OptProb_Linear
     toc;
 
     %test = C1 %this just prints "Linear matrix variable 10x11 (full, real, binary, 110 variables)"
-    test2 = kron(double(C1(1,:)),ones(1,100/(Nt-1))) %this is how to get an actual matrix from C1(1,:)
+    %test2 = kron(double(C1(1,:)),ones(1,100/(Nt-1))) %this is how to get an actual matrix from C1(1,:)
 
     %Plots
     xp=1:1:Nt*100/(Nt-1);  % 110
@@ -93,6 +100,7 @@ function [C1 C2 Del1 Del2 Beta1 Beta2 Y1 Y2 alpha Pito1 Pito2 ] = OptProb_Linear
     plotDelta(Del1, Del2, Nt, N, xp)
     plotBetaBinary(Beta1, Beta2, Nt, N, xp)
     plotBetaContinuous(Beta1, Beta2, Nt, N, xp)
+    plotBetaStorage(Beta1, Beta2, Nt, N, xp, timestep)
 end
 
 function plotPowerReq(Ls1, Lns1, Ls2, Lns2, N)
@@ -224,7 +232,7 @@ function plotBetaContinuous(Beta1, Beta2, Nt, N, xp)
     subplot(2,1,1);
     plot(xp,(kron(double(Beta1),ones(1,10))),'b','LineWidth',2);
     title('Battery charging for DC bus 1');
-    axis([0 N+10 0 100000]);
+    axis([0 N+10 -100000 100000]);
     %set(gca,'YTick',0:1:1);
     %set(gca,'YTickLabel',{'Not-charging','Charging'});
     ylabel('Battery Charging (Watts)')
@@ -233,10 +241,34 @@ function plotBetaContinuous(Beta1, Beta2, Nt, N, xp)
     subplot(2,1,2);
     plot(xp,(kron(double(Beta2),ones(1,10))),'b','LineWidth',2);
     title('Battery charging for DC bus 2');
-    axis([0 N+10 0 100000]);
+    axis([0 N+10 -100000 100000]);
     %set(gca,'YTick',0:1:1);
     %set(gca,'YTickLabel',{'Not-charging','Charging'});
     ylabel('Battery Charging (Watts)')
     xlabel('time [s]');
 end
+
+
+%plot Wh stored in battery (using cumsum of Beta)
+function plotBetaStorage(Beta1, Beta2, Nt, N, xp, timestep)
+    figure;
+    subplot(2,1,1);
+    plot(xp,(kron(cumsum(double(Beta1)*timestep),ones(1,10))),'b','LineWidth',2);
+    title('Battery charge level for DC bus 1');
+    axis([0 N+10 -100000 10000000]);
+    %set(gca,'YTick',0:1:1);
+    %set(gca,'YTickLabel',{'Not-charging','Charging'});
+    ylabel('Battery Charging (Watts)')
+    xlabel('time [s]');
+
+    subplot(2,1,2);
+    plot(xp,(kron(cumsum(double(Beta2)*timestep),ones(1,10))),'b','LineWidth',2);
+    title('Battery charging for DC bus 2');
+    axis([0 N+10 -1000000 1000000]);
+    %set(gca,'YTick',0:1:1);
+    %set(gca,'YTickLabel',{'Not-charging','Charging'});
+    ylabel('Battery Charging (Watts)')
+    xlabel('time [s]');
+end
+
 
