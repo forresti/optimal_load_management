@@ -60,17 +60,14 @@ function [C1 C2 Del1 Del2 Beta1 Beta2 Y1 Y2 alpha Pito1 Pito2 ] = OptProb_Linear
     %cons=[cons, 0 == Beta1; 0 == Beta2]; %this Should turn off the batteries, but instead it seems to shed everything and turn loads off (I think MILP fails).
     %cons=[cons, 0 <= Beta1; 0 <= Beta2]; %matches Medhi's results
     %cons=[cons, 0 <= Beta1 <= U3; 0 <= Beta2 <= U3]; %matches Medhi's results
-    cons=[cons, -U3 <= Beta1 <= U3; -U3 <= Beta2 <= U3];
+    cons=[cons, -U3 <= Beta1 <= U3; -U3 <= Beta2 <= U3]; %temporary test
 
     %Forrest -- doing a running total of battery charge
     timestep = 50; %temporary -- 50ms. using this to convert W to Wh for battery capacity
     batteryCapacity = 22000; %Wh
-    %cons = [cons, 0 <= cumsum(Beta1*timestep) <= batteryCapacity, 0 <= cumsum(Beta2*timestep) <= batteryCapacity]
-    cons = [cons, 0 <= cumsum(Beta1*timestep), 0 <= cumsum(Beta2*timestep)]; %infinite battery -- ignore batteryCapacity
-
+    cons = [cons, 0 <= cumsum(Beta1*timestep) <= batteryCapacity, 0 <= cumsum(Beta2*timestep) <= batteryCapacity];
+    %cons = [cons, 0 <= cumsum(Beta1*timestep), 0 <= cumsum(Beta2*timestep)]; %infinite battery -- ignore batteryCapacity
     cons = [cons, Overflow1 >= 0, Overflow2 >= 0];
-    %cons = [cons, 
-
 
     for i=1:Nl-1
         cons=[cons, C1(i,:) <= C1(i+1,:), C2(i,:) <= C2(i+1,:)];
@@ -82,24 +79,24 @@ function [C1 C2 Del1 Del2 Beta1 Beta2 Y1 Y2 alpha Pito1 Pito2 ] = OptProb_Linear
     xi=0:N/(Nt-1):N; xi(1)=1;  % 0:10:100
 
     % the following five lead to MILP.
-    cons=[ cons, sum(C1.*interp1(x,Ls1',xi)',1) + sum(interp1(x,Lns1',xi),2)' == sum(Y1,1) - Beta1];   %\sum cji(t)*lji(t)= \sum \deta_ji *P_source_i - Betaj
-    cons=[ cons, sum(C2.*interp1(x,Ls2',xi)',1) + sum(interp1(x,Lns2',xi),2)' == sum(Y2,1) - Beta2];
-    cons=[ cons, Y1' + Y2' == alpha.*P];    % The three constraints of the form \delta_{11}*P_{1to1} + \delta_{2to1}*P_{2to2}=P_{eng1}
-    cons=[ cons,  0 <= Y1 <= Pito1', 0 <= Y2 <= Pito2'];
-    cons=[ cons, Pito1' - U.*(1-Del1) <= Y1 <= U.*Del1, Pito2' - U.*(1-Del2) <= Y2 <= U.*Del2];
+    cons=[cons, sum(C1.*interp1(x,Ls1',xi)',1) + sum(interp1(x,Lns1',xi),2)' == sum(Y1,1) - (Beta1+Overflow2)];   %\sum cji(t)*lji(t)= \sum \deta_ji *P_source_i - Betaj
+    cons=[cons, sum(C2.*interp1(x,Ls2',xi)',1) + sum(interp1(x,Lns2',xi),2)' == sum(Y2,1) - (Beta2+Overflow2)];
+    cons=[cons, Y1' + Y2' == alpha.*P];    % The three constraints of the form \delta_{11}*P_{1to1} + \delta_{2to1}*P_{2to2}=P_{eng1}
+    cons=[cons,  0 <= Y1 <= Pito1', 0 <= Y2 <= Pito2'];
+    cons=[cons, Pito1' - U.*(1-Del1) <= Y1 <= U.*Del1, Pito2' - U.*(1-Del2) <= Y2 <= U.*Del2];
+    %cons=[cons, isOverflow1 == (Overflow1>0)] %crashes the solver 
 
     % Objective
     obj=0;
     obj = obj + sum(Gamma1 * (1-C1)) + sum (Gamma2 * (1-C2));
     obj = obj + sum(Lambda1 * Del1) + sum(Lambda2 * Del2);
     obj = obj + M * sum(sum(alpha));
+    %obj = obj + sum((~isOverflow1)*1000000); %crashes MILP -- trying to penalize use of Overflow unless we reach batt capacity
+    obj = obj + sum((~(Overflow1>0))*1000000) %crashes MILP
 
     options=sdpsettings('solver','Cplex'); %windows needs 'Cplex' and mac is ok with 'cplex' or 'Cplex'
     solvesdp(cons,obj,options);
     toc;
-
-    %test = C1 %this just prints "Linear matrix variable 10x11 (full, real, binary, 110 variables)"
-    %test2 = kron(double(C1(1,:)),ones(1,100/(Nt-1))) %this is how to get an actual matrix from C1(1,:)
 
     %Plots
     xp=1:1:Nt*100/(Nt-1);  % 110
