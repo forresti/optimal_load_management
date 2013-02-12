@@ -45,8 +45,11 @@ function [C1 C2 Del1 Del2 Beta1 Beta2 Y1 Y2 alpha Pito1 Pito2 ] = OptProb_Linear
     Beta1=sdpvar(1,Nt,'full');          Beta2=sdpvar(1,Nt,'full'); %Beta1(1,t) = "amount of pwr used for battery 1 at time t"
     Y1=sdpvar(Ns,Nt,'full');            Y2=sdpvar(Ns,Nt,'full'); %what is this?
     alpha=binvar(Nt,Ns,'full'); %alpha(t,g) = "is anything drawing pwr from generator g at time t?"
-
     Pito1=sdpvar(Nt,Ns,'full');         Pito2=sdpvar(Nt,Ns,'full'); %Pito1(t,g) = "amount of pwr delivered by generator g to bus 1 at time t"
+
+    %new decision variables for battery overflow
+    Overflow1=sdpvar(1,Nt,'full'); Overflow2 = sdpvar(1,Nt,'full');
+    isOverflow1=binvar(1,Nt,'full'); isOverflow2=binvar(1,Nt,'full');
 
     % Constraints
     cons=[];
@@ -62,8 +65,8 @@ function [C1 C2 Del1 Del2 Beta1 Beta2 Y1 Y2 alpha Pito1 Pito2 ] = OptProb_Linear
     %Forrest -- doing a running total of battery charge
     timestep = 50; %temporary -- 50ms. using this to convert W to Wh for battery capacity
     batteryCapacity = 22000; %Wh
-    %cons = [cons, 0 <= cumsum(Beta1*timestep) <= batteryCapacity]
-    cons = [cons, 0 <= cumsum(Beta1*timestep)] %infinite battery -- ignore batteryCapacity
+    %cons = [cons, 0 <= cumsum(Beta1*timestep) <= batteryCapacity, 0 <= cumsum(Beta2*timestep) <= batteryCapacity]
+    cons = [cons, 0 <= cumsum(Beta1*timestep), 0 <= cumsum(Beta2*timestep)] %infinite battery -- ignore batteryCapacity
 
     for i=1:Nl-1
         cons=[cons, C1(i,:) <= C1(i+1,:), C2(i,:) <= C2(i+1,:)];
@@ -263,8 +266,9 @@ function plotBetaStorage(Beta1, Beta2, Nt, N, xp, timestep)
 
     subplot(2,1,2);
     plot(xp,(kron(cumsum(double(Beta2)*timestep),ones(1,10))),'b','LineWidth',2);
-    title('Battery charging for DC bus 2');
-    axis([0 N+10 -1000000 1000000]);
+    test = cumsum(double(Beta2)*timestep)
+    title('Battery charge level for DC bus 2');
+    axis([0 N+10 -100000 10000000]);
     %set(gca,'YTick',0:1:1);
     %set(gca,'YTickLabel',{'Not-charging','Charging'});
     ylabel('Battery Charging (Watts)')
