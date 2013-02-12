@@ -47,10 +47,6 @@ function [C1 C2 Del1 Del2 Beta1 Beta2 Y1 Y2 alpha Pito1 Pito2 ] = OptProb_Linear
     alpha=binvar(Nt,Ns,'full'); %alpha(t,g) = "is anything drawing pwr from generator g at time t?"
     Pito1=sdpvar(Nt,Ns,'full');         Pito2=sdpvar(Nt,Ns,'full'); %Pito1(t,g) = "amount of pwr delivered by generator g to bus 1 at time t"
 
-    %new decision variables for battery overflow
-    Overflow1=sdpvar(1,Nt,'full'); Overflow2 = sdpvar(1,Nt,'full');
-    isOverflow1=binvar(1,Nt,'full'); isOverflow2=binvar(1,Nt,'full');
-
     % Constraints
     cons=[];
     %cons=[cons, Beta1 >= 0; Beta2 >= 0]; %Mehdi's "charge but no discharge" strategy
@@ -67,10 +63,6 @@ function [C1 C2 Del1 Del2 Beta1 Beta2 Y1 Y2 alpha Pito1 Pito2 ] = OptProb_Linear
     batteryCapacity = 22000; %Wh
     %cons = [cons, 0 <= cumsum(Beta1*timestep) <= batteryCapacity, 0 <= cumsum(Beta2*timestep) <= batteryCapacity]
     cons = [cons, 0 <= cumsum(Beta1*timestep), 0 <= cumsum(Beta2*timestep)]; %infinite battery -- ignore batteryCapacity
-
-    cons = [cons, Overflow1 >= 0, Overflow2 >= 0];
-    %cons = [cons, 
-
 
     for i=1:Nl-1
         cons=[cons, C1(i,:) <= C1(i+1,:), C2(i,:) <= C2(i+1,:)];
