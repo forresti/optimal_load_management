@@ -85,6 +85,9 @@ function [C1 C2 Del1 Del2 Beta1 Beta2 Y1 Y2 alpha Pito1 Pito2 ] = OptProb_Linear
     cons=[cons,  0 <= Y1 <= Pito1', 0 <= Y2 <= Pito2'];
     cons=[cons, Pito1' - U.*(1-Del1) <= Y1 <= U.*Del1, Pito2' - U.*(1-Del2) <= Y2 <= U.*Del2];
     %cons=[cons, isOverflow1 == (Overflow1>0)] %crashes the solver 
+    %cons=[cons, isOverflow1*Overflow1 == 0]
+    size(isOverflow1)
+    size(Overflow1)
 
     % Objective
     obj=0;
@@ -92,7 +95,7 @@ function [C1 C2 Del1 Del2 Beta1 Beta2 Y1 Y2 alpha Pito1 Pito2 ] = OptProb_Linear
     obj = obj + sum(Lambda1 * Del1) + sum(Lambda2 * Del2);
     obj = obj + M * sum(sum(alpha));
     %obj = obj + sum((~isOverflow1)*1000000); %crashes MILP -- trying to penalize use of Overflow unless we reach batt capacity
-    obj = obj + sum((~(Overflow1>0))*1000000) %crashes MILP
+    %obj = obj + sum((~(Overflow1>0))*1000000) %crashes MILP
 
     options=sdpsettings('solver','Cplex'); %windows needs 'Cplex' and mac is ok with 'cplex' or 'Cplex'
     solvesdp(cons,obj,options);
