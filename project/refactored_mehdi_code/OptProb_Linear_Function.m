@@ -268,20 +268,20 @@ function plotBetaStorage(Beta1, Beta2, Nt, N, xp, timestep)
     plot(xp,(kron(cumsum(double(Beta1)*timestep),ones(1,10))),'b','LineWidth',2);
     dBeta1Storage = cumsum(double(Beta1)*timestep) %printout
     title('Battery charge level for DC bus 1');
-    axis([0 N+10 -100000 10000000]);
+    axis([0 N+10 0 100000]);
     %set(gca,'YTick',0:1:1);
     %set(gca,'YTickLabel',{'Not-charging','Charging'});
-    ylabel('Battery Charging (Watts)')
+    ylabel('Battery Charge Levell (Wh)')
     xlabel('time [s]');
 
     subplot(2,1,2);
     plot(xp,(kron(cumsum(double(Beta2)*timestep),ones(1,10))),'b','LineWidth',2);
     dBeta2Storage = cumsum(double(Beta2)*timestep) %printout
     title('Battery charge level for DC bus 2');
-    axis([0 N+10 -100000 10000000]);
+    axis([0 N+10 0 100000]);
     %set(gca,'YTick',0:1:1);
     %set(gca,'YTickLabel',{'Not-charging','Charging'});
-    ylabel('Battery Charging (Watts)')
+    ylabel('Battery Charge Levell (Wh)')
     xlabel('time [s]');
 end
 
