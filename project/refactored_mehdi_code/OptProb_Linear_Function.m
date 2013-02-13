@@ -83,24 +83,26 @@ function [C1 C2 Del1 Del2 Beta1 Beta2 Y1 Y2 alpha Pito1 Pito2 ] = OptProb_Linear
     cons=[cons, Y1' + Y2' == alpha.*P];    % The three constraints of the form \delta_{11}*P_{1to1} + \delta_{2to1}*P_{2to2}=P_{eng1}
     cons=[cons,  0 <= Y1 <= Pito1', 0 <= Y2 <= Pito2'];
     cons=[cons, Pito1' - U.*(1-Del1) <= Y1 <= U.*Del1, Pito2' - U.*(1-Del2) <= Y2 <= U.*Del2];
-    cons=[cons, Beta1 == wastePower1, Beta2 == wastePower2]
-
-    %cons=[cons, isOverflow1 == Overflow1]; %test -- doesn't crash (not the right logic, though) 
-    %cons=[cons, isOverflow1.*Overflow1 == Overflow1]; %CPLEX not applicable
-    %cons=[cons, isOverflow1 == (Overflow1>0)]; %crashes the solver
-    %cons=[cons, (~isOverflow1)*Overflow1 == 0];
-    %cons=[cons, sum(isOverflow1.*Overflow1) == 0];
-    %cons=[cons, isOverflow1 == (cumsum(Beta1) - batteryCapacity)] %Row 'c661' infeasible, all entries at implied bounds.
-    size(isOverflow1)
-    size(Overflow1)
+    cons=[cons, Beta1 == wastePower1, Beta2 == wastePower2]; %temporary
+    
+    %cons=[cons, Beta(1) == 0, Beta(2) == 0] %this makes no sense; it's just a temp hack. will go away once we have 'Beta1(0)' starting condition in place
+    for i=2:Nt
+        %FIXME: adding the following constraint results in a reduced amount of charge in the battery
+        % this happens even if we enforce Beta1 == wastePower1, Beta2 == wastePower2
+        cons=[cons, Overflow1(i) == (cumsum(Beta1(1:i-1)*timestep) + wastePower1(i)) - batteryCapacity]; %Overflow is only positive if putting all the wastePower into battery would exceed the batteryCapacity 
+    end
+    cons=[cons, isOverflow1 == (sign(Overflow1)+1)/2]; %0 if no overflow, else 1
 
     % Objective
     obj=0;
     obj = obj + sum(Gamma1 * (1-C1)) + sum (Gamma2 * (1-C2));
     obj = obj + sum(Lambda1 * Del1) + sum(Lambda2 * Del2);
     obj = obj + M * sum(sum(alpha));
-    %obj = obj + sum((~isOverflow1)*1000000); %crashes MILP -- trying to penalize use of Overflow unless we reach batt capacity
+    obj = obj - sum(Overflow1); %temporary -- penalize Overflow1
+    %obj = obj + sum((~isOverflow1)*Overflow1'*1000000); %crashes MILP -- trying to penalize use of Overflow unless we reach batt capacity
     %obj = obj + sum((~(Overflow1>0))*1000000) %crashes MILP
+    test1 = double(Overflow1(:))
+    test2 = double(isOverflow1(:))
 
     options=sdpsettings('solver','Cplex'); %windows needs 'Cplex' and mac is ok with 'cplex' or 'Cplex'
     solvesdp(cons,obj,options);
