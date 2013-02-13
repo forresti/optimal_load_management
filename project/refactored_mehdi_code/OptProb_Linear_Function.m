@@ -83,7 +83,6 @@ function [C1 C2 Del1 Del2 Beta1 Beta2 Y1 Y2 alpha Pito1 Pito2 ] = OptProb_Linear
     cons=[cons, Y1' + Y2' == alpha.*P];    % The three constraints of the form \delta_{11}*P_{1to1} + \delta_{2to1}*P_{2to2}=P_{eng1}
     cons=[cons,  0 <= Y1 <= Pito1', 0 <= Y2 <= Pito2'];
     cons=[cons, Pito1' - U.*(1-Del1) <= Y1 <= U.*Del1, Pito2' - U.*(1-Del2) <= Y2 <= U.*Del2];
-    cons=[cons, Beta1 == wastePower1, Beta2 == wastePower2]; %temporary
     
     %cons=[cons, Beta(1) == 0, Beta(2) == 0] %this makes no sense; it's just a temp hack. will go away once we have 'Beta1(0)' starting condition in place
     for i=2:Nt
@@ -92,14 +91,16 @@ function [C1 C2 Del1 Del2 Beta1 Beta2 Y1 Y2 alpha Pito1 Pito2 ] = OptProb_Linear
         cons=[cons, Overflow1(i) == (cumsum(Beta1(1:i-1)*timestep) + wastePower1(i)) - batteryCapacity]; %Overflow is only positive if putting all the wastePower into battery would exceed the batteryCapacity 
     end
     cons=[cons, isOverflow1 == (sign(Overflow1)+1)/2]; %0 if no overflow, else 1
+    cons=[cons, Beta1 == wastePower1, Beta2 == wastePower2]; %temporary
 
     % Objective
     obj=0;
     obj = obj + sum(Gamma1 * (1-C1)) + sum (Gamma2 * (1-C2));
     obj = obj + sum(Lambda1 * Del1) + sum(Lambda2 * Del2);
     obj = obj + M * sum(sum(alpha));
-    obj = obj - 1000*sum(Overflow1); %temporary -- penalize Overflow1
-    %obj = obj + sum((~isOverflow1)*Overflow1'*1000000); %crashes MILP -- trying to penalize use of Overflow unless we reach batt capacity
+    %obj = obj + 1000*sum(Overflow1); %temporary -- penalize Overflow1
+    obj = obj - sum((~isOverflow1)*1000000);
+    %obj = obj + sum((~isOverflow1).*Overflow1*1000000); %crashes MILP -- trying to penalize use of Overflow unless we reach batt capacity
     %obj = obj + sum((~(Overflow1>0))*1000000) %crashes MILP
 
     options=sdpsettings('solver','Cplex'); %windows needs 'Cplex' and mac is ok with 'cplex' or 'Cplex'
@@ -109,6 +110,8 @@ function [C1 C2 Del1 Del2 Beta1 Beta2 Y1 Y2 alpha Pito1 Pito2 ] = OptProb_Linear
     dOverflow1 = double(Overflow1) %display as double
     dIsOverflow1 = double(isOverflow1)
     dWastePower1 = double(wastePower1)
+    dBeta1 = double(Beta1)
+    dCumsumBeta = cumsum(double(Beta1))
 
     %Plots
     xp=1:1:Nt*100/(Nt-1);  % 110
@@ -270,6 +273,7 @@ function plotBetaStorage(Beta1, Beta2, Nt, N, xp, timestep)
     figure;
     subplot(2,1,1);
     plot(xp,(kron(cumsum(double(Beta1)*timestep),ones(1,10))),'b','LineWidth',2);
+    dBeta1Storage = cumsum(double(Beta1)*timestep) %printout
     title('Battery charge level for DC bus 1');
     axis([0 N+10 -100000 10000000]);
     %set(gca,'YTick',0:1:1);
@@ -279,7 +283,7 @@ function plotBetaStorage(Beta1, Beta2, Nt, N, xp, timestep)
 
     subplot(2,1,2);
     plot(xp,(kron(cumsum(double(Beta2)*timestep),ones(1,10))),'b','LineWidth',2);
-    test = cumsum(double(Beta2)*timestep)
+    dBeta2Storage = cumsum(double(Beta2)*timestep) %printout
     title('Battery charge level for DC bus 2');
     axis([0 N+10 -100000 10000000]);
     %set(gca,'YTick',0:1:1);
