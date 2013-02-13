@@ -101,10 +101,10 @@ function [C1 C2 Del1 Del2 Beta1 Beta2 Y1 Y2 alpha Pito1 Pito2 ] = OptProb_Linear
     solvesdp(cons,obj,options);
     toc;
 
-    dOverflow1 = double(Overflow1) %display as double
-    dWastePower1 = double(wastePower1)
-    dBeta1 = double(Beta1)
-    dCumsumBeta1 = cumsum(double(Beta1))
+    %dOverflow1 = double(Overflow1) %display as double
+    %dWastePower1 = double(wastePower1)
+    %dBeta1 = double(Beta1)
+    %dCumsumBeta1 = cumsum(double(Beta1))
 
     %Plots
     xp=1:1:Nt*100/(Nt-1);  % 110
