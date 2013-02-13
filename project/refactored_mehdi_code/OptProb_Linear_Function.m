@@ -76,13 +76,15 @@ function [C1 C2 Del1 Del2 Beta1 Beta2 Y1 Y2 alpha Pito1 Pito2 ] = OptProb_Linear
     xi=0:N/(Nt-1):N; xi(1)=1;  % 0:10:100
 
     % the following five lead to MILP.
-    cons=[cons, sum(C1.*interp1(x,Ls1',xi)',1) + sum(interp1(x,Lns1',xi),2)' == sum(Y1,1) - (Beta1+Overflow2)];   %\sum cji(t)*lji(t)= \sum \deta_ji *P_source_i - Betaj
+    cons=[cons, sum(C1.*interp1(x,Ls1',xi)',1) + sum(interp1(x,Lns1',xi),2)' == sum(Y1,1) - (Beta1+Overflow1)];   %\sum cji(t)*lji(t)= \sum \deta_ji *P_source_i - Betaj
     cons=[cons, sum(C2.*interp1(x,Ls2',xi)',1) + sum(interp1(x,Lns2',xi),2)' == sum(Y2,1) - (Beta2+Overflow2)];
     cons=[cons, Y1' + Y2' == alpha.*P];    % The three constraints of the form \delta_{11}*P_{1to1} + \delta_{2to1}*P_{2to2}=P_{eng1}
     cons=[cons,  0 <= Y1 <= Pito1', 0 <= Y2 <= Pito2'];
     cons=[cons, Pito1' - U.*(1-Del1) <= Y1 <= U.*Del1, Pito2' - U.*(1-Del2) <= Y2 <= U.*Del2];
-    cons=[cons, sign(Beta1) == 1]
-    cons=[cons, Overflow1 == 0]
+    
+    cons=[cons, sign(Beta1) == 1]; %test
+    cons=[cons, Overflow1 == 0]; %test
+
     %cons=[cons, isOverflow1 == Overflow1]; %test -- doesn't crash (not the right logic, though) 
     %cons=[cons, isOverflow1.*Overflow1 == Overflow1]; %CPLEX not applicable
     %cons=[cons, isOverflow1 == (Overflow1>0)]; %crashes the solver
