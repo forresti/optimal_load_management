@@ -51,20 +51,22 @@ function [C1 C2 Del1 Del2 Beta1 Beta2 Y1 Y2 alpha Pito1 Pito2 ] = OptProb_Linear
     Overflow1=sdpvar(1,Nt,'full'); Overflow2 = sdpvar(1,Nt,'full');
     %isOverflow1=binvar(1,Nt,'full'); isOverflow2=binvar(1,Nt,'full');
     isOverflow1=sdpvar(1,Nt,'full'); isOverflow2=sdpvar(1,Nt,'full');
+    wastePower1=sdpvar(1,Nt,'full'); wastePower2=sdpvar(1,Nt,'full'); %Power not used by loads
 
     % Constraints
     cons=[];
-    %cons=[cons, Beta1 >= 0; Beta2 >= 0]; %Mehdi's "charge but no discharge" strategy
+    cons=[cons, Beta1 >= 0; Beta2 >= 0]; %Mehdi's "charge but no discharge" strategy
     chargeRate = 1000; %TODO -- charge/discharge rate of 1000W per timestep. (arbitrary. will revise this once we look more carefully at specifications.)
     %%cons=[cons, -chargeRate <= Beta1 <= chargeRate; -chargeRate <= Beta2 <= chargeRate];
-    cons=[cons, -U3 <= Beta1 <= U3; -U3 <= Beta2 <= U3]; %temporary test
+    %cons=[cons, -U3 <= Beta1 <= U3; -U3 <= Beta2 <= U3]; %temporary test
 
     %Forrest -- doing a running total of battery charge
     timestep = 50; %temporary -- 50ms. using this to convert W to Wh for battery capacity
     batteryCapacity = 22000; %Wh
-    cons = [cons, 0 <= cumsum(Beta1*timestep) <= batteryCapacity, 0 <= cumsum(Beta2*timestep) <= batteryCapacity];
+    %cons = [cons, 0 <= cumsum(Beta1*timestep) <= batteryCapacity, 0 <= cumsum(Beta2*timestep) <= batteryCapacity];
     %cons = [cons, 0 <= cumsum(Beta1*timestep), 0 <= cumsum(Beta2*timestep)]; %infinite battery -- ignore batteryCapacity
-    cons = [cons, Overflow1 >= 0, Overflow2 >= 0];
+    %cons = [cons, Overflow1 >= 0, Overflow2 >= 0];
+    %TODO: add starting charge level to cumsum(Beta). For now, we assume that battery charge is 0 at timestep 0.
 
     for i=1:Nl-1
         cons=[cons, C1(i,:) <= C1(i+1,:), C2(i,:) <= C2(i+1,:)];
@@ -76,14 +78,12 @@ function [C1 C2 Del1 Del2 Beta1 Beta2 Y1 Y2 alpha Pito1 Pito2 ] = OptProb_Linear
     xi=0:N/(Nt-1):N; xi(1)=1;  % 0:10:100
 
     % the following five lead to MILP.
-    cons=[cons, sum(C1.*interp1(x,Ls1',xi)',1) + sum(interp1(x,Lns1',xi),2)' == sum(Y1,1) - (Beta1+Overflow1)];   %\sum cji(t)*lji(t)= \sum \deta_ji *P_source_i - Betaj
-    cons=[cons, sum(C2.*interp1(x,Ls2',xi)',1) + sum(interp1(x,Lns2',xi),2)' == sum(Y2,1) - (Beta2+Overflow2)];
+    cons=[cons, sum(C1.*interp1(x,Ls1',xi)',1) + sum(interp1(x,Lns1',xi),2)' == sum(Y1,1) - wastePower1];   %\sum cji(t)*lji(t)= \sum \deta_ji *P_source_i - Betaj
+    cons=[cons, sum(C2.*interp1(x,Ls2',xi)',1) + sum(interp1(x,Lns2',xi),2)' == sum(Y2,1) - wastePower2];
     cons=[cons, Y1' + Y2' == alpha.*P];    % The three constraints of the form \delta_{11}*P_{1to1} + \delta_{2to1}*P_{2to2}=P_{eng1}
     cons=[cons,  0 <= Y1 <= Pito1', 0 <= Y2 <= Pito2'];
     cons=[cons, Pito1' - U.*(1-Del1) <= Y1 <= U.*Del1, Pito2' - U.*(1-Del2) <= Y2 <= U.*Del2];
-    
-    cons=[cons, sign(Beta1) == 1]; %test
-    cons=[cons, Overflow1 == 0]; %test
+    cons=[cons, Beta1 == wastePower1, Beta2 == wastePower2]
 
     %cons=[cons, isOverflow1 == Overflow1]; %test -- doesn't crash (not the right logic, though) 
     %cons=[cons, isOverflow1.*Overflow1 == Overflow1]; %CPLEX not applicable
