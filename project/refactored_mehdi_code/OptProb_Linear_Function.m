@@ -57,7 +57,7 @@ function [C1 C2 Del1 Del2 Beta1 Beta2 Y1 Y2 alpha Pito1 Pito2 ] = OptProb_Linear
     %cons=[cons, -chargeRate <= Beta1 <= chargeRate; -chargeRate <= Beta2 <= chargeRate]; %will add this later
 
     %doing a running total of battery charge
-    timestep = 1; %temporary -- 1sec for now. using this to convert W to Wh for battery capacity
+    timestep = 1; % 1sec for now. using this to convert W to Wh for battery capacity
     batteryCapacity = 70000; %Wh
     cons = [cons, 0 <= cumsum(Beta1*timestep) <= batteryCapacity, 0 <= cumsum(Beta2*timestep) <= batteryCapacity];
     %TODO: add starting charge level to cumsum(Beta). For now, we assume that battery charge is 0 at timestep 0.
@@ -94,7 +94,7 @@ function [C1 C2 Del1 Del2 Beta1 Beta2 Y1 Y2 alpha Pito1 Pito2 ] = OptProb_Linear
     obj = obj + sum(Gamma1 * (1-C1)) + sum (Gamma2 * (1-C2));
     obj = obj + sum(Lambda1 * Del1) + sum(Lambda2 * Del2);
     obj = obj + M * sum(sum(alpha));
-    obj = obj + 1000*sum(Beta1); %penalize using the battery instead of putting power into loads
+    obj = obj - 1000*(sum(Beta1) + sum(Beta2)); %penalize using the battery instead of putting power into loads
     %obj = obj + 2000*sum(Overflow1); %penalize Overflow more than Battery
 
     options=sdpsettings('solver','Cplex'); %windows needs 'Cplex' and mac is ok with 'cplex' or 'Cplex'
