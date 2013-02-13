@@ -49,30 +49,31 @@ function [C1 C2 Del1 Del2 Beta1 Beta2 Y1 Y2 alpha Pito1 Pito2 ] = OptProb_Linear
 
     %new decision variables for battery overflow
     Overflow1=sdpvar(1,Nt,'full'); Overflow2 = sdpvar(1,Nt,'full');
-    %isOverflow1=binvar(1,Nt,'full'); isOverflow2=binvar(1,Nt,'full');
-    isOverflow1=sdpvar(1,Nt,'full'); isOverflow2=sdpvar(1,Nt,'full');
+    isOverflow1=binvar(1,Nt,'full'); isOverflow2=binvar(1,Nt,'full');
+    %isOverflow1=sdpvar(1,Nt,'full'); isOverflow2=sdpvar(1,Nt,'full');
     wastePower1=sdpvar(1,Nt,'full'); wastePower2=sdpvar(1,Nt,'full'); %Power not used by loads
 
     % Constraints
     cons=[];
-    cons=[cons, Beta1 >= 0; Beta2 >= 0]; %Mehdi's "charge but no discharge" strategy
+    %cons=[cons, Beta1 >= 0; Beta2 >= 0]; %Mehdi's "charge but no discharge" strategy
     chargeRate = 1000; %TODO -- charge/discharge rate of 1000W per timestep. (arbitrary. will revise this once we look more carefully at specifications.)
     %%cons=[cons, -chargeRate <= Beta1 <= chargeRate; -chargeRate <= Beta2 <= chargeRate];
     %cons=[cons, -U3 <= Beta1 <= U3; -U3 <= Beta2 <= U3]; %temporary test
 
     %Forrest -- doing a running total of battery charge
-    timestep = 50; %temporary -- 50ms. using this to convert W to Wh for battery capacity
-    batteryCapacity = 22000; %Wh
-    %cons = [cons, 0 <= cumsum(Beta1*timestep) <= batteryCapacity, 0 <= cumsum(Beta2*timestep) <= batteryCapacity];
+    timestep = 1; %temporary -- 1ms. using this to convert W to Wh for battery capacity
+    batteryCapacity = 70000; %Wh
+    cons = [cons, 0 <= cumsum(Beta1*timestep) <= batteryCapacity, 0 <= cumsum(Beta2*timestep) <= batteryCapacity];
     %cons = [cons, 0 <= cumsum(Beta1*timestep), 0 <= cumsum(Beta2*timestep)]; %infinite battery -- ignore batteryCapacity
     %cons = [cons, Overflow1 >= 0, Overflow2 >= 0];
     %TODO: add starting charge level to cumsum(Beta). For now, we assume that battery charge is 0 at timestep 0.
+    cons=[cons, wastePower1 >= 0, wastePower2 >= 0]; %loads can't siphon imaginary power by making wastePower negative
 
     for i=1:Nl-1
         cons=[cons, C1(i,:) <= C1(i+1,:), C2(i,:) <= C2(i+1,:)];
     end
-    cons=[ cons, sum(Del1,1) == ones(1,Nt)];  % \delta_11(t) + \delta12(t) + \delta_13(t)=1    \forall t>=0
-    cons=[ cons, sum(Del2,1) == ones(1,Nt)];
+    cons=[cons, sum(Del1,1) == ones(1,Nt)];  % \delta_11(t) + \delta12(t) + \delta_13(t)=1    \forall t>=0
+    cons=[cons, sum(Del2,1) == ones(1,Nt)];
 
     x=1:1:100;
     xi=0:N/(Nt-1):N; xi(1)=1;  % 0:10:100
@@ -84,22 +85,26 @@ function [C1 C2 Del1 Del2 Beta1 Beta2 Y1 Y2 alpha Pito1 Pito2 ] = OptProb_Linear
     cons=[cons,  0 <= Y1 <= Pito1', 0 <= Y2 <= Pito2'];
     cons=[cons, Pito1' - U.*(1-Del1) <= Y1 <= U.*Del1, Pito2' - U.*(1-Del2) <= Y2 <= U.*Del2];
     
-    %cons=[cons, Beta(1) == 0, Beta(2) == 0] %this makes no sense; it's just a temp hack. will go away once we have 'Beta1(0)' starting condition in place
+    cons=[cons, Beta1(1) == wastePower2(1), Beta2(1) == wastePower2(1)]; %this makes no sense; it's just a temp hack. will go away once we have 'Beta1(0)' starting condition in place
+    cons=[cons, Beta1 <= wastePower1, Beta2 <= wastePower2];
     for i=2:Nt
         %FIXME: adding the following constraint results in a reduced amount of charge in the battery
         % this happens even if we enforce Beta1 == wastePower1, Beta2 == wastePower2
         cons=[cons, Overflow1(i) == (cumsum(Beta1(1:i-1)*timestep) + wastePower1(i)) - batteryCapacity]; %Overflow is only positive if putting all the wastePower into battery would exceed the batteryCapacity 
+        cons=[cons, Overflow2(i) == (cumsum(Beta2(1:i-1)*timestep) + wastePower2(i)) - batteryCapacity];
     end
     cons=[cons, isOverflow1 == (sign(Overflow1)+1)/2]; %0 if no overflow, else 1
-    cons=[cons, Beta1 == wastePower1, Beta2 == wastePower2]; %temporary
+    cons=[cons, isOverflow2 == (sign(Overflow2)+1)/2];
+    %cons=[cons, Beta1 == wastePower1, Beta2 == wastePower2]; %temporary
 
-    % Objective
+    % Objective to minimize
     obj=0;
     obj = obj + sum(Gamma1 * (1-C1)) + sum (Gamma2 * (1-C2));
     obj = obj + sum(Lambda1 * Del1) + sum(Lambda2 * Del2);
     obj = obj + M * sum(sum(alpha));
-    %obj = obj + 1000*sum(Overflow1); %temporary -- penalize Overflow1
-    obj = obj - sum((~isOverflow1)*1000000);
+    %obj = obj + 1000*sum(Beta1); %penalize using the battery instead of putting power into loads
+    %obj = obj + 2000*sum(Overflow1); %penalize Overflow more than Battery
+    %obj = obj - sum((~isOverflow1)*1000000);
     %obj = obj + sum((~isOverflow1).*Overflow1*1000000); %crashes MILP -- trying to penalize use of Overflow unless we reach batt capacity
     %obj = obj + sum((~(Overflow1>0))*1000000) %crashes MILP
 
@@ -111,7 +116,7 @@ function [C1 C2 Del1 Del2 Beta1 Beta2 Y1 Y2 alpha Pito1 Pito2 ] = OptProb_Linear
     dIsOverflow1 = double(isOverflow1)
     dWastePower1 = double(wastePower1)
     dBeta1 = double(Beta1)
-    dCumsumBeta = cumsum(double(Beta1))
+    dCumsumBeta1 = cumsum(double(Beta1))
 
     %Plots
     xp=1:1:Nt*100/(Nt-1);  % 110
