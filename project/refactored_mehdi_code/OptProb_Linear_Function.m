@@ -98,15 +98,17 @@ function [C1 C2 Del1 Del2 Beta1 Beta2 Y1 Y2 alpha Pito1 Pito2 ] = OptProb_Linear
     obj = obj + sum(Gamma1 * (1-C1)) + sum (Gamma2 * (1-C2));
     obj = obj + sum(Lambda1 * Del1) + sum(Lambda2 * Del2);
     obj = obj + M * sum(sum(alpha));
-    obj = obj - sum(Overflow1); %temporary -- penalize Overflow1
+    obj = obj - 1000*sum(Overflow1); %temporary -- penalize Overflow1
     %obj = obj + sum((~isOverflow1)*Overflow1'*1000000); %crashes MILP -- trying to penalize use of Overflow unless we reach batt capacity
     %obj = obj + sum((~(Overflow1>0))*1000000) %crashes MILP
-    test1 = double(Overflow1(:))
-    test2 = double(isOverflow1(:))
 
     options=sdpsettings('solver','Cplex'); %windows needs 'Cplex' and mac is ok with 'cplex' or 'Cplex'
     solvesdp(cons,obj,options);
     toc;
+
+    dOverflow1 = double(Overflow1) %display as double
+    dIsOverflow1 = double(isOverflow1)
+    dWastePower1 = double(wastePower1)
 
     %Plots
     xp=1:1:Nt*100/(Nt-1);  % 110
