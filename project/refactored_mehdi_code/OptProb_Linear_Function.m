@@ -105,7 +105,7 @@ function [C1 C2 Del1 Del2 Beta1 Beta2 Y1 Y2 alpha Pito1 Pito2 ] = OptProb_Linear
     %obj = obj + 1000*sum(Beta1); %penalize using the battery instead of putting power into loads
     %obj = obj + 2000*sum(Overflow1); %penalize Overflow more than Battery
     %obj = obj - sum((~isOverflow1)*1000000);
-    %obj = obj + sum((~isOverflow1).*Overflow1*1000000); %crashes MILP -- trying to penalize use of Overflow unless we reach batt capacity
+    obj = obj + sum((~isOverflow1)*Overflow1')*1000000; %crashes MILP -- trying to penalize use of Overflow unless we reach batt capacity
     %obj = obj + sum((~(Overflow1>0))*1000000) %crashes MILP
 
     options=sdpsettings('solver','Cplex'); %windows needs 'Cplex' and mac is ok with 'cplex' or 'Cplex'
