@@ -56,7 +56,7 @@ function [C1 C2 Del1 Del2 Beta1 Beta2 Y1 Y2 alpha Pito1 Pito2 ] = OptProb_Linear
     cons=[];
     %cons=[cons, Beta1 >= 0; Beta2 >= 0]; %Mehdi's "charge but no discharge" strategy
     chargeRate = 1000; %TODO -- charge/discharge rate of 1000W per timestep. (arbitrary. will revise this once we look more carefully at specifications.)
-    %cons=[cons, -chargeRate <= Beta1 <= chargeRate; -chargeRate <= Beta2 <= chargeRate];
+    %%cons=[cons, -chargeRate <= Beta1 <= chargeRate; -chargeRate <= Beta2 <= chargeRate];
     cons=[cons, -U3 <= Beta1 <= U3; -U3 <= Beta2 <= U3]; %temporary test
 
     %Forrest -- doing a running total of battery charge
@@ -81,12 +81,14 @@ function [C1 C2 Del1 Del2 Beta1 Beta2 Y1 Y2 alpha Pito1 Pito2 ] = OptProb_Linear
     cons=[cons, Y1' + Y2' == alpha.*P];    % The three constraints of the form \delta_{11}*P_{1to1} + \delta_{2to1}*P_{2to2}=P_{eng1}
     cons=[cons,  0 <= Y1 <= Pito1', 0 <= Y2 <= Pito2'];
     cons=[cons, Pito1' - U.*(1-Del1) <= Y1 <= U.*Del1, Pito2' - U.*(1-Del2) <= Y2 <= U.*Del2];
-    cons=[cons, isOverflow1 == Overflow1]; %test -- doesn't crash (not the right logic, though) 
+    cons=[cons, sign(Beta1) == 1]
+    cons=[cons, Overflow1 == 0]
+    %cons=[cons, isOverflow1 == Overflow1]; %test -- doesn't crash (not the right logic, though) 
     %cons=[cons, isOverflow1.*Overflow1 == Overflow1]; %CPLEX not applicable
     %cons=[cons, isOverflow1 == (Overflow1>0)]; %crashes the solver
     %cons=[cons, (~isOverflow1)*Overflow1 == 0];
     %cons=[cons, sum(isOverflow1.*Overflow1) == 0];
-    cons=[cons, isOverflow1 == (cumsum(Beta1) - batteryCapacity)] %Row 'c661' infeasible, all entries at implied bounds.
+    %cons=[cons, isOverflow1 == (cumsum(Beta1) - batteryCapacity)] %Row 'c661' infeasible, all entries at implied bounds.
     size(isOverflow1)
     size(Overflow1)
 
