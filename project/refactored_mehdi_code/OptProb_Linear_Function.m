@@ -50,17 +50,17 @@ function [C1 C2 Del1 Del2 Beta1 Beta2 Y1 Y2 alpha Pito1 Pito2 ] = OptProb_Linear
     %new decision variables for battery overflow
     Overflow1=sdpvar(1,Nt,'full'); Overflow2 = sdpvar(1,Nt,'full');
     wastePower1=sdpvar(1,Nt,'full'); wastePower2=sdpvar(1,Nt,'full'); %Power not used by loads
+    BETA1 = sdpvar(1,Nt,'full'); BETA2 = sdpvar(1,Nt,'full'); %cumulative battery charge. (lowercase Beta is per-timestep change in charge)
 
     % Constraints
     cons=[];
-    chargeRate = 1000; %TODO -- charge/discharge rate of 1000W per timestep. (arbitrary. will revise this once we look more carefully at specifications.)
+    %chargeRate = 1000; %TODO -- charge/discharge rate of 1000W per timestep. (arbitrary. will revise this once we look more carefully at specifications.)
     %cons=[cons, -chargeRate <= Beta1 <= chargeRate; -chargeRate <= Beta2 <= chargeRate]; %will add this later
 
     %doing a running total of battery charge
     timestep = 1; % 1sec for now. using this to convert W to Wh for battery capacity
     batteryCapacity = 70000; %Wh
-    cons = [cons, 0 <= cumsum(Beta1*timestep) <= batteryCapacity, 0 <= cumsum(Beta2*timestep) <= batteryCapacity];
-    %TODO: add starting charge level to cumsum(Beta). For now, we assume that battery charge is 0 at timestep 0.
+    cons=[cons, 0 <= BETA1 <= batteryCapacity, 0 <= BETA2 <= batteryCapacity];
     cons=[cons, wastePower1 >= 0, wastePower2 >= 0]; %loads can't siphon imaginary power by making wastePower negative
 
     for i=1:Nl-1
@@ -78,15 +78,10 @@ function [C1 C2 Del1 Del2 Beta1 Beta2 Y1 Y2 alpha Pito1 Pito2 ] = OptProb_Linear
     cons=[cons,  0 <= Y1 <= Pito1', 0 <= Y2 <= Pito2'];
     cons=[cons, Pito1' - U.*(1-Del1) <= Y1 <= U.*Del1, Pito2' - U.*(1-Del2) <= Y2 <= U.*Del2];
    
-    %TODO: add starting charge level to cumsum(Beta). For now, we assume that battery charge is 0 at timestep 0.
-    % for now, just have batteries start out empty, and use all the wastePower on the first timestep 
-    cons=[cons, Beta1(1) == wastePower2(1), Beta2(1) == wastePower2(1)]; %this makes no sense; it's just a temp hack. will go away once we have 'Beta1(0)' starting condition in place
-    cons=[cons, Overflow1(1) == 0, Overflow2(1) == 0];
-
-    cons=[cons, Beta1 <= wastePower1, Beta2 <= wastePower2];
+    cons=[cons, Beta1 + Overflow1 == wastePower1, Beta2 + Overflow2 == wastePower2];
+    BETA1(1) = 0; BETA2(1) = 0; %start with zero charge in batteries
     for i=2:Nt
-        cons=[cons, Overflow1(i) == (cumsum(Beta1(1:i-1)*timestep) + wastePower1(i)) - batteryCapacity]; %Overflow is only positive if putting all the wastePower into battery would exceed the batteryCapacity 
-        cons=[cons, Overflow2(i) == (cumsum(Beta2(1:i-1)*timestep) + wastePower2(i)) - batteryCapacity];
+        cons=[cons, BETA1(i) == BETA1(i-1) + Beta1(i), BETA2(i) == BETA2(i-1) + Beta2(i)];
     end
 
     % Objective
@@ -94,17 +89,18 @@ function [C1 C2 Del1 Del2 Beta1 Beta2 Y1 Y2 alpha Pito1 Pito2 ] = OptProb_Linear
     obj = obj + sum(Gamma1 * (1-C1)) + sum (Gamma2 * (1-C2));
     obj = obj + sum(Lambda1 * Del1) + sum(Lambda2 * Del2);
     obj = obj + M * sum(sum(alpha));
-    obj = obj - 1000*(sum(Beta1) + sum(Beta2)); %penalize using the battery instead of putting power into loads
+    %obj = obj - 1000*(sum(Beta1) + sum(Beta2)); %penalize using the battery instead of putting power into loads
     %obj = obj + 2000*sum(Overflow1); %penalize Overflow more than Battery
 
     options=sdpsettings('solver','Cplex'); %windows needs 'Cplex' and mac is ok with 'cplex' or 'Cplex'
     solvesdp(cons,obj,options);
     toc;
 
-    %dOverflow1 = double(Overflow1) %display as double
-    %dWastePower1 = double(wastePower1)
-    %dBeta1 = double(Beta1)
-    %dCumsumBeta1 = cumsum(double(Beta1))
+    dOverflow1 = double(Overflow1) %display as double
+    dWastePower1 = double(wastePower1)
+    dBeta1 = double(Beta1)
+    dCumsumBeta1 = cumsum(double(Beta1))
+    dBETA1 = double(BETA1)
 
     %Plots
     xp=1:1:Nt*100/(Nt-1);  % 110
