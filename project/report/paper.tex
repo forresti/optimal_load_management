@@ -97,9 +97,11 @@ While the work in~\cite{xu:2012} guarantees safety, it doesn't optimize for mini
 
 \section{Optimizing LMS}
 \label{sec:optimizing-LMS}
-LMS systems that are based purely on priority tables are very simplistic, allowing them to frequently sample the system. 
+LMS systems that are based purely on priority tables are intended to be very simplistic, allowing them to frequently sample the system. 
 These LMS systems are thus more responsive to failures in the system.
-However, pure priority table solutions tend to shed more loads than necessary, to use more generators than necessary, 
+However, pure priority table solutions tend to shed more loads than necessary and to use more generators than necessary.
+It is possible to design a more intelligent low level system. However, more intelligent systems will tend to be more
+complex, making it more difficult to operate the system at the high frequencies desired in a low level system.
 %[and be ill-defined in their tradeoffs between generator allocation and load shedding].
 Toward resolving these issues, the control systems community recently designed a model-predictive Optimizing LMS for aircraft EPS~\cite{mehdi}.
 The key insight in~\cite{mehdi} is to formulate the system requirements (e.g. the maximum power produced by each generator) as constraints in an linear optimization problem.
@@ -128,8 +130,8 @@ However, as we will see later in the paper, the Optimizing LMS can be effective 
 \label{sec:LL-LMS}
 \begin{table}[t]
 \caption{\textbf{Load Priority Table Example, NS = nonsheddable, S = sheddable} 
-Loads lower in the list have lower priority while loads higher up in the list have
-higher priority. LL-LMS will shed load starting at the lower end of the list.}
+Loads higher in the list have higher shedding priority while loads lower in the 
+list have lower priority. LL-LMS will shed load starting at the top of the list.}
 \label{T:shed}
 \centering
 \begin{tabular}{c|cc}
@@ -195,12 +197,15 @@ The LL-LMS collects the advice from the Optimizing LMS and determines whether or
 If the advice is safe, the LL-LMS will actuate the system based on the Optimizing LMS's advice. 
 Otherwise, the LL-LMS will fall back to its priority table. 
 Because failures are rare, the LL-LMS will spend most of the time actuating the system based on the Optimizing LMS's advice. 
-This Hierarchical LMS is optimal because the Optimizing LMS is optimal and is safe because the LL-LMS is safe.
+Therefore in normal operating conditions, the Hierarchical LMS will be optimal because the system is 
+essentially being controlled by the Optimizing LMS. The only time the system is using a suboptimal
+configuration is when there is a failure and this is only temporary because eventually the Optimizing
+LMS will have readjusted for the failures.
 
 \subsection{Modifications to Optimizing LMS}
 Instead of having the Optimizing LMS system read the sensors directly as it would in a system that relies solely on an Optimizing LMS, it will instead receive its system status information from the LL-LMS. 
-%This communication strategy saves on communication links between sensors and the Optimizing LMS and reuses the communication link between the LL-LMS and the Optimizing LMS. 
-This communication strategy allows the LL-LMS to have the final word on selecting a system configuration.
+This communication strategy saves on communication links between sensors and the Optimizing LMS and reuses the communication pathway between the LL-LMS and the Optimizing LMS. 
+%This communication strategy allows the LL-LMS to have the final word on selecting a system configuration.
 %We also use the Optimizing LMS to perform live optimizations of the system. 
 %That is, 
 %smaller receding horizon. 
@@ -237,7 +242,9 @@ Recall from Section~\ref{sec:optimizing-LMS} that the Optimizing LMS can optimiz
 Therefore, we set the LL-LMS to sample at a frequency of 50ms (controlled by the fast clock in Figure~\ref{fig:H-LMS}), we set the Optimizing-LMS to use a horizon of 10 timesteps, and thus the Optimizing-LMS gives a batch of advice to the LL-LMS every 500ms.
 
 At each 500ms interval, the Optimizing LMS produces a set of 10 timesteps worth of advice (generator usage recommendations as well as load shedding configurations) that can the LL-LMS can use until the next Optimizing LMS cycle. 
-Notice that there is an arrow going from the the LL-LMS to the Optimizing LMS because the LL-LMS is responsible for providing the Optimizing LMS with information of the status of the generators. 
+Notice that there is an arrow going from the the LL-LMS to the Optimizing LMS because the LL-LMS is responsible for providing the Optimizing LMS with information of the status of the generators.
+Alternatively, we could have an additional arrow going from the sensors into the Optimizing LMS, but this is wasteful. There is no need for the Optimizing LMS to directly sample the sensors. We can instead
+use the existing communication path between the Optimzing LMS and the LL-LMS to send sensor data to the Optimzing LMS.
 The generator usage and load shedding that the LL-LMS will actuate on will be either the advice provided by the Optimizing LMS
 if it is safe or the configuration determined by the LL-LMS's priority table if the Optimizing LMS's advice is unsafe.
 
@@ -255,13 +262,14 @@ In this example, there are no generator failures or power spikes (the historical
 
 \begin{tabular}{c|cc}
 Sheddable loads (W) & Shed priority \\ \hline
-60,000 & 1 (least preferred to shed) \\
+40,000 & 1 (most preferred to shed) \\ \hline
 60,000 & 2 (middle priority to shed) \\ 
-40,000 & 3 (most preferred to shed) \\ \hline
+60,000 & 3 (least preferred to shed) \\
 \end{tabular}
 
 When presented with this workload, the LL-LMS purely applies the priority table, without any optimization or branch-and-bound to investigate ideal combinations of tasks to shed. 
-Thus, while simply shedding Load 2 would be sufficient to get system under its power cap, the LL-LMS walks up the priority table and sheds Loads 2 and 3.
+Thus, while simply shedding Load 2 would be sufficient to get system under its power cap, the LL-LMS walks down the priority table and sheds Loads 1 and 2 because it must
+obey the priority table. On the other hand, if loads 1 and 2 had equal priority, it would be possible for the LL-LMS to only shed Load 2.
 
 In contrast, the Optimizing-LMS views the priorities as weights instead of precedence constraints. 
 Therefore, the Optimizing-LMS sheds Load 2 and doesn't shed Load 3. 
@@ -281,25 +289,25 @@ Fortunately, the LL-LMS in our Hierarchical controller observes the Load 3 power
 Timestep 1 (live data matches historical data):\\
 \begin{tabular}{c|cc}
 Sheddable loads (W) & Shed priority \\ \hline
-40,000 & 1 (least preferred to shed) \\
+{\bf 20,000} & 1 (most preferred to shed) \\ \hline
 40,000 & 2 (middle priority to shed) \\ 
-{\bf 20,000} & 3 (most preferred to shed) \\ \hline
+40,000 & 3 (least preferred to shed) \\
 \end{tabular}
 
 Timestep 2 (historical data): \\
 \begin{tabular}{c|cc}
 Sheddable loads (W) & Shed priority \\ \hline
-40,000 & 1 (least preferred to shed) \\
+{\bf 20,000} & 1 (most preferred to shed) \\ \hline
 40,000 & 2 (middle priority to shed) \\ 
-{\bf 20,000} & 3 (most preferred to shed) \\ \hline
+40,000 & 3 (least preferred to shed) \\
 \end{tabular}
 
 Timestep 2 (live data): \\
 \begin{tabular}{c|cc}
 Sheddable loads (W) & Shed priority \\ \hline
-40,000 & 1 (least preferred to shed) \\
+{\bf 40,000} & 1 (most preferred to shed) \\ \hline
 40,000 & 2 (middle priority to shed) \\ 
-{\bf 40,000} & 3 (most preferred to shed) \\ \hline
+40,000 & 3 (least preferred to shed) \\
 \end{tabular}
 
 \subsection{Example: LL-LMS handles generator failure}
@@ -307,9 +315,9 @@ Sheddable loads (W) & Shed priority \\ \hline
 We use the following loads for all timesteps in this example: \\
 \begin{tabular}{c|cc}
 Sheddable loads (W) & Shed priority \\ \hline
-40,000 & 1 (least preferred to shed) \\
+20,000 & 1 (most preferred to shed) \\ \hline
 40,000 & 2 (middle priority to shed) \\ 
-20,000 & 3 (most preferred to shed) \\ \hline
+40,000 & 3 (least preferred to shed) \\
 \end{tabular}
 
 As with our other examples in this section, we're concentrating on the left side bus, which is powered by the left generator (labeled as Generator 1).
