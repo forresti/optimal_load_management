@@ -51,6 +51,7 @@ function [C1 C2 Del1 Del2 Beta1 Beta2 Y1 Y2 alpha Pito1 Pito2 ] = OptProb_Linear
     Overflow1=sdpvar(1,Nt,'full'); Overflow2 = sdpvar(1,Nt,'full');
     wastePower1=sdpvar(1,Nt,'full'); wastePower2=sdpvar(1,Nt,'full'); %Power not used by loads
     BETA1 = sdpvar(1,Nt,'full'); BETA2 = sdpvar(1,Nt,'full'); %cumulative battery charge. (lowercase Beta is per-timestep change in charge)
+    %TODO: convert Watts * seconds to Wh for printouts
 
     % Constraints
     cons=[];
@@ -60,7 +61,10 @@ function [C1 C2 Del1 Del2 Beta1 Beta2 Y1 Y2 alpha Pito1 Pito2 ] = OptProb_Linear
     %doing a running total of battery charge
     timestep = 1; % 1sec for now. using this to convert W to Wh for battery capacity
     batteryCapacity = 70000; %Wh
-    cons=[cons, 0 <= BETA1 <= batteryCapacity, 0 <= BETA2 <= batteryCapacity];
+    %cons=[cons, 0 <= BETA1 <= batteryCapacity, 0 <= BETA2 <= batteryCapacity];
+    %cons=[cons, 0 <= BETA1, 0 <= BETA2]
+    minBatteryLevel = 50000;
+    cons=[cons, minBatteryLevel <= BETA1, minBatteryLevel <= BETA2]; %min value 100, so that we can see it on graph
     cons=[cons, wastePower1 >= 0, wastePower2 >= 0]; %loads can't siphon imaginary power by making wastePower negative
 
     for i=1:Nl-1
@@ -72,17 +76,18 @@ function [C1 C2 Del1 Del2 Beta1 Beta2 Y1 Y2 alpha Pito1 Pito2 ] = OptProb_Linear
     x=1:1:100;
     xi=0:N/(Nt-1):N; xi(1)=1;  % 0:10:100
 
-    cons=[cons, sum(C1.*interp1(x,Ls1',xi)',1) + sum(interp1(x,Lns1',xi),2)' == sum(Y1,1) - wastePower1];   %\sum cji(t)*lji(t)= \sum \deta_ji *P_source_i - Betaj
-    cons=[cons, sum(C2.*interp1(x,Ls2',xi)',1) + sum(interp1(x,Lns2',xi),2)' == sum(Y2,1) - wastePower2];
+    cons=[cons, sum(C1.*interp1(x,Ls1',xi)',1) + sum(interp1(x,Lns1',xi),2)' == sum(Y1,1) - Beta1];   %\sum cji(t)*lji(t)= \sum \deta_ji *P_source_i - Betaj
+    cons=[cons, sum(C2.*interp1(x,Ls2',xi)',1) + sum(interp1(x,Lns2',xi),2)' == sum(Y2,1) - Beta2];
     cons=[cons, Y1' + Y2' == alpha.*P];    % The three constraints of the form \delta_{11}*P_{1to1} + \delta_{2to1}*P_{2to2}=P_{eng1}
     cons=[cons,  0 <= Y1 <= Pito1', 0 <= Y2 <= Pito2'];
     cons=[cons, Pito1' - U.*(1-Del1) <= Y1 <= U.*Del1, Pito2' - U.*(1-Del2) <= Y2 <= U.*Del2];
    
-    cons=[cons, Beta1 + Overflow1 == wastePower1, Beta2 + Overflow2 == wastePower2];
-    BETA1(1) = 0; BETA2(1) = 0; %start with zero charge in batteries
+    %cons=[cons, Beta1 + Overflow1 == wastePower1, Beta2 + Overflow2 == wastePower2];
+    BETA1(1) = minBatteryLevel; BETA2(1) = minBatteryLevel; %start with zero charge in batteries
     for i=2:Nt
         cons=[cons, BETA1(i) == BETA1(i-1) + Beta1(i), BETA2(i) == BETA2(i-1) + Beta2(i)];
     end
+
 
     % Objective
     obj=0;
@@ -108,7 +113,7 @@ function [C1 C2 Del1 Del2 Beta1 Beta2 Y1 Y2 alpha Pito1 Pito2 ] = OptProb_Linear
     plotDelta(Del1, Del2, Nt, N, xp)
     plotBetaBinary(Beta1, Beta2, Nt, N, xp)
     plotBetaContinuous(Beta1, Beta2, Nt, N, xp)
-    plotBetaStorage(Beta1, Beta2, Nt, N, xp, timestep)
+    plotBetaStorage(BETA1, BETA2, Nt, N, xp, timestep)
 end
 
 function plotPowerReq(Ls1, Lns1, Ls2, Lns2, N)
@@ -258,26 +263,30 @@ end
 
 
 %plot Wh stored in battery (using cumsum of Beta)
-function plotBetaStorage(Beta1, Beta2, Nt, N, xp, timestep)
+function plotBetaStorage(BETA1, BETA2, Nt, N, xp, timestep)
     figure;
     subplot(2,1,1);
-    plot(xp,(kron(cumsum(double(Beta1)*timestep),ones(1,10))),'b','LineWidth',2);
-    dBeta1Storage = cumsum(double(Beta1)*timestep) %printout
+    %plot(xp,(kron(cumsum(double(BETA1)*timestep),ones(1,10))),'b','LineWidth',2);
+    plot(xp,(kron(double(BETA1)*timestep,ones(1,10))),'b','LineWidth',2);
+    %dBeta1Storage = cumsum(double(Beta1)*timestep) %printout
+    dBeta1Storage = double(BETA1)
     title('Battery charge level for DC bus 1');
-    axis([0 N+10 0 100000]);
+    axis([0 N+10 0 200000]);
     %set(gca,'YTick',0:1:1);
     %set(gca,'YTickLabel',{'Not-charging','Charging'});
-    ylabel('Battery Charge Levell (Wh)')
+    ylabel('Battery Charge Level (Wh)')
     xlabel('time [s]');
 
     subplot(2,1,2);
-    plot(xp,(kron(cumsum(double(Beta2)*timestep),ones(1,10))),'b','LineWidth',2);
-    dBeta2Storage = cumsum(double(Beta2)*timestep) %printout
+    %plot(xp,(kron(cumsum(double(BETA2)*timestep),ones(1,10))),'b','LineWidth',2);
+    plot(xp,(kron(double(BETA2)*timestep,ones(1,10))),'b','LineWidth',2);
+    %dBeta2Storage = cumsum(double(Beta2)*timestep) %printout
+    dBeta2Storage = double(BETA2)
     title('Battery charge level for DC bus 2');
-    axis([0 N+10 0 100000]);
+    axis([0 N+10 0 200000]);
     %set(gca,'YTick',0:1:1);
     %set(gca,'YTickLabel',{'Not-charging','Charging'});
-    ylabel('Battery Charge Levell (Wh)')
+    ylabel('Battery Charge Level (Wh)')
     xlabel('time [s]');
 end
 
