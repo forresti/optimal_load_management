@@ -48,8 +48,6 @@ function [C1 C2 Del1 Del2 Beta1 Beta2 Y1 Y2 alpha Pito1 Pito2 ] = OptProb_Linear
     Pito1=sdpvar(Nt,Ns,'full');         Pito2=sdpvar(Nt,Ns,'full'); %Pito1(t,g) = "amount of pwr delivered by generator g to bus 1 at time t"
 
     %new decision variables for battery overflow
-    %Overflow1=sdpvar(1,Nt,'full'); Overflow2 = sdpvar(1,Nt,'full');
-    %wastePower1=sdpvar(1,Nt,'full'); wastePower2=sdpvar(1,Nt,'full'); %Power not used by loads
     BETA1 = sdpvar(1,Nt,'full'); BETA2 = sdpvar(1,Nt,'full'); %cumulative battery charge. (lowercase Beta is per-timestep change in charge)
     %TODO: convert Watts * seconds to Wh for printouts
 
@@ -62,12 +60,10 @@ function [C1 C2 Del1 Del2 Beta1 Beta2 Y1 Y2 alpha Pito1 Pito2 ] = OptProb_Linear
     timestep = 1; % 1sec for now. using this to convert W to Wh for battery capacity
     batteryCapacity = 70000; %Wh
     %cons=[cons, 0 <= BETA1 <= batteryCapacity, 0 <= BETA2 <= batteryCapacity];
-    %cons=[cons, 0 <= BETA1, 0 <= BETA2]
     startBatteryLevel = 0;
     minBatteryLevel = 20000; %afterthe tMinBatteryLevel-th timestep
     tMinBatteryLevel = 10; %first timestep to take minBatteryLevel into account
     cons=[cons, minBatteryLevel <= BETA1, minBatteryLevel <= BETA2]; %min value 100, so that we can see it on graph
-    %cons=[cons, wastePower1 >= 0, wastePower2 >= 0]; %loads can't siphon imaginary power by making wastePower negative
 
     for i=1:Nl-1
         cons=[cons, C1(i,:) <= C1(i+1,:), C2(i,:) <= C2(i+1,:)];
@@ -97,15 +93,11 @@ function [C1 C2 Del1 Del2 Beta1 Beta2 Y1 Y2 alpha Pito1 Pito2 ] = OptProb_Linear
     obj = obj + sum(Gamma1 * (1-C1)) + sum (Gamma2 * (1-C2));
     obj = obj + sum(Lambda1 * Del1) + sum(Lambda2 * Del2);
     obj = obj + M * sum(sum(alpha));
-    %obj = obj - 1000*(sum(Beta1) + sum(Beta2)); %penalize using the battery instead of putting power into loads
-    %obj = obj + 2000*sum(Overflow1); %penalize Overflow more than Battery
 
     options=sdpsettings('solver','Cplex'); %windows needs 'Cplex' and mac is ok with 'cplex' or 'Cplex'
     solvesdp(cons,obj,options);
     toc;
 
-    %dOverflow1 = double(Overflow1) %display as double
-    %dWastePower1 = double(wastePower1)
     dBeta1 = double(Beta1)
     dCumsumBeta1 = cumsum(double(Beta1))
     dBETA1 = double(BETA1)
