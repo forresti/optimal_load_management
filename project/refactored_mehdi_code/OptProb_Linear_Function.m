@@ -48,8 +48,8 @@ function [C1 C2 Del1 Del2 Beta1 Beta2 Y1 Y2 alpha Pito1 Pito2 ] = OptProb_Linear
     Pito1=sdpvar(Nt,Ns,'full');         Pito2=sdpvar(Nt,Ns,'full'); %Pito1(t,g) = "amount of pwr delivered by generator g to bus 1 at time t"
 
     %new decision variables for battery overflow
-    Overflow1=sdpvar(1,Nt,'full'); Overflow2 = sdpvar(1,Nt,'full');
-    wastePower1=sdpvar(1,Nt,'full'); wastePower2=sdpvar(1,Nt,'full'); %Power not used by loads
+    %Overflow1=sdpvar(1,Nt,'full'); Overflow2 = sdpvar(1,Nt,'full');
+    %wastePower1=sdpvar(1,Nt,'full'); wastePower2=sdpvar(1,Nt,'full'); %Power not used by loads
     BETA1 = sdpvar(1,Nt,'full'); BETA2 = sdpvar(1,Nt,'full'); %cumulative battery charge. (lowercase Beta is per-timestep change in charge)
     %TODO: convert Watts * seconds to Wh for printouts
 
@@ -63,9 +63,11 @@ function [C1 C2 Del1 Del2 Beta1 Beta2 Y1 Y2 alpha Pito1 Pito2 ] = OptProb_Linear
     batteryCapacity = 70000; %Wh
     %cons=[cons, 0 <= BETA1 <= batteryCapacity, 0 <= BETA2 <= batteryCapacity];
     %cons=[cons, 0 <= BETA1, 0 <= BETA2]
-    minBatteryLevel = 50000;
+    startBatteryLevel = 0;
+    minBatteryLevel = 20000; %afterthe tMinBatteryLevel-th timestep
+    tMinBatteryLevel = 10; %first timestep to take minBatteryLevel into account
     cons=[cons, minBatteryLevel <= BETA1, minBatteryLevel <= BETA2]; %min value 100, so that we can see it on graph
-    cons=[cons, wastePower1 >= 0, wastePower2 >= 0]; %loads can't siphon imaginary power by making wastePower negative
+    %cons=[cons, wastePower1 >= 0, wastePower2 >= 0]; %loads can't siphon imaginary power by making wastePower negative
 
     for i=1:Nl-1
         cons=[cons, C1(i,:) <= C1(i+1,:), C2(i,:) <= C2(i+1,:)];
@@ -83,7 +85,8 @@ function [C1 C2 Del1 Del2 Beta1 Beta2 Y1 Y2 alpha Pito1 Pito2 ] = OptProb_Linear
     cons=[cons, Pito1' - U.*(1-Del1) <= Y1 <= U.*Del1, Pito2' - U.*(1-Del2) <= Y2 <= U.*Del2];
    
     %cons=[cons, Beta1 + Overflow1 == wastePower1, Beta2 + Overflow2 == wastePower2];
-    BETA1(1) = minBatteryLevel; BETA2(1) = minBatteryLevel; %start with zero charge in batteries
+    cons=[cons, BETA1(tMinBatteryLevel:Nt) >= minBatteryLevel, BETA2(tMinBatteryLevel:Nt) >= minBatteryLevel]; %enforce lower bound on battery charge level after the tMinBatteryLevel-th timestep
+    BETA1(1) = startBatteryLevel; BETA2(1) = startBatteryLevel; %start with zero charge in batteries
     for i=2:Nt
         cons=[cons, BETA1(i) == BETA1(i-1) + Beta1(i), BETA2(i) == BETA2(i-1) + Beta2(i)];
     end
@@ -101,8 +104,8 @@ function [C1 C2 Del1 Del2 Beta1 Beta2 Y1 Y2 alpha Pito1 Pito2 ] = OptProb_Linear
     solvesdp(cons,obj,options);
     toc;
 
-    dOverflow1 = double(Overflow1) %display as double
-    dWastePower1 = double(wastePower1)
+    %dOverflow1 = double(Overflow1) %display as double
+    %dWastePower1 = double(wastePower1)
     dBeta1 = double(Beta1)
     dCumsumBeta1 = cumsum(double(Beta1))
     dBETA1 = double(BETA1)
@@ -113,7 +116,7 @@ function [C1 C2 Del1 Del2 Beta1 Beta2 Y1 Y2 alpha Pito1 Pito2 ] = OptProb_Linear
     plotDelta(Del1, Del2, Nt, N, xp)
     plotBetaBinary(Beta1, Beta2, Nt, N, xp)
     plotBetaContinuous(Beta1, Beta2, Nt, N, xp)
-    plotBetaStorage(BETA1, BETA2, Nt, N, xp, timestep)
+    plotBetaStorage(BETA1, BETA2, Nt, N, xp, timestep, minBatteryLevel)
 end
 
 function plotPowerReq(Ls1, Lns1, Ls2, Lns2, N)
@@ -263,13 +266,15 @@ end
 
 
 %plot Wh stored in battery (using cumsum of Beta)
-function plotBetaStorage(BETA1, BETA2, Nt, N, xp, timestep)
+function plotBetaStorage(BETA1, BETA2, Nt, N, xp, timestep, minBatteryLevel)
     figure;
     subplot(2,1,1);
     %plot(xp,(kron(cumsum(double(BETA1)*timestep),ones(1,10))),'b','LineWidth',2);
     plot(xp,(kron(double(BETA1)*timestep,ones(1,10))),'b','LineWidth',2);
     %dBeta1Storage = cumsum(double(Beta1)*timestep) %printout
     dBeta1Storage = double(BETA1)
+    hold on;
+    plot(1:1:N, minBatteryLevel,'--b','LineWidth',2);
     title('Battery charge level for DC bus 1');
     axis([0 N+10 0 200000]);
     %set(gca,'YTick',0:1:1);
@@ -282,6 +287,8 @@ function plotBetaStorage(BETA1, BETA2, Nt, N, xp, timestep)
     plot(xp,(kron(double(BETA2)*timestep,ones(1,10))),'b','LineWidth',2);
     %dBeta2Storage = cumsum(double(Beta2)*timestep) %printout
     dBeta2Storage = double(BETA2)
+    hold on;
+    plot(1:1:N, minBatteryLevel,'--b','LineWidth',2);
     title('Battery charge level for DC bus 2');
     axis([0 N+10 0 200000]);
     %set(gca,'YTick',0:1:1);
