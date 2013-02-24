@@ -3,6 +3,7 @@ function [] = runAirplane()
     close all hidden %get rid of old figures
 
     nTimesteps=100; % total number of timesteps in runAirplane outer loop 
+    HLclockMultiplier=10; % (HLclock rate) = HLclockMultiplier * (LLclock rate)
     Nl=10;   % number of loads connected to each bus. (10 sheddable, 10 unsheddable)
     Ns=3;    % number of power sources
     Nb=2;    % number of buses
@@ -32,7 +33,7 @@ function [] = runAirplane()
             advice = HLLMS(sensors, constants);
         end
         config = LLLMS(sensors, constants, advice(HLclock));
-        if (HLclock == 10) HLclock = 1; 
+        if (HLclock == HLclockMultiplier) HLclock = 1; 
         else HLclock = HLclock + 1; 
         end
 

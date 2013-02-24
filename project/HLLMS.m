@@ -6,7 +6,7 @@ function [configs] = HLLMS(sensors, constants) %only using 'sensors' for generat
     Nb = constants.Nb; % number of HVAC buses
 
     %% load the "loads"
-    [Ls1 Lns1 Ls2 Lns2] = sliceWorkloads(sensors, constants); %get relavent slice of historicalWorkloads
+    [Ls1 Lns1 Ls2 Lns2] = sliceWorkloads(sensors, constants); %get relevant slice of historicalWorkloads
   
     %% Max. Power supply by Engines and APU
     U1=1e5;     Peng1=U1*ones(1,Nt);
