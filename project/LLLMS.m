@@ -24,8 +24,8 @@ function [BusGen GeneratorOnOff] = selectGenerators(sensors, constants)
     %genPri2 = constants.priorityTables.genPri2;
 
     %HACK priority tables. Listing the generators in order of preference
-    genPri1 = [1 2 3];
-    genPri2 = [2 1 3]; % "first choice is Gen2, second choice is Gen1, third choice is APU"
+    genPri1 = [1 3 2];
+    genPri2 = [2 3 1]; % "first choice is Gen2, second choice is APU, third choice is Gen1"
 
     GeneratorOnOff = zeros([1 3]);
     BusGen = zeros([1 2]);
@@ -41,8 +41,7 @@ function [BusGen GeneratorOnOff] = selectGenerators(sensors, constants)
 
     %Bus 2 generator selection
     for i=1:constants.Ns %1 to number of generators
-        genPri2(i)
-        if( sensors.genStatus(genPri2(i)) == 1) %this generator works properly
+        if(sensors.genStatus(genPri2(i)) == 1) %this generator works properly
             BusGen(2) = genPri2(i);
             GeneratorOnOff(genPri2(i)) = 1; %turn the selected generator on
             break
