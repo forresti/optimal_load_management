@@ -8,14 +8,13 @@ function [] = runAirplane()
     Nb=2;    % number of buses
 
     %N and Nt are params for HL-LMS
-    HLclockMultiplier=10; % (HLclock rate) = HLclockMultiplier * (LLclock rate)
+    HLclockMultiplier=3; % (HLclock rate) = HLclockMultiplier * (LLclock rate)
     N = HLclockMultiplier; % prediction horizon
     Nt = N+1; % (prediction horizon + 1) -- some off-by-one-fix relic.
 
     sensorLog = [];
     configLog = [];
-    %generatorOutput = [1e5, 1e5, 104e3]; %Pwr produced by generators. Called U1, U2, U3 in Mehdi's code
-    generatorOutput = [1e6 1e6 1e6];
+    generatorOutput = [1e5, 1e5, 104e3]; %Pwr produced by generators. Called U1, U2, U3 in Mehdi's code
         %TODO: make generatorOutput be a parameter to Mehdi's code, so that we can tweak it easily.
     [Ls1,Lns1,Ls2,Lns2]=load3(110);
     historicalWorkloads = struct('Ls1', Ls1, 'Lns1', Lns1, 'Ls2', Ls2, 'Lns2', Lns2);

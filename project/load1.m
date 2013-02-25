@@ -1,7 +1,7 @@
 function [Ls1,Lns1,Ls2,Lns2]=load1(N)
 
 % BUS 1
-% Non-Sheddable loads
+% Sheddable loads
 
 
 Ls1(1,:)=25000*ones(1,N);
@@ -16,7 +16,7 @@ Ls1(9,:)=zeros(1,N); Ls1(9, 4*N/10:9*N/10 )=500;
 Ls1(10,:)=zeros(1,N); Ls1(10, 4*N/10:6*N/10 )=500;
 
 
-% Sheddable loads
+% Non-Sheddable loads
 Lns1(1,:)=41000*ones(1,N);   Lns1(2,:)=5000*ones(1,N);     Lns1(3,:)=2000*ones(1,N);
 Lns1(4,:)=2000*ones(1,N);    Lns1(5,:)=1000*ones(1,N);     Lns1(6,:)=5000*ones(1,N);
 Lns1(7,:)=1000*ones(1,N);    Lns1(8,:)=2000*ones(1,N);     Lns1(9,:)=2000*ones(1,N);
@@ -24,7 +24,7 @@ Lns1(10,:)=1000*ones(1,N);
 
 
 % BUS 2
-% Non-Sheddable loads
+% Sheddable loads
 Ls2(1,:)=25000*ones(1,N);  % 25000
 Ls2(2,:)=zeros(1,N); Ls2(2,N/10:end)=1000;
 Ls2(3,:)=zeros(1,N); Ls2(3,1:9*N/10)=1000; 
@@ -36,7 +36,7 @@ Ls2(8,:)=zeros(1,N); Ls2(8,N/10:4*N/10)=4000; Ls2(8,5*N/10:8*N/10)=10000; % 6000
 Ls2(9,:)=zeros(1,N); Ls2(9,1:9*N/10)=500; 
 Ls2(10,:)=zeros(1,N); 
 
-% Sheddable loads
+% Non-Sheddable loads
 Lns2(1,:)=41000*ones(1,N);   Lns2(2,:)=5000*ones(1,N);     Lns2(3,:)=2000*ones(1,N);
 Lns2(4,:)=2000*ones(1,N);    Lns2(5,:)=1000*ones(1,N);     Lns2(6,:)=5000*ones(1,N);
 Lns2(7,:)=1000*ones(1,N);    Lns2(8,:)=2000*ones(1,N);     Lns2(9,:)=2000*ones(1,N);

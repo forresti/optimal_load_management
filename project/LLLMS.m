@@ -1,10 +1,10 @@
 
 function config = LLLMS(sensors, constants, advice)
-    %if (checkSafety(advice, sensors, constants))
-    %    config = advice;
-    %else
+    if (checkSafety(advice, sensors, constants))
+        config = advice;
+    else
         config = applyPriorityTables(sensors, constants);
-    %end
+    end
 end
 
 % Select load shedding and generator assignments based purely on priority tables
