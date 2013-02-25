@@ -3,20 +3,19 @@ function [] = runAirplane()
     close all hidden %get rid of old figures
 
     nTimesteps=100; % total number of timesteps in runAirplane outer loop 
-    HLclockMultiplier=10; % (HLclock rate) = HLclockMultiplier * (LLclock rate)
     Nl=10;   % number of loads connected to each bus. (10 sheddable, 10 unsheddable)
     Ns=3;    % number of power sources
     Nb=2;    % number of buses
 
-    %N and Nt are params for for Mehdi's code
-    N = 10; % prediction horizon
-    Nt = 10+1; % (prediction horizon + 1) -- some off-by-one-fix relic.
+    %N and Nt are params for HL-LMS
+    HLclockMultiplier=10; % (HLclock rate) = HLclockMultiplier * (LLclock rate)
+    N = HLclockMultiplier; % prediction horizon
+    Nt = N+1; % (prediction horizon + 1) -- some off-by-one-fix relic.
 
     sensorLog = [];
     configLog = [];
     generatorOutput = [1e5, 1e5, 104e3]; %Pwr produced by generators. Called U1, U2, U3 in Mehdi's code
         %TODO: make generatorOutput be a parameter to Mehdi's code, so that we can tweak it easily.
-    %[Ls1,Lns1,Ls2,Lns2]=load3(typecast(nTimesteps+Nt, 'int32')); % load the "loads" -- choose between load1, load2 and load3. (including extra padding, Nt, to avoid out-of-bounds in HLLMS)
     [Ls1,Lns1,Ls2,Lns2]=load3(110);
     historicalWorkloads = struct('Ls1', Ls1, 'Lns1', Lns1, 'Ls2', Ls2, 'Lns2', Lns2);
     priorityTables = getPriorityTables();
