@@ -9,9 +9,9 @@ function [configs] = HLLMS(sensors, constants) %only using 'sensors' for generat
     [Ls1 Lns1 Ls2 Lns2] = sliceWorkloads(sensors, constants); %get relevant slice of historicalWorkloads
   
     %% Max. Power supply by Engines and APU
-    U1=1e5;     Peng1=U1*ones(1,Nt);
-    U2=1e5;     Peng2=U2*ones(1,Nt);
-    U3=104e3;   Papu=U3*ones(1,Nt);
+    U1=constants.generatorOutput(1);     Peng1=U1*ones(1,Nt);
+    U2=constants.generatorOutput(2);     Peng2=U2*ones(1,Nt);
+    U3=constants.generatorOutput(3);   Papu=U3*ones(1,Nt);
     U=[U1*ones(1,Nt); U2*ones(1,Nt); U3*ones(1,Nt)];
     P=[Peng1' Peng2' Papu'];
 
