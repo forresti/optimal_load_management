@@ -8,7 +8,7 @@ function [] = runAirplane()
     Nb=2;    % number of buses
 
     %N and Nt are params for HL-LMS
-    HLclockMultiplier=10; % (HLclock rate) = HLclockMultiplier * (LLclock rate)
+    HLclockMultiplier=12; % (HLclock rate) = HLclockMultiplier * (LLclock rate)
     N = HLclockMultiplier; % prediction horizon
     Nt = N+1; % (prediction horizon + 1) -- some off-by-one-fix relic.
 
@@ -38,10 +38,8 @@ function [] = runAirplane()
             nextSensors.time = LLclock + N; %optimize for next horizon
             nextAdvice = HLLMS(nextSensors, constants);
         end
-        if (~isempty(advice))
-            config = LLLMS(sensors, constants, advice(HLclock));
-        else
-            config = LLLMS(sensors, constants, []);
+        if (~isempty(advice)) config = LLLMS(sensors, constants, advice(HLclock));
+        else config = LLLMS(sensors, constants, []);
         end
             
         if (HLclock == HLclockMultiplier) HLclock = 1; 
