@@ -1,6 +1,8 @@
 
 function config = LLLMS(sensors, constants, advice)
-    if (checkSafety(advice, sensors, constants))
+    if(isempty(advice)) %for initial chunk, before optimization kicks in
+        config = applyPriorityTables(sensors, constants);
+    elseif(checkSafety(advice, sensors, constants))
         config = advice;
     else
         config = applyPriorityTables(sensors, constants);

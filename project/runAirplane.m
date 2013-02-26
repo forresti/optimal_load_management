@@ -8,7 +8,7 @@ function [] = runAirplane()
     Nb=2;    % number of buses
 
     %N and Nt are params for HL-LMS
-    HLclockMultiplier=3; % (HLclock rate) = HLclockMultiplier * (LLclock rate)
+    HLclockMultiplier=10; % (HLclock rate) = HLclockMultiplier * (LLclock rate)
     N = HLclockMultiplier; % prediction horizon
     Nt = N+1; % (prediction horizon + 1) -- some off-by-one-fix relic.
 
@@ -22,16 +22,26 @@ function [] = runAirplane()
     constants = struct('historicalWorkloads', historicalWorkloads, 'priorityTables', priorityTables, 'generatorOutput', generatorOutput, 'nTimesteps', nTimesteps, 'Nt', Nt, 'Nl', Nl, 'Ns', Ns, 'Nb', Nb, 'N', N); %hard-coded params to pass around  
     
     advice = [];
+    nextAdvice = [];
     HLclock = 1; %count up to each time we call the HLLMS
+    
     for time=1:nTimesteps
         workload = genWorkload(historicalWorkloads, time, 0);
         genStatus = getGeneratorStatus(time);
         sensors = struct('workload', workload, 'genStatus', genStatus, 'time', time);
 
         if (HLclock == 1) %time to call HLLMS again
-            advice = HLLMS(sensors, constants);
+            advice = nextAdvice;
+            nextSensors = sensors;
+            nextSensors.time = time + N; %optimize for next horizon
+            nextAdvice = HLLMS(nextSensors, constants);
         end
-        config = LLLMS(sensors, constants, advice(HLclock));
+        if (~isempty(advice))
+            config = LLLMS(sensors, constants, advice(HLclock));
+        else
+            config = LLLMS(sensors, constants, []);
+        end
+            
         if (HLclock == HLclockMultiplier) HLclock = 1; 
         else HLclock = HLclock + 1; 
         end
