@@ -25,15 +25,17 @@ function [] = runAirplane()
     nextAdvice = [];
     HLclock = 1; %count up to each time we call the HLLMS
     
-    for time=1:nTimesteps
-        workload = genWorkload(historicalWorkloads, time, 0);
-        genStatus = getGeneratorStatus(time);
-        sensors = struct('workload', workload, 'genStatus', genStatus, 'time', time);
+    for LLclock=1:nTimesteps
+        workload = genWorkload(historicalWorkloads, LLclock, 0);
+        genStatus = getGeneratorStatus(LLclock);
+        sensors = struct('workload', workload, 'genStatus', genStatus, 'time', LLclock);
 
-        if (HLclock == 1) %time to call HLLMS again
+        if (HLclock == 1 && LLclock <= (nTimesteps-N)) %time to call HLLMS again
             advice = nextAdvice;
+            nextWorkload = genWorkload(historicalWorkloads, LLclock+N, 0);
             nextSensors = sensors;
-            nextSensors.time = time + N; %optimize for next horizon
+            nextSensors.workload = nextWorkload;
+            nextSensors.time = LLclock + N; %optimize for next horizon
             nextAdvice = HLLMS(nextSensors, constants);
         end
         if (~isempty(advice))
