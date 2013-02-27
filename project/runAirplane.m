@@ -21,6 +21,7 @@ function [] = runAirplane()
     priorityTables = getPriorityTables();
     constants = struct('historicalWorkloads', historicalWorkloads, 'priorityTables', priorityTables, 'generatorOutput', generatorOutput, 'nTimesteps', nTimesteps, 'Nt', Nt, 'Nl', Nl, 'Ns', Ns, 'Nb', Nb, 'N', N); %hard-coded params to pass around  
     
+    batteryCharge1=0; batteryCharge2=0; %keep track of battery charge level
     advice = [];
     nextAdvice = [];
     HLclock = 1; %count up to each time we call the HLLMS
@@ -36,6 +37,8 @@ function [] = runAirplane()
             nextSensors = sensors;
             nextSensors.workload = nextWorkload;
             nextSensors.time = LLclock + N; %optimize for next horizon
+            %nextSensors.batteryCharge1 = batteryCharge1 + sum(advice.Battery1)
+            %nextSensors.batteryCharge2 = batteryCharge2 + sum(advice.Battery2)  %predicted charge level if all HL advice is used
             nextAdvice = HLLMS(nextSensors, constants);
         end
         if (~isempty(advice)) config = LLLMS(sensors, constants, advice(HLclock));
@@ -49,7 +52,7 @@ function [] = runAirplane()
         configLog = [configLog config]; %this concatenation is slow ... but that's fine. 
         sensorLog = [sensorLog sensors];
     end
-    plotGraphs(configLog, sensorLog, constants, Nt, nTimesteps)
+    %plotGraphs(configLog, sensorLog, constants, Nt, nTimesteps)
 end
 
 
