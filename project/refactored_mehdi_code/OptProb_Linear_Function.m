@@ -63,7 +63,7 @@ function [C1 C2 Del1 Del2 Beta1 Beta2 Y1 Y2 alpha Pito1 Pito2 ] = OptProb_Linear
     startBatteryLevel = 0;
     minBatteryLevel = 20000; %afterthe tMinBatteryLevel-th timestep
     tMinBatteryLevel = 10; %first timestep to take minBatteryLevel into account
-    cons=[cons, minBatteryLevel <= BETA1, minBatteryLevel <= BETA2]; %min value 100, so that we can see it on graph
+    cons=[cons, minBatteryLevel <= BETA1, minBatteryLevel <= BETA2]; %min value 100, so that we can see it on graph -- TODO: remove this?
 
     for i=1:Nl-1
         cons=[cons, C1(i,:) <= C1(i+1,:), C2(i,:) <= C2(i+1,:)];
