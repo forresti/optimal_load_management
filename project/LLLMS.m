@@ -15,9 +15,9 @@ function config = applyPriorityTables(sensors, constants)
     [BusGen GeneratorOnOff] = selectGenerators(sensors, constants); %Del1,Del2 in Mehdi's code
     [Shedding1 Shedding2] = selectShedding(sensors, constants, BusGen); %C1, C2 in Mehdi's code
 
-    Battery1 = [0]; Battery2 = [0]; %Pwr used for charging each battery. Beta1, Beta2 in Mehdi's code
+    batteryUpdate1 = [0]; batteryUpdate2 = [0]; %Pwr used for charging each battery. Beta1, Beta2 in Mehdi's code
 
-    config = struct('Shedding1', Shedding1, 'Shedding2', Shedding2, 'BusGen', BusGen, 'Battery1', Battery1, 'Battery2', Battery2, 'GeneratorOnOff', GeneratorOnOff);
+    config = struct('Shedding1', Shedding1, 'Shedding2', Shedding2, 'BusGen', BusGen, 'batteryUpdate1', batteryUpdate1, 'batteryUpdate2', batteryUpdate2, 'GeneratorOnOff', GeneratorOnOff);
 end
 
 %note that 'constants' contains priorityTables
