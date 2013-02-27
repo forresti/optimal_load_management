@@ -57,7 +57,7 @@ function [] = runAirplane()
         configLog = [configLog config]; %this concatenation is slow ... but that's fine. 
         sensorLog = [sensorLog sensors];
     end
-    %plotGraphs(configLog, sensorLog, constants, Nt, nTimesteps)
+    plotGraphs(configLog, sensorLog, constants, Nt, nTimesteps)
 end
 
 

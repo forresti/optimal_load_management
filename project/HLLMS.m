@@ -33,9 +33,9 @@ function [configs] = HLLMS(sensors, constants) %only using 'sensors' for generat
 
     % Constraints
     cons=[];
-    %cons=[cons, Beta1 >= 0; Beta2 >= 0];
     minBatteryLevel=0;
-    cons=[cons, minBatteryLevel <= BETA1, minBatteryLevel <= BETA2]; 
+    %cons=[cons, minBatteryLevel <= BETA1, minBatteryLevel <= BETA2]; 
+    cons=[cons, Beta1 >= 0; Beta2 >= 0];
     for i=1:Nl-1
         cons=[cons, C1(i,:) <= C1(i+1,:), C2(i,:) <= C2(i+1,:)];
     end
@@ -51,11 +51,11 @@ function [configs] = HLLMS(sensors, constants) %only using 'sensors' for generat
     xi=0:N/(Nt-1):N; xi(1)=1;  % 0:10:100
 
     % the following five lead to MILP.
-    cons=[ cons, sum(C1.*interp1(x,Ls1',xi)',1) + sum(interp1(x,Lns1',xi),2)' == sum(Y1,1) - Beta1];   %\sum cji(t)*lji(t)= \sum \deta_ji *P_source_i - Betaj
-    cons=[ cons, sum(C2.*interp1(x,Ls2',xi)',1) + sum(interp1(x,Lns2',xi),2)' == sum(Y2,1) - Beta2];
-    cons=[ cons, Y1' + Y2' == alpha.*P];    % The three constraints of the form \delta_{11}*P_{1to1} + \delta_{2to1}*P_{2to2}=P_{eng1}
-    cons=[ cons,  0 <= Y1 <= Pito1', 0 <= Y2 <= Pito2'];
-    cons=[ cons, Pito1' - U.*(1-Del1) <= Y1 <= U.*Del1, Pito2' - U.*(1-Del2) <= Y2 <= U.*Del2];
+    cons=[cons, sum(C1.*interp1(x,Ls1',xi)',1) + sum(interp1(x,Lns1',xi),2)' == sum(Y1,1) - Beta1];   %\sum cji(t)*lji(t)= \sum \deta_ji *P_source_i - Betaj
+    cons=[cons, sum(C2.*interp1(x,Ls2',xi)',1) + sum(interp1(x,Lns2',xi),2)' == sum(Y2,1) - Beta2];
+    cons=[cons, Y1' + Y2' == alpha.*P];    % The three constraints of the form \delta_{11}*P_{1to1} + \delta_{2to1}*P_{2to2}=P_{eng1}
+    cons=[cons,  0 <= Y1 <= Pito1', 0 <= Y2 <= Pito2'];
+    cons=[cons, Pito1' - U.*(1-Del1) <= Y1 <= U.*Del1, Pito2' - U.*(1-Del2) <= Y2 <= U.*Del2];
     startBatteryLevel1=0; startBatteryLevel2=0; %TODO: get these from input params    
     %cons=[cons, BETA1(tMinBatteryLevel:Nt) >= minBatteryLevel, BETA2(tMinBatteryLevel:Nt) >= minBatteryLevel]; %enforce lower bound on battery charge level after the tMinBatteryLevel-th timestep
     %everything is shifted to start at 2 (see 'configs' below), so Beta1(1),Beta2(1) is (ignored?)
