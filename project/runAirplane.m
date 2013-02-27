@@ -37,11 +37,16 @@ function [] = runAirplane()
             nextSensors = sensors;
             nextSensors.workload = nextWorkload;
             nextSensors.time = LLclock + N; %optimize for next horizon
-            %nextSensors.batteryCharge1 = batteryCharge1 + sum(advice.Battery1)
-            %nextSensors.batteryCharge2 = batteryCharge2 + sum(advice.Battery2)  %predicted charge level if all HL advice is used
+            %nextSensors.batteryCharge1 = batteryCharge1 + sum(advice.batteryUpdate1)
+            %nextSensors.batteryCharge2 = batteryCharge2 + sum(advice.batteryUpdate2)  %predicted charge level if all HL advice is used
             nextAdvice = HLLMS(nextSensors, constants);
         end
-        if (~isempty(advice)) config = LLLMS(sensors, constants, advice(HLclock));
+
+        if (~isempty(advice)) %use HL advice
+            config = LLLMS(sensors, constants, advice(HLclock));
+            %TODO: add a way to check if LLLMS actually used the HLLMS advice.
+            %batteryCharge1 = batteryCharge1 + config.batteryUpdate1; %TODO: only do this if LLLMS takes the advice.
+            %batteryCharge2 = batteryCharge2 + config.batteryUpdate2;            
         else config = LLLMS(sensors, constants, []);
         end
             
