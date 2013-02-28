@@ -13,15 +13,16 @@ function plotGraphs(configLog, sensorLog, constants, Nt, N)
     end
     plotC(Shedding1', Shedding2', Nt, N, xp)
 
-    %Battery1 = []; Battery2 = []; %Beta1, Beta2
-    %for i=1:N
-    %    Battery1 = [Battery1; sensorLog(i).Battery1];
-    %    Battery2 = [Battery2; sensorLog(i).Battery2];
-    %end
-
+    batteryUpdate1 = []; batteryUpdate2 = []; %Beta1, Beta2
+    for i=1:N
+        batteryUpdate1 = [batteryUpdate1; configLog(i).batteryUpdate1];
+        batteryUpdate2 = [batteryUpdate2; configLog(i).batteryUpdate2];
+    end
     
     %plotDelta(Del1, Del2, Nt, N, xp)
-    %plotBeta(Beta1, Beta2, Nt, N, xp)
+    plotBetaBinary(batteryUpdate1, batteryUpdate2, Nt, N, xp)
+    plotBetaContinuous(batteryUpdate1, batteryUpdate2, Nt, N, xp)
+    plotBetaStorage(batteryUpdate1, batteryUpdate2, Nt, N, xp)
 end
 
 function plotPowerReq(Ls1, Lns1, Ls2, Lns2, N)
@@ -122,7 +123,7 @@ function plotDelta(Del1, Del2, Nt, N, xp)
     xlabel('time [s]');
 end
 
-function plotBeta(Beta1, Beta2, Nt, N, xp)
+function plotBetaBinary(Beta1, Beta2, Nt, N, xp)
     figure;
     subplot(2,1,1);
     plot(Beta1>=0.1,'b','LineWidth',2);  % sign results into error if the value is e.g. -1.2*1e-10! Therefore we use this.
@@ -138,6 +139,40 @@ function plotBeta(Beta1, Beta2, Nt, N, xp)
     axis([0 N+10 -0.1 1.5]);
     set(gca,'YTick',0:1:1);
     set(gca,'YTickLabel',{'Not-charging','Charging'});
+    xlabel('time [s]');
+end
+
+function plotBetaContinuous(Beta1, Beta2, Nt, N, xp)
+    figure;
+    subplot(2,1,1);
+    plot(Beta1,'b','LineWidth',2);  % sign results into error if the value is e.g. -1.2*1e-10! Therefore we use this.
+    title('Battery charging for DC bus 1');
+    axis([0 N+10 -100000 100000]);
+    ylabel('Battery Charging per timestep')
+    xlabel('time [s]');
+
+    subplot(2,1,2);
+    plot(Beta2,'b','LineWidth',2);  % sign results into error if the value is e.g. -1.2*1e-10! Therefore we use this.
+    title('Battery charging for DC bus 2');
+    axis([0 N+10 -100000 100000]);
+    ylabel('Battery Charging per timestep')
+    xlabel('time [s]');
+end
+
+function plotBetaStorage(Beta1, Beta2, Nt, N, xp)
+    figure;
+    subplot(2,1,1);    
+    plot(cumsum(Beta1),'b','LineWidth',2);  % sign results into error if the value is e.g. -1.2*1e-10! Therefore we use this.
+    title('Battery charge level for DC bus 1');
+    axis([0 N+10 -100000 1000000]);
+    ylabel('Battery Charge Level per timestep')
+    xlabel('time [s]');
+
+    subplot(2,1,2);    
+    plot(cumsum(Beta2),'b','LineWidth',2);  % sign results into error if the value is e.g. -1.2*1e-10! Therefore we use this.    
+    title('Battery charge level for DC bus 2');
+    axis([0 N+10 -100000 1000000]);
+    ylabel('Battery Charge Level per timestep')
     xlabel('time [s]');
 end
 
