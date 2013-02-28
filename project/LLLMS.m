@@ -5,7 +5,7 @@ function config = LLLMS(sensors, constants, advice)
     elseif(checkSafety(advice, sensors, constants))
         config = advice;
     else
-        config = applyPriorityTables(sensors, constants);
+        config = applyPriorityTables(sensors, constants); %this thing returns a struct with 'HLadviceUsed' set to false
     end
 end
 
@@ -17,7 +17,7 @@ function config = applyPriorityTables(sensors, constants)
 
     batteryUpdate1 = [0]; batteryUpdate2 = [0]; %Pwr used for charging each battery. Beta1, Beta2 in Mehdi's code
 
-    config = struct('Shedding1', Shedding1, 'Shedding2', Shedding2, 'BusGen', BusGen, 'batteryUpdate1', batteryUpdate1, 'batteryUpdate2', batteryUpdate2, 'GeneratorOnOff', GeneratorOnOff);
+    config = struct('Shedding1', Shedding1, 'Shedding2', Shedding2, 'BusGen', BusGen, 'batteryUpdate1', batteryUpdate1, 'batteryUpdate2', batteryUpdate2, 'GeneratorOnOff', GeneratorOnOff, 'HLadviceUsed', false); 
 end
 
 %note that 'constants' contains priorityTables

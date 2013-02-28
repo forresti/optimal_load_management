@@ -8,7 +8,7 @@ function [] = runAirplane()
     Nb=2;    % number of buses
 
     %N and Nt are params for HL-LMS
-    HLclockMultiplier=12; % (HLclock rate) = HLclockMultiplier * (LLclock rate)
+    HLclockMultiplier=10; % (HLclock rate) = HLclockMultiplier * (LLclock rate)
     N = HLclockMultiplier; % prediction horizon
     Nt = N+1; % (prediction horizon + 1) -- some off-by-one-fix relic.
 
@@ -29,7 +29,7 @@ function [] = runAirplane()
     for LLclock=1:nTimesteps
         workload = genWorkload(historicalWorkloads, LLclock, 0);
         genStatus = getGeneratorStatus(LLclock);
-        sensors = struct('workload', workload, 'genStatus', genStatus, 'time', LLclock);
+        sensors = struct('workload', workload, 'genStatus', genStatus, 'time', LLclock, 'batteryCharge1', batteryCharge1, 'batteryCharge2', batteryCharge2);
 
         if (HLclock == 1 && LLclock <= (nTimesteps-N)) %time to call HLLMS again
             advice = nextAdvice;
@@ -37,8 +37,15 @@ function [] = runAirplane()
             nextSensors = sensors;
             nextSensors.workload = nextWorkload;
             nextSensors.time = LLclock + N; %optimize for next horizon
-            %nextSensors.batteryCharge1 = batteryCharge1 + sum(advice.batteryUpdate1)
-            %nextSensors.batteryCharge2 = batteryCharge2 + sum(advice.batteryUpdate2)  %predicted charge level if all HL advice is used
+            nextSensors.batteryCharge1 = batteryCharge1; %will be 0 if the first advice hasn't been produced yet, otherwise, see the ~isempty(advice) below.
+            nextSensors.batteryCharge2 = batteryCharge2;
+
+            if (~isempty(advice))
+                for adviceIdx=1:N 
+                    nextSensors.batteryCharge1 = nextSensors.batteryCharge1 + advice(adviceIdx).batteryUpdate1;
+                    nextSensors.batteryCharge2 = nextSensors.batteryCharge2 + advice(adviceIdx).batteryUpdate2;
+                end
+            end
             nextAdvice = HLLMS(nextSensors, constants);
         end
 
