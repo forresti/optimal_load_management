@@ -1,5 +1,7 @@
 %This is the "main function" for our airplane power simulation system
-function [] = runAirplane()
+
+%@param useHL -- decide whether to do HL+LL or just LL system
+function [] = runAirplane(useHL)
     close all hidden %get rid of old figures
 
     nTimesteps=100; % total number of timesteps in runAirplane outer loop 
@@ -15,7 +17,6 @@ function [] = runAirplane()
     sensorLog = [];
     configLog = [];
     generatorOutput = [1e5, 1e5, 104e3]; %Pwr produced by generators. Called U1, U2, U3 in Mehdi's code
-        %TODO: make generatorOutput be a parameter to Mehdi's code, so that we can tweak it easily.
     [Ls1,Lns1,Ls2,Lns2]=load3(110);
     historicalWorkloads = struct('Ls1', Ls1, 'Lns1', Lns1, 'Ls2', Ls2, 'Lns2', Lns2);
     priorityTables = getPriorityTables();
@@ -31,7 +32,7 @@ function [] = runAirplane()
         genStatus = getGeneratorStatus(LLclock);
         sensors = struct('workload', workload, 'genStatus', genStatus, 'time', LLclock, 'batteryCharge1', batteryCharge1, 'batteryCharge2', batteryCharge2);
 
-        if (HLclock == 1 && LLclock <= (nTimesteps-N)) %time to call HLLMS again
+        if (HLclock == 1 && LLclock <= (nTimesteps-N) && useHL == true) %time to call HLLMS again
             advice = nextAdvice;
             nextWorkload = genWorkload(historicalWorkloads, LLclock+N, 0);
             nextSensors = sensors;
