@@ -15,7 +15,6 @@ function [configs] = HLLMS(sensors, constants) %only using 'sensors' for generat
     U=[U1*ones(1,Nt); U2*ones(1,Nt); U3*ones(1,Nt)];
     P=[Peng1' Peng2' Papu'];
     startBatteryCharge1=sensors.batteryCharge1; startBatteryCharge2=sensors.batteryCharge2;
-    %startBatteryCharge1=0; startBatteryCharge2=0; %TODO: get these from input params 
 
     %% Optimization problem set-up
     tic;
