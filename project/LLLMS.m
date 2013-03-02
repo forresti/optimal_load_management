@@ -2,10 +2,13 @@
 function config = LLLMS(sensors, constants, advice)
     if(isempty(advice)) %for initial chunk, before optimization kicks in
         config = applyPriorityTables(sensors, constants);
+        %display('no advice provided')
     elseif(checkSafety(advice, sensors, constants))
         config = advice;
+        %display('advice is safe')
     else
         config = applyPriorityTables(sensors, constants); %this thing returns a struct with 'HLadviceUsed' set to false
+        %display('advice is unsafe')
     end
 end
 

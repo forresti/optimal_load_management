@@ -29,16 +29,20 @@ function isSafe = checkSafety(config, sensors, constants)
     
     % check generator status
     if (sensors.genStatus(config.BusGen(1)) == 0 || sensors.genStatus(config.BusGen(2)) == 0) %have we assigned a broken generator to a bus?
+        display('unsafe because we are using a broken generator')
         isSafe=0;
     end
     
     % checking for generator overload
     if(pwrReqGen1 > constants.generatorOutput(1))
         isSafe=0;
+        display(sprintf('unsafe: Gen1 overloaded at time %d',sensors.time))
     elseif(pwrReqGen2 > constants.generatorOutput(2))
         isSafe=0;
+        display(sprintf('unsafe: Gen2 overloaded at time %d',sensors.time))
     elseif(pwrReqApu > constants.generatorOutput(3))
         isSafe=0;
+        display(sprintf('unsafe: APU overloaded at time %d',sensors.time))
     end
 end
 
