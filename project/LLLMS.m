@@ -13,7 +13,7 @@ end
 % This the crux of the LLLMS system
 function config = applyPriorityTables(sensors, constants)
     [BusGen GeneratorOnOff] = selectGenerators(sensors, constants); %Del1,Del2 in Mehdi's code
-    [Shedding1 Shedding2 batteryUpdate1 batteryUpdate2] = selectShedding(sensors, constants, BusGen) %C1, C2 in Mehdi's code
+    [Shedding1 Shedding2 batteryUpdate1 batteryUpdate2] = selectShedding(sensors, constants, BusGen); %C1, C2 in Mehdi's code
 
     config = struct('Shedding1', Shedding1, 'Shedding2', Shedding2, 'BusGen', BusGen, 'batteryUpdate1', batteryUpdate1, 'batteryUpdate2', batteryUpdate2, 'GeneratorOnOff', GeneratorOnOff, 'HLadviceUsed', false); 
 end

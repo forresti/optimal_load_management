@@ -87,37 +87,37 @@ function plotC(C1, C2, Nt, N, xp)
     %title('Power shedding of AC bus 1 (loads 1 to 10)');
     plot(xp,C1(1,:),xp,C1(2,:)+0.02,xp,C1(3,:)+0.04,xp,C1(4,:)+0.06,xp,C1(5,:)+0.08, 'LineWidth',1.5)
     legend('L_1','L_2','L_3','L_4','L_5','Orientation','horizontal');
-    title('Power shedding of AC bus 1 (loads 1 to 5)');
+    title('Power shedding of AC bus 1 (loads 1 to 5)', 'fontsize',10,'fontweight','b');
     axis([0 N+10 -0.1 1.5]);
     set(gca,'YTick',0:1:1);
-    set(gca,'YTickLabel',{'Shed (off)','Granted (on)'});
+    set(gca,'YTickLabel',{'Shed (off)','Granted (on)'}, 'fontsize',10,'fontweight','b');
     xlabel('time [s]');
 
     subplot(2,2,2);
     plot(xp,C2(1,:),xp,C2(2,:)+0.02,xp,C2(3,:)+0.04,xp,C2(4,:)+0.06,xp,C2(5,:)+0.08, 'LineWidth',1.5)
     legend('L_1','L_2','L_3','L_4','L_5','Orientation','horizontal');
-    title('Power shedding of AC bus 2 (loads 1 to 5)');
+    title('Power shedding of AC bus 2 (loads 1 to 5)', 'fontsize',10,'fontweight','b');
     axis([0 N+10 -0.1 1.5]);
     set(gca,'YTick',0:1:1);
-    set(gca,'YTickLabel',{'Shed (off)','Granted (on)'});
+    set(gca,'YTickLabel',{'Shed (off)','Granted (on)'}, 'fontsize',10,'fontweight','b');
     xlabel('time [s]');
 
     subplot(2,2,3);
     plot(xp,C1(6,:),xp,C1(7,:)+0.02,xp,C1(8,:)+0.04,xp,C1(9,:)+0.06,xp,C1(10,:)+0.08, 'LineWidth',1.5)
     legend('L_6','L_7','L_8','L_9','L_{10}','Orientation','horizontal');
-    title('Power shedding of AC bus 1 (loads 6 to 10)');
+    title('Power shedding of AC bus 1 (loads 6 to 10)', 'fontsize',10,'fontweight','b');
     axis([0 N+10 -0.1 1.5]);
     set(gca,'YTick',0:1:1);
-    set(gca,'YTickLabel',{'Shed (off)','Granted (on)'});
+    set(gca,'YTickLabel',{'Shed (off)','Granted (on)'},'fontsize',10,'fontweight','b');
     xlabel('time [s]');
 
     subplot(2,2,4);
     plot(xp,C2(6,:),xp,C2(7,:)+0.02,xp,C2(8,:)+0.04,xp,C2(9,:)+0.06,xp,C2(10,:)+0.08, 'LineWidth',1.5)
     legend('L_6','L_7','L_8','L_9','L_{10}','Orientation','horizontal');
-    title('Power shedding of AC bus 2 (loads 6 to 10)');
+    title('Power shedding of AC bus 2 (loads 6 to 10)', 'fontsize',10,'fontweight','b');
     axis([0 N+10 -0.1 1.5]);
     set(gca,'YTick',0:1:1);
-    set(gca,'YTickLabel',{'Shed (off)','Granted (on)'});
+    set(gca,'YTickLabel',{'Shed (off)','Granted (on)'}, 'fontsize',10,'fontweight','b');
     xlabel('time [s]');
 end
 
@@ -147,18 +147,18 @@ function plotBetaBinary(Beta1, Beta2, Nt, N, xp)
     figure;
     subplot(2,1,1);
     plot(Beta1>=0.1,'b','LineWidth',2);  % sign results into error if the value is e.g. -1.2*1e-10! Therefore we use this.
-    title('Battery charging status for DC bus 1');
+    title('Battery charging status for DC bus 1', 'fontsize',10,'fontweight','b');
     axis([0 N+10 -0.1 1.5]);
     set(gca,'YTick',0:1:1);
-    set(gca,'YTickLabel',{'Not-charging','Charging'});
+    set(gca,'YTickLabel',{'Not-charging','Charging'}, 'fontsize',10,'fontweight','b');
     xlabel('time [s]');
 
     subplot(2,1,2);
     plot(Beta2>=0.1,'b','LineWidth',2);  % sign results into error if the value is e.g. -1.2*1e-10! Therefore we use this.
-    title('Battery charging status for DC bus 2');
+    title('Battery charging status for DC bus 2', 'fontsize',10,'fontweight','b');
     axis([0 N+10 -0.1 1.5]);
     set(gca,'YTick',0:1:1);
-    set(gca,'YTickLabel',{'Not-charging','Charging'});
+    set(gca,'YTickLabel',{'Not-charging','Charging'}, 'fontsize',10,'fontweight','b');
     xlabel('time [s]');
 end
 
@@ -166,16 +166,16 @@ function plotBetaContinuous(Beta1, Beta2, Nt, N, xp)
     figure;
     subplot(2,1,1);
     plot(Beta1,'b','LineWidth',2);  % sign results into error if the value is e.g. -1.2*1e-10! Therefore we use this.
-    title('Battery charging for DC bus 1');
+    title('Battery charging for DC bus 1', 'fontsize',10,'fontweight','b');
     axis([0 N+10 -100000 100000]);
-    ylabel('Battery Charging per timestep')
+    ylabel('Battery Charging per timestep','fontsize',10,'fontweight','b')
     xlabel('time [s]');
 
     subplot(2,1,2);
     plot(Beta2,'b','LineWidth',2);  % sign results into error if the value is e.g. -1.2*1e-10! Therefore we use this.
-    title('Battery charging for DC bus 2');
+    title('Battery charging for DC bus 2', 'fontsize',10,'fontweight','b');
     axis([0 N+10 -100000 100000]);
-    ylabel('Battery Charging per timestep')
+    ylabel('Battery Charging per timestep', 'fontsize',10,'fontweight','b')
     xlabel('time [s]');
 end
 
@@ -185,18 +185,18 @@ function plotBetaStorage(Beta1, Beta2, Nt, N, xp, minBatteryLevel)
     plot(cumsum(Beta1),'b','LineWidth',2);  % sign results into error if the value is e.g. -1.2*1e-10! Therefore we use this.
     hold on;
     plot(1:1:N, minBatteryLevel,'--b','LineWidth',2);
-    title('Battery charge level for DC bus 1');
+    title('Battery charge level for DC bus 1', 'fontsize',10,'fontweight','b');
     axis([0 N+10 0 500000]);
-    ylabel('Battery Charge Level per timestep')
+    ylabel('Battery Charge Level per timestep', 'fontsize',10,'fontweight','b')
     xlabel('time [s]');
 
     subplot(2,1,2);    
     plot(cumsum(Beta2),'b','LineWidth',2);  % sign results into error if the value is e.g. -1.2*1e-10! Therefore we use this.    
     hold on;
     plot(1:1:N, minBatteryLevel,'--b','LineWidth',2);
-    title('Battery charge level for DC bus 2');
+    title('Battery charge level for DC bus 2', 'fontsize',10,'fontweight','b');
     axis([0 N+10 0 500000]);
-    ylabel('Battery Charge Level per timestep')
+    ylabel('Battery Charge Level per timestep', 'fontsize',10,'fontweight','b')
     xlabel('time [s]');
 end
 
