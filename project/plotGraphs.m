@@ -27,7 +27,7 @@ function plotGraphs(configLog, sensorLog, constants, Nt, N)
     for i=1:N
         BusGen = [BusGen; configLog(i).BusGen];
     end
-    %plotDelta(BusGen, Nt, N, xp) %FIXME
+    plotDelta(BusGen, Nt, N, xp) %FIXME
     
     HLadviceUsed = [];
     for i=1:N
@@ -124,23 +124,32 @@ end
 function plotDelta(BusGen, Nt, N, xp)
     figure;
     subplot(2,1,1);
-    Del1(1,:) = (BusGen(1)==1);
-    Del1(2,:) = (BusGen(1)==2);
-    Del1(3,:) = (BusGen(1)==3);
+    dBusGen = BusGen(:,1)
+    Del1(1,:) = (BusGen(:,1)==1)';
+    Del1(2,:) = (BusGen(:,2)==2)';
+    Del1(3,:) = (BusGen(:,2)==3)';
     %plot(xi,double(Del1(1,:)),xi,double(Del1(2,:)),xi,double(Del1(3,:)));
-    plot(Del1(1,:), Del1(2,:), Del1(3,:));
-    %plot(Del1)
-    legend('GEN 1','GEN 2','APU','Orientation','horizontal');
+    size(Del1(1,:))
+    size(xp)
+    xp = ones(size(Del1(1,:)))
+    size(xp)
+    plot(xp,Del1(1,:), xp,Del1(2,:), xp,Del1(3,:));
+    %plot(Del1(1,:), Del1(2,:))
+    dDel1 = Del1(1,:)
+    %plot(Del1(1,:)')
+    %set hold on;
+    %plot(Del1(2,:)')
+    %legend('GEN 1','GEN 2','APU','Orientation','horizontal');
     title('AC bus 1 power suppliers - - \Delta_1 (t)');
     axis([0 N+10 -0.1 1.5]);
     xlabel('time [s]');
 
-    subplot(2,1,2);
+    %subplot(2,1,2);
     %plot(xi,double(Del2(1,:)),xi,double(Del2(2,:)),xi,double(Del2(3,:)));
-    legend('GEN 1','GEN 2','APU','Orientation','horizontal');
-    title('AC bus 2 power suppliers - - \Delta_2 (t)');
-    axis([0 N+10 -0.1 1.5]);
-    xlabel('time [s]');
+    %legend('GEN 1','GEN 2','APU','Orientation','horizontal');
+    %title('AC bus 2 power suppliers - - \Delta_2 (t)');
+    %axis([0 N+10 -0.1 1.5]);
+    %xlabel('time [s]');
 end
 
 function plotBetaBinary(Beta1, Beta2, Nt, N, xp)
