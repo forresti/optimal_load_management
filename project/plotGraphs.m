@@ -27,7 +27,7 @@ function plotGraphs(configLog, sensorLog, constants, Nt, N)
     for i=1:N
         BusGen = [BusGen; configLog(i).BusGen];
     end
-    plotDelta(BusGen, Nt, N, xp) %FIXME
+    plotDelta(BusGen, Nt, N, xp) 
     
     HLadviceUsed = [];
     for i=1:N
@@ -122,35 +122,34 @@ end
 function plotDelta(BusGen, Nt, N, xp)
     %TODO: two legends stacked vertically. see Richie Cotton's post here: http://stackoverflow.com/questions/5674426/how-can-i-customize-the-positions-of-legend-elements
 
+    Del1(1,:) = (BusGen(:,1)==1)';
+    Del1(2,:) = (BusGen(:,1)==2)';
+    Del1(3,:) = (BusGen(:,1)==3)';
+    
+    Del2(1,:) = (BusGen(:,2)==1)';
+    Del2(2,:) = (BusGen(:,2)==2)';
+    Del2(3,:) = (BusGen(:,2)==3)';
+
+    xp = xp(1:size(Del1(1,:)')); %trim xp if necessary
+
     figure;
     subplot(2,1,1);
-    dBusGen = BusGen(:,1)
-    Del1(1,:) = (BusGen(:,1)==1)';
-    Del1(2,:) = (BusGen(:,2)==2)';
-    Del1(3,:) = (BusGen(:,2)==3)';
-    %plot(xi,double(Del1(1,:)),xi,double(Del1(2,:)),xi,double(Del1(3,:)));
-    size(Del1(1,:))
-    size(xp)
-    xp = xp(1:size(Del1(1,:)'))
-    %xp = ones(size(Del1(1,:))`)
-    size(xp)
-    plot(xp,Del1(1,:), xp,Del1(2,:), xp,Del1(3,:), 'LineWidth',1.5);
-    %plot(Del1(1,:), Del1(2,:))
-    dDel1 = Del1(1,:)
-    %plot(Del1(1,:)')
-    %set hold on;
-    %plot(Del1(2,:)')
-    legend('GEN 1','GEN 2','APU','Orientation','horizontal');
-    title('AC bus 1 power suppliers - - \Delta_1 (t)');
+    plot(xp,Del1(1,:), xp,Del1(2,:), xp,Del1(3,:), 'LineWidth',2.5);
+    legend('GEN 1','GEN 2','APU','Orientation','horizontal', 'fontsize',10,'fontweight','b');
+    title('AC bus 1 power suppliers - - \Delta_1 (t)', 'fontsize',10,'fontweight','b');
+    set(gca,'YTick',0:1:1);
+    set(gca,'YTickLabel',{'Connected','Disconnected'}, 'fontsize',10,'fontweight','b');
     axis([0 N+10 -0.1 1.5]);
     xlabel('time [s]');
 
-    %subplot(2,1,2);
-    %plot(xi,double(Del2(1,:)),xi,double(Del2(2,:)),xi,double(Del2(3,:)));
-    %legend('GEN 1','GEN 2','APU','Orientation','horizontal');
-    %title('AC bus 2 power suppliers - - \Delta_2 (t)');
-    %axis([0 N+10 -0.1 1.5]);
-    %xlabel('time [s]');
+    subplot(2,1,2);
+    plot(xp,Del2(1,:), xp,Del2(2,:), xp,Del2(3,:), 'LineWidth',2.5);
+    legend('GEN 1','GEN 2','APU','Orientation','horizontal', 'fontsize',10,'fontweight','b');
+    title('AC bus 2 power suppliers - - \Delta_2 (t)', 'fontsize',10,'fontweight','b');
+    set(gca,'YTick',0:1:1);
+    set(gca,'YTickLabel',{'Connected','Disconnected'}, 'fontsize',10,'fontweight','b');
+    axis([0 N+10 -0.1 1.5]);
+    xlabel('time [s]');
 end
 
 function plotBetaBinary(Beta1, Beta2, Nt, N, xp)
