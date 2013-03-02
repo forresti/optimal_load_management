@@ -29,7 +29,7 @@ function isSafe = checkSafety(config, sensors, constants)
     
     % check generator status
     if (sensors.genStatus(config.BusGen(1)) == 0 || sensors.genStatus(config.BusGen(2)) == 0) %have we assigned a broken generator to a bus?
-        display('unsafe because we are using a broken generator')
+        display(sprintf('unsafe: using a broken generator at time %d',sensors.time))
         isSafe=0;
     end
     

@@ -19,10 +19,17 @@ function plotGraphs(configLog, sensorLog, constants, Nt, N)
         batteryUpdate2 = [batteryUpdate2; configLog(i).batteryUpdate2];
     end
     
-    %plotDelta(Del1, Del2, Nt, N, xp)
     plotBetaBinary(batteryUpdate1, batteryUpdate2, Nt, N, xp)
     plotBetaContinuous(batteryUpdate1, batteryUpdate2, Nt, N, xp)
     plotBetaStorage(batteryUpdate1, batteryUpdate2, Nt, N, xp)
+
+    BusGen1 = []; BusGen2 = []; %generator selection
+    for i=1:N
+        BusGen1 = [BusGen1; configLog(i).BusGen(1)];
+        BusGen2 = [BusGen2; configLog(i).BusGen(2)];
+    end
+    plotDelta(BusGen1, BusGen2, Nt, N, xp)
+
     
     HLadviceUsed = [];
     for i=1:N
@@ -112,17 +119,22 @@ function plotC(C1, C2, Nt, N, xp)
     xlabel('time [s]');
 end
 
-function plotDelta(Del1, Del2, Nt, N, xp)
+function plotDelta(BusGen, Nt, N, xp)
     figure;
     subplot(2,1,1);
-    plot(xi,double(Del1(1,:)),xi,double(Del1(2,:)),xi,double(Del1(3,:)));
+    Del1(1,:) = (BusGen(1)==1);
+    Del1(2,:) = (BusGen(1)==2);
+    Del1(3,:) = (BusGen(1)==3);
+    %plot(xi,double(Del1(1,:)),xi,double(Del1(2,:)),xi,double(Del1(3,:)));
+    plot(Del1(1,:), Del1(2,:), Del1(3,:));
+    %plot(Del1)
     legend('GEN 1','GEN 2','APU','Orientation','horizontal');
     title('AC bus 1 power suppliers - - \Delta_1 (t)');
     axis([0 N+10 -0.1 1.5]);
     xlabel('time [s]');
 
     subplot(2,1,2);
-    plot(xi,double(Del2(1,:)),xi,double(Del2(2,:)),xi,double(Del2(3,:)));
+    %plot(xi,double(Del2(1,:)),xi,double(Del2(2,:)),xi,double(Del2(3,:)));
     legend('GEN 1','GEN 2','APU','Orientation','horizontal');
     title('AC bus 2 power suppliers - - \Delta_2 (t)');
     axis([0 N+10 -0.1 1.5]);
