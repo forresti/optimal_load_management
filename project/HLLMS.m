@@ -60,7 +60,8 @@ function [configs] = HLLMS(sensors, constants) %only using 'sensors' for generat
 
     if(sensors.time >= constants.tMinBatteryLevel)
         cons=[cons, constants.minBatteryLevel <= BETA1, constants.minBatteryLevel <= BETA2]; 
-    elseif((constants.tMinBatteryLevel - sensors.time) < 0) %TODO: check correctness
+    elseif((sensors.time - constants.tMinBatteryLevel) < 0) %TODO: check correctness
+        display('not using minBatteryLevel constraint')
         my_tMinBatteryLevel = constants.tMinBatteryLevel - sensors.time;
         cons=[cons, BETA1(my_tMinBatteryLevel:Nt) >= minBatteryLevel, BETA2(my_tMinBatteryLevel:Nt) >= minBatteryLevel]; %enforce lower bound on battery charge level after the tMinBatteryLevel-th timestep
     end 

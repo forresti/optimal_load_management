@@ -21,7 +21,7 @@ function plotGraphs(configLog, sensorLog, constants, Nt, N)
     
     plotBetaBinary(batteryUpdate1, batteryUpdate2, Nt, N, xp)
     plotBetaContinuous(batteryUpdate1, batteryUpdate2, Nt, N, xp)
-    plotBetaStorage(batteryUpdate1, batteryUpdate2, Nt, N, xp)
+    plotBetaStorage(batteryUpdate1, batteryUpdate2, Nt, N, xp, constants.minBatteryLevel)
 
     BusGen = [];  %generator selection
     for i=1:N
@@ -175,19 +175,23 @@ function plotBetaContinuous(Beta1, Beta2, Nt, N, xp)
     xlabel('time [s]');
 end
 
-function plotBetaStorage(Beta1, Beta2, Nt, N, xp)
+function plotBetaStorage(Beta1, Beta2, Nt, N, xp, minBatteryLevel)
     figure;
     subplot(2,1,1);    
     plot(cumsum(Beta1),'b','LineWidth',2);  % sign results into error if the value is e.g. -1.2*1e-10! Therefore we use this.
+    hold on;
+    plot(1:1:N, minBatteryLevel,'--b','LineWidth',2);
     title('Battery charge level for DC bus 1');
-    axis([0 N+10 -100000 1000000]);
+    axis([0 N+10 0 300000]);
     ylabel('Battery Charge Level per timestep')
     xlabel('time [s]');
 
     subplot(2,1,2);    
     plot(cumsum(Beta2),'b','LineWidth',2);  % sign results into error if the value is e.g. -1.2*1e-10! Therefore we use this.    
+    hold on;
+    plot(1:1:N, minBatteryLevel,'--b','LineWidth',2);
     title('Battery charge level for DC bus 2');
-    axis([0 N+10 -100000 1000000]);
+    axis([0 N+10 0 300000]);
     ylabel('Battery Charge Level per timestep')
     xlabel('time [s]');
 end
