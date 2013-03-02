@@ -10,12 +10,10 @@ function config = LLLMS(sensors, constants, advice)
 end
 
 % Select load shedding and generator assignments based purely on priority tables
-% This the crux of the LL-LMS system
+% This the crux of the LLLMS system
 function config = applyPriorityTables(sensors, constants)
     [BusGen GeneratorOnOff] = selectGenerators(sensors, constants); %Del1,Del2 in Mehdi's code
-    [Shedding1 Shedding2 batteryUpdate1 batteryUpdate2] = selectShedding(sensors, constants, BusGen); %C1, C2 in Mehdi's code
-
-    %batteryUpdate1 = [0]; batteryUpdate2 = [0]; %Pwr used for charging each battery. Beta1, Beta2 in Mehdi's code
+    [Shedding1 Shedding2 batteryUpdate1 batteryUpdate2] = selectShedding(sensors, constants, BusGen) %C1, C2 in Mehdi's code
 
     config = struct('Shedding1', Shedding1, 'Shedding2', Shedding2, 'BusGen', BusGen, 'batteryUpdate1', batteryUpdate1, 'batteryUpdate2', batteryUpdate2, 'GeneratorOnOff', GeneratorOnOff, 'HLadviceUsed', false); 
 end
@@ -62,13 +60,10 @@ function [Shedding1 Shedding2 batteryUpdate1 batteryUpdate2] = selectShedding(se
     end
 
     if (BusGen(2) == 1)
-        pwrReqGen1 = pwrReqGen1 + Bus2_pwrReq - sensors.batteryCharge2;
         pwrReqGen1 = pwrReqGen1 + Bus2_pwrReq;
     elseif (BusGen(2) == 2)
-        pwrReqGen2 = pwrReqGen2 + Bus2_pwrReq - sensors.batteryCharge2;
         pwrReqGen2 = pwrReqGen2 + Bus2_pwrReq;
     elseif (BusGen(2) == 3)
-        pwrReqApu = pwrReqApu + Bus2_pwrReq - sensors.batteryCharge2;
         pwrReqApu = pwrReqApu + Bus2_pwrReq;
     end
 

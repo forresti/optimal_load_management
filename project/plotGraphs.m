@@ -77,11 +77,15 @@ function plotC(C1, C2, Nt, N, xp)
     %xp=1:1:Nt*100/(Nt-1);  % 110
     xp=1:N;
     %xp=1:10:N; %x-axis coords
+
+    %TODO: two legends stacked vertically. see Richie Cotton's post here: http://stackoverflow.com/questions/5674426/how-can-i-customize-the-positions-of-legend-elements
  
     figure;
     subplot(2,2,1);
+    %plot(xp,C1(1,:),xp,C1(2,:)+0.02,xp,C1(3,:)+0.04,xp,C1(4,:)+0.06,xp,C1(5,:)+0.08,xp,C1(6,:)+0.10,xp,C1(7,:)+0.12,xp,C1(8,:)+0.14,xp,C1(9,:)+0.16,xp,C1(10,:)+0.18, 'LineWidth',1.5)
+    %legend('L_1','L_2','L_3','L_4', ['L_5' char(10) 'line'], 'L_6', 'L_7', 'L_8', 'L_9', 'L_{10}','Orientation','horizontal');
+    %title('Power shedding of AC bus 1 (loads 1 to 10)');
     plot(xp,C1(1,:),xp,C1(2,:)+0.02,xp,C1(3,:)+0.04,xp,C1(4,:)+0.06,xp,C1(5,:)+0.08, 'LineWidth',1.5)
-
     legend('L_1','L_2','L_3','L_4','L_5','Orientation','horizontal');
     title('Power shedding of AC bus 1 (loads 1 to 5)');
     axis([0 N+10 -0.1 1.5]);
