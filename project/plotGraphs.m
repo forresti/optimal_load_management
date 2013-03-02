@@ -1,12 +1,8 @@
-
 % Expects ordinary arrays, not binvar arrays. (so, we got rid of '' and stuff)
 function plotGraphs(configLog, sensorLog, constants, Nt, N)
 
     xp=1:1:Nt*100/(Nt-1);  % 110
     plotPowerReq(constants.historicalWorkloads.Ls1(:,1:N), constants.historicalWorkloads.Lns1(:,1:N), constants.historicalWorkloads.Ls2(:,1:N), constants.historicalWorkloads.Lns2(:,1:N), N)
-    %h=gca
-    %print(h, 'figures/powerReq.eps');
-    %print(h, 'figures/powerReq.png');
 
     %Shedding1 = configLog(:).Shedding1; doesn't work -- it just returns the first timestep instead of all timesteps
     Shedding1 = []; Shedding2 = [];
@@ -45,6 +41,7 @@ function plotPowerReq(Ls1, Lns1, Ls2, Lns2, N)
     Lns1sum=sum(Lns1,1);
 
     h=figure;
+    set(gcf,'InvertHardCopy','off'); %force it to export color later
     subplot(2,1,1);
     plot(1:1:N,Lns1sum,'--b','LineWidth',2);
     title('P_{req}(t) for bus 1');
@@ -74,7 +71,7 @@ function plotPowerReq(Ls1, Lns1, Ls2, Lns2, N)
     legend('L_{ns}','L_{s}+L_{ns}');
     axis([1 N 0 1.1*max(L2sum)]);
 
-    print(h, 'figures/powerReq.eps');
+    print(h, '-deps2', 'figures/powerReq.eps');
 end
 
 %plot load shedding
