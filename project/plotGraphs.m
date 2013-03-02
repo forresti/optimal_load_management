@@ -23,13 +23,11 @@ function plotGraphs(configLog, sensorLog, constants, Nt, N)
     plotBetaContinuous(batteryUpdate1, batteryUpdate2, Nt, N, xp)
     plotBetaStorage(batteryUpdate1, batteryUpdate2, Nt, N, xp)
 
-    BusGen1 = []; BusGen2 = []; %generator selection
+    BusGen = [];  %generator selection
     for i=1:N
-        BusGen1 = [BusGen1; configLog(i).BusGen(1)];
-        BusGen2 = [BusGen2; configLog(i).BusGen(2)];
+        BusGen = [BusGen; configLog(i).BusGen];
     end
-    plotDelta(BusGen1, BusGen2, Nt, N, xp)
-
+    %plotDelta(BusGen, Nt, N, xp) %FIXME
     
     HLadviceUsed = [];
     for i=1:N

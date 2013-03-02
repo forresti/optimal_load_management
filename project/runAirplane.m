@@ -53,7 +53,7 @@ function [] = runAirplane(useHL)
         if (~isempty(advice))
             config = LLLMS(sensors, constants, advice(HLclock));
             if(config.HLadviceUsed)
-                batteryCharge1 = batteryCharge1 + config.batteryUpdate1; %TODO: only do this if LLLMS takes the advice.
+                batteryCharge1 = batteryCharge1 + config.batteryUpdate1; 
                 batteryCharge2 = batteryCharge2 + config.batteryUpdate2;            
             end
         else config = LLLMS(sensors, constants, []);
@@ -62,6 +62,8 @@ function [] = runAirplane(useHL)
         if (HLclock == HLclockMultiplier) HLclock = 1; 
         else HLclock = HLclock + 1; 
         end
+
+        display(sprintf('Bus 1 uses generator %d, Bus 2 uses generator %d at time %d', config.BusGen(1), config.BusGen(2), LLclock))
 
         configLog = [configLog config]; %this concatenation is slow ... but that's fine. 
         sensorLog = [sensorLog sensors];
