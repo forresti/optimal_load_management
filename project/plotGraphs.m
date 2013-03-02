@@ -78,6 +78,8 @@ function plotC(C1, C2, Nt, N, xp)
     xp=1:N;
     %xp=1:10:N; %x-axis coords
 
+    %TODO: two legends stacked vertically. see Richie Cotton's post here: http://stackoverflow.com/questions/5674426/how-can-i-customize-the-positions-of-legend-elements
+
     figure;
     subplot(2,2,1);
     %plot(xp,C1(1,:),xp,C1(2,:)+0.02,xp,C1(3,:)+0.04,xp,C1(4,:)+0.06,xp,C1(5,:)+0.08,xp,C1(6,:)+0.10,xp,C1(7,:)+0.12,xp,C1(8,:)+0.14,xp,C1(9,:)+0.16,xp,C1(10,:)+0.18, 'LineWidth',1.5)
@@ -120,34 +122,30 @@ function plotC(C1, C2, Nt, N, xp)
 end
 
 function plotDelta(BusGen, Nt, N, xp)
-    %TODO: two legends stacked vertically. see Richie Cotton's post here: http://stackoverflow.com/questions/5674426/how-can-i-customize-the-positions-of-legend-elements
-
     Del1(1,:) = (BusGen(:,1)==1)';
     Del1(2,:) = (BusGen(:,1)==2)';
     Del1(3,:) = (BusGen(:,1)==3)';
-    
     Del2(1,:) = (BusGen(:,2)==1)';
     Del2(2,:) = (BusGen(:,2)==2)';
     Del2(3,:) = (BusGen(:,2)==3)';
-
     xp = xp(1:size(Del1(1,:)')); %trim xp if necessary
 
     figure;
     subplot(2,1,1);
-    plot(xp,Del1(1,:), xp,Del1(2,:), xp,Del1(3,:), 'LineWidth',2.5);
+    plot(xp,Del1(1,:), xp,Del1(2,:)+0.02, xp,Del1(3,:)+0.04, 'LineWidth',2.5);
     legend('GEN 1','GEN 2','APU','Orientation','horizontal', 'fontsize',10,'fontweight','b');
-    title('AC bus 1 power suppliers - - \Delta_1 (t)', 'fontsize',10,'fontweight','b');
+    title('AC bus 1 power suppliers -- \Delta_1 (t)', 'fontsize',10,'fontweight','b');
     set(gca,'YTick',0:1:1);
-    set(gca,'YTickLabel',{'Connected','Disconnected'}, 'fontsize',10,'fontweight','b');
+    set(gca,'YTickLabel',{'Disconnected', 'Connected'}, 'fontsize',10,'fontweight','b');
     axis([0 N+10 -0.1 1.5]);
     xlabel('time [s]');
 
     subplot(2,1,2);
-    plot(xp,Del2(1,:), xp,Del2(2,:), xp,Del2(3,:), 'LineWidth',2.5);
+    plot(xp,Del2(1,:), xp,Del2(2,:)+0.02, xp,Del2(3,:)+0.04, 'LineWidth',2.5);
     legend('GEN 1','GEN 2','APU','Orientation','horizontal', 'fontsize',10,'fontweight','b');
-    title('AC bus 2 power suppliers - - \Delta_2 (t)', 'fontsize',10,'fontweight','b');
+    title('AC bus 2 power suppliers -- \Delta_2 (t)', 'fontsize',10,'fontweight','b');
     set(gca,'YTick',0:1:1);
-    set(gca,'YTickLabel',{'Connected','Disconnected'}, 'fontsize',10,'fontweight','b');
+    set(gca,'YTickLabel',{'Disconnected', 'Connected'}, 'fontsize',10,'fontweight','b');
     axis([0 N+10 -0.1 1.5]);
     xlabel('time [s]');
 end
