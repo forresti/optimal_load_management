@@ -24,7 +24,7 @@ function [] = runAirplane(useHL)
     
     batteryCharge1=0; batteryCharge2=0; %keep track of battery charge level
     advice = [];
-    nextAdvice = [];
+    %nextAdvice = [];
     HLclock = 1; %count up to each time we call the HLLMS
     
     for LLclock=1:nTimesteps
@@ -33,21 +33,21 @@ function [] = runAirplane(useHL)
         sensors = struct('workload', workload, 'genStatus', genStatus, 'time', LLclock, 'batteryCharge1', batteryCharge1, 'batteryCharge2', batteryCharge2);
 
         if (HLclock == 1 && LLclock <= (nTimesteps-N) && useHL == true) %time to call HLLMS again
-            advice = nextAdvice;
-            nextWorkload = genWorkload(historicalWorkloads, LLclock+N, 0);
-            nextSensors = sensors;
-            nextSensors.workload = nextWorkload;
-            nextSensors.time = LLclock + N; %optimize for next horizon
-            nextSensors.batteryCharge1 = batteryCharge1; %will be 0 if the first advice hasn't been produced yet, otherwise, see the ~isempty(advice) below.
-            nextSensors.batteryCharge2 = batteryCharge2;
+            %nextWorkload = genWorkload(historicalWorkloads, LLclock+N, 0);
+            %nextSensors = sensors;
+            %nextSensors.workload = nextWorkload;
+            %nextSensors.time = LLclock + N; %optimize for next horizon
+            %nextSensors.batteryCharge1 = batteryCharge1; %will be 0 if the first advice hasn't been produced yet, otherwise, see the ~isempty(advice) below.
+            %nextSensors.batteryCharge2 = batteryCharge2;
 
-            if (~isempty(advice))
-                for adviceIdx=1:N 
-                    nextSensors.batteryCharge1 = nextSensors.batteryCharge1 + advice(adviceIdx).batteryUpdate1;
-                    nextSensors.batteryCharge2 = nextSensors.batteryCharge2 + advice(adviceIdx).batteryUpdate2;
-                end
-            end
-            nextAdvice = HLLMS(nextSensors, constants);
+            %if (~isempty(advice))
+            %    for adviceIdx=1:N 
+            %        nextSensors.batteryCharge1 = nextSensors.batteryCharge1 + advice(adviceIdx).batteryUpdate1;
+            %        nextSensors.batteryCharge2 = nextSensors.batteryCharge2 + advice(adviceIdx).batteryUpdate2;
+            %    end
+            %end
+            %nextAdvice = HLLMS(nextSensors, constants);
+            advice = HLLMS(sensors, constants);
         end
 
         if (~isempty(advice))
