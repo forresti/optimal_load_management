@@ -2,13 +2,10 @@
 function config = LLLMS(sensors, constants, advice)
     if(isempty(advice)) %for initial chunk, before optimization kicks in
         config = applyPriorityTables(sensors, constants);
-        %display('no advice provided')
     elseif(checkSafety(advice, sensors, constants))
         config = advice;
-        %display('advice is safe')
     else
         config = applyPriorityTables(sensors, constants); %this thing returns a struct with 'HLadviceUsed' set to false
-        %display('advice is unsafe')
     end
 end
 
@@ -16,9 +13,9 @@ end
 % This the crux of the LL-LMS system
 function config = applyPriorityTables(sensors, constants)
     [BusGen GeneratorOnOff] = selectGenerators(sensors, constants); %Del1,Del2 in Mehdi's code
-    [Shedding1 Shedding2] = selectShedding(sensors, constants, BusGen); %C1, C2 in Mehdi's code
+    [Shedding1 Shedding2 batteryUpdate1 batteryUpdate2] = selectShedding(sensors, constants, BusGen); %C1, C2 in Mehdi's code
 
-    batteryUpdate1 = [0]; batteryUpdate2 = [0]; %Pwr used for charging each battery. Beta1, Beta2 in Mehdi's code
+    %batteryUpdate1 = [0]; batteryUpdate2 = [0]; %Pwr used for charging each battery. Beta1, Beta2 in Mehdi's code
 
     config = struct('Shedding1', Shedding1, 'Shedding2', Shedding2, 'BusGen', BusGen, 'batteryUpdate1', batteryUpdate1, 'batteryUpdate2', batteryUpdate2, 'GeneratorOnOff', GeneratorOnOff, 'HLadviceUsed', false); 
 end
@@ -54,24 +51,31 @@ function [BusGen GeneratorOnOff] = selectGenerators(sensors, constants)
     end
 end
 
-function [Shedding1 Shedding2] = selectShedding(sensors, constants, BusGen)
+function [Shedding1 Shedding2 batteryUpdate1 batteryUpdate2] = selectShedding(sensors, constants, BusGen)
     Bus1_pwrReq = sum(sensors.workload.Ls1) + sum(sensors.workload.Lns1);
     Bus2_pwrReq = sum(sensors.workload.Ls2) + sum(sensors.workload.Lns2);
 
     pwrReqGen1 = 0; pwrReqGen2 = 0; pwrReqApu = 0;
+    pwrReqGen1_withBatt = 0; pwrReqGen2_withBatt = 0; pwrReqApu_withBatt = 0;
     if (BusGen(1) == 1)
+        pwrReqGen1_withBatt = Bus1_pwrReq - sensors.batteryCharge1;
         pwrReqGen1 = Bus1_pwrReq;
     elseif (BusGen(1) == 2)
+        pwrReqGen2_withBatt = Bus1_pwrReq - sensors.batteryCharge1;
         pwrReqGen2 = Bus1_pwrReq;
     elseif (BusGen(1) == 3)
+        pwrReqApu_withBatt = Bus1_pwrReq - sensors.batteryCharge1;
         pwrReqApu = Bus1_pwrReq;
     end
 
     if (BusGen(2) == 1)
+        pwrReqGen1_withBatt = pwrReqGen1_withBatt + Bus2_pwrReq - sensors.batteryCharge2;
         pwrReqGen1 = pwrReqGen1 + Bus2_pwrReq;
     elseif (BusGen(2) == 2)
+        pwrReqGen2_withBatt = pwrReqGen2_withBatt + Bus2_pwrReq - sensors.batteryCharge2;
         pwrReqGen2 = pwrReqGen2 + Bus2_pwrReq;
     elseif (BusGen(2) == 3)
+        pwrReqApu_withBatt = pwrReqApu_withBatt + Bus2_pwrReq - sensors.batteryCharge2;
         pwrReqApu = pwrReqApu + Bus2_pwrReq;
     end
 
@@ -81,39 +85,50 @@ function [Shedding1 Shedding2] = selectShedding(sensors, constants, BusGen)
     sheddingPri2 = constants.priorityTables.sheddingPri2;
     priority = 1;
     maxPriority = 10;
-    while (pwrReqGen1 >= constants.generatorOutput(1) && priority<=maxPriority)
+
+    batteryUpdate1=0; batteryUpdate2=0;
+    while (pwrReqGen1_withBatt >= constants.generatorOutput(1) && priority<=maxPriority)
         if (BusGen(2) == 1) % remove sheddable load from right side first
-            pwrReqGen1 = pwrReqGen1 - sensors.workload.Ls2(sheddingPri2(1,priority));
+            pwrReqGen1_withBatt = pwrReqGen1_withBatt - sensors.workload.Ls2(sheddingPri2(1,priority));
             Shedding2(priority) = 0; %TODO: Shedding2(sheddingPri2(1,priority))
-        elseif (BusGen(1) == 1 && pwrReqGen1 > constants.generatorOutput(1)) % now do it for the left side if still over
-            pwrReqGen1 = pwrReqGen1 - sensors.workload.Ls1(sheddingPri1(1,priority));
+        elseif (BusGen(1) == 1 && pwrReqGen1_withBatt > constants.generatorOutput(1)) % now do it for the left side if still over
+            pwrReqGen1_withBatt = pwrReqGen1_withBatt - sensors.workload.Ls1(sheddingPri1(1,priority));
             Shedding1(priority) = 0;
         end
         priority = priority + 1;
     end
 
     priority = 1;
-    while (pwrReqGen2 >= constants.generatorOutput(2) && priority<=maxPriority)
+    while (pwrReqGen2_withBatt >= constants.generatorOutput(2) && priority<=maxPriority)
         if (BusGen(1) == 2) % remove sheddable load from left side first
-            pwrReqGen2 = pwrReqGen2 - sensors.workload.Ls1(sheddingPri1(1,priority));
+            pwrReqGen2_withBatt = pwrReqGen2_withBatt - sensors.workload.Ls1(sheddingPri1(1,priority));
             Shedding1(priority) = 0;
-        elseif (BusGen(2) == 2 && pwrReqGen2 > constants.generatorOutput(2)) % now do it for the right side if still over
-            pwrReqGen2= pwrReqGen2 - sensors.workload.Ls2(sheddingPri2(1,priority));
+        elseif (BusGen(2) == 2 && pwrReqGen2_withBatt > constants.generatorOutput(2)) % now do it for the right side if still over
+            pwrReqGen2_withBatt = pwrReqGen2_withBatt - sensors.workload.Ls2(sheddingPri2(1,priority));
             Shedding2(priority) = 0;
         end
         priority = priority + 1;
     end
 
     priority = 1;
-    while (pwrReqApu >= constants.generatorOutput(3) && priority<=maxPriority)
+    while (pwrReqApu_withBatt >= constants.generatorOutput(3) && priority<=maxPriority)
         if (BusGen(1) == 3) % remove sheddable load from left side first
-            pwrReqApu = pwrReqApu - sensors.workload.Ls1(sheddingPri1(1,priority));
+            pwrReqApu_withBatt = pwrReqApu_withBatt - sensors.workload.Ls1(sheddingPri1(1,priority));
             Shedding1(priority) = 0;
-        elseif (BusGen(2) == 3 && pwrReqGen2 > constants.generatorOutput(3)) % now do it for the right side if still over
-            pwrReqApu = pwrReqApu - sensors.workload.Ls2(sheddingPri2(1,priority));
+        elseif (BusGen(2) == 3 && pwrReqGen2_withBatt > constants.generatorOutput(3)) % now do it for the right side if still over
+            pwrReqApu_withBatt = pwrReqApu_withBatt - sensors.workload.Ls2(sheddingPri2(1,priority));
             Shedding2(priority) = 0;
         end
         priority = priority + 1;
+    end
+
+    %simplification: assume LLLMS only allows a generator to feed its own side's battery
+
+    if(BusGen(1)==1) batteryUpdate1 = constants.generatorOutput(1) - pwrReqGen1;
+    else batteryUpdate1 = 0;
+    end
+    if(BusGen(2)==2) batteryUpdate2 = constants.generatorOutput(2) - pwrReqGen2;
+    else batteryUpdate2 = 0;
     end
 end
 

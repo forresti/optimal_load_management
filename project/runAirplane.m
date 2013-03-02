@@ -34,7 +34,8 @@ function [] = runAirplane(useHL)
         genStatus = getGeneratorStatus(LLclock);
         sensors = struct('workload', workload, 'genStatus', genStatus, 'time', LLclock, 'batteryCharge1', batteryCharge1, 'batteryCharge2', batteryCharge2);
 
-        if (HLclock == 1 && LLclock <= (nTimesteps-N) && useHL == true) %time to call HLLMS again
+        %if (HLclock == 1 && LLclock <= (nTimesteps-N) && useHL == true) %time to call HLLMS again
+        if (HLclock == 1 && useHL == true)
             %nextWorkload = genWorkload(historicalWorkloads, LLclock+N, 0);
             %nextSensors = sensors;
             %nextSensors.workload = nextWorkload;

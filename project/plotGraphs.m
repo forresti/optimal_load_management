@@ -182,7 +182,7 @@ function plotBetaStorage(Beta1, Beta2, Nt, N, xp, minBatteryLevel)
     hold on;
     plot(1:1:N, minBatteryLevel,'--b','LineWidth',2);
     title('Battery charge level for DC bus 1');
-    axis([0 N+10 0 300000]);
+    axis([0 N+10 0 500000]);
     ylabel('Battery Charge Level per timestep')
     xlabel('time [s]');
 
@@ -191,7 +191,7 @@ function plotBetaStorage(Beta1, Beta2, Nt, N, xp, minBatteryLevel)
     hold on;
     plot(1:1:N, minBatteryLevel,'--b','LineWidth',2);
     title('Battery charge level for DC bus 2');
-    axis([0 N+10 0 300000]);
+    axis([0 N+10 0 500000]);
     ylabel('Battery Charge Level per timestep')
     xlabel('time [s]');
 end

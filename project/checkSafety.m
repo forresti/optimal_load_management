@@ -9,19 +9,19 @@ function isSafe = checkSafety(config, sensors, constants)
     %calculate pwr required from each generator
     pwrReqGen1 = 0; pwrReqGen2 = 0; pwrReqApu = 0; 
     if (config.BusGen(1) == 1)
-        pwrReqGen1 = Bus1_pwrReq;
+        pwrReqGen1 = Bus1_pwrReq - sensors.batteryCharge1;
     elseif (config.BusGen(1) == 2)
-        pwrReqGen2 = Bus1_pwrReq;
+        pwrReqGen2 = Bus1_pwrReq - sensors.batteryCharge1;
     elseif (config.BusGen(1) == 3)
-        pwrReqApu = Bus1_pwrReq;
+        pwrReqApu = Bus1_pwrReq - sensors.batteryCharge1;
     end
 
     if (config.BusGen(2) == 1)
-        pwrReqGen1 = pwrReqGen1 + Bus2_pwrReq;
+        pwrReqGen1 = pwrReqGen1 + Bus2_pwrReq - sensors.batteryCharge2;
     elseif (config.BusGen(2) == 2)
-        pwrReqGen2 = pwrReqGen2 + Bus2_pwrReq;
+        pwrReqGen2 = pwrReqGen2 + Bus2_pwrReq - sensors.batteryCharge2;
     elseif (config.BusGen(2) == 3)
-        pwrReqApu = pwrReqApu + Bus2_pwrReq;
+        pwrReqApu = pwrReqApu + Bus2_pwrReq - sensors.batteryCharge2;
     end
 
     %decide whether any of the generators are being overdrawn
