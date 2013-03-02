@@ -78,8 +78,6 @@ function plotC(C1, C2, Nt, N, xp)
     xp=1:N;
     %xp=1:10:N; %x-axis coords
 
-    %TODO: two legends stacked vertically. see Richie Cotton's post here: http://stackoverflow.com/questions/5674426/how-can-i-customize-the-positions-of-legend-elements
- 
     figure;
     subplot(2,2,1);
     %plot(xp,C1(1,:),xp,C1(2,:)+0.02,xp,C1(3,:)+0.04,xp,C1(4,:)+0.06,xp,C1(5,:)+0.08,xp,C1(6,:)+0.10,xp,C1(7,:)+0.12,xp,C1(8,:)+0.14,xp,C1(9,:)+0.16,xp,C1(10,:)+0.18, 'LineWidth',1.5)
@@ -122,6 +120,8 @@ function plotC(C1, C2, Nt, N, xp)
 end
 
 function plotDelta(BusGen, Nt, N, xp)
+    %TODO: two legends stacked vertically. see Richie Cotton's post here: http://stackoverflow.com/questions/5674426/how-can-i-customize-the-positions-of-legend-elements
+
     figure;
     subplot(2,1,1);
     dBusGen = BusGen(:,1)
@@ -131,15 +131,16 @@ function plotDelta(BusGen, Nt, N, xp)
     %plot(xi,double(Del1(1,:)),xi,double(Del1(2,:)),xi,double(Del1(3,:)));
     size(Del1(1,:))
     size(xp)
-    xp = ones(size(Del1(1,:)))
+    xp = xp(1:size(Del1(1,:)'))
+    %xp = ones(size(Del1(1,:))`)
     size(xp)
-    plot(xp,Del1(1,:), xp,Del1(2,:), xp,Del1(3,:));
+    plot(xp,Del1(1,:), xp,Del1(2,:), xp,Del1(3,:), 'LineWidth',1.5);
     %plot(Del1(1,:), Del1(2,:))
     dDel1 = Del1(1,:)
     %plot(Del1(1,:)')
     %set hold on;
     %plot(Del1(2,:)')
-    %legend('GEN 1','GEN 2','APU','Orientation','horizontal');
+    legend('GEN 1','GEN 2','APU','Orientation','horizontal');
     title('AC bus 1 power suppliers - - \Delta_1 (t)');
     axis([0 N+10 -0.1 1.5]);
     xlabel('time [s]');
