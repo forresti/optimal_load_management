@@ -29,10 +29,15 @@ function isSafe = checkSafety(config, sensors, constants)
     
     % check generator status
     if (sensors.genStatus(config.BusGen(1)) == 0 || sensors.genStatus(config.BusGen(2)) == 0) %have we assigned a broken generator to a bus?
-        display(sprintf('unsafe: using a broken generator at time %d',sensors.time))
+
+        if(sensors.genStatus(config.BusGen(1)) == 0) %TEMPORARY for debugging
+            display(sprintf('unsafe: HLLMS using a broken generator (Gen%d) at time %d', config.BusGen(1), sensors.time))
+        else if(sensors.genStatus(config.BusGen(2)) == 0)
+            display(sprintf('unsafe: HLLMS using a broken generator (Gen%d) at time %d', config.BusGen(2), sensors.time))
+        end
         isSafe=0;
     end
-    
+ 
     % checking for generator overload
     if(pwrReqGen1 > constants.generatorOutput(1))
         isSafe=0;
