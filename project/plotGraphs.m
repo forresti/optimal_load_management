@@ -41,7 +41,9 @@ function plotPowerReq(Ls1, Lns1, Ls2, Lns2, N)
     Lns1sum=sum(Lns1,1);
 
     h=figure;
-    set(gcf,'InvertHardCopy','off'); %force it to export color later
+    %set(gcf,'InvertHardCopy','off'); %force it to export color later
+    %set(gcf,'color',[1 1 1]);
+    %set(gca,'color',[1 1 1]); %trying to get color exported figues
     subplot(2,1,1);
     plot(1:1:N,Lns1sum,'--b','LineWidth',2);
     title('P_{req}(t) for bus 1');
@@ -71,7 +73,7 @@ function plotPowerReq(Ls1, Lns1, Ls2, Lns2, N)
     legend('L_{ns}','L_{s}+L_{ns}');
     axis([1 N 0 1.1*max(L2sum)]);
 
-    print(h, '-deps2', 'figures/powerReq.eps');
+    print(h, '-depsc2', 'figures/powerReq.eps');
 end
 
 %plot load shedding
