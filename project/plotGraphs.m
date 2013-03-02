@@ -23,6 +23,13 @@ function plotGraphs(configLog, sensorLog, constants, Nt, N)
     plotBetaBinary(batteryUpdate1, batteryUpdate2, Nt, N, xp)
     plotBetaContinuous(batteryUpdate1, batteryUpdate2, Nt, N, xp)
     plotBetaStorage(batteryUpdate1, batteryUpdate2, Nt, N, xp)
+    
+    HLadviceUsed1 = []; HLadviceUsed2 = []; %Beta1, Beta2
+    for i=1:N
+        HLadviceUsed1 = [HLadviceUsed1; configLog(i).HLadviceUsed1];
+        HLadviceUsed2 = [HLadviceUsed2; configLog(i).HLadviceUsed2];
+    end
+    plotHLadviceUsed(HLadviceUsed1, HLadviceUsed2, Nt, N, xp)
 end
 
 function plotPowerReq(Ls1, Lns1, Ls2, Lns2, N)
@@ -173,6 +180,25 @@ function plotBetaStorage(Beta1, Beta2, Nt, N, xp)
     title('Battery charge level for DC bus 2');
     axis([0 N+10 -100000 1000000]);
     ylabel('Battery Charge Level per timestep')
+    xlabel('time [s]');
+end
+
+function plotHLadviceUsed(HLadviceUsed1, HLadviceUsed2, Nt, N, xp)
+    figure;
+    subplot(2,1,1);
+    plot(HLadviceUsed1,'b','LineWidth',2);  % sign results into error if the value is e.g. -1.2*1e-10! Therefore we use this.
+    title('Hierarchical control for DC bus 1');
+    axis([0 N+10 -0.1 1.5]);
+    set(gca,'YTick',0:1:1);
+    set(gca,'YTickLabel',{'LL-LMS', 'HL-LMS'});
+    xlabel('time [s]');
+
+    subplot(2,1,2);
+    plot(HLadviceUsed2,'b','LineWidth',2);  % sign results into error if the value is e.g. -1.2*1e-10! Therefore we use this.
+    title('Hierarchical control for DC bus 2');
+    axis([0 N+10 -0.1 1.5]);
+    set(gca,'YTick',0:1:1);
+    set(gca,'YTickLabel',{'LL-LMS', 'HL-LMS'});
     xlabel('time [s]');
 end
 

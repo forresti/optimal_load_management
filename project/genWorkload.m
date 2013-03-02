@@ -10,7 +10,7 @@ function workload = genWorkload(historicalWorkloads, time, doPerturb)
     newLs2 = perturbBus(Ls2);
     newLns2 = perturbBus(Lns2);
     if (doPerturb)
-      workload = struct('Ls1', newLs1, 'Lns1', newLns1, 'Ls2', newLs2, 'Lns2', newLns2);
+       workload = struct('Ls1', newLs1, 'Lns1', newLns1, 'Ls2', newLs2, 'Lns2', newLns2);
     else
        workload = struct('Ls1', Ls1, 'Lns1', Lns1, 'Ls2', Ls2, 'Lns2', Lns2);
     end
