@@ -34,8 +34,7 @@ function [configs] = HLLMS(sensors, constants) %only using 'sensors' for generat
 
     % Constraints
     cons=[];
-    minBatteryLevel=0;
-    cons=[cons, minBatteryLevel <= BETA1, minBatteryLevel <= BETA2]; 
+    cons=[cons, 0 <= BETA1, 0 <= BETA2]; 
     %cons=[cons, Beta1 >= 0; Beta2 >= 0];
     for i=1:Nl-1
         cons=[cons, C1(i,:) <= C1(i+1,:), C2(i,:) <= C2(i+1,:)];
@@ -44,7 +43,8 @@ function [configs] = HLLMS(sensors, constants) %only using 'sensors' for generat
     cons=[ cons, sum(Del2,1) == ones(1,Nt)];
     for i=1:Ns %hard code "generator broken" where necessary
         if (sensors.genStatus(i) == 0)
-            cons=[cons, alpha(:, i)==0]; %require that generator i is not used
+            cons=[cons, alpha(:,i)==0]; %require that generator i is off
+            cons=[cons, Del1(i,:)==0, Del2(i,:)==0]; %require that nobody draws power from gen i
         end
     end
 
@@ -57,6 +57,14 @@ function [configs] = HLLMS(sensors, constants) %only using 'sensors' for generat
     cons=[cons, Y1' + Y2' == alpha.*P];    % The three constraints of the form \delta_{11}*P_{1to1} + \delta_{2to1}*P_{2to2}=P_{eng1}
     cons=[cons,  0 <= Y1 <= Pito1', 0 <= Y2 <= Pito2'];
     cons=[cons, Pito1' - U.*(1-Del1) <= Y1 <= U.*Del1, Pito2' - U.*(1-Del2) <= Y2 <= U.*Del2];
+
+    if(sensors.time >= constants.tMinBatteryLevel)
+        cons=[cons, constants.minBatteryLevel <= BETA1, constants.minBatteryLevel <= BETA2]; 
+    elseif((constants.tMinBatteryLevel - sensors.time) < 0) %TODO: check correctness
+        my_tMinBatteryLevel = constants.tMinBatteryLevel - sensors.time;
+        cons=[cons, BETA1(my_tMinBatteryLevel:Nt) >= minBatteryLevel, BETA2(my_tMinBatteryLevel:Nt) >= minBatteryLevel]; %enforce lower bound on battery charge level after the tMinBatteryLevel-th timestep
+    end 
+
     %cons=[cons, BETA1(tMinBatteryLevel:Nt) >= minBatteryLevel, BETA2(tMinBatteryLevel:Nt) >= minBatteryLevel]; %enforce lower bound on battery charge level after the tMinBatteryLevel-th timestep
     %everything is shifted to start at 2 (see 'configs' below), so Beta1(1),Beta2(1) is (ignored?)
     BETA1(1) = startBatteryCharge1; BETA2(1) = startBatteryCharge2;     
