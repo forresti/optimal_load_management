@@ -10,7 +10,7 @@ function plotGraphs(configLog, sensorLog, constants, Nt, N)
         Shedding1 = [Shedding1; configLog(i).Shedding1];
         Shedding2 = [Shedding2; configLog(i).Shedding2];
     end
-    plotC(Shedding1', Shedding2', Nt, N, xp)
+    plotLoadShedding(Shedding1', Shedding2', Nt, N, xp)
 
     batteryUpdate1 = []; batteryUpdate2 = []; %Beta1, Beta2
     for i=1:N
@@ -18,15 +18,15 @@ function plotGraphs(configLog, sensorLog, constants, Nt, N)
         batteryUpdate2 = [batteryUpdate2; configLog(i).batteryUpdate2];
     end
     
-    plotBetaBinary(batteryUpdate1, batteryUpdate2, Nt, N, xp)
-    plotBetaContinuous(batteryUpdate1, batteryUpdate2, Nt, N, xp)
-    plotBetaStorage(batteryUpdate1, batteryUpdate2, Nt, N, xp, constants.minBatteryLevel)
+    plotBatteryBinary(batteryUpdate1, batteryUpdate2, Nt, N, xp)
+    plotBatteryUpdate(batteryUpdate1, batteryUpdate2, Nt, N, xp)
+    plotBatteryStorage(batteryUpdate1, batteryUpdate2, Nt, N, xp, constants.minBatteryLevel)
 
     BusGen = [];  %generator selection
     for i=1:N
         BusGen = [BusGen; configLog(i).BusGen];
     end
-    plotDelta(BusGen, Nt, N, xp) 
+    plotGenSelection(BusGen, Nt, N, xp) 
     
     HLadviceUsed = [];
     for i=1:N
@@ -41,14 +41,11 @@ function plotPowerReq(Ls1, Lns1, Ls2, Lns2, N)
     Lns1sum=sum(Lns1,1);
 
     h=figure;
-    %set(gcf,'InvertHardCopy','off'); %force it to export color later
-    %set(gcf,'color',[1 1 1]);
-    %set(gca,'color',[1 1 1]); %trying to get color exported figues
     subplot(2,1,1);
     plot(1:1:N,Lns1sum,'--b','LineWidth',2);
-    title('P_{req}(t) for bus 1');
-    xlabel('time [s]');
-    ylabel('P_{req_1} [W]');
+    title('P_{req}(t) for bus 1', 'fontsize',10,'fontweight','b');
+    xlabel('time [s]', 'fontsize',10,'fontweight','b');
+    ylabel('P_{req_1} [W]', 'fontsize',10,'fontweight','b');
     grid on;
     L1sum=Ls1sum+Lns1sum;
     hold on;
@@ -63,9 +60,9 @@ function plotPowerReq(Ls1, Lns1, Ls2, Lns2, N)
     %figure;
     subplot(2,1,2);
     plot(1:1:N,Lns2sum,'--b','LineWidth',2);
-    title('P_{req}(t) for bus 2');
-    xlabel('time [s]');
-    ylabel('P_{req_2} [W]');
+    title('P_{req}(t) for bus 2', 'fontsize',10,'fontweight','b');
+    xlabel('time [s]', 'fontsize',10,'fontweight','b');
+    ylabel('P_{req_2} [W]', 'fontsize',10,'fontweight','b');
     grid on;
     L2sum=Ls2sum+Lns2sum;
     hold on;
@@ -74,17 +71,17 @@ function plotPowerReq(Ls1, Lns1, Ls2, Lns2, N)
     axis([1 N 0 1.1*max(L2sum)]);
 
     print(h, '-depsc2', 'figures/powerReq.eps');
+    print(h, '-dpng', 'figures/powerReq.png');
 end
 
 %plot load shedding
-function plotC(C1, C2, Nt, N, xp)
-    %xp=1:1:Nt*100/(Nt-1);  % 110
+function plotLoadShedding(C1, C2, Nt, N, xp)
     xp=1:N;
-    %xp=1:10:N; %x-axis coords
 
     %TODO: two legends stacked vertically. see Richie Cotton's post here: http://stackoverflow.com/questions/5674426/how-can-i-customize-the-positions-of-legend-elements
 
-    figure;
+    left=0; bottom=0; width=1000; height=500;
+    h=figure('Position',[left, bottom, width, height]); %set size
     subplot(2,2,1);
     %plot(xp,C1(1,:),xp,C1(2,:)+0.02,xp,C1(3,:)+0.04,xp,C1(4,:)+0.06,xp,C1(5,:)+0.08,xp,C1(6,:)+0.10,xp,C1(7,:)+0.12,xp,C1(8,:)+0.14,xp,C1(9,:)+0.16,xp,C1(10,:)+0.18, 'LineWidth',1.5)
     %legend('L_1','L_2','L_3','L_4', ['L_5' char(10) 'line'], 'L_6', 'L_7', 'L_8', 'L_9', 'L_{10}','Orientation','horizontal');
@@ -95,7 +92,7 @@ function plotC(C1, C2, Nt, N, xp)
     axis([0 N+10 -0.1 1.5]);
     set(gca,'YTick',0:1:1);
     set(gca,'YTickLabel',{'Shed (off)','Granted (on)'}, 'fontsize',10,'fontweight','b');
-    xlabel('time [s]');
+    xlabel('time [s]', 'fontsize',10,'fontweight','b');
 
     subplot(2,2,2);
     plot(xp,C2(1,:),xp,C2(2,:)+0.02,xp,C2(3,:)+0.04,xp,C2(4,:)+0.06,xp,C2(5,:)+0.08, 'LineWidth',1.5)
@@ -104,7 +101,7 @@ function plotC(C1, C2, Nt, N, xp)
     axis([0 N+10 -0.1 1.5]);
     set(gca,'YTick',0:1:1);
     set(gca,'YTickLabel',{'Shed (off)','Granted (on)'}, 'fontsize',10,'fontweight','b');
-    xlabel('time [s]');
+    xlabel('time [s]', 'fontsize',10,'fontweight','b');
 
     subplot(2,2,3);
     plot(xp,C1(6,:),xp,C1(7,:)+0.02,xp,C1(8,:)+0.04,xp,C1(9,:)+0.06,xp,C1(10,:)+0.08, 'LineWidth',1.5)
@@ -113,7 +110,7 @@ function plotC(C1, C2, Nt, N, xp)
     axis([0 N+10 -0.1 1.5]);
     set(gca,'YTick',0:1:1);
     set(gca,'YTickLabel',{'Shed (off)','Granted (on)'},'fontsize',10,'fontweight','b');
-    xlabel('time [s]');
+    xlabel('time [s]', 'fontsize',10,'fontweight','b');
 
     subplot(2,2,4);
     plot(xp,C2(6,:),xp,C2(7,:)+0.02,xp,C2(8,:)+0.04,xp,C2(9,:)+0.06,xp,C2(10,:)+0.08, 'LineWidth',1.5)
@@ -122,10 +119,12 @@ function plotC(C1, C2, Nt, N, xp)
     axis([0 N+10 -0.1 1.5]);
     set(gca,'YTick',0:1:1);
     set(gca,'YTickLabel',{'Shed (off)','Granted (on)'}, 'fontsize',10,'fontweight','b');
-    xlabel('time [s]');
+    xlabel('time [s]', 'fontsize',10,'fontweight','b');
+    print(h, '-depsc2', 'figures/loadShedding.eps');
+    print(h, '-dpng', 'figures/loadShedding.png');
 end
 
-function plotDelta(BusGen, Nt, N, xp)
+function plotGenSelection(BusGen, Nt, N, xp)
     Del1(1,:) = (BusGen(:,1)==1)';
     Del1(2,:) = (BusGen(:,1)==2)';
     Del1(3,:) = (BusGen(:,1)==3)';
@@ -134,7 +133,7 @@ function plotDelta(BusGen, Nt, N, xp)
     Del2(3,:) = (BusGen(:,2)==3)';
     xp = xp(1:size(Del1(1,:)')); %trim xp if necessary
 
-    figure;
+    h=figure;
     subplot(2,1,1);
     plot(xp,Del1(1,:), xp,Del1(2,:)+0.02, xp,Del1(3,:)+0.04, 'LineWidth',2.5);
     legend('GEN 1','GEN 2','APU','Orientation','horizontal');
@@ -142,7 +141,7 @@ function plotDelta(BusGen, Nt, N, xp)
     set(gca,'YTick',0:1:1);
     set(gca,'YTickLabel',{'Disconnected', 'Connected'}, 'fontsize',10,'fontweight','b');
     axis([0 N+10 -0.1 1.5]);
-    xlabel('time [s]');
+    xlabel('time [s]', 'fontsize',10,'fontweight','b');
 
     subplot(2,1,2);
     plot(xp,Del2(1,:), xp,Del2(2,:)+0.02, xp,Del2(3,:)+0.04, 'LineWidth',2.5);
@@ -151,10 +150,13 @@ function plotDelta(BusGen, Nt, N, xp)
     set(gca,'YTick',0:1:1);
     set(gca,'YTickLabel',{'Disconnected', 'Connected'}, 'fontsize',10,'fontweight','b');
     axis([0 N+10 -0.1 1.5]);
-    xlabel('time [s]');
+    xlabel('time [s]', 'fontsize',10,'fontweight','b');
+
+    print(h, '-depsc2', 'figures/genSelection.eps');
+    print(h, '-dpng', 'figures/genSelection.png');
 end
 
-function plotBetaBinary(Beta1, Beta2, Nt, N, xp)
+function plotBatteryBinary(Beta1, Beta2, Nt, N, xp)
     figure;
     subplot(2,1,1);
     plot(Beta1>=0.1,'b','LineWidth',2);  % sign results into error if the value is e.g. -1.2*1e-10! Therefore we use this.
@@ -162,7 +164,7 @@ function plotBetaBinary(Beta1, Beta2, Nt, N, xp)
     axis([0 N+10 -0.1 1.5]);
     set(gca,'YTick',0:1:1);
     set(gca,'YTickLabel',{'Not-charging','Charging'}, 'fontsize',10,'fontweight','b');
-    xlabel('time [s]');
+    xlabel('time [s]', 'fontsize',10,'fontweight','b');
 
     subplot(2,1,2);
     plot(Beta2>=0.1,'b','LineWidth',2);  % sign results into error if the value is e.g. -1.2*1e-10! Therefore we use this.
@@ -170,28 +172,30 @@ function plotBetaBinary(Beta1, Beta2, Nt, N, xp)
     axis([0 N+10 -0.1 1.5]);
     set(gca,'YTick',0:1:1);
     set(gca,'YTickLabel',{'Not-charging','Charging'}, 'fontsize',10,'fontweight','b');
-    xlabel('time [s]');
+    xlabel('time [s]', 'fontsize',10,'fontweight','b');
 end
 
-function plotBetaContinuous(Beta1, Beta2, Nt, N, xp)
-    figure;
+function plotBatteryUpdate(Beta1, Beta2, Nt, N, xp)
+    h=figure;
     subplot(2,1,1);
     plot(Beta1,'b','LineWidth',2);  % sign results into error if the value is e.g. -1.2*1e-10! Therefore we use this.
     title('Battery charging for DC bus 1', 'fontsize',10,'fontweight','b');
     axis([0 N+10 -100000 100000]);
     ylabel('Battery Charging per timestep','fontsize',10,'fontweight','b')
-    xlabel('time [s]');
+    xlabel('time [s]', 'fontsize',10,'fontweight','b');
 
     subplot(2,1,2);
     plot(Beta2,'b','LineWidth',2);  % sign results into error if the value is e.g. -1.2*1e-10! Therefore we use this.
     title('Battery charging for DC bus 2', 'fontsize',10,'fontweight','b');
     axis([0 N+10 -100000 100000]);
     ylabel('Battery Charging per timestep', 'fontsize',10,'fontweight','b')
-    xlabel('time [s]');
+    xlabel('time [s]', 'fontsize',10,'fontweight','b');
+    print(h, '-depsc2', 'figures/batteryUpdate.eps');
+    print(h, '-dpng', 'figures/batteryUpdate.png');
 end
 
-function plotBetaStorage(Beta1, Beta2, Nt, N, xp, minBatteryLevel)
-    figure;
+function plotBatteryStorage(Beta1, Beta2, Nt, N, xp, minBatteryLevel)
+    h=figure;
     subplot(2,1,1);    
     plot(cumsum(Beta1),'b','LineWidth',2);  % sign results into error if the value is e.g. -1.2*1e-10! Therefore we use this.
     hold on;
@@ -199,7 +203,7 @@ function plotBetaStorage(Beta1, Beta2, Nt, N, xp, minBatteryLevel)
     title('Battery charge level for DC bus 1', 'fontsize',10,'fontweight','b');
     axis([0 N+10 0 500000]);
     ylabel('Battery Charge Level per timestep', 'fontsize',10,'fontweight','b')
-    xlabel('time [s]');
+    xlabel('time [s]', 'fontsize',10,'fontweight','b');
 
     subplot(2,1,2);    
     plot(cumsum(Beta2),'b','LineWidth',2);  % sign results into error if the value is e.g. -1.2*1e-10! Therefore we use this.    
@@ -208,18 +212,20 @@ function plotBetaStorage(Beta1, Beta2, Nt, N, xp, minBatteryLevel)
     title('Battery charge level for DC bus 2', 'fontsize',10,'fontweight','b');
     axis([0 N+10 0 500000]);
     ylabel('Battery Charge Level per timestep', 'fontsize',10,'fontweight','b')
-    xlabel('time [s]');
+    xlabel('time [s]', 'fontsize',10,'fontweight','b');
+    print(h, '-depsc2', 'figures/batteryStorage.eps')
+    print(h, '-dpng', 'figures/batteryStorage.png');
 end
 
 function plotHLadviceUsed(HLadviceUsed, Nt, N, xp)
-    figure;
-    %subplot(2,1,1);
+    h=figure;
     plot(HLadviceUsed,'b','LineWidth',2);  % sign results into error if the value is e.g. -1.2*1e-10! Therefore we use this.
-    title('Hierarchical control status');
+    title('Hierarchical control status', 'fontsize',10,'fontweight','b');
     axis([0 N+10 -0.1 1.5]);
     set(gca,'YTick',0:1:1);
-    set(gca,'YTickLabel',{'LL-LMS', 'HL-LMS'});
-    xlabel('time [s]');
-
+    set(gca,'YTickLabel',{'LL-LMS', 'HL-LMS'}, 'fontsize',10,'fontweight','b');
+    xlabel('time [s]', 'fontsize',10,'fontweight','b');
+    print(h, '-depsc2', 'figures/HLadviceUsed.eps')
+    print(h, '-dpng', 'figures/HLadviceUsed.png');
 end
 
