@@ -4,6 +4,9 @@ function plotGraphs(configLog, sensorLog, constants, Nt, N)
 
     xp=1:1:Nt*100/(Nt-1);  % 110
     plotPowerReq(constants.historicalWorkloads.Ls1(:,1:N), constants.historicalWorkloads.Lns1(:,1:N), constants.historicalWorkloads.Ls2(:,1:N), constants.historicalWorkloads.Lns2(:,1:N), N)
+    %h=gca
+    %print(h, 'figures/powerReq.eps');
+    %print(h, 'figures/powerReq.png');
 
     %Shedding1 = configLog(:).Shedding1; doesn't work -- it just returns the first timestep instead of all timesteps
     Shedding1 = []; Shedding2 = [];
@@ -41,7 +44,7 @@ function plotPowerReq(Ls1, Lns1, Ls2, Lns2, N)
     Ls1sum=sum(Ls1,1); 
     Lns1sum=sum(Lns1,1);
 
-    figure;
+    h=figure;
     subplot(2,1,1);
     plot(1:1:N,Lns1sum,'--b','LineWidth',2);
     title('P_{req}(t) for bus 1');
@@ -70,6 +73,8 @@ function plotPowerReq(Ls1, Lns1, Ls2, Lns2, N)
     plot(1:1:N,L2sum,'-r','LineWidth',2);
     legend('L_{ns}','L_{s}+L_{ns}');
     axis([1 N 0 1.1*max(L2sum)]);
+
+    print(h, 'figures/powerReq.eps');
 end
 
 %plot load shedding
@@ -133,7 +138,7 @@ function plotDelta(BusGen, Nt, N, xp)
     figure;
     subplot(2,1,1);
     plot(xp,Del1(1,:), xp,Del1(2,:)+0.02, xp,Del1(3,:)+0.04, 'LineWidth',2.5);
-    legend('GEN 1','GEN 2','APU','Orientation','horizontal', 'fontsize',10,'fontweight','b');
+    legend('GEN 1','GEN 2','APU','Orientation','horizontal');
     title('AC bus 1 power suppliers -- \Delta_1 (t)', 'fontsize',10,'fontweight','b');
     set(gca,'YTick',0:1:1);
     set(gca,'YTickLabel',{'Disconnected', 'Connected'}, 'fontsize',10,'fontweight','b');
@@ -142,7 +147,7 @@ function plotDelta(BusGen, Nt, N, xp)
 
     subplot(2,1,2);
     plot(xp,Del2(1,:), xp,Del2(2,:)+0.02, xp,Del2(3,:)+0.04, 'LineWidth',2.5);
-    legend('GEN 1','GEN 2','APU','Orientation','horizontal', 'fontsize',10,'fontweight','b');
+    legend('GEN 1','GEN 2','APU','Orientation','horizontal');
     title('AC bus 2 power suppliers -- \Delta_2 (t)', 'fontsize',10,'fontweight','b');
     set(gca,'YTick',0:1:1);
     set(gca,'YTickLabel',{'Disconnected', 'Connected'}, 'fontsize',10,'fontweight','b');
