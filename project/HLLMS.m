@@ -23,8 +23,8 @@ function [configs] = HLLMS(sensors, constants) %only using 'sensors' for generat
     %Lambda1=[0 2 0];                    Lambda2=[1 2 0]; %pri table: prefer APU over other side's generator 
     Gamma1=1000*ones(1,Nl);             Gamma2=500*ones(1,Nl); %load shedding priority table (one value for each load at each timestep)
     %Gamma1=500*ones(1,Nl);             Gamma2=1000*ones(1,Nl);
-    M=10; %'mu' -- weight for alpha (see eq.9 in OLMS paper)
-    %M=100;
+   % M=10; %'mu' -- weight for alpha (see eq.9 in OLMS paper)
+    M=1;
 
     % Decision variables (one set for Bus 1, one set for Bus 2)
     C1=binvar(Nl,Nt,'full');            C2=binvar(Nl,Nt,'full'); %C1(l,t) = "shed load l at time t?:
@@ -34,6 +34,7 @@ function [configs] = HLLMS(sensors, constants) %only using 'sensors' for generat
     alpha=binvar(Nt,Ns,'full'); %alpha(t,g) = "is anything drawing pwr from generator g at time t?"
     Pito1=sdpvar(Nt,Ns,'full');         Pito2=sdpvar(Nt,Ns,'full'); %Pito1(t,g) = "amount of pwr delivered by generator g to bus 1 at time t"
     BETA1 = sdpvar(1,Nt,'full'); BETA2 = sdpvar(1,Nt,'full'); %cumulative battery charge. (lowercase Beta is per-timestep change in charge)
+    nSwitch_gen1=sdpvar(1,Nt,'full'); nSwitch_gen2=sdpvar(1,Nt,'full'); nSwitch_APU=sdpvar(1,Nt,'full'); %num of times a generator is reassigned to a different bus
 
     % Constraints
     cons=[];
@@ -51,6 +52,15 @@ function [configs] = HLLMS(sensors, constants) %only using 'sensors' for generat
         end
     end
 
+    %the following 'number of generator changes' count is infeasible when used in an objective.
+    %for i=2:Nt %count the timesteps where a generator changes what it's powering. (double count sometimes -- its ok)
+    %    nSwitch_gen1(i) = abs(Del1(1,i) - Del1(1, i-1)) + abs(Del2(1,i) - Del2(1, i-1));
+    %    nSwitch_gen2(i) = abs(Del1(2,i) - Del1(2, i-1)) + abs(Del2(2,i) - Del2(2, i-1));
+    %    nSwitch_APU(i) = abs(Del1(2,i) - Del1(3, i-1)) + abs(Del2(3,i) - Del2(3, i-1));
+    %end
+
+    %cons=[cons,sum(alpha, 2) == 2]; %run 2 generators at all times (TEST)
+
     x=1:1:N;
     xi=0:N/(Nt-1):N; xi(1)=1;  % 0:10:100
 
@@ -64,14 +74,12 @@ function [configs] = HLLMS(sensors, constants) %only using 'sensors' for generat
     if(sensors.time >= constants.tMinBatteryLevel)
         cons=[cons, constants.minBatteryLevel <= BETA1, constants.minBatteryLevel <= BETA2];
         display(sprintf('using minBatteryLevel starting at time %d', sensors.time)) 
-    %elseif((sensors.time - constants.tMinBatteryLevel) < 0) %TODO: check correctness
-    elseif((constants.tMinBatteryLevel - sensors.time) < 0)
+    elseif((constants.tMinBatteryLevel - sensors.time) < 0) %TODO: check correctness
         display('not using minBatteryLevel constraint')
         my_tMinBatteryLevel = constants.tMinBatteryLevel - sensors.time;
         cons=[cons, BETA1(my_tMinBatteryLevel:Nt) >= minBatteryLevel, BETA2(my_tMinBatteryLevel:Nt) >= minBatteryLevel]; %enforce lower bound on battery charge level after the tMinBatteryLevel-th timestep
     end 
 
-    %cons=[cons, BETA1(tMinBatteryLevel:Nt) >= minBatteryLevel, BETA2(tMinBatteryLevel:Nt) >= minBatteryLevel]; %enforce lower bound on battery charge level after the tMinBatteryLevel-th timestep
     %everything is shifted to start at 2 (see 'configs' below), so Beta1(1),Beta2(1) is (ignored?)
     BETA1(1) = startBatteryCharge1; BETA2(1) = startBatteryCharge2;     
     for i=2:Nt
@@ -83,6 +91,7 @@ function [configs] = HLLMS(sensors, constants) %only using 'sensors' for generat
     obj = obj + sum(Gamma1 * (1-C1)) + sum (Gamma2 * (1-C2));
     obj = obj + sum(Lambda1 * Del1) + sum(Lambda2 * Del2);
     obj = obj + M * sum(sum(alpha));
+    %obj = obj + (M+1)*(sum(nSwitch_gen1) + sum(nSwitch_gen2) + sum(nSwitch_APU));
 
     options=sdpsettings('solver','Cplex'); %windows needs 'Cplex' and mac is ok with 'cplex' or 'Cplex'
     solvesdp(cons,obj,options);

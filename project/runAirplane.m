@@ -19,13 +19,14 @@ function [] = runAirplane(useHL)
     sensorLog = [];
     configLog = [];
     %generatorOutput = [1e5, 1e5, 104e3]; %Pwr produced by generators. Called U1, U2, U3 in Mehdi's code
-    generatorOutput = [1e5, 1e5, 85e3];
+    generatorOutput = [1e5, 1e5, 1e5];
     [Ls1,Lns1,Ls2,Lns2]=load3(110);
     historicalWorkloads = struct('Ls1', Ls1, 'Lns1', Lns1, 'Ls2', Ls2, 'Lns2', Lns2);
     priorityTables = getPriorityTables();
     constants = struct('historicalWorkloads', historicalWorkloads, 'priorityTables', priorityTables, 'generatorOutput', generatorOutput, 'nTimesteps', nTimesteps, 'Nt', Nt, 'Nl', Nl, 'Ns', Ns, 'Nb', Nb, 'N', N, 'minBatteryLevel', minBatteryLevel, 'tMinBatteryLevel', tMinBatteryLevel); %hard-coded params to pass around  
     
     batteryCharge1=0; batteryCharge2=0; %keep track of battery charge level
+    %batteryCharge1=50000; batteryCharge2=50000;
     advice = [];
     nextAdvice = [];
     HLclock = 1; %count up to each time we call the HLLMS
