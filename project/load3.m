@@ -23,7 +23,8 @@ Lns1(10,:)=1000*ones(1,N);
 
 % BUS 2
 % Sheddable loads
-Ls2(1,:)=4000*ones(1,N);  % 25000
+%Ls2(1,:)=4000*ones(1,N);  % 25000
+Ls2(1,:)=4000*ones(1,N);
 Ls2(2,:)=zeros(1,N); Ls2(2,N/10:end)=1000;
 Ls2(3,:)=zeros(1,N); Ls2(3,1:9*N/10)=1000; 
 Ls2(4,:)=zeros(1,N); Ls2(4,1:9*N/10)=2000;
@@ -37,9 +38,11 @@ Ls2(9,:)=zeros(1,N); Ls2(9,1:9*N/10)=500;
 Ls2(10,:)=zeros(1,N); 
 
 % Non-Sheddable loads
-Lns2(1,:)=21000*ones(1,N);   Lns2(2,:)=5000*ones(1,N);     Lns2(3,:)=2000*ones(1,N);
+%Lns2(1,:)=21000*ones(1,N);   Lns2(2,:)=5000*ones(1,N);     Lns2(3,:)=2000*ones(1,N);
+Lns2(1,:)=10000*ones(1,N);   Lns2(2,:)=5000*ones(1,N);     Lns2(3,:)=2000*ones(1,N);
 Lns2(4,:)=2000*ones(1,N);    Lns2(5,:)=1000*ones(1,N);     Lns2(6,:)=5000*ones(1,N);
 Lns2(7,:)=1000*ones(1,N);    Lns2(8,:)=2000*ones(1,N);     Lns2(9,:)=2000*ones(1,N);
 Lns2(10,:)=1000*ones(1,N);
+
 
 end

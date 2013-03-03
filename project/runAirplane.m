@@ -18,7 +18,8 @@ function [] = runAirplane(useHL)
 
     sensorLog = [];
     configLog = [];
-    generatorOutput = [1e5, 1e5, 104e3]; %Pwr produced by generators. Called U1, U2, U3 in Mehdi's code
+    %generatorOutput = [1e5, 1e5, 104e3]; %Pwr produced by generators. Called U1, U2, U3 in Mehdi's code
+    generatorOutput = [1e5, 1e5, 85e3];
     [Ls1,Lns1,Ls2,Lns2]=load3(110);
     historicalWorkloads = struct('Ls1', Ls1, 'Lns1', Lns1, 'Ls2', Ls2, 'Lns2', Lns2);
     priorityTables = getPriorityTables();

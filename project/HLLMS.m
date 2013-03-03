@@ -20,8 +20,11 @@ function [configs] = HLLMS(sensors, constants) %only using 'sensors' for generat
     tic;
     %Coefficients (one set for Bus 1, one set for Bus 2):
     Lambda1=[0 1 2];                    Lambda2=[1 0 2]; %generator priority table (GR, GL, APU)
+    %Lambda1=[0 2 0];                    Lambda2=[1 2 0]; %pri table: prefer APU over other side's generator 
     Gamma1=1000*ones(1,Nl);             Gamma2=500*ones(1,Nl); %load shedding priority table (one value for each load at each timestep)
+    %Gamma1=500*ones(1,Nl);             Gamma2=1000*ones(1,Nl);
     M=10; %'mu' -- weight for alpha (see eq.9 in OLMS paper)
+    %M=100;
 
     % Decision variables (one set for Bus 1, one set for Bus 2)
     C1=binvar(Nl,Nt,'full');            C2=binvar(Nl,Nt,'full'); %C1(l,t) = "shed load l at time t?:
