@@ -15,15 +15,16 @@ function plotGraphs(configLog, sensorLog, constants, Nt, N)
     batteryUpdate1 = []; batteryUpdate2 = []; %Beta1, Beta2
     batteryCharge1 = []; batteryCharge2 = []; %BETA1, BETA2
     for i=1:N
-        batteryUpdate1 = [batteryUpdate1; configLog(i).batteryUpdate1];
-        batteryUpdate2 = [batteryUpdate2; configLog(i).batteryUpdate2];
-        batteryCharge1 = [batteryCharge1; sensorLog(i).batteryCharge1];
-        batteryCharge2 = [batteryCharge2; sensorLog(i).batteryCharge2];
+        batteryUpdate1 = [batteryUpdate1; configLog(i).batteryUpdate1]; batteryUpdate2 = [batteryUpdate2; configLog(i).batteryUpdate2];
+        batteryCharge1 = [batteryCharge1; sensorLog(i).batteryCharge1]; batteryCharge2 = [batteryCharge2; sensorLog(i).batteryCharge2];
     end
-    
+  
+    size(configLog) 
+    dBatteryUpdate1 = [configLog.batteryUpdate1] %easier way to pull an element out of all indices in array of structs
+    configLog
+ 
     plotBatteryBinary(batteryUpdate1, batteryUpdate2, Nt, N, xp)
     plotBatteryUpdate(batteryUpdate1, batteryUpdate2, Nt, N, xp)
-    %plotBatteryStorage(batteryUpdate1, batteryUpdate2, Nt, N, xp, constants.minBatteryLevel)
     plotBatteryStorage(batteryCharge1, batteryCharge2, Nt, N, xp, constants.minBatteryLevel)
 
     BusGen = [];  %generator selection
