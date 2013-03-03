@@ -70,8 +70,10 @@ function [] = runAirplane(useHL)
 
         display(sprintf('Bus 1 uses generator %d, Bus 2 uses generator %d at time %d', config.BusGen(1), config.BusGen(2), LLclock))
 
+        sensors.batteryCharge1=batteryCharge1; sensors.batteryCharge2=batteryCharge2; %batteries may have changed since beginning of the timestep. other 'stuff that changed during the timestep' is stored in config.
         configLog = [configLog config]; %this concatenation is slow ... but that's fine. 
         sensorLog = [sensorLog sensors];
+        %batteryLog = [batteryLog struct('batteryCharge1', batteryCharge1, 'batteryCharge2', batteryCharge2)]; %this holds the *actual* cumulative battery level. configLog just holds the per-timestep battery updates.
     end
     plotGraphs(configLog, sensorLog, constants, Nt, nTimesteps)
 end

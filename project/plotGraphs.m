@@ -13,14 +13,18 @@ function plotGraphs(configLog, sensorLog, constants, Nt, N)
     plotLoadShedding(Shedding1', Shedding2', Nt, N, xp)
 
     batteryUpdate1 = []; batteryUpdate2 = []; %Beta1, Beta2
+    batteryCharge1 = []; batteryCharge2 = []; %BETA1, BETA2
     for i=1:N
         batteryUpdate1 = [batteryUpdate1; configLog(i).batteryUpdate1];
         batteryUpdate2 = [batteryUpdate2; configLog(i).batteryUpdate2];
+        batteryCharge1 = [batteryCharge1; sensorLog(i).batteryCharge1];
+        batteryCharge2 = [batteryCharge2; sensorLog(i).batteryCharge2];
     end
     
     plotBatteryBinary(batteryUpdate1, batteryUpdate2, Nt, N, xp)
     plotBatteryUpdate(batteryUpdate1, batteryUpdate2, Nt, N, xp)
-    plotBatteryStorage(batteryUpdate1, batteryUpdate2, Nt, N, xp, constants.minBatteryLevel)
+    %plotBatteryStorage(batteryUpdate1, batteryUpdate2, Nt, N, xp, constants.minBatteryLevel)
+    plotBatteryStorage(batteryCharge1, batteryCharge2, Nt, N, xp, constants.minBatteryLevel)
 
     BusGen = [];  %generator selection
     for i=1:N
@@ -194,10 +198,11 @@ function plotBatteryUpdate(Beta1, Beta2, Nt, N, xp)
     print(h, '-dpng', 'figures/batteryUpdate.png');
 end
 
-function plotBatteryStorage(Beta1, Beta2, Nt, N, xp, minBatteryLevel)
+function plotBatteryStorage(BETA1, BETA2, Nt, N, xp, minBatteryLevel)
     h=figure;
     subplot(2,1,1);    
-    plot(cumsum(Beta1),'b','LineWidth',2);  % sign results into error if the value is e.g. -1.2*1e-10! Therefore we use this.
+    %plot(cumsum(Beta1),'b','LineWidth',2);  % sign results into error if the value is e.g. -1.2*1e-10! Therefore we use this.
+    plot(BETA1,'b','LineWidth',2);
     hold on;
     plot(1:1:N, minBatteryLevel,'--b','LineWidth',2);
     title('Battery charge level for DC bus 1', 'fontsize',10,'fontweight','b');
@@ -206,7 +211,7 @@ function plotBatteryStorage(Beta1, Beta2, Nt, N, xp, minBatteryLevel)
     xlabel('time [s]', 'fontsize',10,'fontweight','b');
 
     subplot(2,1,2);    
-    plot(cumsum(Beta2),'b','LineWidth',2);  % sign results into error if the value is e.g. -1.2*1e-10! Therefore we use this.    
+    plot(BETA2,'b','LineWidth',2);  % sign results into error if the value is e.g. -1.2*1e-10! Therefore we use this.    
     hold on;
     plot(1:1:N, minBatteryLevel,'--b','LineWidth',2);
     title('Battery charge level for DC bus 2', 'fontsize',10,'fontweight','b');
