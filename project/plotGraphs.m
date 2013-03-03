@@ -19,9 +19,7 @@ function plotGraphs(configLog, sensorLog, constants, Nt, N)
         batteryCharge1 = [batteryCharge1; sensorLog(i).batteryCharge1]; batteryCharge2 = [batteryCharge2; sensorLog(i).batteryCharge2];
     end
   
-    size(configLog) 
-    dBatteryUpdate1 = [configLog.batteryUpdate1] %easier way to pull an element out of all indices in array of structs
-    configLog
+    %dBatteryUpdate1 = [configLog.batteryUpdate1] %easier way to pull an element out of all indices in array of structs
  
     plotBatteryBinary(batteryUpdate1, batteryUpdate2, Nt, N, xp)
     plotBatteryUpdate(batteryUpdate1, batteryUpdate2, Nt, N, xp)

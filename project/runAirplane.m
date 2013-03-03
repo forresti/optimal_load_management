@@ -25,8 +25,8 @@ function [] = runAirplane(useHL)
     priorityTables = getPriorityTables();
     constants = struct('historicalWorkloads', historicalWorkloads, 'priorityTables', priorityTables, 'generatorOutput', generatorOutput, 'nTimesteps', nTimesteps, 'Nt', Nt, 'Nl', Nl, 'Ns', Ns, 'Nb', Nb, 'N', N, 'minBatteryLevel', minBatteryLevel, 'tMinBatteryLevel', tMinBatteryLevel); %hard-coded params to pass around  
     
-    batteryCharge1=0; batteryCharge2=0; %keep track of battery charge level
-    %batteryCharge1=50000; batteryCharge2=50000;
+    %batteryCharge1=0; batteryCharge2=0; %keep track of battery charge level
+    batteryCharge1=100000; batteryCharge2=100000;
     advice = [];
     nextAdvice = [];
     HLclock = 1; %count up to each time we call the HLLMS
@@ -70,7 +70,7 @@ function [] = runAirplane(useHL)
 
         display(sprintf('Bus 1 uses generator %d, Bus 2 uses generator %d at time %d', config.BusGen(1), config.BusGen(2), LLclock))
 
-        sensors.batteryCharge1=batteryCharge1; sensors.batteryCharge2=batteryCharge2; %batteries may have changed since beginning of the timestep. other 'stuff that changed during the timestep' is stored in config.
+        %sensors.batteryCharge1=batteryCharge1; sensors.batteryCharge2=batteryCharge2; %batteries may have changed since beginning of the timestep. other 'stuff that changed during the timestep' is stored in config.
         configLog = [configLog config]; %this concatenation is slow ... but that's fine. 
         sensorLog = [sensorLog sensors];
     end
