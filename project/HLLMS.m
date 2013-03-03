@@ -34,7 +34,8 @@ function [configs] = HLLMS(sensors, constants) %only using 'sensors' for generat
     alpha=binvar(Nt,Ns,'full'); %alpha(t,g) = "is anything drawing pwr from generator g at time t?"
     Pito1=sdpvar(Nt,Ns,'full');         Pito2=sdpvar(Nt,Ns,'full'); %Pito1(t,g) = "amount of pwr delivered by generator g to bus 1 at time t"
     BETA1 = sdpvar(1,Nt,'full'); BETA2 = sdpvar(1,Nt,'full'); %cumulative battery charge. (lowercase Beta is per-timestep change in charge)
-    nSwitch_gen1=sdpvar(1,Nt,'full'); nSwitch_gen2=sdpvar(1,Nt,'full'); nSwitch_APU=sdpvar(1,Nt,'full'); %num of times a generator is reassigned to a different bus
+    %nSwitch_gen1=sdpvar(1,Nt,'full'); nSwitch_gen2=sdpvar(1,Nt,'full'); nSwitch_APU=sdpvar(1,Nt,'full'); %num of times a generator is reassigned to a different bus
+    nSwitch = sdpvar(1,Nt,'full');
 
     % Constraints
     cons=[];
@@ -57,6 +58,12 @@ function [configs] = HLLMS(sensors, constants) %only using 'sensors' for generat
     %    nSwitch_gen1(i) = abs(Del1(1,i) - Del1(1, i-1)) + abs(Del2(1,i) - Del2(1, i-1));
     %    nSwitch_gen2(i) = abs(Del1(2,i) - Del1(2, i-1)) + abs(Del2(2,i) - Del2(2, i-1));
     %    nSwitch_APU(i) = abs(Del1(2,i) - Del1(3, i-1)) + abs(Del2(3,i) - Del2(3, i-1));
+    %end
+
+    %for i=2:Nt
+    %    for gen = 1:Ns
+    %        cons = [cons, nSwitch(i) == nSwitch(i) + abs(alpha(i, gen) - alpha(i-1, gen))];
+    %    end
     %end
 
     %cons=[cons,sum(alpha, 2) == 2]; %run 2 generators at all times (TEST)
@@ -92,6 +99,7 @@ function [configs] = HLLMS(sensors, constants) %only using 'sensors' for generat
     obj = obj + sum(Lambda1 * Del1) + sum(Lambda2 * Del2);
     obj = obj + M * sum(sum(alpha));
     %obj = obj + (M+1)*(sum(nSwitch_gen1) + sum(nSwitch_gen2) + sum(nSwitch_APU));
+    obj = obj + (M+1)*(sum(nSwitch)) 
 
     options=sdpsettings('solver','Cplex'); %windows needs 'Cplex' and mac is ok with 'cplex' or 'Cplex'
     solvesdp(cons,obj,options);
