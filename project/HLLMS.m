@@ -35,7 +35,7 @@ function [configs] = HLLMS(sensors, constants) %only using 'sensors' for generat
     Pito1=sdpvar(Nt,Ns,'full');         Pito2=sdpvar(Nt,Ns,'full'); %Pito1(t,g) = "amount of pwr delivered by generator g to bus 1 at time t"
     BETA1 = sdpvar(1,Nt,'full'); BETA2 = sdpvar(1,Nt,'full'); %cumulative battery charge. (lowercase Beta is per-timestep change in charge)
     %nSwitch_gen1=sdpvar(1,Nt,'full'); nSwitch_gen2=sdpvar(1,Nt,'full'); nSwitch_APU=sdpvar(1,Nt,'full'); %num of times a generator is reassigned to a different bus
-    nSwitch = sdpvar(1,Nt,'full');
+    %nSwitch = sdpvar(1,Nt,'full');
 
     % Constraints
     cons=[];
@@ -99,7 +99,7 @@ function [configs] = HLLMS(sensors, constants) %only using 'sensors' for generat
     obj = obj + sum(Lambda1 * Del1) + sum(Lambda2 * Del2);
     obj = obj + M * sum(sum(alpha));
     %obj = obj + (M+1)*(sum(nSwitch_gen1) + sum(nSwitch_gen2) + sum(nSwitch_APU));
-    obj = obj + (M+1)*(sum(nSwitch)) 
+    %obj = obj + (M+1)*(sum(nSwitch)) 
 
     options=sdpsettings('solver','Cplex'); %windows needs 'Cplex' and mac is ok with 'cplex' or 'Cplex'
     solvesdp(cons,obj,options);
