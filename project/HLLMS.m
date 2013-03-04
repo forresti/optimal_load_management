@@ -88,13 +88,10 @@ function [configs] = HLLMS(sensors, constants) %only using 'sensors' for generat
     %everything is shifted to start at 2 (see 'configs' below), so Beta1(1),Beta2(1) is (ignored?)
     BETA1(1) = startBatteryCharge1; BETA2(1) = startBatteryCharge2;     
     for i=2:Nt
-        %cons=[cons, BETA1(i) == BETA1(i-1) + Beta1(i), BETA2(i) == BETA2(i-1) + Beta2(i)];
+        cons=[cons, BETA1(i) == BETA1(i-1) + Beta1(i), BETA2(i) == BETA2(i-1) + Beta2(i)];
         %cons=[cons, BETA1(i) == sum(Beta1(1:i)), BETA2(i) == sum(Beta2(1:i))];
-        cons=[cons, BETA1(1,i) == sum(Beta1(1,1:i)), BETA2(1,i) == sum(Beta2(1,1:i))];
+        %cons=[cons, BETA1(1,i) == sum(Beta1(1,1:i)), BETA2(1,i) == sum(Beta2(1,1:i))];
     end
-
-    size(BETA1)
-    size(Beta1)
 
     % Objective
     obj=0;
