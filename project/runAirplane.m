@@ -11,8 +11,8 @@ function [] = runAirplane(useHL)
 
     %N and Nt are params for HL-LMS
     HLclockMultiplier=10; % (HLclock rate) = HLclockMultiplier * (LLclock rate)
-    %N = HLclockMultiplier; % prediction horizon
-    N = 3*HLclockMultiplier; % prediction horizon
+    N = HLclockMultiplier; % prediction horizon
+    %N = 3*HLclockMultiplier; % prediction horizon
     Nt = N+1; % (prediction horizon + 1) -- some off-by-one-fix relic.
     minBatteryLevel = 50000; %afterthe tMinBatteryLevel-th timestep
     %tMinBatteryLevel = 10; %first timestep to take minBatteryLevel into account
@@ -38,8 +38,11 @@ function [] = runAirplane(useHL)
         genStatus = getGeneratorStatus(LLclock);
         sensors = struct('workload', workload, 'genStatus', genStatus, 'time', LLclock, 'batteryCharge1', batteryCharge1, 'batteryCharge2', batteryCharge2);
 
-        if (HLclock == 1 && LLclock <= (nTimesteps-N) && useHL == true) %time to call HLLMS again
-        %if (HLclock == 1 && useHL == true)
+        %if (HLclock == 1 && LLclock <= (nTimesteps-N) && useHL == true) %time to call HLLMS again
+        if (HLclock == 1 && useHL == true)
+            %resize the horizon if we're getting near the end of the simulation
+            constants.N = min(LLclock+constants.N, nTimesteps+1) - LLclock;  %avoid out-of-bounds horizon
+            constants.Nt = constants.N+1; %horizon+1
             %nextWorkload = genWorkload(historicalWorkloads, LLclock+N, 0);
             %nextSensors = sensors;
             %nextSensors.workload = nextWorkload;
