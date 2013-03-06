@@ -15,6 +15,7 @@ function [] = runAirplane(useHL)
     %N = 3*HLclockMultiplier; % prediction horizon
     Nt = N+1; % (prediction horizon + 1) -- some off-by-one-fix relic.
     minBatteryLevel = 50000; %afterthe tMinBatteryLevel-th timestep
+    maxBatteryLevel =- 5e5;
     %tMinBatteryLevel = 10; %first timestep to take minBatteryLevel into account
     tMinBatteryLevel = 0;
 
@@ -25,7 +26,7 @@ function [] = runAirplane(useHL)
     [Ls1,Lns1,Ls2,Lns2]=load3(110);
     historicalWorkloads = struct('Ls1', Ls1, 'Lns1', Lns1, 'Ls2', Ls2, 'Lns2', Lns2);
     priorityTables = getPriorityTables();
-    constants = struct('historicalWorkloads', historicalWorkloads, 'priorityTables', priorityTables, 'generatorOutput', generatorOutput, 'nTimesteps', nTimesteps, 'Nt', Nt, 'Nl', Nl, 'Ns', Ns, 'Nb', Nb, 'N', N, 'minBatteryLevel', minBatteryLevel, 'tMinBatteryLevel', tMinBatteryLevel); %hard-coded params to pass around  
+    constants = struct('historicalWorkloads', historicalWorkloads, 'priorityTables', priorityTables, 'generatorOutput', generatorOutput, 'nTimesteps', nTimesteps, 'Nt', Nt, 'Nl', Nl, 'Ns', Ns, 'Nb', Nb, 'N', N, 'minBatteryLevel', minBatteryLevel, 'maxBatteryLevel', maxBatteryLevel, 'tMinBatteryLevel', tMinBatteryLevel); %hard-coded params to pass around  
     
     %batteryCharge1=0; batteryCharge2=0; %keep track of battery charge level
     batteryCharge1=100000; batteryCharge2=100000;

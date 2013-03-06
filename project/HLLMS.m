@@ -37,8 +37,7 @@ function [configs] = HLLMS(sensors, constants) %only using 'sensors' for generat
 
     % Constraints
     cons=[];
-    cons=[cons, 0 <= BETA1, 0 <= BETA2]; 
-    %cons=[cons, Beta1 >= 0; Beta2 >= 0];
+    cons=[cons, 0 <= BETA1 <= constants.maxBatteryLevel, 0 <= BETA2 <= constants.maxBatteryLevel]; %battery charge level can't be negative 
     for i=1:Nl-1
         cons=[cons, C1(i,:) <= C1(i+1,:), C2(i,:) <= C2(i+1,:)];
     end
@@ -67,7 +66,7 @@ function [configs] = HLLMS(sensors, constants) %only using 'sensors' for generat
     elseif((constants.tMinBatteryLevel - sensors.time) < 0) %TODO: check correctness
         display('not using minBatteryLevel constraint')
         my_tMinBatteryLevel = constants.tMinBatteryLevel - sensors.time;
-        cons=[cons, BETA1(my_tMinBatteryLevel:Nt) >= minBatteryLevel, BETA2(my_tMinBatteryLevel:Nt) >= minBatteryLevel]; %enforce lower bound on battery charge level after the tMinBatteryLevel-th timestep
+        cons=[cons, maxBatteryLevel <= BETA1(my_tMinBatteryLevel:Nt) >= minBatteryLevel, BETA2(my_tMinBatteryLevel:Nt) >= minBatteryLevel]; %enforce lower bound on battery charge level after the tMinBatteryLevel-th timestep
     end 
 
     %everything is shifted to start at 2 (see 'configs' below), so Beta1(1),Beta2(1) is (ignored?)
@@ -76,8 +75,7 @@ function [configs] = HLLMS(sensors, constants) %only using 'sensors' for generat
         cons=[cons, BETA1(i) == BETA1(i-1) + Beta1(i), BETA2(i) == BETA2(i-1) + Beta2(i)];
     end
 
-    nSwitch1=0; nSwitch2=0; nSwitch3=0;
-    nSwitch4=0; nSwitch5=0; nSwitch6=0;
+    nSwitch1=0; nSwitch2=0; nSwitch3=0; nSwitch4=0; nSwitch5=0; nSwitch6=0;
     for i=1:Nt-1
         nSwitch1=nSwitch1 + abs( Del1(1,i)-Del1(1,i+1) );
         nSwitch2=nSwitch2 + abs( Del1(2,i)-Del1(2,i+1) );
