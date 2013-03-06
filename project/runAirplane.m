@@ -15,7 +15,7 @@ function [] = runAirplane(useHL)
     %N = 3*HLclockMultiplier; % prediction horizon
     Nt = N+1; % (prediction horizon + 1) -- some off-by-one-fix relic.
     minBatteryLevel = 50000; %afterthe tMinBatteryLevel-th timestep
-    maxBatteryLevel =- 5e5;
+    maxBatteryLevel =- 5e6;
     %tMinBatteryLevel = 10; %first timestep to take minBatteryLevel into account
     tMinBatteryLevel = 0;
 
