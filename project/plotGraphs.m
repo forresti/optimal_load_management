@@ -127,6 +127,41 @@ function plotLoadShedding(C1, C2, Nt, N, xp)
     print(h, '-dpng', 'figures/loadShedding.png');
 end
 
+%plot load shedding
+function plotLoadShedding_twoGraphs(C1, C2, Nt, N, xp)
+    xp=1:N;
+
+    %TODO: two legends stacked vertically. see Richie Cotton's post here: http://stackoverflow.com/questions/5674426/how-can-i-customize-the-positions-of-legend-elements
+
+    left=0; bottom=0; width=1000; height=500;
+    h=figure('Position',[left, bottom, width, height]); %set size
+    subplot(2,2,1);
+    plot(xp,C1(1,:),xp,C1(2,:)+0.02,xp,C1(3,:)+0.04,xp,C1(4,:)+0.06,xp,C1(5,:)+0.08,xp,C1(6,:)+0.10,xp,C1(7,:)+0.12,xp,C1(8,:)+0.14,xp,C1(9,:)+0.16,xp,C1(10,:)+0.18, 'LineWidth',1.5)
+    legend('L_1','L_2','L_3','L_4', 'L_5', 'L_6', 'L_7', 'L_8', 'L_9', 'L_{10}','Orientation','horizontal');
+    title('Power shedding of AC bus 1 (loads 1 to 10)');
+    %plot(xp,C1(1,:),xp,C1(2,:)+0.02,xp,C1(3,:)+0.04,xp,C1(4,:)+0.06,xp,C1(5,:)+0.08, 'LineWidth',1.5)
+    %legend('L_1','L_2','L_3','L_4','L_5','Orientation','horizontal');
+    %title('Power shedding of AC bus 1 (loads 1 to 5)', 'fontsize',10,'fontweight','b');
+    axis([0 N+10 -0.1 1.5]);
+    set(gca,'YTick',0:1:1);
+    set(gca,'YTickLabel',{'Shed (off)','Granted (on)'}, 'fontsize',10,'fontweight','b');
+    xlabel('time [s]', 'fontsize',10,'fontweight','b');
+
+    subplot(2,2,2);
+    plot(xp,C2(1,:),xp,C2(2,:)+0.02,xp,C2(3,:)+0.04,xp,C2(4,:)+0.06,xp,C2(5,:)+0.08,xp,C2(6,:)+0.10,xp,C2(7,:)+0.12,xp,C2(8,:)+0.14,xp,C2(9,:)+0.16,xp,C2(10,:)+0.18, 'LineWidth',1.5)
+    legend('L_1','L_2','L_3','L_4', 'L_5', 'L_6', 'L_7', 'L_8', 'L_9', 'L_{10}','Orientation','horizontal');
+    title('Power shedding of AC bus 1 (loads 1 to 10)');
+    %plot(xp,C2(1,:),xp,C2(2,:)+0.02,xp,C2(3,:)+0.04,xp,C2(4,:)+0.06,xp,C2(5,:)+0.08, 'LineWidth',1.5)
+    %legend('L_1','L_2','L_3','L_4','L_5','Orientation','horizontal');
+    %title('Power shedding of AC bus 2 (loads 1 to 5)', 'fontsize',10,'fontweight','b');
+    axis([0 N+10 -0.1 1.5]);
+    set(gca,'YTick',0:1:1);
+    set(gca,'YTickLabel',{'Shed (off)','Granted (on)'}, 'fontsize',10,'fontweight','b');
+    xlabel('time [s]', 'fontsize',10,'fontweight','b');
+    print(h, '-depsc2', 'figures/loadShedding.eps');
+    print(h, '-dpng', 'figures/loadShedding.png');
+end
+
 function plotGenSelection(BusGen, Nt, N, xp)
     Del1(1,:) = (BusGen(:,1)==1)';
     Del1(2,:) = (BusGen(:,1)==2)';
@@ -206,20 +241,22 @@ function plotBatteryStorage(BETA1, BETA2, Nt, N, minBatteryLevel, maxBatteryLeve
     subplot(2,1,1);    
     plot(xp,BETA1,'b','LineWidth',2);
     hold on;
-    plot(xp, minBatteryLevel*xp,'--b','LineWidth',2);
-    plot(xp, maxBatteryLevel*xp,'--b','LineWidth',2);
+    plot(xp, minBatteryLevel*ones(size(xp)),'--r','LineWidth',2);
+    plot(xp, maxBatteryLevel*ones(size(xp)),'--r','LineWidth',2);
+    plot(tMinBatteryLevel*ones(1,15),linspace(0,max(BETA1)*1.4,15),'--r','MarkerFaceColor','r','MarkerSize',1.5,'LineWidth',2); 
     title('Battery charge level for DC bus 1', 'fontsize',10,'fontweight','b');
-    axis([0 N+10 0 500000]);
+    axis([0 N+10 0 600000]);
     ylabel('Battery Charge Level per timestep', 'fontsize',10,'fontweight','b')
     xlabel('time [s]', 'fontsize',10,'fontweight','b');
 
     subplot(2,1,2);    
     plot(xp,BETA2,'b','LineWidth',2);
     hold on;
-    plot(xp, minBatteryLevel*xp,'--b','LineWidth',2);
-    plot(xp, maxBatteryLevel*xp,'--b','LineWidth',2);
+    plot(xp, minBatteryLevel*ones(size(xp)),'--r','LineWidth',2);
+    plot(xp, maxBatteryLevel*ones(size(xp)),'--r','LineWidth',2);
+    plot(tMinBatteryLevel*ones(1,15),linspace(0,max(BETA1)*1.4,15),'--r','MarkerFaceColor','r','MarkerSize',1.5,'LineWidth',2);
     title('Battery charge level for DC bus 2', 'fontsize',10,'fontweight','b');
-    axis([0 N+10 0 500000]);
+    axis([0 N+10 0 600000]);
     ylabel('Battery Charge Level per timestep', 'fontsize',10,'fontweight','b')
     xlabel('time [s]', 'fontsize',10,'fontweight','b');
     print(h, '-depsc2', 'figures/batteryStorage.eps')
