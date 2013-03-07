@@ -11,13 +11,13 @@ function [] = runAirplane(useHL)
 
     %N and Nt are params for HL-LMS
     HLclockMultiplier=10; % (HLclock rate) = HLclockMultiplier * (LLclock rate)
-    N = HLclockMultiplier; % prediction horizon
-    %N = 3*HLclockMultiplier; % prediction horizon
+    %N = HLclockMultiplier; % prediction horizon
+    N = 3*HLclockMultiplier; % prediction horizon
     Nt = N+1; % (prediction horizon + 1) -- some off-by-one-fix relic.
     minBatteryLevel = 50000; %afterthe tMinBatteryLevel-th timestep
-    maxBatteryLevel =- 5e6;
+    maxBatteryLevel = 4.5e5;
     %tMinBatteryLevel = 10; %first timestep to take minBatteryLevel into account
-    tMinBatteryLevel = 0;
+    tMinBatteryLevel = 30;
 
     sensorLog = [];
     configLog = [];
@@ -29,7 +29,7 @@ function [] = runAirplane(useHL)
     constants = struct('historicalWorkloads', historicalWorkloads, 'priorityTables', priorityTables, 'generatorOutput', generatorOutput, 'nTimesteps', nTimesteps, 'Nt', Nt, 'Nl', Nl, 'Ns', Ns, 'Nb', Nb, 'N', N, 'minBatteryLevel', minBatteryLevel, 'maxBatteryLevel', maxBatteryLevel, 'tMinBatteryLevel', tMinBatteryLevel); %hard-coded params to pass around  
     
     %batteryCharge1=0; batteryCharge2=0; %keep track of battery charge level
-    batteryCharge1=100000; batteryCharge2=100000;
+    batteryCharge1=2.8e5; batteryCharge2=2.8e5;
     advice = [];
     nextAdvice = [];
     HLclock = 1; %count up to each time we call the HLLMS

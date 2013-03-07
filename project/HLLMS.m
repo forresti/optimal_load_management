@@ -23,7 +23,7 @@ function [configs] = HLLMS(sensors, constants) %only using 'sensors' for generat
     %Lambda1=[0 2 0];                    Lambda2=[1 2 0]; %pri table: prefer APU over other side's generator 
     Gamma1=1000*ones(1,Nl);             Gamma2=500*ones(1,Nl); %load shedding priority table (one value for each load at each timestep)
    % M=10; %'mu' -- weight for alpha (see eq.9 in OLMS paper)
-    M=100;
+    M=1;
 
     % Decision variables (one set for Bus 1, one set for Bus 2)
     C1=binvar(Nl,Nt,'full');            C2=binvar(Nl,Nt,'full'); %C1(l,t) = "shed load l at time t?:
@@ -37,8 +37,8 @@ function [configs] = HLLMS(sensors, constants) %only using 'sensors' for generat
 
     % Constraints
     cons=[];
-    cons=[cons, 0 <= BETA1, 0 <= BETA2];
-    %cons=[cons, 0 <= BETA1 <= constants.maxBatteryLevel, 0 <= BETA2 <= constants.maxBatteryLevel]; %battery charge level can't be negative 
+    %cons=[cons, 0 <= BETA1, 0 <= BETA2];
+    cons=[cons, 0 <= BETA1 <= constants.maxBatteryLevel, 0 <= BETA2 <= constants.maxBatteryLevel]; %battery charge level can't be negative 
     for i=1:Nl-1
         cons=[cons, C1(i,:) <= C1(i+1,:), C2(i,:) <= C2(i+1,:)];
     end
@@ -86,7 +86,7 @@ function [configs] = HLLMS(sensors, constants) %only using 'sensors' for generat
         nSwitch5=nSwitch5 + abs( Del2(2,i)-Del2(2,i+1) );
         nSwitch6=nSwitch6 + abs( Del2(3,i)-Del2(3,i+1) );
     end 
-    NOAS=3;  % Number Of Allowed Switchings
+    NOAS=2;  % Number Of Allowed Switchings
     cons=[cons, nSwitch1<=NOAS, nSwitch2<=NOAS, nSwitch3<=NOAS];
     cons=[cons, nSwitch4<=NOAS, nSwitch5<=NOAS, nSwitch6<=NOAS];
 

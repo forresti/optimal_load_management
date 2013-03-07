@@ -23,7 +23,7 @@ function plotGraphs(configLog, sensorLog, constants, Nt, N)
  
     plotBatteryBinary(batteryUpdate1, batteryUpdate2, Nt, N, xp)
     plotBatteryUpdate(batteryUpdate1, batteryUpdate2, Nt, N, xp)
-    plotBatteryStorage(batteryCharge1, batteryCharge2, Nt, N, constants.minBatteryLevel)
+    plotBatteryStorage(batteryCharge1, batteryCharge2, Nt, N, constants.minBatteryLevel, constants.maxBatteryLevel, constants.tMinBatteryLevel)
 
     BusGen = [];  %generator selection
     for i=1:N
@@ -199,25 +199,25 @@ end
 
 %note: starts from time 0 instead of time 1. 
 %in runAirplane, BETA (batteryCharge) goes from 0 to N-1 (initial battery charge to N-1th battery charge)
-function plotBatteryStorage(BETA1, BETA2, Nt, N, minBatteryLevel)
+function plotBatteryStorage(BETA1, BETA2, Nt, N, minBatteryLevel, maxBatteryLevel, tMinBatteryLevel)
     xp = 0:(N-1);
 
     h=figure;
     subplot(2,1,1);    
-    %plot(BETA1,'b','LineWidth',2);
     plot(xp,BETA1,'b','LineWidth',2);
     hold on;
-    plot(1:1:N, minBatteryLevel,'--b','LineWidth',2);
+    plot(xp, minBatteryLevel*xp,'--b','LineWidth',2);
+    plot(xp, maxBatteryLevel*xp,'--b','LineWidth',2);
     title('Battery charge level for DC bus 1', 'fontsize',10,'fontweight','b');
     axis([0 N+10 0 500000]);
     ylabel('Battery Charge Level per timestep', 'fontsize',10,'fontweight','b')
     xlabel('time [s]', 'fontsize',10,'fontweight','b');
 
     subplot(2,1,2);    
-    %plot(BETA2,'b','LineWidth',2);
     plot(xp,BETA2,'b','LineWidth',2);
     hold on;
-    plot(1:1:N, minBatteryLevel,'--b','LineWidth',2);
+    plot(xp, minBatteryLevel*xp,'--b','LineWidth',2);
+    plot(xp, maxBatteryLevel*xp,'--b','LineWidth',2);
     title('Battery charge level for DC bus 2', 'fontsize',10,'fontweight','b');
     axis([0 N+10 0 500000]);
     ylabel('Battery Charge Level per timestep', 'fontsize',10,'fontweight','b')
