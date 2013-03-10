@@ -49,6 +49,10 @@ end
 function [Shedding1 Shedding2 batteryUpdate1 batteryUpdate2] = selectShedding(sensors, constants, BusGen)
     Bus1_pwrReq = sum(sensors.workload.Ls1) + sum(sensors.workload.Lns1);
     Bus2_pwrReq = sum(sensors.workload.Ls2) + sum(sensors.workload.Lns2);
+    dBusGen = BusGen
+    dGeneratorOutput = constants.generatorOutput
+    dBus1_pwrReq = Bus1_pwrReq
+    dBus2_pwrReq = Bus2_pwrReq
 
     pwrReqGen1 = 0; pwrReqGen2 = 0; pwrReqApu = 0;
     if (BusGen(1) == 1)
@@ -66,6 +70,9 @@ function [Shedding1 Shedding2 batteryUpdate1 batteryUpdate2] = selectShedding(se
     elseif (BusGen(2) == 3)
         pwrReqApu = pwrReqApu + Bus2_pwrReq;
     end
+    dpwrReqGen1 = pwrReqGen1
+    dpwrReqGen2 = pwrReqGen2
+    dpwrReqApu = pwrReqApu
 
     Shedding1 = ones(1, 10); %if Shedding(1)==1, then DON'T shed. if shedding(1)==0, then DO shed.
     Shedding2 = ones(1, 10);
@@ -103,15 +110,20 @@ function [Shedding1 Shedding2 batteryUpdate1 batteryUpdate2] = selectShedding(se
         if (BusGen(1) == 3) % remove sheddable load from left side first
             pwrReqApu = pwrReqApu - sensors.workload.Ls1(sheddingPri1(1,priority));
             Shedding1(priority) = 0;
-        elseif (BusGen(2) == 3 && pwrReqGen2 > constants.generatorOutput(3)) % now do it for the right side if still over
+            dPwrReqApu = pwrReqApu
+        elseif (BusGen(2) == 3 && pwrReqApu > constants.generatorOutput(3)) % now do it for the right side if still over
             pwrReqApu = pwrReqApu - sensors.workload.Ls2(sheddingPri2(1,priority));
             Shedding2(priority) = 0;
+            dPwrReqApu = pwrReqApu
         end
         priority = priority + 1;
     end
 
     batteryUpdate1 = 0;
     batteryUpdate2 = 0;
+    dpwrReqGen1_withShedding = pwrReqGen1
+    dpwrReqGen2_withShedding = pwrReqGen2
+    dpwrReqApu_withShedding = pwrReqApu
 end
 
 

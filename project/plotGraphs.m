@@ -10,7 +10,7 @@ function plotGraphs(configLog, sensorLog, constants, Nt, N)
         Shedding1 = [Shedding1; configLog(i).Shedding1];
         Shedding2 = [Shedding2; configLog(i).Shedding2];
     end
-    plotLoadShedding(Shedding1', Shedding2', Nt, N, xp)
+    plotLoadShedding_twoGraphs(Shedding1', Shedding2', Nt, N, xp)
 
     batteryUpdate1 = []; batteryUpdate2 = []; %Beta1, Beta2
     batteryCharge1 = []; batteryCharge2 = []; %BETA1, BETA2
@@ -135,7 +135,7 @@ function plotLoadShedding_twoGraphs(C1, C2, Nt, N, xp)
 
     left=0; bottom=0; width=1000; height=500;
     h=figure('Position',[left, bottom, width, height]); %set size
-    subplot(2,2,1);
+    subplot(2,1,1);
     plot(xp,C1(1,:),xp,C1(2,:)+0.02,xp,C1(3,:)+0.04,xp,C1(4,:)+0.06,xp,C1(5,:)+0.08,xp,C1(6,:)+0.10,xp,C1(7,:)+0.12,xp,C1(8,:)+0.14,xp,C1(9,:)+0.16,xp,C1(10,:)+0.18, 'LineWidth',1.5)
     legend('L_1','L_2','L_3','L_4', 'L_5', 'L_6', 'L_7', 'L_8', 'L_9', 'L_{10}','Orientation','horizontal');
     title('Power shedding of AC bus 1 (loads 1 to 10)');
@@ -147,7 +147,7 @@ function plotLoadShedding_twoGraphs(C1, C2, Nt, N, xp)
     set(gca,'YTickLabel',{'Shed (off)','Granted (on)'}, 'fontsize',10,'fontweight','b');
     xlabel('time [s]', 'fontsize',10,'fontweight','b');
 
-    subplot(2,2,2);
+    subplot(2,1,2);
     plot(xp,C2(1,:),xp,C2(2,:)+0.02,xp,C2(3,:)+0.04,xp,C2(4,:)+0.06,xp,C2(5,:)+0.08,xp,C2(6,:)+0.10,xp,C2(7,:)+0.12,xp,C2(8,:)+0.14,xp,C2(9,:)+0.16,xp,C2(10,:)+0.18, 'LineWidth',1.5)
     legend('L_1','L_2','L_3','L_4', 'L_5', 'L_6', 'L_7', 'L_8', 'L_9', 'L_{10}','Orientation','horizontal');
     title('Power shedding of AC bus 1 (loads 1 to 10)');
@@ -187,6 +187,8 @@ function plotGenSelection(BusGen, Nt, N, xp)
     title('AC bus 2 power suppliers -- \Delta_2 (t)', 'fontsize',10,'fontweight','b');
     set(gca,'YTick',0:1:1);
     set(gca,'YTickLabel',{'Disconnected', 'Connected'}, 'fontsize',10,'fontweight','b');
+    textLocationY = 1.2;
+    text(44, textLocationY, '\downarrow GEN2 fails', 'fontsize',12,'fontweight','b'); %FIXME: make sure this location is correct
     axis([0 N+10 -0.1 1.5]);
     xlabel('time [s]', 'fontsize',10,'fontweight','b');
 
@@ -236,6 +238,7 @@ end
 %in runAirplane, BETA (batteryCharge) goes from 0 to N-1 (initial battery charge to N-1th battery charge)
 function plotBatteryStorage(BETA1, BETA2, Nt, N, minBatteryLevel, maxBatteryLevel, tMinBatteryLevel)
     xp = 0:(N-1);
+    maxPlotHeight = 600000;
 
     h=figure;
     subplot(2,1,1);    
@@ -243,9 +246,10 @@ function plotBatteryStorage(BETA1, BETA2, Nt, N, minBatteryLevel, maxBatteryLeve
     hold on;
     plot(xp, minBatteryLevel*ones(size(xp)),'--r','LineWidth',2);
     plot(xp, maxBatteryLevel*ones(size(xp)),'--r','LineWidth',2);
-    plot(tMinBatteryLevel*ones(1,15),linspace(0,max(BETA1)*1.4,15),'--r','MarkerFaceColor','r','MarkerSize',1.5,'LineWidth',2); 
+    plot(tMinBatteryLevel*ones(1,15),linspace(0,maxPlotHeight*1.4,15),'--r','MarkerFaceColor','r','MarkerSize',1.5,'LineWidth',2); 
+    text(tMinBatteryLevel, maxPlotHeight*0.8, '\rightarrow SoC constraints enforced', 'fontsize', 12, 'fontweight', 'b');
     title('Battery charge level for DC bus 1', 'fontsize',10,'fontweight','b');
-    axis([0 N+10 0 600000]);
+    axis([0 N+10 0 maxPlotHeight]);
     ylabel('Battery Charge Level per timestep', 'fontsize',10,'fontweight','b')
     xlabel('time [s]', 'fontsize',10,'fontweight','b');
 
@@ -254,9 +258,9 @@ function plotBatteryStorage(BETA1, BETA2, Nt, N, minBatteryLevel, maxBatteryLeve
     hold on;
     plot(xp, minBatteryLevel*ones(size(xp)),'--r','LineWidth',2);
     plot(xp, maxBatteryLevel*ones(size(xp)),'--r','LineWidth',2);
-    plot(tMinBatteryLevel*ones(1,15),linspace(0,max(BETA1)*1.4,15),'--r','MarkerFaceColor','r','MarkerSize',1.5,'LineWidth',2);
+    plot(tMinBatteryLevel*ones(1,15),linspace(0,maxPlotHeight*1.4,15),'--r','MarkerFaceColor','r','MarkerSize',1.5,'LineWidth',2);
     title('Battery charge level for DC bus 2', 'fontsize',10,'fontweight','b');
-    axis([0 N+10 0 600000]);
+    axis([0 N+10 0 maxPlotHeight]);
     ylabel('Battery Charge Level per timestep', 'fontsize',10,'fontweight','b')
     xlabel('time [s]', 'fontsize',10,'fontweight','b');
     print(h, '-depsc2', 'figures/batteryStorage.eps')

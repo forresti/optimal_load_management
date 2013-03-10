@@ -4,7 +4,8 @@ function [Ls1,Lns1,Ls2,Lns2]=load3(N)
 % Sheddable loads
 
 Ls1(1,:)=5000*ones(1,N);
-Ls1(2,:)=zeros(1,N); Ls1(2,N/10:end)=1000;
+Ls1(2,:)=zeros(1,N); Ls1(2,N/10:end)=1000
+%Ls1(2,:)=zeros(1,N); Ls1(2,N/10:end)=100000; %test
 Ls1(3,:)=zeros(1,N); Ls1(3,2*N/10:9*N/10)=1000;
 Ls1(4,:)=zeros(1,N); Ls1(4,N/10:9*N/10)=2000;
 Ls1(5,:)=zeros(1,N); Ls1(5, 2*N/10:9*N/10 )=1000;
@@ -42,7 +43,8 @@ Lns2(1,:)=21000*ones(1,N);   Lns2(2,:)=5000*ones(1,N);     Lns2(3,:)=2000*ones(1
 %Lns2(1,:)=10000*ones(1,N);   Lns2(2,:)=5000*ones(1,N);     Lns2(3,:)=2000*ones(1,N);
 Lns2(4,:)=2000*ones(1,N);    Lns2(5,:)=1000*ones(1,N);     Lns2(6,:)=5000*ones(1,N);
 Lns2(7,:)=1000*ones(1,N);    Lns2(8,:)=2000*ones(1,N);     Lns2(9,:)=2000*ones(1,N);
-Lns2(10,:)=1000*ones(1,N);
+%Lns2(10,:)=1000*ones(1,N);
+Lns2(10,:)=100000*ones(1,N); %test
 
 
 end
