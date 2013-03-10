@@ -43,8 +43,8 @@ Lns2(1,:)=21000*ones(1,N);   Lns2(2,:)=5000*ones(1,N);     Lns2(3,:)=2000*ones(1
 %Lns2(1,:)=10000*ones(1,N);   Lns2(2,:)=5000*ones(1,N);     Lns2(3,:)=2000*ones(1,N);
 Lns2(4,:)=2000*ones(1,N);    Lns2(5,:)=1000*ones(1,N);     Lns2(6,:)=5000*ones(1,N);
 Lns2(7,:)=1000*ones(1,N);    Lns2(8,:)=2000*ones(1,N);     Lns2(9,:)=2000*ones(1,N);
-%Lns2(10,:)=1000*ones(1,N);
-Lns2(10,:)=100000*ones(1,N); %test
+Lns2(10,:)=1000*ones(1,N);
+%Lns2(10,:)=100000*ones(1,N); %test
 
 
 end
