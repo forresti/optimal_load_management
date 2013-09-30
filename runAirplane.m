@@ -49,20 +49,6 @@ function [configLog, sensorLog, constants, Nt, N] = runAirplane(useHL)
             %resize the horizon if we're getting near the end of the simulation
             constants.N = min(LLclock+constants.N, nTimesteps+1) - LLclock;  %avoid out-of-bounds horizon
             constants.Nt = constants.N+1; %horizon+1
-            %nextWorkload = genWorkload(historicalWorkloads, LLclock+N, 0);
-            %nextSensors = sensors;
-            %nextSensors.workload = nextWorkload;
-            %nextSensors.time = LLclock + N; %optimize for next horizon
-            %nextSensors.batteryCharge1 = batteryCharge1; %will be 0 if the first advice hasn't been produced yet, otherwise, see the ~isempty(advice) below.
-            %nextSensors.batteryCharge2 = batteryCharge2;
-
-            %if (~isempty(advice))
-            %    for adviceIdx=1:N 
-            %        nextSensors.batteryCharge1 = nextSensors.batteryCharge1 + advice(adviceIdx).batteryUpdate1;
-            %        nextSensors.batteryCharge2 = nextSensors.batteryCharge2 + advice(adviceIdx).batteryUpdate2;
-            %    end
-            %end
-            %nextAdvice = HLLMS(nextSensors, constants);
             advice = HLLMS(sensors, constants);
         end
 
