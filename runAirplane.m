@@ -5,7 +5,9 @@
 function [configLog, sensorLog, constants, Nt, N] = runAirplane(useHL)
     close all hidden %get rid of old figures
 
-    if(nargin<1) useHL = 1;
+    if(nargin<1) 
+        useHL = 1;
+    end
 
     nTimesteps=100; % total number of timesteps in runAirplane outer loop 
     Nl=10;   % number of loads connected to each bus. (10 sheddable, 10 unsheddable)
