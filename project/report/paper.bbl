@@ -1,0 +1,34 @@
+\begin{thebibliography}{1}
+
+\bibitem{CPLEX}
+{IBM CPLEX}.
+\newblock {\tt ibm.com/software/integration/optimization/cplex-optimizer}.
+
+\bibitem{Chandrasekaran:2003}
+S.~Chandrasekaran, S.~Ragon, D.~Lindner, Z.~Gurdal, and D.~Boroyevich.
+\newblock Optimization of an aircraft power distribution subsystem.
+\newblock {\em Journal of aircraft}, 2003.
+
+\bibitem{VanDriel:2006}
+E.~V. Driel, R.Slingerland, and N.Antoine.
+\newblock A framework for aircraft power system optimization.
+\newblock In {\em Proceedings AIAA}, 2006.
+
+\bibitem{mehdi}
+M.~Maasoumy, P.~Nuzzo, M.~Kamgarpour, C.~Tomlin, A.~Sangiovanni-Vincentelli,
+  and M.~Mozumdar.
+\newblock {OLMS}: Optimal load management system for aircraft electric power
+  distribution.
+\newblock Technical report, University of California, Berkeley, 2012.
+
+\bibitem{Pinto:2010}
+A.~Pinto, S.~Becz, and H.~M. Reeve.
+\newblock Correct-by-construction design of aircraft electric power systems.
+\newblock In {\em AIAA ATIO/ISSMO Conference}, 2010.
+
+\bibitem{xu:2012}
+H.~Xu, U.~Topcu, and R.~M. Murray.
+\newblock Reactive protocols for aircraft electric power distribution.
+\newblock In {\em International Conference on Decision and Control}, 2012.
+
+\end{thebibliography}
