@@ -6,6 +6,7 @@ Mehdi Maasoumy, Pierluigi Nuzzo, Forrest Iandola, Maryam Kamgarpour, Alberto San
 "Optimal Load Management System for Aircraft Electric Power Distribution."
 IEEE Conference on Decision and Control (CDC), 2013.
 ```
+Huy Vo also contributed to our controller and its implementation.
 
 <h3>Getting Started</h3>
 To run an aircraft power simulation using our controller, experiment with the following on the Matlab prompt:
