@@ -1,4 +1,6 @@
-To run our project, type the following into matlab
+
+<h3>Getting Started</h3>
+To run an aircraft power simulation using our controller, experiment with the following on the Matlab prompt:
 
 ``` Matlab
   runAirplane(1) %use hierarchical controller 
@@ -6,18 +8,18 @@ To run our project, type the following into matlab
   runAirplane %default to hierarchical controller
 ```
 
-Make sure to either be in the project directory or add our project directory to your path. 
-By default, runAirplan uses load1.m as the load characterization. It assumes no generator failures and that
-the actual workloads match the historical workloads.
+<h3>Setup</h3>
+...install cplex and yalmip... (TODO: give a list of dependencies)
 
-
-Graphs
+<h3>Graphs</h3>
 By default, runAirplane.m uses plotGraphs.m to produce several graphs, which summarize workloads, power provided by each generator/APU, and battery usage.
 
-Workloads
+<h3>Aircraft Power Workloads</h3>
 To change workload data, use load1, load2, load3, or load4 near the beginning of runAirplane.m. 
+Ideally, these workloads are similar to what you'd find in a commercial aircraft. 
+As you can see, the workload varies throughout the flight -- avionics systems, cabin lights, and coffee makers may or may not be at their peak power draw at any given time in the flight.
 
-Generator Failures
+<h3>Generator Failures</h3>
 To introduce generator failures, modify getGeneratorStatus.m. 
 The function takes an input time and returns a 3 element binary vector representing the generator's status at that moment in time. The format is as follows: 
   [LeftGenerator RightGenerator APU]. 
