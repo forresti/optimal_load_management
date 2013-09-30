@@ -4,7 +4,7 @@ function [Ls1,Lns1,Ls2,Lns2]=load3(N)
 % Sheddable loads
 
 Ls1(1,:)=5000*ones(1,N);
-Ls1(2,:)=zeros(1,N); Ls1(2,N/10:end)=1000
+Ls1(2,:)=zeros(1,N); Ls1(2,N/10:end)=1000;
 %Ls1(2,:)=zeros(1,N); Ls1(2,N/10:end)=100000; %test
 Ls1(3,:)=zeros(1,N); Ls1(3,2*N/10:9*N/10)=1000;
 Ls1(4,:)=zeros(1,N); Ls1(4,N/10:9*N/10)=2000;
