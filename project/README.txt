@@ -1,8 +1,8 @@
-
 <h5>This aircraft EPS controller implementation accompanies the following paper:</h5>
 
 ```
-Mehdi Maasoumy, Pierluigi Nuzzo, Forrest Iandola, Maryam Kamgarpour, Alberto Sangiovanni-Vincentelli and Claire Tomlin.
+Mehdi Maasoumy, Pierluigi Nuzzo, Forrest Iandola, Maryam Kamgarpour, 
+Alberto Sangiovanni-Vincentelli and Claire Tomlin.
 "Optimal Load Management System for Aircraft Electric Power Distribution."
 IEEE Conference on Decision and Control (CDC), 2013.
 ```
